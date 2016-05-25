@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebChat</title>
+    <style>
+        .panel{
+            min-height: 600px;
+            background-color: wheat;
+        }
+        .message .who{
+
+        }
+        .message .text{
+            margin-left: 12px;
+        }
+        .message-box{
+            position: fixed;
+            right: -30%;
+            bottom: 30%;
+            height: 200px;
+            width: 400px;
+            background-color: #dddddd;
+            transition: right 0.5s;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <span>在线人数</span>
+    <span id="user-count"></span>
+</div>
+<div class="panel" id="panel">
+    <!--<div class="message">-->
+        <!--<div class="who">111:</div>-->
+        <!--<div class="text">222</div>-->
+    <!--</div>-->
+</div>
+<div>
+    <input type="text" style="width: 80%" id="text">
+    <button id="sendBtn">发送</button>
+</div>
+<div class="message-box" id="message-box">
+    <div id="message-box-who"></div>
+    <div id="message-box-text"></div>
+</div>
+<script src="/scripts/socket.io.js"></script>
+<script src="scripts/hichat.js"></script>
+</body>
+</html>
