@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旋转动画</title>
+    <style>
+        @keyframes xz
+        {
+            0%   {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+        @keyframes xz-f
+        {
+            0%   {transform: rotate(0deg);}
+            100% {transform: rotate(-360deg);}
+        }
+        .xz-circle{
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border-top: 8px solid #11994b;
+            border-right: 8px solid #f2a808;
+            border-bottom: 8px solid #2399e7;
+            border-left: 8px solid #c0392b;
+            animation:xz 2s linear infinite;
+        }
+        .xz-circle::after{
+            content: " ";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border-top: 8px solid #11994b;
+            border-right: 8px solid #f2a808;
+            border-bottom: 8px solid #2399e7;
+            border-left: 8px solid #c0392b;
+            left: 42px;
+            top: 42px;
+            animation:xz-f 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="xz-circle"></div>
+</body>
+</html>
