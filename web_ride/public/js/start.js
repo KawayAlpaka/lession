@@ -3,6 +3,7 @@ require.config({
     paths: {
         'angular': '../lib/angular-1.5.0',
         'ui-router': '../lib/angular-ui-router',
+        'statehelper': '../lib/statehelper',
         'jquery': '../lib/jquery',
         'ng-bootstrap': '../lib/ui-bootstrap-tpls-1.2.1',
         'lodash': '../lib/lodash'
@@ -19,13 +20,16 @@ require.config({
         },
         'rap':{
             deps:['angular']
+        },
+        'statehelper': {
+            deps: ['ui-router']
         }
     },
     waitSeconds: 15
 });
 
 require(['jquery', 'app', 'angular', 'ui-router', 'router', 'controller',
-    'lodash','ng-bootstrap'], function ($, app, angular) {
+    'lodash','ng-bootstrap','statehelper'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });
 

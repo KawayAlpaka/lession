@@ -1,2 +1,3 @@
-define(['app'], function(myApp){
+define(['app','controller/m1'], function(myApp){
+
 });

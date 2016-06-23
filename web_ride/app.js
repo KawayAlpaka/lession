@@ -14,8 +14,6 @@ var app = express();
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    // req.model = {"haha":"hehe"};
-    console.log(req.model);
     next();
 });
 app.use('/api', routerApi);
