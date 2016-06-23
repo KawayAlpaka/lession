@@ -13,10 +13,10 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    RobotNode.all(function (err, robotNodes) {
-        res.resFormat.data = robotNodes;
-        res.json(res.resFormat);
-    });
+    console.log(req.body);
+    res.resFormat.msg = "post robot node";
+    res.resFormat.data = "post robot node";
+    res.json(res.resFormat);
 });
 
 router.get('/:id', function(req, res) {

@@ -45,6 +45,16 @@ define(['app'], function (myApp) {
                                         }
                                     }
                                 ]
+                            },
+                            {
+                                name: 'test',
+                                url: '/test',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/test.html',
+                                        controller: 'm1_test_controller'
+                                    }
+                                }
                             }
                         ]
                     });
