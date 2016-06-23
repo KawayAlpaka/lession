@@ -24,4 +24,8 @@ robotNodeSchema.methods.myName = function (cb) {
     return this.name;
 };
 
+robotNodeSchema.statics.all = function(cb){
+    this.find({},cb);
+};
+
 module.exports = robotNodeSchema;

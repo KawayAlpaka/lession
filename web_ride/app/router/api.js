@@ -6,6 +6,12 @@ var router = express.Router();
 // 该路由使用的中间件
 router.use(function timeLog(req, res, next) {
     // console.log('Time: ', Date.now());
+    res.resFormat = {
+        data:null,
+        logicState:0,
+        msg:"success",
+        state:0
+    };
     next();
 },function(err, req, res, next) {
     console.error(err.stack);

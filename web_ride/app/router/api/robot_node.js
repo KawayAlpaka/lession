@@ -6,8 +6,33 @@ var router = express.Router();
 console.log("api RobotNode");
 
 router.get('/', function(req, res) {
-    res.send('hello api RobotNode');
+    RobotNode.all(function (err, robotNodes) {
+        res.resFormat.data = robotNodes;
+        res.json(res.resFormat);
+    });
 });
+
+router.post('/', function(req, res) {
+    RobotNode.all(function (err, robotNodes) {
+        res.resFormat.data = robotNodes;
+        res.json(res.resFormat);
+    });
+});
+
+router.get('/:id', function(req, res) {
+    console.log(req.params.id);
+    RobotNode.find({_id:req.params.id},function (err, robotNodes) {
+        if(robotNodes.length > 0) {
+            res.resFormat.data = robotNodes[0];
+            res.json(res.resFormat);
+        }else{
+            res.resFormat.logicState = 1;
+            res.resFormat.msg = "没有找到该节点";
+            res.json(res.resFormat);
+        }
+    });
+});
+
 
 router.get('/create', function(req, res) {
     var robotNode = new RobotNode({
