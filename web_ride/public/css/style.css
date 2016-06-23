@@ -1,4 +1,9 @@
-/* line 1, ../scss/style.scss */
-.test-scss {
-  color: black;
+/* line 1, ../scss/_workspace.scss */
+.workspace {
+  display: flex;
+  flex-direction: row;
+}
+/* line 4, ../scss/_workspace.scss */
+.workspace .node-list {
+  width: 30%;
 }

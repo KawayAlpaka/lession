@@ -1,3 +1,3 @@
-define([], function(myApp){
+define(['factory/my_http'], function(){
 
 });

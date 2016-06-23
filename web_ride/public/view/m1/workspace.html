@@ -1,5 +1,11 @@
 <div>workspace</div>
-<div class="node-list">
-
+<div class="workspace">
+    <div class="node-list">
+        <div>
+            <span data-ng-bind="nodeTree.node.name" data-ng-click="getChildren(nodeTree.node)"> </span>
+            <button data-ng-click="addSuite(nodeTree.node)">添加套件</button>
+        </div>
+    </div>
+    <tree-view></tree-view>
+    <div data-ui-view="workspace"></div>
 </div>
-<div data-ui-view="workspace"></div>

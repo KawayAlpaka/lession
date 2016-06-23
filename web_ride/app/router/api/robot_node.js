@@ -5,6 +5,11 @@ var router = express.Router();
 
 console.log("api RobotNode");
 
+router.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
 router.get('/', function(req, res) {
     RobotNode.all(function (err, robotNodes) {
         res.resFormat.data = robotNodes;
@@ -14,9 +19,17 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
     console.log(req.body);
-    res.resFormat.msg = "post robot node";
-    res.resFormat.data = "post robot node";
-    res.json(res.resFormat);
+    var robotNode = new RobotNode(req.body);
+    robotNode.save(function (err, robotNode) {
+        if(err){
+
+        }else{
+            res.resFormat.msg = "post robot node";
+            res.resFormat.data = robotNode;
+            res.json(res.resFormat);
+        }
+    });
+
 });
 
 router.get('/:id', function(req, res) {
@@ -30,6 +43,17 @@ router.get('/:id', function(req, res) {
             res.resFormat.msg = "没有找到该节点";
             res.json(res.resFormat);
         }
+    });
+});
+
+router.get('/:id/children', function(req, res) {
+    console.log(req.params.id);
+    RobotNode.find({parent:req.params.id},function (err, robotNodes) {
+
+        res.resFormat.msg = "success";
+        res.resFormat.data = robotNodes;
+        res.json(res.resFormat);
+
     });
 });
 
