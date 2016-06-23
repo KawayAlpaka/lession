@@ -10,7 +10,8 @@ define(['app'], function(myApp){
                 console.log(data);
             });
         s.addSuite = function (pNode) {
-            var sendData = pNode;
+            console.log("addSuite");
+            var sendData = jQuery.extend(true,{}, pNode);
             sendData.name = "新建套件";
             sendData.fileType = "file";
             sendData.fileFormat = "txt";

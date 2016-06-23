@@ -1,3 +1,7 @@
-<div class="tree-view">
-    <div>tree-view</div>
+<div style="margin-left: 12px">
+    <div data-ng-repeat="node in mTreeData" >
+        <span data-ng-bind="node.name" data-ng-click="getChildren(node)"></span>
+        <button data-ng-click="addSuite(node)">添加套件</button>
+        <tree-view m-tree-data="node.children" tree-data="node.children" add-suite="addSuite" get-children="getChildren"></tree-view>
+    </div>
 </div>

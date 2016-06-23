@@ -6,6 +6,6 @@
             <button data-ng-click="addSuite(nodeTree.node)">添加套件</button>
         </div>
     </div>
-    <tree-view></tree-view>
+    <tree-view m-tree-data="nodeTree.node.children" tree-data="nodeTree.node.children" add-suite="addSuite" get-children="getChildren"></tree-view>
     <div data-ui-view="workspace"></div>
 </div>

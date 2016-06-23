@@ -12,11 +12,16 @@ define(['app'], function (myApp) {
                 itemClicked: '&',
                 itemCheckedChanged: '&',
                 itemTemplateUrl: '@',
-                aaa:'='
+                
+                mTreeData:'=',
+                mTreeData:'=',
+                addSuite:"="
             },
             controller:['$scope', function($scope){
+                $scope.showMTreeData = function () {
+                    console.log($scope);
+                };
 
-                console.log($scope);
 
                 // $scope.itemExpended = function(item, $event){
                 //     item.$$isExpend = ! item.$$isExpend;
