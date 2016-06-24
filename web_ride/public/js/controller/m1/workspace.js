@@ -50,7 +50,7 @@ define(['app'], function(myApp){
             s.nodeTree.node.selected = false;
             s.ergodicTree(s.nodeTree.node.children);
             node.selected = true;
-            s.selectedNode = node;
+            s.setSelectedNode(node);
         };
 
         s.treeFunctions = {
@@ -58,8 +58,10 @@ define(['app'], function(myApp){
             clickNode: function (node) {
                 selectNode(node);
             },
-            rightClickNode:function (node) {
+            rightClickNode:function (node,$event) {
+                console.log($event);
                 selectNode(node);
+                s.setContextMenuPoint($event.clientX,$event.clientY);
                 s.setShowContextMenu(true);
             }
         };

@@ -1,0 +1,20 @@
+m-context-menu{
+  position: fixed;
+}
+.m-context-menu{
+  width: 130px;
+  border: solid 1px #ddd;
+  padding: 1px;
+  background-color: #eee;
+  font-size: 12px;
+  .item-group{
+    border-bottom: solid 1px #ddd;
+    .item{
+      border: solid 1px transparent;
+    }
+    .item:hover{
+      border: solid 1px #ddd;
+      cursor: pointer;
+    }
+  }
+}

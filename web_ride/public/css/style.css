@@ -1,3 +1,30 @@
+/* line 1, ../scss/_directive.scss */
+m-context-menu {
+  position: fixed;
+}
+
+/* line 4, ../scss/_directive.scss */
+.m-context-menu {
+  width: 130px;
+  border: solid 1px #ddd;
+  padding: 1px;
+  background-color: #eee;
+  font-size: 12px;
+}
+/* line 10, ../scss/_directive.scss */
+.m-context-menu .item-group {
+  border-bottom: solid 1px #ddd;
+}
+/* line 12, ../scss/_directive.scss */
+.m-context-menu .item-group .item {
+  border: solid 1px transparent;
+}
+/* line 15, ../scss/_directive.scss */
+.m-context-menu .item-group .item:hover {
+  border: solid 1px #ddd;
+  cursor: pointer;
+}
+
 /* line 1, ../scss/_workspace.scss */
 .workspace {
   display: flex;
@@ -13,20 +40,4 @@
 .workspace .node-list .selected {
   background-color: blue;
   color: white;
-}
-
-/* line 15, ../scss/_workspace.scss */
-.m-context-menu {
-  width: 130px;
-  border: solid 1px #ddd;
-  padding: 1px;
-}
-/* line 20, ../scss/_workspace.scss */
-.m-context-menu .item-group .item {
-  border: solid 1px transparent;
-}
-/* line 23, ../scss/_workspace.scss */
-.m-context-menu .item-group .item:hover {
-  border: solid 1px #ddd;
-  cursor: pointer;
 }
