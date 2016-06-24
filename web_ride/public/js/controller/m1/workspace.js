@@ -25,6 +25,7 @@ define(['app'], function(myApp){
                     s.getChildren(pNode);
                 });
         };
+
         s.getChildren = function (node) {
             console.log("getChildren");
             s.api.robotNode.getChildren(node._id)
@@ -32,7 +33,8 @@ define(['app'], function(myApp){
                     node.children = data.data;
                 });
         };
-        s.showMenu = true;
+
+        
 
         s.ergodicTree = function (children) {
             if(children){
@@ -43,14 +45,22 @@ define(['app'], function(myApp){
             }
         };
 
+        var selectNode = function (node) {
+            s.getChildren(node);
+            s.nodeTree.node.selected = false;
+            s.ergodicTree(s.nodeTree.node.children);
+            node.selected = true;
+            s.selectedNode = node;
+        };
+
         s.treeFunctions = {
             getChildren:s.getChildren,
             clickNode: function (node) {
-                console.log("treeFunctions clickNode");
-                s.getChildren(node);
-                s.nodeTree.node.selected = false;
-                s.ergodicTree(s.nodeTree.node.children);
-                node.selected = true;
+                selectNode(node);
+            },
+            rightClickNode:function (node) {
+                selectNode(node);
+                s.setShowContextMenu(true);
             }
         };
 

@@ -5,7 +5,7 @@ define(['app'], function (myApp) {
             restrict: 'E',
             templateUrl: '/view/directive/m_context_menu.html',
             scope: {
-                mNode:'@'
+                mNode:'='
             },
             controller:['$scope', function($scope){
 
@@ -51,7 +51,7 @@ define(['app'], function (myApp) {
                 $scope.alert = function (obj) {
                     alert(obj);
                 };
-                
+
 
                 // $scope.itemExpended = function(item, $event){
                 //     item.$$isExpend = ! item.$$isExpend;
