@@ -5,5 +5,24 @@
     width: 30%;
     resize: both;
     overflow:auto;
+    .selected{
+      background-color: blue;
+      color: white;
+    }
+  }
+}
+
+.m-context-menu{
+  width: 130px;
+  border: solid 1px #ddd;
+  padding: 1px;
+  .item-group{
+    .item{
+      border: solid 1px transparent;
+    }
+    .item:hover{
+      border: solid 1px #ddd;
+      cursor: pointer;
+    }
   }
 }

@@ -2,10 +2,14 @@
 <div class="workspace">
     <div class="node-list">
         <div>
-            <span data-ng-bind="nodeTree.node.name" data-ng-click="getChildren(nodeTree.node)"> </span>
+            <span data-ng-bind="nodeTree.node.name" data-ng-click="treeFunctions.clickNode(nodeTree.node)"> </span>
             <button data-ng-click="addSuite(nodeTree.node)">添加套件</button>
         </div>
-        <tree-view m-tree-data="nodeTree.node.children" tree-data="nodeTree.node.children" add-suite="addSuite" get-children="getChildren"></tree-view>
+        <tree-view m-tree-data="nodeTree.node.children" add-suite="addSuite" tree-functions="treeFunctions"></tree-view>
     </div>
+
+    <m-context-menu data-ng-if="showMenu" m-node="selectedNode"></m-context-menu>
+
     <div data-ui-view="workspace"></div>
+
 </div>

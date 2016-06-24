@@ -1,5 +1,18 @@
 define(['app'], function (myApp) {
 
+    myApp.directive('mContextMenu', function($parse) {
+        return {
+            restrict: 'E',
+            templateUrl: '/view/directive/m_context_menu.html',
+            scope: {
+                mNode:'@'
+            },
+            controller:['$scope', function($scope){
+
+            }]
+        };
+    });
+
     myApp.directive('ngRightClick', function($parse) {
         return function(scope, element, attrs) {
             var fn = $parse(attrs.ngRightClick);
@@ -18,13 +31,14 @@ define(['app'], function (myApp) {
             restrict: 'E',
             templateUrl: '/view/directive/tree_view.html',
             scope: {
-                treeData: '=',
-                canChecked: '=',
-                textField: '@',
-                itemClicked: '&',
-                itemCheckedChanged: '&',
-                itemTemplateUrl: '@',
-                
+                // treeData: '=',
+                // canChecked: '=',
+                // textField: '@',
+                // itemClicked: '&',
+                // itemCheckedChanged: '&',
+                // itemTemplateUrl: '@',
+
+                treeFunctions:"=",
                 mTreeData:'=',
                 getChildren:'=',
                 addSuite:"="
@@ -37,6 +51,7 @@ define(['app'], function (myApp) {
                 $scope.alert = function (obj) {
                     alert(obj);
                 };
+                
 
                 // $scope.itemExpended = function(item, $event){
                 //     item.$$isExpend = ! item.$$isExpend;

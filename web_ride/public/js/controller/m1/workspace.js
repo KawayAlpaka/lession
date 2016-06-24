@@ -23,7 +23,6 @@ define(['app'], function(myApp){
             s.api.robotNode.create(sendData)
                 .success(function (data) {
                     s.getChildren(pNode);
-                    // console.log(data);
                 });
         };
         s.getChildren = function (node) {
@@ -32,7 +31,29 @@ define(['app'], function(myApp){
                 .success(function (data) {
                     node.children = data.data;
                 });
-        }
+        };
+        s.showMenu = true;
+
+        s.ergodicTree = function (children) {
+            if(children){
+                children.forEach(function (node) {
+                    node.selected = false;
+                    s.ergodicTree(node.children);
+                });
+            }
+        };
+
+        s.treeFunctions = {
+            getChildren:s.getChildren,
+            clickNode: function (node) {
+                console.log("treeFunctions clickNode");
+                s.getChildren(node);
+                s.nodeTree.node.selected = false;
+                s.ergodicTree(s.nodeTree.node.children);
+                node.selected = true;
+            }
+        };
+
     }]);
     myApp.controller('m1_workspace_edit_controller', ['$scope', function (s) {
         console.log("m1_workspace_edit_controller");
