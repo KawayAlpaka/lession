@@ -1,5 +1,17 @@
 define(['app'], function (myApp) {
 
+    myApp.directive('ngRightClick', function($parse) {
+        return function(scope, element, attrs) {
+            var fn = $parse(attrs.ngRightClick);
+            element.bind('contextmenu', function(event) {
+                scope.$apply(function() {
+                    event.preventDefault();
+                    fn(scope, {$event:event});
+                });
+            });
+        };
+    });
+
     myApp.directive('treeView',[function(){
 
         return {
@@ -14,7 +26,7 @@ define(['app'], function (myApp) {
                 itemTemplateUrl: '@',
                 
                 mTreeData:'=',
-                mTreeData:'=',
+                getChildren:'=',
                 addSuite:"="
             },
             controller:['$scope', function($scope){
@@ -22,6 +34,9 @@ define(['app'], function (myApp) {
                     console.log($scope);
                 };
 
+                $scope.alert = function (obj) {
+                    alert(obj);
+                };
 
                 // $scope.itemExpended = function(item, $event){
                 //     item.$$isExpend = ! item.$$isExpend;

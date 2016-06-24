@@ -6,4 +6,6 @@
 /* line 4, ../scss/_workspace.scss */
 .workspace .node-list {
   width: 30%;
+  resize: both;
+  overflow: auto;
 }

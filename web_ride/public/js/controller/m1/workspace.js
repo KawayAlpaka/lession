@@ -22,10 +22,12 @@ define(['app'], function(myApp){
             delete sendData.meta;
             s.api.robotNode.create(sendData)
                 .success(function (data) {
-                    console.log(data);
+                    s.getChildren(pNode);
+                    // console.log(data);
                 });
         };
         s.getChildren = function (node) {
+            console.log("getChildren");
             s.api.robotNode.getChildren(node._id)
                 .success(function (data) {
                     node.children = data.data;

@@ -3,5 +3,7 @@
   flex-direction: row;
   .node-list{
     width: 30%;
+    resize: both;
+    overflow:auto;
   }
 }
