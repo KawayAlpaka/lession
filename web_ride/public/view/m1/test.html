@@ -1,4 +1,10 @@
-<div>
+<div class="test-nav">
+    <div class="nav-tab" ng-click="setTab('component')">组件测试</div>
+    <div class="nav-tab" ng-click="setTab('api')">专用接口测试</div>
+    <div class="nav-tab" ng-click="setTab('apiCommon')">通用接口测试</div>
+</div>
+
+<div ng-show="tab == 'apiCommon'">
     <h3>测试API</h3>
     <div>
         <label>地址：</label><input type="text" data-ng-model="address">
@@ -18,7 +24,7 @@
     <div data-ng-bind="result"></div>
 </div>
 
-<div>
+<div ng-show="tab == 'component'">
     <h3>测试modal</h3>
     <div>
         <butto ng-click="openModal()">打开modal</butto>

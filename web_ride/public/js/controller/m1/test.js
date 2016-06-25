@@ -2,6 +2,12 @@ define(['app'], function(myApp){
     myApp.controller('m1_test_controller', ['$scope','$scope','$http','$uibModal','component', function ($scope,s,$http,$uibModal,component) {
         console.log("m1_test_controller");
 
+        
+        s.tab = "component";
+        s.setTab = function (str) {
+            s.tab = str;
+        };
+
         //test api
         $scope.address = "";
         $scope.methods = ["GET","POST"];
