@@ -1,16 +1,26 @@
 <div>
-    <label>地址：</label><input type="text" data-ng-model="address">
+    <h3>测试API</h3>
+    <div>
+        <label>地址：</label><input type="text" data-ng-model="address">
+    </div>
+    <div>
+        <label>方法：</label>
+        <select data-ng-model="method" data-ng-options="m for m in methods">
+        </select>
+    </div>
+    <div>
+        <label>数据：</label>
+        <textarea data-ng-model="sendData" style="min-height: 200px;min-width: 600px"> </textarea>
+    </div>
+    <div>
+        <button type="button" data-ng-click="test()">发送请求</button>
+    </div>
+    <div data-ng-bind="result"></div>
 </div>
+
 <div>
-    <label>方法：</label>
-    <select data-ng-model="method" data-ng-options="m for m in methods">
-    </select>
+    <h3>测试modal</h3>
+    <div>
+        <butto ng-click="openModal()">打开modal</butto>
+    </div>
 </div>
-<div>
-    <label>数据：</label>
-    <textarea data-ng-model="sendData" style="min-height: 200px;min-width: 600px"> </textarea>
-</div>
-<div>
-    <button type="button" data-ng-click="test()">发送请求</button>
-</div>
-<div data-ng-bind="result"></div>

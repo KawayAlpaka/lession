@@ -1,3 +1,3 @@
-define(['factory/my_http'], function(){
+define(['factory/my_http','factory/component'], function(){
 
 });

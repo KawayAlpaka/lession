@@ -1,6 +1,8 @@
 define(['app'], function(myApp){
-    myApp.controller('m1_test_controller', ['$scope','$http', function ($scope,$http) {
+    myApp.controller('m1_test_controller', ['$scope','$scope','$http','$uibModal','component', function ($scope,s,$http,$uibModal,component) {
         console.log("m1_test_controller");
+
+        //test api
         $scope.address = "";
         $scope.methods = ["GET","POST"];
         $scope.method = $scope.methods[0];
@@ -32,6 +34,22 @@ define(['app'], function(myApp){
                 $scope.result = JSON.stringify(data);
             });
         };
+
+        //test modal
+        s.openModal = function () {
+            s.modalOption = {
+                action:"New Test Case",
+                close:function (data) {
+                    console.log(data);
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                    console.log('Modal dismissed at: ' + new Date());
+                }
+            };
+            component.inputModal(s.modalOption);
+        }
+
 
     }]);
 });
