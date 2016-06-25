@@ -59,7 +59,7 @@ define(['app'], function(myApp){
                 selectNode(node);
             },
             rightClickNode:function (node,$event) {
-                console.log($event);
+                $event.stopPropagation();
                 selectNode(node);
                 s.setContextMenuPoint($event.clientX,$event.clientY);
                 s.setShowContextMenu(true);

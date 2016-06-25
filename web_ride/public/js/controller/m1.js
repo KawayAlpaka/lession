@@ -1,5 +1,5 @@
 define(['app','controller/m1/home','controller/m1/workspace','controller/m1/manage','controller/m1/test'], function(myApp){
-    myApp.controller('m1_controller', ['$scope', function (s) {
+    myApp.controller('m1_controller', ['$scope','component', function (s,component) {
         console.log("m1_controller");
 
         s.setSelectedNode = function (node) {
@@ -16,10 +16,33 @@ define(['app','controller/m1/home','controller/m1/workspace','controller/m1/mana
                 "left" : x + "px"
             }
         };
-
         s.contextMenu = {};
         s.contextMenu.point = {};
         s.showContextMenu = false;
+
+        s.contextMenuFunctions = {
+            click:function (data) {
+                console.log(data);
+                s.showContextMenu = false;
+
+                var modalOption = {
+                    action: data,
+                    close:function (data) {
+                        data.parent = s.selectedNode._id;
+                        s.api.robotNode.create(data)
+                            .success(function (data) {
+                                
+                            });
+                    },
+                    dismiss:function (data) {
+                        console.log(data);
+                    }
+                };
+                component.inputModal(modalOption);
+            }
+        };
+
+
 
     }]);
 });

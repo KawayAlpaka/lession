@@ -1,7 +1,10 @@
 <div style="margin-left: 12px">
     <div data-ng-repeat="node in mTreeData" >
-        <span data-ng-bind="node.name" data-ng-click="treeFunctions.clickNode(node)" ng-right-click="treeFunctions.rightClickNode(node,$event)" ng-class="{selected:node.selected}"></span>
-        <button data-ng-click="addSuite(node)">添加套件</button>
+        <span ng-bind="'('+node.type[0]+')'"></span>
+        <span data-ng-bind="node.name"
+              data-ng-click="treeFunctions.clickNode(node)"
+              ng-right-click="treeFunctions.rightClickNode(node,$event)"
+              ng-class="{selected:node.selected}"></span>
         <tree-view m-tree-data="node.children" tree-functions="treeFunctions"  add-suite="addSuite" get-children="getChildren"></tree-view>
     </div>
 </div>

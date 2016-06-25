@@ -8,13 +8,19 @@ define(['app'], function (myApp) {
                 animation: true,
                 templateUrl: 'view/component/inputModal.html',
                 controller: ['$scope','$rootScope','$uibModalInstance',function ($scope,$rootScope,$uibModalInstance) {
-                    $scope.option = option;
-
                     $scope.robotNode = {};
+                    if(option.action == "New Project"){
+                        $scope.robotNode.type = "project";
+                        $scope.robotNode.fileType = "file";
+                        $scope.robotNode.fileFormat = "txt";
+                    }else if(option.action == "New Test Case"){
+                        $scope.robotNode.type = "case";
+                    }else if(option.action == "New Suite"){
+                        $scope.robotNode.type = "suite";
+                        $scope.robotNode.fileType = "file";
+                        $scope.robotNode.fileFormat = "txt";
+                    }
                     $scope.robotNode.name = "";
-                    $scope.robotNode.type = "project";
-                    $scope.robotNode.fileType = "file";
-                    $scope.robotNode.fileFormat = "txt";
                     $scope.confirm = function () {
                         $uibModalInstance.close($scope.robotNode);
                     };

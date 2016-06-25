@@ -5,9 +5,9 @@ var ObjectId = Schema.Types.ObjectId;
 var robotNodeSchema = new Schema({
     name: { type: String ,required:true},
     parent: { type: ObjectId ,ref:"RobotNode" },
-    type:{ type: String ,enum:['project','suite','case'],required:true},
-    fileType:{ type:String,enum:['file','dir'],required:true},
-    fileFormat:{ type:String,enum:['robot','txt'],required:true},
+    type:{ type: String ,enum:['project','suite','case','other'],required:true},
+    fileType:{ type:String,enum:['file','dir']},
+    fileFormat:{ type:String,enum:['robot','txt']},
     meta: {
         createAt: {
             type: Date,

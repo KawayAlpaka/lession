@@ -5,10 +5,13 @@ define(['app'], function (myApp) {
             restrict: 'E',
             templateUrl: '/view/directive/m_context_menu.html',
             scope: {
-                mNode:'='
+                mNode:'=',
+                contextMenuFunctions:'='
             },
             controller:['$scope', function($scope){
-
+                $scope.clickItem = function (str) {
+                    $scope.contextMenuFunctions.click(str);
+                }
             }]
         };
     });
