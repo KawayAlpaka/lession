@@ -18,18 +18,27 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    console.log(req.body);
     var robotNode = new RobotNode(req.body);
     robotNode.save(function (err, robotNode) {
         if(err){
 
         }else{
-            res.resFormat.msg = "post robot node";
             res.resFormat.data = robotNode;
             res.json(res.resFormat);
         }
     });
+});
 
+router.post('/find', function(req, res) {
+    RobotNode.find(req.body,function (err, robotNodes) {
+        if(err){
+
+        }else {
+            res.resFormat.msg = "success";
+            res.resFormat.data = robotNodes;
+            res.json(res.resFormat);
+        }
+    });
 });
 
 router.get('/:id', function(req, res) {

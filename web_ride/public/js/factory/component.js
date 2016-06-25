@@ -8,10 +8,15 @@ define(['app'], function (myApp) {
                 animation: true,
                 templateUrl: 'view/component/inputModal.html',
                 controller: ['$scope','$rootScope','$uibModalInstance',function ($scope,$rootScope,$uibModalInstance) {
-                    $scope.data = option;
-                    // console.log($uibModalInstance.resolve);
+                    $scope.option = option;
+
+                    $scope.robotNode = {};
+                    $scope.robotNode.name = "";
+                    $scope.robotNode.type = "project";
+                    $scope.robotNode.fileType = "file";
+                    $scope.robotNode.fileFormat = "txt";
                     $scope.confirm = function () {
-                        $uibModalInstance.close($scope.data);
+                        $uibModalInstance.close($scope.robotNode);
                     };
                     $scope.cancel = function () {
                         $uibModalInstance.dismiss('cancel');
@@ -26,7 +31,7 @@ define(['app'], function (myApp) {
                     // }
                 }
             });
-            modalInstance.result.then(option.close,option.dismiss );
+            modalInstance.result.then(option.close ,option.dismiss );
         };
 
         return component;

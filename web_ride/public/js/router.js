@@ -25,6 +25,16 @@ define(['app'], function (myApp) {
                                 }
                             },
                             {
+                                name: 'manage',
+                                url: '/manage',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/manage.html',
+                                        controller: 'm1_manage_controller'
+                                    }
+                                }
+                            },
+                            {
                                 name: 'workspace',
                                 url: '/workspace/:projectId',
                                 views: {

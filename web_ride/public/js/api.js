@@ -10,6 +10,17 @@ define(['app'], function (myApp) {
                 type : 'json'
             });
         };
+        api.robotNode.findProjects = function () {
+            var data = {
+                type: "project"
+            };
+            return myHttp({
+                url : '/api/robot_nodes/find',
+                method:'POST',
+                type : 'json',
+                data : data
+            });
+        };
         api.robotNode.create = function (data) {
             return myHttp({
                 url : '/api/robot_nodes/',

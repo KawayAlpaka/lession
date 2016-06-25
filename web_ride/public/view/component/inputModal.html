@@ -1,4 +1,22 @@
-<div>inputModal</div>
+<div>
+    <h3>inputModal</h3>
+</div>
+<div>
+    <div>
+        <label>Name:</label>
+        <input type="text" ng-model="robotNode.name">
+    </div>
+    <div>
+        <label>fileType:</label>
+        <input type="radio" ng-model="robotNode.fileType" value="file"><span>file</span>
+        <input type="radio" ng-model="robotNode.fileType" value="dir"><span>dir</span>
+    </div>
+    <div>
+        <label>fileFormat:</label>
+        <input type="radio"  ng-model="robotNode.fileFormat" value="robot"><span>robot</span>
+        <input type="radio"  ng-model="robotNode.fileFormat" value="txt"><span>txt</span>
+    </div>
+</div>
 <div>
     <button class="btn btn-success" ng-click="confirm()">确认</button>
     <button class="btn btn-default" ng-click="cancel()">取消</button>
