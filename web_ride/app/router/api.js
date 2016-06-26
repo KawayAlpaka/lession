@@ -1,6 +1,7 @@
 var express = require('express');
-var routerUser = require('./api/user');
-var routerRobotNode = require('./api/robot_node');
+var api = require('../controller/api');
+// var routerUser = require('./api/user');
+// var routerRobotNode = require('./api/robot_node');
 var router = express.Router();
 
 
@@ -13,17 +14,24 @@ router.use(function (req, res, next) {
     };
     next();
 },function(err, req, res, next) {
-    console.error(22);
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
-
-router.use('/users',routerUser);
-router.use('/robot_nodes', routerRobotNode);
 
 router.get('/', function(req, res) {
     console.log('hello api');
     res.send('hello api');
 });
+
+// router.use('/users',routerUser);
+// router.use('/robot_nodes', routerRobotNode);
+
+router.post('/users', api.users.create );
+
+router.get('/robot_nodes',api.robotNodes.list);
+router.post('/robot_nodes', api.robotNodes.create );
+router.post('/robot_nodes/find', api.robotNodes.find);
+router.get('/robot_nodes/:id', api.robotNodes.findById);
+router.get('/robot_nodes/:id/children', api.robotNodes.findChildren);
 
 module.exports = router;
