@@ -2,7 +2,6 @@ define(['app'], function(myApp){
     myApp.controller('m1_workspace_controller', ['$scope', function (s) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
-        console.log(s.$state.params.projectId);
         s.nodeTree = {};
         s.api.robotNode.findById(projectId)
             .success(function (data) {
@@ -58,6 +57,11 @@ define(['app'], function(myApp){
                     console.log(data);
                 });
         };
+
+        s.createProjectFiles = function () {
+            projectId;
+        };
+
 
         s.ergodicTree = function (children) {
             if(children){

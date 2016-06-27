@@ -1,4 +1,3 @@
-<div>workspace</div>
 <div class="workspace">
     <div class="node-list">
         <tree-view m-tree-data="[nodeTree.node]" add-suite="addSuite" tree-functions="treeFunctions"></tree-view>
@@ -18,8 +17,8 @@
             <button ng-click="saveForm(selectedNode)">保存</button>
         </div>
     </div>
-
-
     <div data-ui-view="workspace"></div>
-
+</div>
+<div>
+    <button ng-click="createProjectFiles()">生成项目文件</button>
 </div>

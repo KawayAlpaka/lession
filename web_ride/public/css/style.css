@@ -56,12 +56,13 @@ m-context-menu {
 /* line 24, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor label {
   font-size: 14px;
+  margin-bottom: 0;
 }
-/* line 27, ../scss/_workspace.scss */
+/* line 28, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor input {
   font-size: 14px;
 }
-/* line 30, ../scss/_workspace.scss */
+/* line 31, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor button {
   font-size: 14px;
 }
