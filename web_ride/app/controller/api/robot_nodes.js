@@ -35,8 +35,8 @@ robotNodes.find = function (req, res) {
     });
 };
 robotNodes.findById = function (req, res) {
-    console.log(req.params.id);
-    RobotNode.find({_id: req.params.id}, function (err, robotNodes) {
+    var nodeId = req.params.id;
+    RobotNode.find({_id: nodeId}, function (err, robotNodes) {
         if (robotNodes.length > 0) {
             res.resFormat.data = robotNodes[0];
             res.json(res.resFormat);
@@ -48,8 +48,8 @@ robotNodes.findById = function (req, res) {
     });
 };
 robotNodes.findChildren = function (req, res) {
-    console.log(req.params.id);
-    RobotNode.find({parent: req.params.id}, function (err, robotNodes) {
+    var nodeId = req.params.id;
+    RobotNode.find({parent: nodeId}, function (err, robotNodes) {
         res.resFormat.msg = "success";
         res.resFormat.data = robotNodes;
         res.json(res.resFormat);

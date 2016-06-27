@@ -2,6 +2,9 @@ var express = require('express');
 var api = require('../controller/api');
 var router = express.Router();
 
+//temp
+var mongoose = require('mongoose');
+var RobotNode = mongoose.model('RobotNode');
 
 router.use(function (req, res, next) {
     res.resFormat = {
@@ -31,7 +34,19 @@ router.get('/robot_nodes/:id/children', api.robotNodes.findChildren);
 router.patch('/robot_nodes/:id', api.robotNodes.update);
 
 router.get('action/createProjectFiles/:id',function (req, res) {
+    var nodeId = req.params.id;
+    RobotNode.find({_id: nodeId}, function (err, robotNodes) {
+        if (robotNodes.length > 0) {
+            //生成文件代码
 
+
+            res.json(res.resFormat);
+        } else {
+            res.resFormat.logicState = 1;
+            res.resFormat.msg = "没有找到该节点";
+            res.json(res.resFormat);
+        }
+    });
 });
 
 module.exports = router;

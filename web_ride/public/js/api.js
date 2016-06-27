@@ -1,7 +1,7 @@
 define(['app'], function (myApp) {
     myApp.factory('api', ['myHttp', function (myHttp) {
         var api = {};
-        // console.log(myHttp);
+
         api.robotNode = {};
         api.robotNode.findById = function (id) {
             return myHttp({
