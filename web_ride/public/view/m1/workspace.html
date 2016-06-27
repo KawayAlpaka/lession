@@ -3,6 +3,24 @@
     <div class="node-list">
         <tree-view m-tree-data="[nodeTree.node]" add-suite="addSuite" tree-functions="treeFunctions"></tree-view>
     </div>
+    <div class="work-panel">
+        <div class="form-editor" ng-if="selectedNode.type == 'case'">
+            <div class="form-row" ng-repeat="row in selectedNode.form.rows">
+                <label ng-bind="$index"></label>
+                <input type="text" ng-repeat="cell in row.cols" ng-model="cell.text">
+                <button ng-click="addCol(row.cols)">+</button>
+                <button ng-click="removeCol(row.cols)">-</button>
+            </div>
+            <div>
+                <button ng-click="addRow(selectedNode.form.rows)">+</button>
+                <button ng-click="removeRow(selectedNode.form.rows)">-</button>
+            </div>
+            <div ng-click="save(selectedNode.form)">保存</div>
+
+        </div>
+    </div>
+
+
     <div data-ui-view="workspace"></div>
 
 </div>

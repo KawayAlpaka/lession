@@ -9,22 +9,22 @@ define(['app'], function(myApp){
                 s.nodeTree.node = data.data;
                 console.log(data);
             });
-        s.addSuite = function (pNode) {
-            console.log("addSuite");
-            var sendData = jQuery.extend(true,{}, pNode);
-            sendData.name = "新建套件";
-            sendData.fileType = "file";
-            sendData.fileFormat = "txt";
-            sendData.type = "suite";
-            sendData.parent = pNode._id;
-            delete sendData._id;
-            delete sendData.__v;
-            delete sendData.meta;
-            s.api.robotNode.create(sendData)
-                .success(function (data) {
-                    s.getChildren(pNode);
-                });
-        };
+        // s.addSuite = function (pNode) {
+        //     console.log("addSuite");
+        //     var sendData = jQuery.extend(true,{}, pNode);
+        //     sendData.name = "新建套件";
+        //     sendData.fileType = "file";
+        //     sendData.fileFormat = "txt";
+        //     sendData.type = "suite";
+        //     sendData.parent = pNode._id;
+        //     delete sendData._id;
+        //     delete sendData.__v;
+        //     delete sendData.meta;
+        //     s.api.robotNode.create(sendData)
+        //         .success(function (data) {
+        //             s.getChildren(pNode);
+        //         });
+        // };
 
         s.getChildren = function (node) {
             console.log("getChildren");
@@ -34,7 +34,23 @@ define(['app'], function(myApp){
                 });
         };
 
-        
+        s.addCol = function (cols) {
+            cols.push({
+                text:""
+            });
+        };
+        s.removeCol = function (cols) {
+            cols.pop();
+        };
+
+        s.addRow = function (rows) {
+            rows.push({
+                cols:[]
+            });
+        };
+        s.removeRow = function (rows) {
+            rows.pop();
+        };
 
         s.ergodicTree = function (children) {
             if(children){
@@ -46,6 +62,7 @@ define(['app'], function(myApp){
         };
 
         var selectNode = function (node) {
+            console.log(node);
             s.getChildren(node);
             s.nodeTree.node.selected = false;
             s.ergodicTree(s.nodeTree.node.children);
@@ -67,6 +84,19 @@ define(['app'], function(myApp){
         };
 
     }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
     myApp.controller('m1_workspace_edit_controller', ['$scope', function (s) {
         console.log("m1_workspace_edit_controller");
         console.log(s.$state.params.robotNodeId);

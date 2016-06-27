@@ -29,6 +29,7 @@ define(['app','controller/m1/home','controller/m1/workspace','controller/m1/mana
                     action: data,
                     close:function (data) {
                         data.parent = s.selectedNode._id;
+                        console.log(data);
                         s.api.robotNode.create(data)
                             .success(function (data) {
                                 

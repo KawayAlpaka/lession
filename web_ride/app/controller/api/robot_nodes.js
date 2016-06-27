@@ -11,9 +11,10 @@ robotNodes.list = function(req, res) {
 };
 robotNodes.create=function(req, res) {
     var robotNode = new RobotNode(req.body);
+    console.log(robotNode);
     robotNode.save(function (err, robotNode) {
         if(err){
-
+            console.log(err)
         }else{
             res.resFormat.data = robotNode;
             res.json(res.resFormat);

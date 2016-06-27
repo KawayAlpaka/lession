@@ -42,9 +42,7 @@ define(['app'], function (myApp) {
                 // itemTemplateUrl: '@',
 
                 treeFunctions:"=",
-                mTreeData:'=',
-                getChildren:'=',
-                addSuite:"="
+                mTreeData:'='
             },
             controller:['$scope', function($scope){
                 $scope.showMTreeData = function () {

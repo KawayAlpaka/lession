@@ -8,6 +8,29 @@ var robotNodeSchema = new Schema({
     type:{ type: String ,enum:['project','suite','case','other'],required:true},
     fileType:{ type:String,enum:['file','dir']},
     fileFormat:{ type:String,enum:['robot','txt']},
+    //套件属性
+    documentation:{ type:String },
+    suiteSetup:{ type:String },
+    suiteTeardown:{ type:String },
+    testSetup:{ type:String },
+    testTeardown:{ type:String },
+    testTemplate:{ type:String },
+    testTimeout:{ type:String },
+    forceTags:{ type:String },
+    defaultTags:{ type:String },
+
+    //表格
+    form: {
+        type:Object,
+        default:{
+            rows:[{
+                cols:[{
+                    text:""
+                }]
+            }]
+        }
+    },
+
     meta: {
         createAt: {
             type: Date,

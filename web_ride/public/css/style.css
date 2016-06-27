@@ -32,12 +32,36 @@ m-context-menu {
 }
 /* line 4, ../scss/_workspace.scss */
 .workspace .node-list {
-  width: 30%;
+  width: 20%;
   resize: both;
+  border: solid 1px #DDDDDD;
+  min-height: 800px;
   overflow: auto;
 }
-/* line 8, ../scss/_workspace.scss */
+/* line 10, ../scss/_workspace.scss */
 .workspace .node-list .selected {
   background-color: blue;
   color: white;
+}
+/* line 16, ../scss/_workspace.scss */
+.workspace .work-panel {
+  width: 80%;
+  border: solid 1px #DDDDDD;
+  min-height: 800px;
+}
+/* line 20, ../scss/_workspace.scss */
+.workspace .work-panel .form-editor {
+  font-size: 0;
+}
+/* line 24, ../scss/_workspace.scss */
+.workspace .work-panel .form-editor label {
+  font-size: 14px;
+}
+/* line 27, ../scss/_workspace.scss */
+.workspace .work-panel .form-editor input {
+  font-size: 14px;
+}
+/* line 30, ../scss/_workspace.scss */
+.workspace .work-panel .form-editor button {
+  font-size: 14px;
 }

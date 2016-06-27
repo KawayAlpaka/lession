@@ -2,12 +2,34 @@
   display: flex;
   flex-direction: row;
   .node-list{
-    width: 30%;
+    width: 20%;
     resize: both;
+    border: solid 1px #DDDDDD;
+    min-height: 800px;
     overflow:auto;
     .selected{
       background-color: blue;
       color: white;
+    }
+  }
+
+  .work-panel{
+    width: 80%;
+    border: solid 1px #DDDDDD;
+    min-height: 800px;
+    .form-editor{
+      font-size: 0;
+      .form-row{
+      }
+      label{
+        font-size: 14px;
+      }
+      input{
+        font-size: 14px;
+      }
+      button{
+        font-size: 14px;
+      }
     }
   }
 }
