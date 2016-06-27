@@ -1,7 +1,5 @@
 var express = require('express');
 var api = require('../controller/api');
-// var routerUser = require('./api/user');
-// var routerRobotNode = require('./api/robot_node');
 var router = express.Router();
 
 
@@ -22,9 +20,6 @@ router.get('/', function(req, res) {
     console.log('hello api');
     res.send('hello api');
 });
-
-// router.use('/users',routerUser);
-// router.use('/robot_nodes', routerRobotNode);
 
 router.post('/users', api.users.create );
 
