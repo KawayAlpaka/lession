@@ -9,15 +9,16 @@ var Schema = mongoose.Schema;
 var blogSchema = new Schema({
     title:  String,
     author: { type: String, default: 'hahaha' },
-    body: { type: [[{
-        bd:{type: String, default: 'hahaha'}
-    }]],
+    body: {
+        type: [[{
+            bd: {type: String, default: 'hahaha'}
+        }]],
         default: [[{
-            bd:11
-        }],[{
-            bd:22
-        }],[{
-        }]] },
+            bd: 11
+        }], [{
+            bd: 22
+        }], [{}]]
+    },
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },
     hidden: Boolean,
