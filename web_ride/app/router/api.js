@@ -33,5 +33,6 @@ router.post('/robot_nodes', api.robotNodes.create );
 router.post('/robot_nodes/find', api.robotNodes.find);
 router.get('/robot_nodes/:id', api.robotNodes.findById);
 router.get('/robot_nodes/:id/children', api.robotNodes.findChildren);
+router.patch('/robot_nodes/:id', api.robotNodes.update);
 
 module.exports = router;

@@ -52,6 +52,13 @@ define(['app'], function(myApp){
             rows.pop();
         };
 
+        s.saveForm = function (node) {
+            s.api.robotNode.update(node._id, {form:node.form})
+                .success(function (data) {
+                    console.log(data);
+                });
+        };
+
         s.ergodicTree = function (children) {
             if(children){
                 children.forEach(function (node) {

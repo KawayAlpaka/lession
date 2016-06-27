@@ -29,6 +29,14 @@ define(['app'], function (myApp) {
                 data : data
             });
         };
+        api.robotNode.update = function (id,data) {
+            return myHttp({
+                url : '/api/robot_nodes/'+id,
+                method:'PATCH',
+                type : 'json',
+                data : data
+            });
+        };
         api.robotNode.getChildren = function (id) {
             return myHttp({
                 url : '/api/robot_nodes/'+id+"/children",

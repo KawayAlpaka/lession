@@ -3,7 +3,8 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "mongoose": "^4.5.1"
+    "mongoose": "^4.5.1",
+    "util": "^0.10.3"
   },
   "name": "web_ride",
   "version": "1.0.0",
