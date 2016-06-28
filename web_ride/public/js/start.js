@@ -28,7 +28,7 @@ require.config({
     waitSeconds: 15
 });
 
-require(['jquery', 'app', 'angular', 'ui-router', 'router','api','factory','directive' ,'controller',
+require(['jquery', 'app', 'angular', 'ui-router', 'router','api','model','factory','directive' ,'controller',
     'lodash','ng-bootstrap','statehelper'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });

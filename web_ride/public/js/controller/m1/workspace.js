@@ -3,18 +3,26 @@ define(['app'], function(myApp){
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
         s.nodeTree = {};
-        s.api.robotNode.findById(projectId)
-            .success(function (data) {
-                s.nodeTree.node = data.data;
-                console.log(data);
+        // s.api.robotNode.findById(projectId)
+        //     .success(function (data) {
+        //         s.nodeTree.node = data.data;
+        //         console.log(data);
+        //     });
+
+        s.nodeTree.node = s.model.RobotNode.createNew();
+        s.nodeTree.node.findById(projectId)
+            .success(function () {
+
             });
-        
+
+
         s.getChildren = function (node) {
-            console.log("getChildren");
-            s.api.robotNode.getChildren(node._id)
-                .success(function (data) {
-                    node.children = data.data;
-                });
+            node.getChildren();
+            // console.log("getChildren");
+            // s.api.robotNode.getChildren(node._id)
+            //     .success(function (data) {
+            //         node.children = data.data;
+            //     });
         };
 
         s.addCol = function (cols) {
@@ -36,10 +44,11 @@ define(['app'], function(myApp){
         };
 
         s.saveForm = function (node) {
-            s.api.robotNode.update(node._id, {form:node.form})
-                .success(function (data) {
-                    console.log(data);
-                });
+            node.update({form:node.form});
+            // s.api.robotNode.update(node._id, {form:node.form})
+            //     .success(function (data) {
+            //         console.log(data);
+            //     });
         };
 
         s.createProjectFiles = function () {
@@ -82,16 +91,6 @@ define(['app'], function(myApp){
         };
 
     }]);
-
-
-
-
-
-
-
-
-
-
 
 
 

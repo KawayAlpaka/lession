@@ -1,7 +1,7 @@
 <div class="m-context-menu">
     <div class="item-group">
-        <div class="item" ng-click="clickItem('New Test Case')">New Test Case</div>
-        <div class="item" ng-click="clickItem('New Suite')">New Suite</div>
+        <div class="item" ng-click="clickItem('New Test Case')" ng-if="mNode.canNewCase()">New Test Case</div>
+        <div class="item" ng-click="clickItem('New Suite')" ng-if="mNode.canNewSuite()">New Suite</div>
         <div class="item">New Directory</div>
     </div>
     <div class="item-group">
