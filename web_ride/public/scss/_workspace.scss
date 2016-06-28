@@ -17,8 +17,30 @@
     width: 80%;
     border: solid 1px #DDDDDD;
     min-height: 800px;
+    background-color: #EEEEEE;
+    .settings{
+      padding: 20px 0;
+      .setting{
+        display: flex;
+        flex-direction: row;
+        label{
+          width: 180px;
+
+        }
+        input,
+        textarea,
+        .show-value{
+          width: 90%;
+        }
+        .tag{
+          width: 60px;
+        }
+      }
+    }
     .form-editor{
       font-size: 0;
+      background-color: white;
+      min-height: 600px;
       .form-row{
       }
       label{

@@ -3,6 +3,56 @@
         <tree-view m-tree-data="[nodeTree.node]" add-suite="addSuite" tree-functions="treeFunctions"></tree-view>
     </div>
     <div class="work-panel">
+        <div>
+            <h3 ng-bind="selectedNode.name"></h3>
+        </div>
+        <div class="settings">
+            <div>
+                <button ng-click="changeShowSettings()">Settings</button>
+            </div>
+            <div ng-if="showSettings == true">
+                <div ng-if="selectedNode.type == 'case'">
+                    <div class="setting">
+                        <label>documentation</label>
+                        <textarea disabled></textarea>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                    <div class="setting">
+                        <label>setup</label>
+                        <input type="text" disabled>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                    <div class="setting">
+                        <label>teardown</label>
+                        <input type="text" disabled>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                    <div class="setting">
+                        <label>tags</label>
+                        <div class="show-value">
+                            <input type="text" class="tag" disabled>
+                        </div>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                    <div class="setting">
+                        <label>timeout</label>
+                        <input type="text" disabled>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                    <div class="setting">
+                        <label>template</label>
+                        <input type="text" disabled>
+                        <button>Edit</button>
+                        <button>Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="form-editor" ng-if="selectedNode.type == 'case'">
             <div class="form-row" ng-repeat="row in selectedNode.form.rows">
                 <label ng-bind="$index"></label>

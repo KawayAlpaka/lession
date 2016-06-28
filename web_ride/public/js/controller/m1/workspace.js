@@ -15,6 +15,10 @@ define(['app'], function(myApp){
 
             });
 
+        s.showSettings = false;
+        s.changeShowSettings = function () {
+            s.showSettings = !s.showSettings;
+        };
 
         s.getChildren = function (node) {
             node.getChildren();

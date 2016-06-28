@@ -48,21 +48,47 @@ m-context-menu {
   width: 80%;
   border: solid 1px #DDDDDD;
   min-height: 800px;
+  background-color: #EEEEEE;
 }
-/* line 20, ../scss/_workspace.scss */
+/* line 21, ../scss/_workspace.scss */
+.workspace .work-panel .settings {
+  padding: 20px 0;
+}
+/* line 23, ../scss/_workspace.scss */
+.workspace .work-panel .settings .setting {
+  display: flex;
+  flex-direction: row;
+}
+/* line 26, ../scss/_workspace.scss */
+.workspace .work-panel .settings .setting label {
+  width: 180px;
+}
+/* line 30, ../scss/_workspace.scss */
+.workspace .work-panel .settings .setting input,
+.workspace .work-panel .settings .setting textarea,
+.workspace .work-panel .settings .setting .show-value {
+  width: 90%;
+}
+/* line 35, ../scss/_workspace.scss */
+.workspace .work-panel .settings .setting .tag {
+  width: 60px;
+}
+/* line 40, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor {
   font-size: 0;
+  background-color: white;
+  min-height: 600px;
 }
-/* line 24, ../scss/_workspace.scss */
+/* line 46, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor label {
   font-size: 14px;
   margin-bottom: 0;
 }
-/* line 28, ../scss/_workspace.scss */
+/* line 50, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor input {
   font-size: 14px;
 }
-/* line 31, ../scss/_workspace.scss */
+/* line 53, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor button {
   font-size: 14px;
 }
