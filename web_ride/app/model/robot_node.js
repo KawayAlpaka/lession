@@ -1,5 +1,3 @@
-console.log("model robot_node");
-
 var mongoose = require('mongoose');
 var robotNodeSchema = require('../schema/robot_node');
 
