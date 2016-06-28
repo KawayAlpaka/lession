@@ -59,7 +59,10 @@ define(['app'], function(myApp){
         };
 
         s.createProjectFiles = function () {
-            projectId;
+            s.api.action.createProjectFiles(projectId)
+                .success(function (data) {
+                    console.log(data);
+                });
         };
 
 

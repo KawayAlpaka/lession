@@ -9,7 +9,6 @@ define(['app'], function(myApp){
                     s.projects = data.data;
                 });
         };
-        s.refreshProject();
 
         s.newProject = function () {
             s.modalOption = {
@@ -28,5 +27,6 @@ define(['app'], function(myApp){
             component.inputModal(s.modalOption);
         };
 
+        s.refreshProject();
     }]);
 });
