@@ -1,10 +1,11 @@
 <div class="m-context-menu">
-    <div class="item-group">
-        <div class="item" ng-click="clickItem('New Test Case')" ng-if="mNode.canNewCase()">New Test Case</div>
-        <div class="item" ng-click="clickItem('New Suite')" ng-if="mNode.canNewSuite()">New Suite</div>
+    <div class="item-group" ng-if="mNode.fileType == 'dir'">
+        <div class="item" ng-click="clickItem('New Suite')">New Suite</div>
         <div class="item">New Directory</div>
+        <div class="item">New Resource</div>
     </div>
-    <div class="item-group">
+    <div class="item-group" ng-if="mNode.fileType == 'file'">
+        <div class="item" ng-click="clickItem('New Test Case')">New Test Case</div>
         <div class="item">New User Keyword</div>
         <div class="item">New Scalar</div>
         <div class="item">New List Variable</div>
