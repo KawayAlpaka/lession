@@ -39,9 +39,8 @@ actions.createProjectFiles = function (req, res) {
                 return deferred.promise;
             };
             
-            var createDir = function (data) {
-
-                console.log("createDir");
+            var createFiles = function (data) {
+                console.log("createFiles");
                 var deferred = Q.defer();
                 if( data.node.fileType == "dir" ) {
                     var dir = data.path + "\\" + data.node.name;
@@ -54,21 +53,27 @@ actions.createProjectFiles = function (req, res) {
                             console.log(err);
                             return;
                         }
-                        deferred.resolve(nData);
+                        fs.writeFile(nData.path + '/__init__.txt', "__init__", {flag: 'w'}, function (err) {
+                            if(err) {
+                                console.error(err);
+                            } else {
+                                console.log('写入成功');
+                                deferred.resolve(nData);
+                            }
+                        });
+
                     });
+                } else if (data.node.fileType == "file") {
+                    var fileFullName = data.path + '/' + data.node.name + '.txt';
+                    fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
+                        if (err) {
+                            console.error(err);
+                        } else {
+                            console.log('写入成功');
+                        }
+                    });
+
                 }
-                return deferred.promise;
-            };
-            var createInitFile = function (data) {
-                var deferred = Q.defer();
-                fs.writeFile(data.path + '/__init__.txt', "hahaha", {flag: 'w'}, function (err) {
-                    if(err) {
-                        console.error(err);
-                    } else {
-                        console.log('写入成功');
-                        deferred.resolve(data);
-                    }
-                });
                 return deferred.promise;
             };
 
@@ -79,8 +84,7 @@ actions.createProjectFiles = function (req, res) {
                             path: data.path,
                             node:child
                         };
-                        createDir(nData)
-                            .then(createInitFile)
+                        createFiles(nData)
                             .then(createChildren);
                     })
                 });
@@ -88,8 +92,7 @@ actions.createProjectFiles = function (req, res) {
 
             removeOldFiles()
                 .then(createRootDir)
-                .then(createDir)
-                .then(createInitFile)
+                .then(createFiles)
                 .then(createChildren);
 
             res.json(res.resFormat);
