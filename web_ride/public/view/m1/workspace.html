@@ -4,23 +4,23 @@
     </div>
     <div class="work-panel">
         <div>
-            <h3 ng-bind="selectedNode.name"></h3>
+            <h3 ng-bind="editingNode.name"></h3>
         </div>
         <div class="settings">
             <div>
                 <button ng-click="changeShowSettings()">Settings</button>
             </div>
             <div ng-if="showSettings == true">
-                <div ng-if="selectedNode.type == 'case'">
+                <div ng-if="editingNode.type == 'case'">
                     <div class="setting">
                         <label>documentation</label>
-                        <textarea disabled></textarea>
+                        <textarea disabled ng-bind="'11'" ng-click="editDocumentation()"></textarea>
                         <button>Edit</button>
                         <button>Clear</button>
                     </div>
                     <div class="setting">
                         <label>setup</label>
-                        <input type="text" disabled>
+                        <input type="text" disabled ng-value="'11'" disabled>
                         <button>Edit</button>
                         <button>Clear</button>
                     </div>
@@ -53,18 +53,18 @@
                 </div>
             </div>
         </div>
-        <div class="form-editor" ng-if="selectedNode.type == 'case'">
-            <div class="form-row" ng-repeat="row in selectedNode.form.rows">
+        <div class="form-editor" ng-if="editingNode.type == 'case'">
+            <div class="form-row" ng-repeat="row in editingNode.form.rows">
                 <label ng-bind="$index"></label>
                 <input type="text" ng-repeat="cell in row.cols" ng-model="cell.text">
                 <button ng-click="addCol(row.cols)">+</button>
                 <button ng-click="removeCol(row.cols)">-</button>
             </div>
             <div>
-                <button ng-click="addRow(selectedNode.form.rows)">+</button>
-                <button ng-click="removeRow(selectedNode.form.rows)">-</button>
+                <button ng-click="addRow(editingNode.form.rows)">+</button>
+                <button ng-click="removeRow(editingNode.form.rows)">-</button>
             </div>
-            <button ng-click="saveForm(selectedNode)">保存</button>
+            <button ng-click="saveForm(editingNode)">保存</button>
         </div>
     </div>
     <div data-ui-view="workspace"></div>

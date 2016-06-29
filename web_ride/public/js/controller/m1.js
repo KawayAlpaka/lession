@@ -4,6 +4,7 @@ define(['app','controller/m1/home','controller/m1/workspace','controller/m1/mana
 
         s.setSelectedNode = function (node) {
             s.selectedNode = node;
+            s.editingNode = node;
         };
         s.setShowContextMenu = function (bool) {
             s.showContextMenu = bool;

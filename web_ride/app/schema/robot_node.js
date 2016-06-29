@@ -6,7 +6,7 @@ var robotNodeSchema = new Schema({
     name: { type: String ,required:true},
     parent: { type: ObjectId ,ref:"RobotNode" },
     type:{ type: String ,enum:['project','suite','case','other'],required:true},
-    fileType:{ type:String,enum:['file','dir']},
+    fileType:{ type:String,enum:['file','dir','content']},
     fileFormat:{ type:String,enum:['robot','txt']},
     //通用Settings
     documentation:{ type:String },
