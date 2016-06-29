@@ -18,12 +18,29 @@ define(['app'], function(myApp){
                 },
                 close:function (data) {
                     node.documentation = data.value;
+                    node.fn.update({documentation:node.documentation});
                 },
                 dismiss:function (data) {
                     console.log(data);
                 }
             };
-            console.log(1);
+            component.inputModal(modalOption);
+        };
+        s.editSetup = function (node) {
+            var modalOption = {
+                action: 'Edit Setup',
+                data:{
+                    value: node.documentation,
+                    comment : ""
+                },
+                close:function (data) {
+                    node.setup = data;
+                    node.fn.update({setup:node.setup});
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
             component.inputModal(modalOption);
         };
 

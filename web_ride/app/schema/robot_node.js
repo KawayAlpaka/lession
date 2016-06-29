@@ -20,7 +20,14 @@ var robotNodeSchema = new Schema({
     forceTags:{ type:String },
     defaultTags:{ type:String },
     //用例Settings
-    setup:{ type:String },
+    setup:{
+        value:{
+            type:String
+        },
+        comment: {
+            type:String
+        }
+    },
     teardown:{ type:String },
     tags:{ type:String },
     timeout:{ type:String },

@@ -23,6 +23,16 @@
         <textarea ng-model="data.value"></textarea>
     </div>
 </div>
+<div ng-if="action == 'Edit Setup'">
+    <div>
+        <label>value:</label>
+        <input type="text" ng-model="data.value">
+    </div>
+    <div>
+        <label>comment:</label>
+        <input type="text" ng-model="data.comment">
+    </div>
+</div>
 <div>
     <button class="btn btn-success" ng-click="confirm()">确认</button>
     <button class="btn btn-default" ng-click="cancel()">取消</button>

@@ -43,7 +43,11 @@ define(['app'], function (myApp) {
                             break;
                         case "Edit Documentation":
                             $scope.confirm = function () {
-                                console.log($scope.data);
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case "Edit Setup":
+                            $scope.confirm = function () {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
