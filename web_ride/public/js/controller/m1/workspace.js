@@ -71,6 +71,20 @@ define(['app'], function(myApp){
             };
             component.inputModal(modalOption);
         };
+        s.editTimeout  = function (node) {
+            var modalOption = {
+                action: s.modalConf.action.editTimeout,
+                data:node.timeout,
+                close:function (data) {
+                    node.timeout = data;
+                    node.fn.update({timeout:node.timeout});
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.inputModal(modalOption);
+        };
 
         s.showSettings = false;
         s.changeShowSettings = function () {

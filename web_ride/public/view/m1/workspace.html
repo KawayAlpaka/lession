@@ -40,8 +40,8 @@
                     </div>
                     <div class="setting">
                         <label>timeout</label>
-                        <input type="text" disabled>
-                        <button>Edit</button>
+                        <div class="show-value" ng-bind="editingNode.timeout.value + ' | # '+ editingNode.timeout.comment" ></div>
+                        <button ng-click="editTimeout(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
                     <div class="setting">

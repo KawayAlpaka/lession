@@ -1,4 +1,4 @@
-define(['app','jquery'], function (myApp,$) {
+define(['app','jquery','common'], function (myApp,$,common) {
     myApp.factory('component', ['$uibModal', function ($uibModal) {
 
         var component = {};
@@ -68,6 +68,14 @@ define(['app','jquery'], function (myApp,$) {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
+                        case conf.action.editTimeout:
+                            $scope.confirm = function () {
+                                if(common.stringHelp.isNumber($scope.data.value)){
+                                    $scope.data.value = common.timeHelp.number2String($scope.data.value);
+                                }
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
                         default:
                             $scope.confirm = function () {
                                 $uibModalInstance.close("confirm");
@@ -94,7 +102,8 @@ define(['app','jquery'], function (myApp,$) {
                 editDocumentation:"Edit Documentation",
                 editSetup:"Edit Setup",
                 editTeardown:"Edit Teardown",
-                editTemplate:"Edit Template"
+                editTemplate:"Edit Template",
+                editTimeout:"editTimeout"
             }
         };
 

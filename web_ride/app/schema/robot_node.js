@@ -37,7 +37,14 @@ var robotNodeSchema = new Schema({
         }
     },
     tags:{ type:String },
-    timeout:{ type:String },
+    timeout:{
+        value:{
+            type:String
+        },
+        comment: {
+            type:String
+        }
+    },
     template:{
         value:{
             type:String

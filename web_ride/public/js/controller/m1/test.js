@@ -1,8 +1,12 @@
-define(['app'], function(myApp){
+define(['app','common'], function(myApp , common){
     myApp.controller('m1_test_controller', ['$scope','$scope','$http','$uibModal','component', function ($scope,s,$http,$uibModal,component) {
         console.log("m1_test_controller");
+        // console.log(common.stringHelp.isNumber(""));
+        // console.log(common.stringHelp.toNumber(""));
+        // console.log(common.timeHelp.number2String(1111111.5));
+        // console.log(common.timeHelp.number2String(1));
+        // console.log(common.timeHelp.number2String("1"));
 
-        
         s.tab = "component";
         s.setTab = function (str) {
             s.tab = str;
