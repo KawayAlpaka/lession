@@ -1,25 +1,33 @@
-define(['app'], function (myApp) {
+define(['app','jquery'], function (myApp,$) {
     myApp.factory('component', ['$uibModal', function ($uibModal) {
 
         var component = {};
-
         component.inputModal = function (option) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'view/component/inputModal.html',
                 controller: ['$scope','$rootScope','$uibModalInstance',function ($scope,$rootScope,$uibModalInstance) {
 
+                    var conf = component.inputModal.option;
+                    $scope.conf = conf;
+
                     $scope.cancel = function () {
                         $uibModalInstance.dismiss('cancel');
                     };
                     $scope.action = option.action;
-                    $scope.data = option.data;
+                    if (option.data){
+                        $scope.data = $.extend({},option.data);
+                    }else{
+                        $scope.data = {};
+                    }
 
                     $scope.robotNode = {};
                     $scope.robotNode.name = "";
+                    console.log(option.action);
+                    console.log(option.action);
                     switch(option.action)
                     {
-                        case "New Project":
+                        case conf.action.newProject:
                             $scope.robotNode.type = "project";
                             $scope.robotNode.fileType = "file";
                             $scope.robotNode.fileFormat = "txt";
@@ -27,13 +35,13 @@ define(['app'], function (myApp) {
                                 $uibModalInstance.close($scope.robotNode);
                             };
                             break;
-                        case "New Test Case":
+                        case conf.action.newTestCase:
                             $scope.robotNode.type = "case";
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.robotNode);
                             };
                             break;
-                        case "New Suite":
+                        case conf.action.newSuite:
                             $scope.robotNode.type = "suite";
                             $scope.robotNode.fileType = "file";
                             $scope.robotNode.fileFormat = "txt";
@@ -41,12 +49,21 @@ define(['app'], function (myApp) {
                                 $uibModalInstance.close($scope.robotNode);
                             };
                             break;
-                        case "Edit Documentation":
+                        case conf.action.editDocumentation:
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
-                        case "Edit Setup":
+                        case conf.action.editSetup:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                        case conf.action.editTeardown:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editTemplate:
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.data);
                             };
@@ -56,8 +73,6 @@ define(['app'], function (myApp) {
                                 $uibModalInstance.close("confirm");
                             };
                     }
-
-
                 }],
                 size: "auto",
                 // scope: $scope,
@@ -69,6 +84,18 @@ define(['app'], function (myApp) {
                 }
             });
             modalInstance.result.then(option.close ,option.dismiss );
+        };
+
+        component.inputModal.option = {
+            action:{
+                newProject:"New Project",
+                newTestCase:"New TestCase",
+                newSuite:"New Suite",
+                editDocumentation:"Edit Documentation",
+                editSetup:"Edit Setup",
+                editTeardown:"Edit Teardown",
+                editTemplate:"Edit Template"
+            }
         };
 
         return component;

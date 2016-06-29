@@ -26,8 +26,8 @@
                     </div>
                     <div class="setting">
                         <label>teardown</label>
-                        <input type="text" disabled>
-                        <button>Edit</button>
+                        <div class="show-value" ng-bind="editingNode.teardown.value + ' | # '+ editingNode.teardown.comment" ></div>
+                        <button ng-click="editTeardown(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
                     <div class="setting">
@@ -46,8 +46,8 @@
                     </div>
                     <div class="setting">
                         <label>template</label>
-                        <input type="text" disabled>
-                        <button>Edit</button>
+                        <div class="show-value" ng-bind="editingNode.template.value + ' | # '+ editingNode.template.comment" ></div>
+                        <button ng-click="editTemplate(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
                 </div>

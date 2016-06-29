@@ -8,6 +8,7 @@ define(['jquery'],function($) {
             //数据操作
             model.fn = {};
             model.fn.update = function(json){
+                console.log(json);
                 var func = function (resolve, reject) {
                     return model.C.api.robotNode.update(model._id,json)
                         .success(function (data) {

@@ -28,10 +28,24 @@ var robotNodeSchema = new Schema({
             type:String
         }
     },
-    teardown:{ type:String },
+    teardown:{
+        value:{
+            type:String
+        },
+        comment: {
+            type:String
+        }
+    },
     tags:{ type:String },
     timeout:{ type:String },
-    template:{ type:String },
+    template:{
+        value:{
+            type:String
+        },
+        comment: {
+            type:String
+        }
+    },
     //表格
     form: {
         type:Object,

@@ -9,9 +9,11 @@ define(['app'], function(myApp){
             .success(function () {
             });
 
+        s.modalConf = component.inputModal.option;
+
         s.editDocumentation = function (node) {
             var modalOption = {
-                action: 'Edit Documentation',
+                action: s.modalConf.action.editDocumentation,
                 data:{
                     value: node.documentation,
                     comment : ""
@@ -28,14 +30,40 @@ define(['app'], function(myApp){
         };
         s.editSetup = function (node) {
             var modalOption = {
-                action: 'Edit Setup',
-                data:{
-                    value: node.documentation,
-                    comment : ""
-                },
+                action: s.modalConf.action.editSetup,
+                data:node.setup,
                 close:function (data) {
+                    console.log(data);
                     node.setup = data;
                     node.fn.update({setup:node.setup});
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.inputModal(modalOption);
+        };
+        s.editTeardown = function (node) {
+            var modalOption = {
+                action: s.modalConf.action.editTeardown,
+                data:node.teardown,
+                close:function (data) {
+                    node.teardown = data;
+                    node.fn.update({teardown:node.teardown});
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.inputModal(modalOption);
+        };
+        s.editTemplate  = function (node) {
+            var modalOption = {
+                action: s.modalConf.action.editTemplate,
+                data:node.template,
+                close:function (data) {
+                    node.template = data;
+                    node.fn.update({template:node.template});
                 },
                 dismiss:function (data) {
                     console.log(data);
