@@ -6,8 +6,8 @@ define(['jquery'],function($) {
             model.C = C;
 
             //数据操作
-            model.f = {};
-            model.f.update = function(json){
+            model.fn = {};
+            model.fn.update = function(json){
                 var func = function (resolve, reject) {
                     return model.C.api.robotNode.update(model._id,json)
                         .success(function (data) {
@@ -20,23 +20,23 @@ define(['jquery'],function($) {
                 return model.C.promise(func);
             };
 
-            model.f.set = function(json){
+            model.fn.set = function(json){
                 $.extend(model,json);
             };
 
             //可执行操作判断
-            model.f.canNewCase = function(){
+            model.fn.canNewCase = function(){
                 return model.fileType == "file";
             };
-            model.f.canNewSuite = function(){
+            model.fn.canNewSuite = function(){
                 return model.fileType == "dir";
             };
 
-            model.f.findById = function (id) {
+            model.fn.findById = function (id) {
                 var func = function (resolve, reject) {
                     return model.C.api.robotNode.findById(id)
                         .success(function (data) {
-                            model.f.set(data.data);
+                            model.fn.set(data.data);
                             resolve(model);
                         })
                         .error(function (data) {
@@ -46,14 +46,14 @@ define(['jquery'],function($) {
                 return model.C.promise(func);
             };
 
-            model.f.getChildren = function () {
+            model.fn.getChildren = function () {
                 var func = function (resolve, reject) {
                     return model.C.api.robotNode.getChildren(model._id)
                         .success(function (data) {
                             model.children = [];
                             data.data.forEach(function (json) {
                                 var child = obj.createNew();
-                                child.f.set(json);
+                                child.fn.set(json);
                                 model.children.push(child);
                             });
                             resolve(model);
