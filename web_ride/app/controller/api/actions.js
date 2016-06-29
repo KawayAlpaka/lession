@@ -39,65 +39,65 @@ actions.createProjectFiles = function (req, res) {
                 return deferred.promise;
             };
             
-            var createFiles = function (data) {
-                // console.log("createFiles");
-                var deferred = Q.defer();
-                if( data.node.fileType == "dir" ) {
-                    data.length.length --;
-                    console.log(data.length.length);
-                    var dir = data.path + "\\" + data.node.name;
-                    var nData = {
-                        path: dir,
-                        node:data.node
-                    };
-                    fs.mkdir(dir, 0666, function (err) {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        console.log(dir);
-                        var initFileFullName = nData.path + '/__init__.txt';
-                        fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
-                            if(err) {
-                                console.error(err);
-                            } else {
-                                console.log(initFileFullName);
-                                deferred.resolve(nData);
-                            }
-                        });
-                    });
-                } else if (data.node.fileType == "file") {
-                    data.length.length --;
-                    console.log(data.length.length);
-                    var fileFullName = data.path + '/' + data.node.name + '.txt';
-                    fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
-                        if (err) {
-                            console.error(err);
-                        } else {
-                            console.log(fileFullName);
-                        }
-                    });
-                }
-                return deferred.promise;
-            };
-
-            var createChildren = function (data) {
-                var deferred = Q.defer();
-                data.node.children(function (err,children) {
-                    var length = {};
-                    length.length = children.length;
-                    children.forEach(function (child) {
-                        var nData = {
-                            path: data.path,
-                            node:child,
-                            length:length
-                        };
-                        createFiles(nData)
-                            .then(createChildren);
-                    })
-                });
-                return deferred.promise;
-            };
+            // var createFiles = function (data) {
+            //     // console.log("createFiles");
+            //     var deferred = Q.defer();
+            //     if( data.node.fileType == "dir" ) {
+            //         data.length.length --;
+            //         console.log(data.length.length);
+            //         var dir = data.path + "\\" + data.node.name;
+            //         var nData = {
+            //             path: dir,
+            //             node:data.node
+            //         };
+            //         fs.mkdir(dir, 0666, function (err) {
+            //             if (err) {
+            //                 console.log(err);
+            //                 return;
+            //             }
+            //             console.log(dir);
+            //             var initFileFullName = nData.path + '/__init__.txt';
+            //             fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
+            //                 if(err) {
+            //                     console.error(err);
+            //                 } else {
+            //                     console.log(initFileFullName);
+            //                     deferred.resolve(nData);
+            //                 }
+            //             });
+            //         });
+            //     } else if (data.node.fileType == "file") {
+            //         data.length.length --;
+            //         console.log(data.length.length);
+            //         var fileFullName = data.path + '/' + data.node.name + '.txt';
+            //         fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
+            //             if (err) {
+            //                 console.error(err);
+            //             } else {
+            //                 console.log(fileFullName);
+            //             }
+            //         });
+            //     }
+            //     return deferred.promise;
+            // };
+            //
+            // var createChildren = function (data) {
+            //     var deferred = Q.defer();
+            //     data.node.children(function (err,children) {
+            //         var length = {};
+            //         length.length = children.length;
+            //         children.forEach(function (child) {
+            //             var nData = {
+            //                 path: data.path,
+            //                 node:child,
+            //                 length:length
+            //             };
+            //             createFiles(nData)
+            //                 .then(createChildren);
+            //         })
+            //     });
+            //     return deferred.promise;
+            // };
 
             var createProject = function (data) {
                 var deferred = Q.defer();
@@ -126,61 +126,64 @@ actions.createProjectFiles = function (req, res) {
                 });
                 return deferred.promise;
             };
-            var lev = 0;
+
+            var dealDir = function (data,child,cb) {
+                //创建目录
+                var path = data.path + "/" + child.name;
+                fs.mkdir(path, 0666, function (err) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    //创建__init__文件
+                    var initFileFullName = path + '/__init__.txt';
+                    fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
+                        if(err) {
+                            console.error(err);
+                        } else {
+                            //获取子元素
+                            child.children(function (err,children) {
+                                var nData = {
+                                    path: path,
+                                    nodes:children
+                                };
+                                walk(nData)
+                                    .then(cb);
+                            });
+                        }
+                    });
+                });
+            };
+
             var walk = function (data) {
                 console.log("walk");
                 var deferred = Q.defer();
                 var len = data.nodes.length;
-                console.log(lev + ":"+ len);
-                lev ++;
                 if(len == 0){
                     deferred.resolve();
                 }
-
                 data.nodes.forEach(function (child) {
                     if(child.fileType == "dir"){
-                        //创建目录
-                        var path = data.path + "/" + child.name;
-                        fs.mkdir(path, 0666, function (err) {
-                            if (err) {
-                                console.log(err);
-                                return;
+                        dealDir(data,child,function () {
+                            len --;
+                            if(len == 0){
+                                deferred.resolve();
                             }
-                            console.log(path);
-                            //创建__init__文件
-                            var initFileFullName = path + '/__init__.txt';
-                            fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
-                                if(err) {
-                                    console.error(err);
-                                } else {
-                                    console.log(initFileFullName);
-                                    //获取子元素
-                                    child.children(function (err,children) {
-                                        var nData = {
-                                            path: path,
-                                            nodes:children
-                                        };
-                                        walk(nData)
-                                            .then(function () {
-                                                len --;
-                                                console.log(len);
-                                                if(len == 0){
-                                                    deferred.resolve();
-                                                }
-                                            });
-                                    });
-                                }
-                            });
                         });
                     }else if(child.fileType == "file"){
-                        len --;
-                        console.log(len);
-                        if(len == 0){
-                            deferred.resolve();
-                        }
+                        var fileFullName = data.path + '/' + child.name + '.txt';
+                        fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
+                            if (err) {
+                                console.error(err);
+                            } else {
+                                len --;
+                                if(len == 0){
+                                    deferred.resolve();
+                                }
+                            }
+                        });
                     }else{
                         len --;
-                        console.log(len);
                         if(len == 0){
                             deferred.resolve();
                         }
@@ -195,6 +198,7 @@ actions.createProjectFiles = function (req, res) {
                 .then(walk)
                 .then(function () {
                     console.log("finish");
+                    res.json(res.resFormat);
                 });
 
             // removeOldFiles()
