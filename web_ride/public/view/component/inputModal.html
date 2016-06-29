@@ -1,7 +1,7 @@
 <div>
     <h3>inputModal</h3>
 </div>
-<div>
+<div ng-if="action == 'New Project' || action == 'New Test Case' || action == 'New Suite'">
     <div>
         <label>Name:</label>
         <input type="text" ng-model="robotNode.name">
@@ -15,6 +15,12 @@
         <label>fileFormat:</label>
         <input type="radio"  ng-model="robotNode.fileFormat" value="robot"><span>robot</span>
         <input type="radio"  ng-model="robotNode.fileFormat" value="txt"><span>txt</span>
+    </div>
+</div>
+<div ng-if="action == 'Edit Documentation'">
+    <div>
+        <label>value:</label>
+        <textarea ng-model="data.value"></textarea>
     </div>
 </div>
 <div>

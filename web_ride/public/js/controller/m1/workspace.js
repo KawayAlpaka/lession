@@ -1,19 +1,31 @@
 define(['app'], function(myApp){
-    myApp.controller('m1_workspace_controller', ['$scope', function (s) {
+    myApp.controller('m1_workspace_controller', ['$scope','component', function (s,component) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
         s.nodeTree = {};
-        // s.api.robotNode.findById(projectId)
-        //     .success(function (data) {
-        //         s.nodeTree.node = data.data;
-        //         console.log(data);
-        //     });
 
         s.nodeTree.node = s.model.RobotNode.createNew();
         s.nodeTree.node.fn.findById(projectId)
             .success(function () {
-
             });
+
+        s.editDocumentation = function (node) {
+            var modalOption = {
+                action: 'Edit Documentation',
+                data:{
+                    value: node.documentation,
+                    comment : ""
+                },
+                close:function (data) {
+                    node.documentation = data.value;
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            console.log(1);
+            component.inputModal(modalOption);
+        };
 
         s.showSettings = false;
         s.changeShowSettings = function () {
@@ -22,11 +34,6 @@ define(['app'], function(myApp){
 
         s.getChildren = function (node) {
             node.fn.getChildren();
-            // console.log("getChildren");
-            // s.api.robotNode.getChildren(node._id)
-            //     .success(function (data) {
-            //         node.children = data.data;
-            //     });
         };
 
         s.addCol = function (cols) {
@@ -49,10 +56,6 @@ define(['app'], function(myApp){
 
         s.saveForm = function (node) {
             node.fn.update({form:node.form});
-            // s.api.robotNode.update(node._id, {form:node.form})
-            //     .success(function (data) {
-            //         console.log(data);
-            //     });
         };
 
         s.createProjectFiles = function () {
@@ -93,6 +96,8 @@ define(['app'], function(myApp){
                 s.setShowContextMenu(true);
             }
         };
+
+
 
     }]);
 

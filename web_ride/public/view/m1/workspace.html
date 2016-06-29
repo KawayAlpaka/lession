@@ -14,13 +14,16 @@
                 <div ng-if="editingNode.type == 'case'">
                     <div class="setting">
                         <label>documentation</label>
-                        <textarea disabled ng-bind="'11'" ng-click="editDocumentation()"></textarea>
-                        <button>Edit</button>
+                        <div class="show-value" ng-bind="editingNode.documentation" ng-click="editDocumentation(editingNode)">
+                            <!--<input type="text" class="tag" disabled>-->
+                        </div>
+                        <!--<textarea ng-bind="editingNode.documentation" ng-click="editDocumentation(editingNode)"></textarea>-->
+                        <button ng-click="editDocumentation(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
                     <div class="setting">
                         <label>setup</label>
-                        <input type="text" disabled ng-value="'11'" disabled>
+                        <input type="text" disabled ng-value="editingNode.setup" disabled>
                         <button>Edit</button>
                         <button>Clear</button>
                     </div>
