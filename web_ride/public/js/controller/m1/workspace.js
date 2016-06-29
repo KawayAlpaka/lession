@@ -10,7 +10,7 @@ define(['app'], function(myApp){
         //     });
 
         s.nodeTree.node = s.model.RobotNode.createNew();
-        s.nodeTree.node.findById(projectId)
+        s.nodeTree.node.f.findById(projectId)
             .success(function () {
 
             });
@@ -21,7 +21,7 @@ define(['app'], function(myApp){
         };
 
         s.getChildren = function (node) {
-            node.getChildren();
+            node.f.getChildren();
             // console.log("getChildren");
             // s.api.robotNode.getChildren(node._id)
             //     .success(function (data) {
@@ -48,7 +48,7 @@ define(['app'], function(myApp){
         };
 
         s.saveForm = function (node) {
-            node.update({form:node.form});
+            node.f.update({form:node.form});
             // s.api.robotNode.update(node._id, {form:node.form})
             //     .success(function (data) {
             //         console.log(data);
