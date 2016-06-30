@@ -56,9 +56,9 @@
         <div class="form-editor" ng-if="editingNode.type == 'case'">
             <div class="form-row" ng-repeat="row in editingNode.form.rows">
                 <label ng-bind="$index"></label>
-                <input type="text" ng-repeat="cell in row.cols" ng-model="cell.text">
-                <button ng-click="addCol(row.cols)">+</button>
-                <button ng-click="removeCol(row.cols)">-</button>
+                <input type="text" ng-repeat="cell in row.cells" ng-model="cell.text">
+                <button ng-click="addCell(row.cells)">+</button>
+                <button ng-click="removeCell(row.cells)">-</button>
             </div>
             <div>
                 <button ng-click="addRow(editingNode.form.rows)">+</button>

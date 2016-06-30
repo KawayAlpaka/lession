@@ -8,7 +8,8 @@ define(['app'], function (myApp) {
                 mNode:'=',
                 contextMenuFunctions:'='
             },
-            controller:['$scope', function($scope){
+            controller:['$scope','component', function($scope,component){
+                $scope.modalAction = component.inputModal.option.action;
                 $scope.clickItem = function (str) {
                     $scope.contextMenuFunctions.click(str);
                 }

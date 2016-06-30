@@ -1,7 +1,62 @@
 var fs = require('fs-extra');
 var Q = require("q");
 var mongoose = require('mongoose');
+var common = require('../../../public/js/common');
 var RobotNode = mongoose.model('RobotNode');
+var strHelp = common.strHelp;
+
+var getFileContent = function (node,cb) {
+    if (node.fileType == "dir") {
+
+    } else if (node.fileType == "file") {
+        var content = "*** Test Cases ***\r\n";
+        node.children(function (err,children) {
+            if(err){
+                console.log(err);
+                return;
+            }
+            
+            var insertValueCommont = function (title,value,commont) {
+                if(strHelp.isNotEmptyStr(value) || strHelp.isNotEmptyStr(commont) ){
+                    content += "    [" + title + "]";
+                    if(strHelp.isNotEmptyStr(value)){
+                        content += "    " + value;
+                    }
+                    if(strHelp.isNotEmptyStr(commont)){
+                        content += "    " + "# " + commont;
+                    }
+                    content += "\r\n";
+                }
+            };
+            
+            children.forEach(function (child) {
+                if(child.type == "case"){
+                    content += child.name + "\r\n";
+                    if(strHelp.isNotEmptyStr(child.documentation)){
+                        content += "    [Documentation]    " + child.documentation + "\r\n";
+                    }
+                    // 占位 tags
+
+                    insertValueCommont("Setup",child.setup.value,child.setup.comment);
+                    insertValueCommont("Template",child.template.value,child.template.comment);
+                    insertValueCommont("Timeout",child.timeout.value,child.timeout.comment);
+
+                    if(child.form){
+                        child.form.rows.forEach(function (row) {
+                            row.cells.forEach(function (cell) {
+                                content += "    " + cell.text;
+                            });
+                            content +="\r\n";
+                        });
+                    }
+                    insertValueCommont("Teardown",child.teardown.value,child.teardown.comment);
+                    content += "\r\n";
+                }
+            });
+            cb(content);
+        });
+    }
+};
 
 var actions = {};
 actions.createProjectFiles = function (req, res) {
@@ -172,15 +227,17 @@ actions.createProjectFiles = function (req, res) {
                         });
                     }else if(child.fileType == "file"){
                         var fileFullName = data.path + '/' + child.name + '.txt';
-                        fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
-                            if (err) {
-                                console.error(err);
-                            } else {
-                                len --;
-                                if(len == 0){
-                                    deferred.resolve();
+                        getFileContent(child,function (content) {
+                            fs.writeFile(fileFullName, content , {flag: 'w'}, function (err) {
+                                if (err) {
+                                    console.error(err);
+                                } else {
+                                    len --;
+                                    if(len == 0){
+                                        deferred.resolve();
+                                    }
                                 }
-                            }
+                            });
                         });
                     }else{
                         len --;

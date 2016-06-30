@@ -95,18 +95,18 @@ define(['app'], function(myApp){
             node.fn.getChildren();
         };
 
-        s.addCol = function (cols) {
-            cols.push({
+        s.addCell = function (cells) {
+            cells.push({
                 text:""
             });
         };
-        s.removeCol = function (cols) {
-            cols.pop();
+        s.removeCell = function (cells) {
+            cells.pop();
         };
 
         s.addRow = function (rows) {
             rows.push({
-                cols:[]
+                cells:[]
             });
         };
         s.removeRow = function (rows) {

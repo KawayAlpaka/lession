@@ -37,6 +37,7 @@ define(['app','jquery','common'], function (myApp,$,common) {
                             break;
                         case conf.action.newTestCase:
                             $scope.robotNode.type = "case";
+                            $scope.robotNode.fileType = "content";
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.robotNode);
                             };
@@ -97,7 +98,7 @@ define(['app','jquery','common'], function (myApp,$,common) {
         component.inputModal.option = {
             action:{
                 newProject:"New Project",
-                newTestCase:"New TestCase",
+                newTestCase:"New Test Case",
                 newSuite:"New Suite",
                 editDocumentation:"Edit Documentation",
                 editSetup:"Edit Setup",

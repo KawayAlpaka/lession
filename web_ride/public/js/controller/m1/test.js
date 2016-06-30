@@ -7,6 +7,20 @@ define(['app','common'], function(myApp , common){
         // console.log(common.timeHelp.number2String(1));
         // console.log(common.timeHelp.number2String("1"));
 
+        // console.log( common.strHelp.isEmptyStr("") );
+        // console.log( common.strHelp.isEmptyStr() );
+        // console.log( common.strHelp.isEmptyStr(null) );
+        // console.log( common.strHelp.isEmptyStr(undefined) );
+        // console.log( common.strHelp.isEmptyStr([]) );
+        // console.log( common.strHelp.isEmptyStr("1") );
+
+        console.log( common.strHelp.isNotEmptyStr("") );
+        console.log( common.strHelp.isNotEmptyStr() );
+        console.log( common.strHelp.isNotEmptyStr(null) );
+        console.log( common.strHelp.isNotEmptyStr(undefined) );
+        console.log( common.strHelp.isNotEmptyStr([]) );
+        console.log( common.strHelp.isNotEmptyStr("1") );
+
         s.tab = "component";
         s.setTab = function (str) {
             s.tab = str;
