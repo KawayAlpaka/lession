@@ -1,13 +1,10 @@
-define([], function () {
-
+(function () {
     // String.prototype.trim = function() {
     //     //return this.replace(/[(^\s+)(\s+$)]/g,"");//會把字符串中間的空白符也去掉
     //     //return this.replace(/^\s+|\s+$/g,""); //
     //     return this.replace(/^\s+/g,"").replace(/\s+$/g,"");
     // };
-
     var common = {};
-
     common.timeHelp = {};
     common.timeHelp.number2String = function (number) {
         var millisecond = 0.001;
@@ -38,13 +35,30 @@ define([], function () {
         return result.trim();
     };
 
-    common.stringHelp = {};
-    common.stringHelp.isNumber = function (str) {
+    common.strHelp = {};
+    common.strHelp.isNumber = function (str) {
         return !isNaN(str);
     };
-    common.stringHelp.toNumber = function (str) {
+    common.strHelp.toNumber = function (str) {
         return Number(str);
     };
+    common.strHelp.toNumber = function (str) {
+        return Number(str);
+    };
+    common.strHelp.isEmptyStr = function (obj) {
+        return typeof obj == 'string' && obj.length == 0;
+    };
+    common.strHelp.isNotEmptyStr = function (obj) {
+        return typeof obj == 'string' && obj.length > 0;
+    };
+    // console.log(typeof window);
+    // console.log(typeof global);
+    if(typeof window == 'object'){
+        define([], function () {
+            return common;
+        });
+    }else if(typeof global == 'object'){
+        module.exports = common;
+    }
+})();
 
-    return common;
-});
