@@ -93,66 +93,6 @@ actions.createProjectFiles = function (req, res) {
                 });
                 return deferred.promise;
             };
-            
-            // var createFiles = function (data) {
-            //     // console.log("createFiles");
-            //     var deferred = Q.defer();
-            //     if( data.node.fileType == "dir" ) {
-            //         data.length.length --;
-            //         console.log(data.length.length);
-            //         var dir = data.path + "\\" + data.node.name;
-            //         var nData = {
-            //             path: dir,
-            //             node:data.node
-            //         };
-            //         fs.mkdir(dir, 0666, function (err) {
-            //             if (err) {
-            //                 console.log(err);
-            //                 return;
-            //             }
-            //             console.log(dir);
-            //             var initFileFullName = nData.path + '/__init__.txt';
-            //             fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
-            //                 if(err) {
-            //                     console.error(err);
-            //                 } else {
-            //                     console.log(initFileFullName);
-            //                     deferred.resolve(nData);
-            //                 }
-            //             });
-            //         });
-            //     } else if (data.node.fileType == "file") {
-            //         data.length.length --;
-            //         console.log(data.length.length);
-            //         var fileFullName = data.path + '/' + data.node.name + '.txt';
-            //         fs.writeFile(fileFullName, "file", {flag: 'w'}, function (err) {
-            //             if (err) {
-            //                 console.error(err);
-            //             } else {
-            //                 console.log(fileFullName);
-            //             }
-            //         });
-            //     }
-            //     return deferred.promise;
-            // };
-            //
-            // var createChildren = function (data) {
-            //     var deferred = Q.defer();
-            //     data.node.children(function (err,children) {
-            //         var length = {};
-            //         length.length = children.length;
-            //         children.forEach(function (child) {
-            //             var nData = {
-            //                 path: data.path,
-            //                 node:child,
-            //                 length:length
-            //             };
-            //             createFiles(nData)
-            //                 .then(createChildren);
-            //         })
-            //     });
-            //     return deferred.promise;
-            // };
 
             var createProject = function (data) {
                 var deferred = Q.defer();
@@ -164,7 +104,7 @@ actions.createProjectFiles = function (req, res) {
                     }
                     console.log(path);
                     var initFileFullName = path + '/__init__.txt';
-                    fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
+                    fs.writeFile(initFileFullName, "", {flag: 'w'}, function (err) {
                         if(err) {
                             console.error(err);
                         } else {
@@ -192,7 +132,7 @@ actions.createProjectFiles = function (req, res) {
                     }
                     //创建__init__文件
                     var initFileFullName = path + '/__init__.txt';
-                    fs.writeFile(initFileFullName, "__init__", {flag: 'w'}, function (err) {
+                    fs.writeFile(initFileFullName, "", {flag: 'w'}, function (err) {
                         if(err) {
                             console.error(err);
                         } else {
@@ -258,15 +198,6 @@ actions.createProjectFiles = function (req, res) {
                     res.json(res.resFormat);
                 });
 
-            // removeOldFiles()
-            //     .then(createRootDir)
-            //     .then(createFiles)
-            //     .then(createChildren)
-            //     .then(function (data) {
-            //         console.log("finish")
-            //     });
-
-            res.json(res.resFormat);
         } else {
             res.resFormat.logicState = 1;
             res.resFormat.msg = "没有找到该节点";
