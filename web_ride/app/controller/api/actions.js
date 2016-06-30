@@ -9,7 +9,44 @@ var getFileContent = function (node,cb) {
     if (node.fileType == "dir") {
 
     } else if (node.fileType == "file") {
-        var content = "*** Test Cases ***\r\n";
+        var content = "";
+
+        var insertFileSetting = function (settingName,value,comment) {
+            if(strHelp.isNotEmptyStr(value) || strHelp.isNotEmptyStr(comment) ){
+                var settingHeader = settingName;
+                while (true){
+                    if(settingHeader.length <15){
+                        settingHeader += " ";
+                    }else{
+                        break;
+                    }
+                }
+                content += settingHeader;
+                if(strHelp.isNotEmptyStr(value)){
+                    content += "    " + value;
+                }
+                if(strHelp.isNotEmptyStr(comment)){
+                    content += "    " + "# " + comment;
+                }
+                content += "\r\n";
+            }
+        };
+
+        //设置信息
+        content += "*** Settings ***\r\n";
+        insertFileSetting("Documentation",node.documentation);
+        insertFileSetting("Suite Setup",node.suiteSetup.value,node.suiteSetup.comment);
+        insertFileSetting("Suite Teardown",node.suiteTeardown.value,node.suiteTeardown.comment);
+        insertFileSetting("Test Setup",node.testSetup.value,node.testSetup.comment);
+        insertFileSetting("Test Teardown",node.testTeardown.value,node.testTeardown.comment);
+        insertFileSetting("Test Template",node.testTemplate.value,node.testTemplate.comment);
+        insertFileSetting("Test Timeout",node.testTimeout.value,node.testTimeout.comment);
+
+        content += "\r\n";
+
+
+        //用例信息
+        content += "*** Test Cases ***\r\n";
         node.children(function (err,children) {
             if(err){
                 console.log(err);
