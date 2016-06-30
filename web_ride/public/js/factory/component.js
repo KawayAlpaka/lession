@@ -23,8 +23,6 @@ define(['app','jquery','common'], function (myApp,$,common) {
 
                     $scope.robotNode = {};
                     $scope.robotNode.name = "";
-                    console.log(option.action);
-                    console.log(option.action);
                     switch(option.action)
                     {
                         case conf.action.newProject:
@@ -55,6 +53,7 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
+                        //用例属性
                         case conf.action.editSetup:
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.data);
@@ -71,7 +70,41 @@ define(['app','jquery','common'], function (myApp,$,common) {
                             break;
                         case conf.action.editTimeout:
                             $scope.confirm = function () {
-                                if(common.stringHelp.isNumber($scope.data.value)){
+                                if(common.strHelp.isNumber($scope.data.value)){
+                                    $scope.data.value = common.timeHelp.number2String($scope.data.value);
+                                }
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        //套件属性
+                        case conf.action.editSuiteSetup:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editSuiteTeardown:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editTestSetup:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editTestTeardown:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editTestTemplate:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editTestTimeout:
+                            $scope.confirm = function () {
+                                if(common.strHelp.isNumber($scope.data.value)){
                                     $scope.data.value = common.timeHelp.number2String($scope.data.value);
                                 }
                                 $uibModalInstance.close($scope.data);
@@ -97,14 +130,24 @@ define(['app','jquery','common'], function (myApp,$,common) {
 
         component.inputModal.option = {
             action:{
+                //新建元素
                 newProject:"New Project",
                 newTestCase:"New Test Case",
                 newSuite:"New Suite",
+                //编辑属性-通用属性
                 editDocumentation:"Edit Documentation",
+                //编辑属性-用例属性
                 editSetup:"Edit Setup",
                 editTeardown:"Edit Teardown",
                 editTemplate:"Edit Template",
-                editTimeout:"editTimeout"
+                editTimeout:"editTimeout",
+                //编辑属性-套件属性
+                editSuiteSetup:"editSuiteSetup",
+                editSuiteTeardown:"editSuiteTeardown",
+                editTestSetup:"editTestSetup",
+                editTestTeardown:"editTestTeardown",
+                editTestTemplate:"editTestTemplate",
+                editTestTimeout:"editTestTimeout"
             }
         };
 

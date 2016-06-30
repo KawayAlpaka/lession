@@ -11,44 +11,84 @@
                 <button ng-click="changeShowSettings()">Settings</button>
             </div>
             <div ng-if="showSettings == true">
-                <div ng-if="editingNode.type == 'case'">
+                <div>
                     <div class="setting">
                         <label>documentation</label>
                         <div class="show-value" ng-bind="editingNode.documentation" ng-click="editDocumentation(editingNode)"></div>
                         <button ng-click="editDocumentation(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
-                    <div class="setting">
-                        <label>setup</label>
-                        <div class="show-value" ng-bind="editingNode.setup.value + ' | # '+ editingNode.setup.comment" ></div>
-                        <button ng-click="editSetup(editingNode)">Edit</button>
-                        <button>Clear</button>
-                    </div>
-                    <div class="setting">
-                        <label>teardown</label>
-                        <div class="show-value" ng-bind="editingNode.teardown.value + ' | # '+ editingNode.teardown.comment" ></div>
-                        <button ng-click="editTeardown(editingNode)">Edit</button>
-                        <button>Clear</button>
-                    </div>
-                    <div class="setting">
-                        <label>tags</label>
-                        <div class="show-value">
-                            <input type="text" class="tag" disabled>
+                    <div ng-if="editingNode.type == 'case'">
+                        <div class="setting">
+                            <label>setup</label>
+                            <div class="show-value" ng-bind="editingNode.setup.value + ' | # '+ editingNode.setup.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'setup')">Edit</button>
+                            <button>Clear</button>
                         </div>
-                        <button>Edit</button>
-                        <button>Clear</button>
+                        <div class="setting">
+                            <label>teardown</label>
+                            <div class="show-value" ng-bind="editingNode.teardown.value + ' | # '+ editingNode.teardown.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'teardown')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>tags</label>
+                            <div class="show-value">
+                                <input type="text" class="tag" disabled>
+                            </div>
+                            <button>Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>timeout</label>
+                            <div class="show-value" ng-bind="editingNode.timeout.value + ' | # '+ editingNode.timeout.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'timeout')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>template</label>
+                            <div class="show-value" ng-bind="editingNode.template.value + ' | # '+ editingNode.template.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'template')">Edit</button>
+                            <button>Clear</button>
+                        </div>
                     </div>
-                    <div class="setting">
-                        <label>timeout</label>
-                        <div class="show-value" ng-bind="editingNode.timeout.value + ' | # '+ editingNode.timeout.comment" ></div>
-                        <button ng-click="editTimeout(editingNode)">Edit</button>
-                        <button>Clear</button>
-                    </div>
-                    <div class="setting">
-                        <label>template</label>
-                        <div class="show-value" ng-bind="editingNode.template.value + ' | # '+ editingNode.template.comment" ></div>
-                        <button ng-click="editTemplate(editingNode)">Edit</button>
-                        <button>Clear</button>
+                    <div ng-if="editingNode.type == 'suite'">
+                        <div class="setting">
+                            <label>Suite Setup</label>
+                            <div class="show-value" ng-bind="editingNode.suiteSetup.value + ' | # '+ editingNode.suiteSetup.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'suiteSetup')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>Suite Teardown</label>
+                            <div class="show-value" ng-bind="editingNode.suiteTeardown.value + ' | # '+ editingNode.suiteTeardown.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'suiteTeardown')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>Test Setup</label>
+                            <div class="show-value" ng-bind="editingNode.testSetup.value + ' | # '+ editingNode.testSetup.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'testSetup')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>Test Teardown</label>
+                            <div class="show-value" ng-bind="editingNode.testTeardown.value + ' | # '+ editingNode.testTeardown.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'testTeardown')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>Test Template</label>
+                            <div class="show-value" ng-bind="editingNode.testTemplate.value + ' | # '+ editingNode.testTemplate.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'testTemplate')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting">
+                            <label>Test Timeout</label>
+                            <div class="show-value" ng-bind="editingNode.testTimeout.value + ' | # '+ editingNode.testTimeout.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'testTimeout')">Edit</button>
+                            <button>Clear</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,14 +16,14 @@ var getFileContent = function (node,cb) {
                 return;
             }
             
-            var insertValueCommont = function (title,value,commont) {
-                if(strHelp.isNotEmptyStr(value) || strHelp.isNotEmptyStr(commont) ){
+            var insertValueComment = function (title,value,comment) {
+                if(strHelp.isNotEmptyStr(value) || strHelp.isNotEmptyStr(comment) ){
                     content += "    [" + title + "]";
                     if(strHelp.isNotEmptyStr(value)){
                         content += "    " + value;
                     }
-                    if(strHelp.isNotEmptyStr(commont)){
-                        content += "    " + "# " + commont;
+                    if(strHelp.isNotEmptyStr(comment)){
+                        content += "    " + "# " + comment;
                     }
                     content += "\r\n";
                 }
@@ -37,9 +37,9 @@ var getFileContent = function (node,cb) {
                     }
                     // 占位 tags
 
-                    insertValueCommont("Setup",child.setup.value,child.setup.comment);
-                    insertValueCommont("Template",child.template.value,child.template.comment);
-                    insertValueCommont("Timeout",child.timeout.value,child.timeout.comment);
+                    insertValueComment("Setup",child.setup.value,child.setup.comment);
+                    insertValueComment("Template",child.template.value,child.template.comment);
+                    insertValueComment("Timeout",child.timeout.value,child.timeout.comment);
 
                     if(child.form){
                         child.form.rows.forEach(function (row) {
@@ -49,7 +49,7 @@ var getFileContent = function (node,cb) {
                             content +="\r\n";
                         });
                     }
-                    insertValueCommont("Teardown",child.teardown.value,child.teardown.comment);
+                    insertValueComment("Teardown",child.teardown.value,child.teardown.comment);
                     content += "\r\n";
                 }
             });
@@ -197,6 +197,7 @@ actions.createProjectFiles = function (req, res) {
                     console.log("finish");
                     res.json(res.resFormat);
                 });
+
 
         } else {
             res.resFormat.logicState = 1;

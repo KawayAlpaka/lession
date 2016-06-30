@@ -1,4 +1,4 @@
-define(['app'], function(myApp){
+define(['app','common'], function(myApp,common){
     myApp.controller('m1_workspace_controller', ['$scope','component', function (s,component) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
@@ -28,56 +28,16 @@ define(['app'], function(myApp){
             };
             component.inputModal(modalOption);
         };
-        s.editSetup = function (node) {
+
+        s.editValueCommentAttr = function (node,attrName) {
             var modalOption = {
-                action: s.modalConf.action.editSetup,
-                data:node.setup,
-                close:function (data) {
-                    console.log(data);
-                    node.setup = data;
-                    node.fn.update({setup:node.setup});
-                },
-                dismiss:function (data) {
-                    console.log(data);
-                }
-            };
-            component.inputModal(modalOption);
-        };
-        s.editTeardown = function (node) {
-            var modalOption = {
-                action: s.modalConf.action.editTeardown,
-                data:node.teardown,
-                close:function (data) {
-                    node.teardown = data;
-                    node.fn.update({teardown:node.teardown});
-                },
-                dismiss:function (data) {
-                    console.log(data);
-                }
-            };
-            component.inputModal(modalOption);
-        };
-        s.editTemplate  = function (node) {
-            var modalOption = {
-                action: s.modalConf.action.editTemplate,
-                data:node.template,
-                close:function (data) {
-                    node.template = data;
-                    node.fn.update({template:node.template});
-                },
-                dismiss:function (data) {
-                    console.log(data);
-                }
-            };
-            component.inputModal(modalOption);
-        };
-        s.editTimeout  = function (node) {
-            var modalOption = {
-                action: s.modalConf.action.editTimeout,
+                action: s.modalConf.action["edit" + common.strHelp.firstUpper(attrName)],
                 data:node.timeout,
                 close:function (data) {
-                    node.timeout = data;
-                    node.fn.update({timeout:node.timeout});
+                    node[attrName] = data;
+                    var updateData = {};
+                    updateData[attrName] = node[attrName];
+                    node.fn.update(updateData);
                 },
                 dismiss:function (data) {
                     console.log(data);

@@ -42,17 +42,17 @@
     common.strHelp.toNumber = function (str) {
         return Number(str);
     };
-    common.strHelp.toNumber = function (str) {
-        return Number(str);
-    };
     common.strHelp.isEmptyStr = function (obj) {
         return typeof obj == 'string' && obj.length == 0;
     };
     common.strHelp.isNotEmptyStr = function (obj) {
         return typeof obj == 'string' && obj.length > 0;
     };
-    // console.log(typeof window);
-    // console.log(typeof global);
+    common.strHelp.firstUpper = function (str) {
+        return str.replace(/(\w)/,function(v){return v.toUpperCase()});
+    };
+
+
     if(typeof window == 'object'){
         define([], function () {
             return common;

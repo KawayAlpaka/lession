@@ -14,12 +14,16 @@ define(['app','common'], function(myApp , common){
         // console.log( common.strHelp.isEmptyStr([]) );
         // console.log( common.strHelp.isEmptyStr("1") );
 
-        console.log( common.strHelp.isNotEmptyStr("") );
-        console.log( common.strHelp.isNotEmptyStr() );
-        console.log( common.strHelp.isNotEmptyStr(null) );
-        console.log( common.strHelp.isNotEmptyStr(undefined) );
-        console.log( common.strHelp.isNotEmptyStr([]) );
-        console.log( common.strHelp.isNotEmptyStr("1") );
+        // console.log( common.strHelp.isNotEmptyStr("") );
+        // console.log( common.strHelp.isNotEmptyStr() );
+        // console.log( common.strHelp.isNotEmptyStr(null) );
+        // console.log( common.strHelp.isNotEmptyStr(undefined) );
+        // console.log( common.strHelp.isNotEmptyStr([]) );
+        // console.log( common.strHelp.isNotEmptyStr("1") );
+
+        // console.log( common.strHelp.firstUpper("1fawefawe") );
+        // console.log( common.strHelp.firstUpper("awefawe") );
+        // console.log( common.strHelp.firstUpper("你好1fawefawe") );
 
         s.tab = "component";
         s.setTab = function (str) {

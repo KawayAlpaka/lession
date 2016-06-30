@@ -11,48 +11,20 @@ var robotNodeSchema = new Schema({
     //通用Settings
     documentation:{ type:String },
     //套件Settings
-    suiteSetup:{ type:String },
-    suiteTeardown:{ type:String },
-    testSetup:{ type:String },
-    testTeardown:{ type:String },
-    testTemplate:{ type:String },
-    testTimeout:{ type:String },
+    suiteSetup:{value:{type:String}, comment: {type:String}},
+    suiteTeardown:{value:{type:String}, comment: {type:String}},
+    testSetup:{value:{type:String}, comment: {type:String}},
+    testTeardown:{value:{type:String}, comment: {type:String}},
+    testTemplate:{value:{type:String}, comment: {type:String}},
+    testTimeout:{value:{type:String}, comment: {type:String}},
     forceTags:{ type:String },
     defaultTags:{ type:String },
     //用例Settings
-    setup:{
-        value:{
-            type:String
-        },
-        comment: {
-            type:String
-        }
-    },
-    teardown:{
-        value:{
-            type:String
-        },
-        comment: {
-            type:String
-        }
-    },
-    tags:{ type:String },
-    timeout:{
-        value:{
-            type:String
-        },
-        comment: {
-            type:String
-        }
-    },
-    template:{
-        value:{
-            type:String
-        },
-        comment: {
-            type:String
-        }
-    },
+    setup:{value:{type:String}, comment: {type:String}},
+    teardown:{value:{type:String}, comment: {type:String}},
+    tags:{value:{type:String}, comment: {type:String}}, //待设计
+    template:{value:{type:String}, comment: {type:String}},
+    timeout:{value:{type:String}, comment: {type:String}},
     //表格
     form: {
         type:Object,

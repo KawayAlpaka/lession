@@ -23,7 +23,11 @@
         <textarea ng-model="data.value"></textarea>
     </div>
 </div>
-<div ng-if="action == conf.action.editSetup || action == conf.action.editTeardown || action == conf.action.editTemplate || action == conf.action.editTimeout">
+<div ng-if="action == conf.action.editSetup || action == conf.action.editTeardown
+|| action == conf.action.editTemplate || action == conf.action.editTimeout
+|| action == conf.action.editSuiteSetup || action == conf.action.editSuiteTeardown
+|| action == conf.action.editTestSetup || action == conf.action.editTestTeardown
+|| action == conf.action.editTestTemplate || action == conf.action.editTestTimeout">
     <div>
         <label>value:</label>
         <input type="text" ng-model="data.value">
