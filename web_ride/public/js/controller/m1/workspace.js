@@ -32,7 +32,7 @@ define(['app','common'], function(myApp,common){
         s.editValueCommentAttr = function (node,attrName) {
             var modalOption = {
                 action: s.modalConf.action["edit" + common.strHelp.firstUpper(attrName)],
-                data:node.timeout,
+                data:node[attrName],
                 close:function (data) {
                     node[attrName] = data;
                     var updateData = {};
