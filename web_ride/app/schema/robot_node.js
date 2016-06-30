@@ -19,6 +19,15 @@ var robotNodeSchema = new Schema({
     testTimeout:{value:{type:String}, comment: {type:String}},
     forceTags:{ type:String },
     defaultTags:{ type:String },
+    imports: {
+        type: [{
+            type:String,
+            path:String,
+            args:String,
+            alias:String,
+            comment:String
+        }]
+    },
     //用例Settings
     setup:{value:{type:String}, comment: {type:String}},
     teardown:{value:{type:String}, comment: {type:String}},

@@ -106,6 +106,26 @@
             </div>
             <button ng-click="saveForm(editingNode)">保存</button>
         </div>
+        <div class="imports" ng-if="editingNode.type == 'suite'" >
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Import</th>
+                        <th>Name / Path</th>
+                        <th>Arguments</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Library</td>
+                        <td>Selenium2Library</td>
+                        <td>haha</td>
+                        <td>hehe</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div data-ui-view="workspace"></div>
 </div>
