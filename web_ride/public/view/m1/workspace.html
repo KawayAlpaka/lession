@@ -117,14 +117,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Library</td>
-                        <td>Selenium2Library</td>
-                        <td>haha</td>
-                        <td>hehe</td>
+                    <tr ng-repeat="import in editingNode.imports">
+                        <td ng-bind="import.type"></td>
+                        <td ng-bind="import.path">Selenium2Library</td>
+                        <td ng-bind="import.args">haha</td>
+                        <td ng-bind="import.comment">hehe</td>
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <div ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</div>
+                <div ng-click="addImport(editingNode,modalConf.action.addResource)">Resource</div>
+                <div ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</div>
+            </div>
         </div>
     </div>
     <div data-ui-view="workspace"></div>

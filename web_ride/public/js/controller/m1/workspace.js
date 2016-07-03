@@ -1,4 +1,4 @@
-define(['app','common'], function(myApp,common){
+define(['app','common','jquery'], function(myApp,common,$){
     myApp.controller('m1_workspace_controller', ['$scope','component', function (s,component) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
@@ -38,6 +38,26 @@ define(['app','common'], function(myApp,common){
                     var updateData = {};
                     updateData[attrName] = node[attrName];
                     node.fn.update(updateData);
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.inputModal(modalOption);
+        };
+        
+        s.addImport = function (node,action) {
+            var modalOption = {
+                action: s.modalConf.action[action],
+                // data:node[attrName],
+                close:function (data) {
+                    var imports = $.extend([],node.imports);
+                    imports.push(data);
+                    var updateData = {imports:imports};
+                    node.fn.update(updateData)
+                        .success(function () {
+                            node.imports = imports;
+                        });
                 },
                 dismiss:function (data) {
                     console.log(data);

@@ -110,6 +110,24 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
+                        case conf.action.addLibrary:
+                            $scope.confirm = function () {
+                                $scope.data.type = "Library";
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.addResource:
+                            $scope.confirm = function () {
+                                $scope.data.type = "Resource";
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.addVariables:
+                            $scope.confirm = function () {
+                                $scope.data.type = "Variables";
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
                         default:
                             $scope.confirm = function () {
                                 $uibModalInstance.close("confirm");
@@ -147,7 +165,10 @@ define(['app','jquery','common'], function (myApp,$,common) {
                 editTestSetup:"editTestSetup",
                 editTestTeardown:"editTestTeardown",
                 editTestTemplate:"editTestTemplate",
-                editTestTimeout:"editTestTimeout"
+                editTestTimeout:"editTestTimeout",
+                addLibrary:"addLibrary",
+                addResource:"addResource",
+                addVariables:"addVariables"
             }
         };
 

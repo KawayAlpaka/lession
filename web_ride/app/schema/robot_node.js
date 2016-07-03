@@ -17,16 +17,18 @@ var robotNodeSchema = new Schema({
     testTeardown:{value:{type:String}, comment: {type:String}},
     testTemplate:{value:{type:String}, comment: {type:String}},
     testTimeout:{value:{type:String}, comment: {type:String}},
-    forceTags:{ type:String },
-    defaultTags:{ type:String },
+    forceTags:{ type:String },//待设计
+    defaultTags:{ type:String },//待设计
     imports: {
         type: [{
-            type:String,
-            path:String,
-            args:String,
-            alias:String,
-            comment:String
+            type: {type: String},
+            path: {type: String},
+            args: {type: String},
+            alias: {type: String},
+            comment: {type: String}
         }]
+        // ,
+        // default: []
     },
     //用例Settings
     setup:{value:{type:String}, comment: {type:String}},
