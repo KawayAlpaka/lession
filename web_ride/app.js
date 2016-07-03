@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 
 mongoose.connect('mongodb://localhost/web_ride');
+mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
 var User = require('./app/model/user');
 var RobotNode = require('./app/model/robot_node');
