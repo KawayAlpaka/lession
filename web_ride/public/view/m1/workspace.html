@@ -1,6 +1,6 @@
 <div class="workspace">
     <div class="node-list">
-        <tree-view m-tree-data="[nodeTree.node]" add-suite="addSuite" tree-functions="treeFunctions"></tree-view>
+        <tree-view m-tree-data="[nodeTree.node]" tree-functions="treeFunctions"></tree-view>
     </div>
     <div class="work-panel">
         <div>
@@ -114,6 +114,7 @@
                         <th>Name / Path</th>
                         <th>Arguments</th>
                         <th>Comment</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,6 +123,9 @@
                         <td ng-bind="import.path">Selenium2Library</td>
                         <td ng-bind="import.args">haha</td>
                         <td ng-bind="import.comment">hehe</td>
+                        <td>
+                            <button ng-click="deleteImport(editingNode,$index)">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

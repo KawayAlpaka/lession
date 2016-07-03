@@ -125,18 +125,35 @@ define(['app','common','jquery'], function(myApp,common,$){
 
         s.treeFunctions = {
             getChildren:s.getChildren,
-            clickNode: function (node) {
+            click: function (node) {
                 selectNode(node);
             },
-            rightClickNode:function (node,$event) {
+            rightClick:function (node,$event) {
                 $event.stopPropagation();
                 selectNode(node);
+                s.setRightClickNode(node);
+                s.setRightClickNodeType("node");
                 s.setContextMenuPoint($event.clientX,$event.clientY);
                 s.setShowContextMenu(true);
             }
         };
 
-
+        s.deleteImport = function (node,index) {
+            var imports = $.extend([],node.imports);
+            imports.splice(index,1);
+            node.fn.update({imports:imports})
+                .success(function () {
+                    node.imports = imports;
+                });
+        };
+        ////不采用右键删除方案
+        // s.rightClickImport = function (editingNode,iImport,index,$event) {
+        //     $event.stopPropagation();
+        //     s.setRightClickNode(iImport);
+        //     s.setRightClickNodeType("import");
+        //     s.setContextMenuPoint($event.clientX,$event.clientY);
+        //     s.setShowContextMenu(true);
+        // }
 
     }]);
 

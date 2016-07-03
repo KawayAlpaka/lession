@@ -61,7 +61,6 @@ robotNodes.update = function (req, res) {
     RobotNode.find({_id: nodeId}, function (err, robotNodes) {
         if (robotNodes.length > 0) {
             var node = robotNodes[0];
-            // node.form = req.body;
             extend(node, req.body);
             node.save(function (err, node) {
                 if (err) {

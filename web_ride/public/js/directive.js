@@ -6,7 +6,8 @@ define(['app'], function (myApp) {
             templateUrl: '/view/directive/m_context_menu.html',
             scope: {
                 mNode:'=',
-                contextMenuFunctions:'='
+                contextMenuFunctions:'=',
+                mNodeType:"="
             },
             controller:['$scope','component', function($scope,component){
                 $scope.modalAction = component.inputModal.option.action;

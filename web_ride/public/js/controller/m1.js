@@ -6,6 +6,13 @@ define(['app','controller/m1/home','controller/m1/workspace','controller/m1/mana
             s.selectedNode = node;
             s.editingNode = node;
         };
+        s.setRightClickNode = function (node) {
+            s.rightClickNode = node;
+        };
+        s.setRightClickNodeType = function (type) {
+            s.rightClickNodeType = type;
+        };
+
         s.setShowContextMenu = function (bool) {
             s.showContextMenu = bool;
         };
@@ -22,29 +29,39 @@ define(['app','controller/m1/home','controller/m1/workspace','controller/m1/mana
         s.showContextMenu = false;
 
         s.contextMenuFunctions = {
-            click:function (data) {
-                console.log(data);
-                s.showContextMenu = false;
+            click:function (action) {
 
-                var modalOption = {
-                    action: data,
-                    close:function (data) {
-                        data.parent = s.selectedNode._id;
-                        console.log(data);
-                        s.api.robotNode.create(data)
-                            .success(function (data) {
-                                
-                            });
-                    },
-                    dismiss:function (data) {
-                        console.log(data);
-                    }
-                };
-                component.inputModal(modalOption);
+                switch (s.rightClickNodeType){
+                    case "node":
+                    var modalOption = {
+                        action: action,
+                        close:function (data) {
+                            data.parent = s.selectedNode._id;
+                            console.log(data);
+                            s.api.robotNode.create(data)
+                                .success(function (data) {
+
+                                });
+                        },
+                        dismiss:function (data) {
+                            console.log(data);
+                        }
+                    };
+                    component.inputModal(modalOption);
+                    break;
+                    case "import":
+                        if(action == "Delete"){
+                            //
+                        }
+                        break;
+                    default:
+                        $scope.confirm = function () {
+                            $uibModalInstance.close("confirm");
+                        };
+                }
+                s.showContextMenu = false;
             }
         };
-
-
-
+        
     }]);
 });
