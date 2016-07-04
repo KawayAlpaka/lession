@@ -22,10 +22,9 @@ define(['app','jquery','common'], function (myApp,$,common) {
                         $scope.data = {};
                     }
 
-                    switch(option.action)
-                    {
+                    switch (option.action) {
                         case conf.action.searchResource:
-                            $scope.api.robotNode.find({type:"resource"})
+                            $scope.api.robotNode.find({type: "resource"})
                                 .success(function (data) {
                                     $scope.results = data.data;
                                 });

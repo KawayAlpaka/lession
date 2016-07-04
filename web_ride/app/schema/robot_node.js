@@ -71,8 +71,26 @@ robotNodeSchema.methods.myName = function (cb) {
 robotNodeSchema.methods.children = function (cb) {
     return this.model('RobotNode').find({ parent: this._id }, cb);
 };
-robotNodeSchema.methods.getParent = function () {
-    console.log("function parent");
+robotNodeSchema.methods.getParent = function (cb) {
+    return this.model('RobotNode').find({ _id: this.parent }, cb);
+};
+robotNodeSchema.methods.getParentList = function (cb) {
+    var list = [];
+    var getParentCb = function (err,nodes) {
+        if(err){
+            cb(list);
+            return;
+        }
+        if(nodes.length == 0){
+            console.log("已经到顶层");
+            cb(list);
+            return;
+        }else{
+            list.push(nodes[0]);
+            nodes[0].getParent(getParentCb);
+        }
+    };
+    this.getParent(getParentCb);
 };
 
 robotNodeSchema.statics.all = function(cb){

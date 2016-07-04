@@ -29,3 +29,8 @@ var server = app.listen(3030, function () {
         console.log('Caught exception: ', err.stack);
     });
 });
+
+// //test
+// var RobotNode = mongoose.model('RobotNode');
+// var robotNode = new RobotNode({name:"haha"});
+// robotNode.getParentList();

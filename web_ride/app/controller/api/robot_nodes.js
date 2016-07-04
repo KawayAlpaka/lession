@@ -78,4 +78,22 @@ robotNodes.update = function (req, res) {
     });
 };
 
+robotNodes.parentList = function (req, res) {
+    var nodeId = req.params.id;
+    RobotNode.find({_id: nodeId}, function (err, robotNodes) {
+        if(err){
+            return ;
+        }
+        if(robotNodes.length == 0){
+            res.json(res.resFormat);
+        }else{
+            robotNodes[0].getParentList(function (nodes) {
+                res.resFormat.data = nodes;
+                res.json(res.resFormat);
+            });
+        }
+
+    });
+};
+
 module.exports = robotNodes;

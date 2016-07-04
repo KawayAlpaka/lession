@@ -29,6 +29,7 @@ router.post('/robot_nodes/find', api.robotNodes.find);
 router.get('/robot_nodes/:id', api.robotNodes.findById);
 router.get('/robot_nodes/:id/children', api.robotNodes.findChildren);
 router.patch('/robot_nodes/:id', api.robotNodes.update);
+router.get('/robot_nodes/:id/parent_list', api.robotNodes.parentList );
 
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
 
