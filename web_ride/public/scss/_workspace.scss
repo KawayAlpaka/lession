@@ -54,5 +54,10 @@
         font-size: 14px;
       }
     }
+    .imports{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
   }
 }

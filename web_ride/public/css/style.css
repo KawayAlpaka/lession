@@ -92,3 +92,9 @@ m-context-menu {
 .workspace .work-panel .form-editor button {
   font-size: 14px;
 }
+/* line 57, ../scss/_workspace.scss */
+.workspace .work-panel .imports {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}

@@ -107,32 +107,42 @@
             <button ng-click="saveForm(editingNode)">保存</button>
         </div>
         <div class="imports" ng-if="editingNode.type == 'suite'" >
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Import</th>
-                        <th>Name / Path</th>
-                        <th>Arguments</th>
-                        <th>Comment</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="import in editingNode.imports">
-                        <td ng-bind="import.type"></td>
-                        <td ng-bind="import.path">Selenium2Library</td>
-                        <td ng-bind="import.args">haha</td>
-                        <td ng-bind="import.comment">hehe</td>
-                        <td>
-                            <button ng-click="deleteImport(editingNode,$index)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <div ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</div>
-                <div ng-click="addImport(editingNode,modalConf.action.addResource)">Resource</div>
-                <div ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</div>
+            <!--<div style="flex-grow: 5;">-->
+            <div style="width: 100%">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Import</th>
+                            <th>Name / Path</th>
+                            <th>Arguments</th>
+                            <th>Comment</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="import in editingNode.imports">
+                            <td ng-bind="import.type"></td>
+                            <td ng-bind="import.path">Selenium2Library</td>
+                            <td ng-bind="import.args">haha</td>
+                            <td ng-bind="import.comment">hehe</td>
+                            <td>
+                                <button ng-click="deleteImport(editingNode,$index)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="width: 120px">
+                <div>Add Import</div>
+                <div>
+                    <button ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</button>
+                </div>
+                <div>
+                    <button ng-click="addImport(editingNode,modalConf.action.addResource)">Resource</button>
+                </div>
+                <div>
+                    <button ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</button>
+                </div>
             </div>
         </div>
     </div>
