@@ -1,6 +1,6 @@
 <div>search modal</div>
 <div>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Name</th>
@@ -9,11 +9,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="result in results">
+            <tr ng-repeat="result in results" ng-class="{success:result.selected}" ng-click="clickRow(result)">
                 <td ng-bind="result.name"></td>
                 <td ng-bind="result.abPath"></td>
                 <td></td>
             </tr>
         </tbody>
     </table>
+</div>
+<div>
+    <button class="btn btn-success" ng-click="confirm()">确认</button>
+    <button class="btn btn-default" ng-click="cancel()">取消</button>
 </div>

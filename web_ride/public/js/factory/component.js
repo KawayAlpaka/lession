@@ -24,6 +24,15 @@ define(['app','jquery','common'], function (myApp,$,common) {
 
                     switch (option.action) {
                         case conf.action.searchResource:
+
+                            $scope.clickRow = function (result) {
+                                if($scope.selectedResult){
+                                    $scope.selectedResult.selected = false;
+                                }
+                                result.selected = true;
+                                $scope.selectedResult = result;
+                            };
+
                             $scope.api.robotNode.find({type: "resource"})
                                 .success(function (data) {
                                     $scope.results = data.data;
@@ -37,9 +46,10 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                                 result.abPath = path;
                                             });
                                     });
-
-
                                 });
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.selectedResult);
+                            };
                             break;
                         default:
                             $scope.confirm = function () {
