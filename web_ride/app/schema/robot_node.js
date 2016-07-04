@@ -22,7 +22,9 @@ var robotNodeSchema = new Schema({
     imports: {
         type: [{
             type: {type: String},
+            from: {type: String,enum:['file','db'],default:'file'},
             path: {type: String},
+            resource: {type: ObjectId ,ref:"RobotNode"},
             args: {type: String},
             alias: {type: String},
             comment: {type: String}
@@ -39,7 +41,6 @@ var robotNodeSchema = new Schema({
     //User Keyword Settings
     arguments:{value:{type:String}, comment: {type:String}},
     returnValue:{value:{type:String}, comment: {type:String}},
-
 
     //表格
     form: {
