@@ -27,6 +27,18 @@ define(['app','jquery','common'], function (myApp,$,common) {
                             $scope.api.robotNode.find({type: "resource"})
                                 .success(function (data) {
                                     $scope.results = data.data;
+                                    $scope.results.forEach(function (result) {
+                                        $scope.api.robotNode.getParentList(result._id)
+                                            .success(function (data) {
+                                                var path = "";
+                                                data.data.forEach(function (node) {
+                                                    path += "/" + node.name;
+                                                });
+                                                result.abPath = path;
+                                            });
+                                    });
+
+
                                 });
                             break;
                         default:

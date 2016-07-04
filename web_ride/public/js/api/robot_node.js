@@ -57,6 +57,13 @@ define([], function () {
             type : 'json'
         });
     };
+    api.getParentList = function (id) {
+        return myHttp({
+            url : '/api/robot_nodes/'+id+"/parent_list",
+            method:'GET',
+            type : 'json'
+        });
+    };
 
     return api;
 });
