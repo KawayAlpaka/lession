@@ -4,8 +4,13 @@
     <div class="nav-tab" ng-click="setTab('apiCommon')">通用接口测试</div>
 </div>
 
+<div ng-show="tab == 'api'">
+    <h3>专用接口测试</h3>
+    <button ng-click="testGetRelativePath()">getRelativePath</button>
+</div>
+
 <div ng-show="tab == 'apiCommon'">
-    <h3>测试API</h3>
+    <h3>通用接口测试</h3>
     <div>
         <label>地址：</label><input type="text" data-ng-model="address">
     </div>

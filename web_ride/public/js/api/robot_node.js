@@ -64,6 +64,14 @@ define([], function () {
             type : 'json'
         });
     };
+    api.getRelativePath = function (data) {
+        return myHttp({
+            url : "/api/robot_nodes/relative_path",
+            method:'POST',
+            type : 'json',
+            data:data
+        });
+    };
 
     return api;
 });

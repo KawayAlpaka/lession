@@ -30,6 +30,7 @@ router.get('/robot_nodes/:id', api.robotNodes.findById);
 router.get('/robot_nodes/:id/children', api.robotNodes.findChildren);
 router.patch('/robot_nodes/:id', api.robotNodes.update);
 router.get('/robot_nodes/:id/parent_list', api.robotNodes.parentList );
+router.post('/robot_nodes/relative_path', api.robotNodes.relativePath );
 
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
 

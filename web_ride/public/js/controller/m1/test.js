@@ -30,6 +30,16 @@ define(['app','common'], function(myApp , common){
             s.tab = str;
         };
 
+
+        //test 专用API
+        s.testGetRelativePath = function () {
+            s.api.robotNode.getRelativePath({sourceId:"5774826e51a57da02438381f",targetId:"5779bcb2ee4c303020b65d20"})
+                .success(function (data) {
+                    console.log(data);
+                });
+        };
+
+
         //test api
         $scope.address = "";
         $scope.methods = ["GET","POST"];
