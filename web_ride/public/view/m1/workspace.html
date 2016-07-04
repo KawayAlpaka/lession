@@ -18,8 +18,8 @@
                         <button ng-click="editDocumentation(editingNode)">Edit</button>
                         <button>Clear</button>
                     </div>
-                    <div ng-if="editingNode.type == 'case'">
-                        <div class="setting">
+                    <div ng-if="editingNode.type == 'case' || editingNode.type == 'keyword'">
+                        <div class="setting" ng-if="editingNode.type == 'case'">
                             <label>setup</label>
                             <div class="show-value" ng-bind="editingNode.setup.value + ' | # '+ editingNode.setup.comment" ></div>
                             <button ng-click="editValueCommentAttr(editingNode,'setup')">Edit</button>
@@ -45,10 +45,22 @@
                             <button ng-click="editValueCommentAttr(editingNode,'timeout')">Edit</button>
                             <button>Clear</button>
                         </div>
-                        <div class="setting">
+                        <div class="setting" ng-if="editingNode.type == 'case'">
                             <label>template</label>
                             <div class="show-value" ng-bind="editingNode.template.value + ' | # '+ editingNode.template.comment" ></div>
                             <button ng-click="editValueCommentAttr(editingNode,'template')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting" ng-if="editingNode.type == 'keyword'">
+                            <label>arguments</label>
+                            <div class="show-value" ng-bind="editingNode.arguments.value + ' | # '+ editingNode.arguments.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'arguments')">Edit</button>
+                            <button>Clear</button>
+                        </div>
+                        <div class="setting" ng-if="editingNode.type == 'keyword'">
+                            <label>returnValue</label>
+                            <div class="show-value" ng-bind="editingNode.returnValue.value + ' | # '+ editingNode.returnValue.comment" ></div>
+                            <button ng-click="editValueCommentAttr(editingNode,'returnValue')">Edit</button>
                             <button>Clear</button>
                         </div>
                     </div>
@@ -93,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-editor" ng-if="editingNode.type == 'case'">
+        <div class="form-editor" ng-if="editingNode.type == 'case' || editingNode.type == 'keyword'">
             <div class="form-row" ng-repeat="row in editingNode.form.rows">
                 <label ng-bind="$index"></label>
                 <input type="text" ng-repeat="cell in row.cells" ng-model="cell.text">

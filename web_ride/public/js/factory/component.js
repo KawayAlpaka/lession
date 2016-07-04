@@ -133,6 +133,16 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
+                        case conf.action.editArguments:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.editReturnValue:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
                         case conf.action.addLibrary:
                             $scope.confirm = function () {
                                 $scope.data.type = "Library";
@@ -192,6 +202,8 @@ define(['app','jquery','common'], function (myApp,$,common) {
                 editTestTeardown:"editTestTeardown",
                 editTestTemplate:"editTestTemplate",
                 editTestTimeout:"editTestTimeout",
+                editArguments:"editArguments",
+                editReturnValue:"editReturnValue",
                 addLibrary:"addLibrary",
                 addResource:"addResource",
                 addVariables:"addVariables"

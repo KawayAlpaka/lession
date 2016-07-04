@@ -30,12 +30,17 @@ var robotNodeSchema = new Schema({
         // ,
         // default: []
     },
-    //用例Settings
+    //用例Settings //tags - teardown - timeout 与 case 共用
     setup:{value:{type:String}, comment: {type:String}},
     teardown:{value:{type:String}, comment: {type:String}},
     tags:{value:{type:String}, comment: {type:String}}, //待设计
     template:{value:{type:String}, comment: {type:String}},
     timeout:{value:{type:String}, comment: {type:String}},
+    //User Keyword Settings
+    arguments:{value:{type:String}, comment: {type:String}},
+    returnValue:{value:{type:String}, comment: {type:String}},
+
+
     //表格
     form: {
         type:Object,
