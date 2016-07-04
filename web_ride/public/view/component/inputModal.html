@@ -1,7 +1,8 @@
 <div>
     <h3>inputModal</h3>
 </div>
-<div ng-if="action == conf.action.newProject || action == conf.action.newTestCase || action == conf.action.newSuite">
+<div ng-if="action == conf.action.newProject || action == conf.action.newTestCase || action == conf.action.newSuite
+|| action == conf.action.newDirectory || action == conf.action.newResource || action == conf.action.newUserKeyword">
     <div>
         <label>Name:</label>
         <input type="text" ng-model="robotNode.name">
@@ -11,7 +12,8 @@
         <input type="radio" ng-model="robotNode.fileType" value="file"><span>file</span>
         <input type="radio" ng-model="robotNode.fileType" value="dir"><span>dir</span>
     </div>
-    <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'">
+    <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'
+    || robotNode.type == 'resource' || robotNode.type == 'other' ">
         <label>fileFormat:</label>
         <input type="radio"  ng-model="robotNode.fileFormat" value="robot"><span>robot</span>
         <input type="radio"  ng-model="robotNode.fileFormat" value="txt"><span>txt</span>

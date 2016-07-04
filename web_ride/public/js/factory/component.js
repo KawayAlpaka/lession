@@ -48,6 +48,29 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                 $uibModalInstance.close($scope.robotNode);
                             };
                             break;
+                        case conf.action.newDirectory:
+                            $scope.robotNode.type = "other";
+                            $scope.robotNode.fileType = "dir";
+                            $scope.robotNode.fileFormat = "txt";
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.robotNode);
+                            };
+                            break;
+                        case conf.action.newResource:
+                            $scope.robotNode.type = "resource";
+                            $scope.robotNode.fileType = "file";
+                            $scope.robotNode.fileFormat = "txt";
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.robotNode);
+                            };
+                            break;
+                        case conf.action.newUserKeyword:
+                            $scope.robotNode.type = "keyword";
+                            $scope.robotNode.fileType = "content";
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.robotNode);
+                            };
+                            break;
                         case conf.action.editDocumentation:
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.data);
@@ -152,6 +175,9 @@ define(['app','jquery','common'], function (myApp,$,common) {
                 newProject:"New Project",
                 newTestCase:"New Test Case",
                 newSuite:"New Suite",
+                newDirectory:"New Directory",
+                newResource:"New Resource",
+                newUserKeyword:"New User Keyword",
                 //编辑属性-通用属性
                 editDocumentation:"Edit Documentation",
                 //编辑属性-用例属性
