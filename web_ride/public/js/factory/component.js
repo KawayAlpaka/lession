@@ -2,10 +2,60 @@ define(['app','jquery','common'], function (myApp,$,common) {
     myApp.factory('component', ['$uibModal', function ($uibModal) {
 
         var component = {};
+
+        component.searchModal = function (option) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'view/component/search_modal.html',
+                controller: ['$scope','$rootScope','$uibModalInstance',function ($scope,$rootScope,$uibModalInstance) {
+
+                    var conf = component.searchModal.option;
+                    $scope.conf = conf;
+
+                    $scope.cancel = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+                    $scope.action = option.action;
+                    if (option.data){
+                        $scope.data = $.extend({},option.data);
+                    }else{
+                        $scope.data = {};
+                    }
+
+                    switch(option.action)
+                    {
+                        case conf.action.searchResource:
+                            $scope.api.robotNode.find({type:"resource"})
+                                .success(function (data) {
+                                    $scope.results = data.data;
+                                });
+                            break;
+                        default:
+                            $scope.confirm = function () {
+                                $uibModalInstance.close("confirm");
+                            };
+                    }
+                }],
+                size: "auto",
+                resolve: {
+                }
+            });
+            modalInstance.result.then(option.close ,option.dismiss );
+        };
+
+        component.searchModal.option = {
+            action:{
+                //新建元素
+                searchResource:"searchResource"
+            }
+        };
+
+
+
         component.inputModal = function (option) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'view/component/inputModal.html',
+                templateUrl: 'view/component/input_modal.html',
                 controller: ['$scope','$rootScope','$uibModalInstance',function ($scope,$rootScope,$uibModalInstance) {
 
                     var conf = component.inputModal.option;

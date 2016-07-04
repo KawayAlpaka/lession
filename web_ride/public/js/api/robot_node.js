@@ -13,6 +13,16 @@ define([], function () {
             type : 'json'
         });
     };
+
+    api.find = function (data) {
+        return myHttp({
+            url : '/api/robot_nodes/find',
+            method:'POST',
+            type : 'json',
+            data : data
+        });
+    };
+
     api.findProjects = function () {
         var data = {
             type: "project"

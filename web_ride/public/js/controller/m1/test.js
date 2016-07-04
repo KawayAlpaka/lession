@@ -64,7 +64,7 @@ define(['app','common'], function(myApp , common){
         };
 
         //test modal
-        s.openModal = function () {
+        s.openInputModal = function () {
             s.modalOption = {
                 action:"New Test Case",
                 close:function (data) {
@@ -76,7 +76,19 @@ define(['app','common'], function(myApp , common){
                 }
             };
             component.inputModal(s.modalOption);
-        }
+        };
+        s.openSearchModal = function () {
+            s.modalOption = {
+                action:component.searchModal.option.action.searchResource,
+                close:function (data) {
+                    console.log(data);
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.searchModal(s.modalOption);
+        };
 
 
     }]);

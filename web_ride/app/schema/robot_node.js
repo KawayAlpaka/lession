@@ -71,6 +71,9 @@ robotNodeSchema.methods.myName = function (cb) {
 robotNodeSchema.methods.children = function (cb) {
     return this.model('RobotNode').find({ parent: this._id }, cb);
 };
+robotNodeSchema.methods.getParent = function () {
+    console.log("function parent");
+};
 
 robotNodeSchema.statics.all = function(cb){
     this.find({},cb);

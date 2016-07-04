@@ -46,6 +46,24 @@ define(['jquery'],function($) {
                 };
                 return model.C.promise(func);
             };
+            model.fn.find = function (data) {
+                var func = function (resolve, reject) {
+                    return model.C.api.robotNode.find(data)
+                        .success(function (data) {
+                            var nodes = [];
+                            data.data.forEach(function (json) {
+                                var node = obj.createNew();
+                                node.fn.set(json);
+                                nodes.push(node);
+                            });
+                            resolve(nodes);
+                        })
+                        .error(function (data) {
+                            reject(data);
+                        });
+                };
+                return model.C.promise(func);
+            };
 
             model.fn.getChildren = function () {
                 var func = function (resolve, reject) {
