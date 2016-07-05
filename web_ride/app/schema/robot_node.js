@@ -28,9 +28,8 @@ var robotNodeSchema = new Schema({
             args: {type: String},
             alias: {type: String},
             comment: {type: String}
-        }]
-        // ,
-        // default: []
+        }],
+        default: []
     },
     //用例Settings //tags - teardown - timeout 与 case 共用
     setup:{value:{type:String}, comment: {type:String}},

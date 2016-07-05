@@ -42,11 +42,13 @@ var getFileContent = function (node,cb) {
         insertFileSetting("Test Template",node.testTemplate.value,node.testTemplate.comment);
         insertFileSetting("Test Timeout",node.testTimeout.value,node.testTimeout.comment);
 
+        node.imports.forEach(function (mImport) {
+            insertFileSetting( mImport.type,mImport.path,mImport.comment);
+        });
+
         content += "\r\n";
 
-
-        //用例信息
-        content += "*** Test Cases ***\r\n";
+        //children 信息
         node.children(function (err,children) {
             if(err){
                 console.log(err);
@@ -65,31 +67,66 @@ var getFileContent = function (node,cb) {
                     content += "\r\n";
                 }
             };
-            
-            children.forEach(function (child) {
-                if(child.type == "case"){
-                    content += child.name + "\r\n";
-                    if(strHelp.isNotEmptyStr(child.documentation)){
-                        content += "    [Documentation]    " + child.documentation + "\r\n";
-                    }
-                    // 占位 tags
 
-                    insertValueComment("Setup",child.setup.value,child.setup.comment);
-                    insertValueComment("Template",child.template.value,child.template.comment);
-                    insertValueComment("Timeout",child.timeout.value,child.timeout.comment);
 
-                    if(child.form){
-                        child.form.rows.forEach(function (row) {
-                            row.cells.forEach(function (cell) {
-                                content += "    " + cell.text;
+            if(node.type == "suite"){
+                //用例信息
+                content += "*** Test Cases ***\r\n";
+                children.forEach(function (child) {
+                    if(child.type == "case"){
+                        content += child.name + "\r\n";
+                        if(strHelp.isNotEmptyStr(child.documentation)){
+                            content += "    [Documentation]    " + child.documentation + "\r\n";
+                        }
+                        // 占位 tags
+
+                        insertValueComment("Setup",child.setup.value,child.setup.comment);
+                        insertValueComment("Template",child.template.value,child.template.comment);
+                        insertValueComment("Timeout",child.timeout.value,child.timeout.comment);
+
+                        if(child.form){
+                            child.form.rows.forEach(function (row) {
+                                row.cells.forEach(function (cell) {
+                                    content += "    " + cell.text;
+                                });
+                                content +="\r\n";
                             });
-                            content +="\r\n";
-                        });
+                        }
+                        insertValueComment("Teardown",child.teardown.value,child.teardown.comment);
+                        content += "\r\n";
                     }
-                    insertValueComment("Teardown",child.teardown.value,child.teardown.comment);
-                    content += "\r\n";
-                }
-            });
+                });
+            }
+
+            if(node.type == "resource"){
+                //用户关键字信息
+                content += "*** Keywords ***\r\n";
+                children.forEach(function (child) {
+                    if(child.type == "keyword"){
+                        content += child.name + "\r\n";
+                        insertValueComment("Arguments",child.arguments.value,child.arguments.comment);
+                        if(strHelp.isNotEmptyStr(child.documentation)){
+                            content += "    [Documentation]    " + child.documentation + "\r\n";
+                        }
+                        // 占位 tags
+
+                        insertValueComment("Timeout",child.timeout.value,child.timeout.comment);
+
+                        if(child.form){
+                            child.form.rows.forEach(function (row) {
+                                row.cells.forEach(function (cell) {
+                                    content += "    " + cell.text;
+                                });
+                                content +="\r\n";
+                            });
+                        }
+                        insertValueComment("Teardown",child.teardown.value,child.teardown.comment);
+                        insertValueComment("Return",child.returnValue.value,child.returnValue.comment);
+                        content += "\r\n";
+                    }
+                });
+            }
+
             cb(content);
         });
     }
