@@ -108,46 +108,46 @@ robotNodes.relativePath = function (req, res) {
             var targetList;
             targetNode.getParentList(function (list) {
                 targetList = list;
-            });
-            RobotNode.findOne({_id: sourceId}, function (err, sourceNode){
-                if(err){
-                    return ;
-                }
-                if(sourceNode){
-                    var sourceList;
-                    sourceNode.getParentList(function (list){
-                        sourceList = list;
-                        var rPath = "";
-                        var index1 = -1;
-                        var target1;
-                        targetList.forEach(function (target) {
-                            var index = _.findIndex(sourceList,function (source) {
-                                return target._id.toString() == source._id.toString();
+                RobotNode.findOne({_id: sourceId}, function (err, sourceNode){
+                    if(err){
+                        return ;
+                    }
+                    if(sourceNode){
+                        var sourceList;
+                        sourceNode.getParentList(function (list){
+                            sourceList = list;
+                            var rPath = "";
+                            var index1 = -1;
+                            var target1;
+                            targetList.forEach(function (target) {
+                                var index = _.findIndex(sourceList,function (source) {
+                                    return target._id.toString() == source._id.toString();
+                                });
+                                if(index >=0){
+                                    index1 = index;
+                                    target1 = target;
+                                    return;
+                                }
                             });
-                            if(index >=0){
-                                index1 = index;
-                                target1 = target;
-                                return;
+                            for(var i = 0 ;i<index1;i++){
+                                rPath += "../";
                             }
-                        });
-                        for(var i = 0 ;i<index1;i++){
-                            rPath += "../";
-                        }
 
-                        var targetList2 = targetList.reverse();
-                        var index2 = _.findIndex(targetList2,function (target) {
-                            return target._id.toString() == target1._id.toString();
-                        });
-                        console.log(index2);
-                        for(var i = index2;i<targetList2.length;i++ ){
-                            rPath += targetList2[i].name + "/";
-                        }
-                        rPath += targetNode.name + "." + targetNode.fileFormat;
+                            var targetList2 = targetList.reverse();
+                            var index2 = _.findIndex(targetList2,function (target) {
+                                return target._id.toString() == target1._id.toString();
+                            });
+                            console.log(index2);
+                            for(var i = index2 + 1;i<targetList2.length;i++ ){
+                                rPath += targetList2[i].name + "/";
+                            }
+                            rPath += targetNode.name + "." + targetNode.fileFormat;
 
-                        res.resFormat.data = rPath;
-                        res.json(res.resFormat);
-                    });
-                }
+                            res.resFormat.data = rPath;
+                            res.json(res.resFormat);
+                        });
+                    }
+                });
             });
         }
     });
