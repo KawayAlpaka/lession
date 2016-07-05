@@ -4,15 +4,15 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Path1</th>
-                <th>Path2</th>
+                <th>绝对路径</th>
+                <th>相对路径</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="result in results" ng-class="{success:result.selected}" ng-click="clickRow(result)">
                 <td ng-bind="result.name"></td>
                 <td ng-bind="result.abPath"></td>
-                <td></td>
+                <td ng-bind="result.rePath"></td>
             </tr>
         </tbody>
     </table>

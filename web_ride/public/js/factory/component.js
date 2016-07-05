@@ -24,7 +24,6 @@ define(['app','jquery','common'], function (myApp,$,common) {
 
                     switch (option.action) {
                         case conf.action.searchResource:
-
                             $scope.clickRow = function (result) {
                                 if($scope.selectedResult){
                                     $scope.selectedResult.selected = false;
@@ -43,7 +42,12 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                                 data.data.reverse().forEach(function (node) {
                                                     path += "/" + node.name;
                                                 });
-                                                result.abPath = path;
+                                                result.abPath = path += "/" + result.name + "." + result.fileFormat;
+                                            });
+                                        $scope.api.robotNode.getRelativePath({sourceId:option.editingNode._id,targetId:result._id})
+                                            .success(function (data) {
+                                                console.log(data.data);
+                                                result.rePath = data.data;
                                             });
                                     });
                                 });
@@ -221,6 +225,19 @@ define(['app','jquery','common'], function (myApp,$,common) {
                             };
                             break;
                         case conf.action.addResource:
+                            $scope.searchResource = function () {
+                                $scope.modalOption = {
+                                    action:component.searchModal.option.action.searchResource,
+                                    editingNode: option.editingNode,
+                                    close:function (data) {
+                                        $scope.data.path = data.rePath;
+                                    },
+                                    dismiss:function (data) {
+                                        console.log(data);
+                                    }
+                                };
+                                component.searchModal($scope.modalOption);
+                            };
                             $scope.confirm = function () {
                                 $scope.data.type = "Resource";
                                 $uibModalInstance.close($scope.data);

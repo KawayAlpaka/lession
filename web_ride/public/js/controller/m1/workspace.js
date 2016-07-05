@@ -47,9 +47,11 @@ define(['app','common','jquery'], function(myApp,common,$){
         };
         
         s.addImport = function (node,action) {
+            console.log(s.editingNode);
             var modalOption = {
                 action: s.modalConf.action[action],
                 // data:node[attrName],
+                editingNode: s.editingNode,
                 close:function (data) {
                     var imports = $.extend([],node.imports);
                     imports.push(data);
@@ -154,7 +156,6 @@ define(['app','common','jquery'], function(myApp,common,$){
         //     s.setContextMenuPoint($event.clientX,$event.clientY);
         //     s.setShowContextMenu(true);
         // }
-
     }]);
 
 

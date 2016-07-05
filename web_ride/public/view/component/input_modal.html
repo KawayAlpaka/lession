@@ -44,6 +44,7 @@
     <div>
         <label>path/name:</label>
         <input type="text" ng-model="data.path">
+        <button ng-click="searchResource()" ng-if="action == conf.action.addResource">Browse</button>
     </div>
     <div>
         <label>args:</label>
