@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20160705 12:09:40.320" generator="Robot 3.0 (Python 2.7.11 on win32)">
+<suite source="D:\test\5774802151a57da02438381c\哈哈2" id="s1" name="哈哈2">
+<suite source="D:\test\5774802151a57da02438381c\哈哈2\suite1.txt" id="s1-s1" name="Suite1">
+<test id="s1-s1-t1" name="我是Case">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>0</arg>
+</arguments>
+<msg timestamp="20160705 12:09:40.348" level="INFO">0</msg>
+<status status="PASS" endtime="20160705 12:09:40.348" starttime="20160705 12:09:40.347"></status>
+</kw>
+<doc>11</doc>
+<timeout value="1 second"></timeout>
+<status status="PASS" endtime="20160705 12:09:40.348" critical="yes" starttime="20160705 12:09:40.346"></status>
+</test>
+<test id="s1-s1-t2" name="我是Case2">
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20160705 12:09:40.349" level="INFO">1</msg>
+<status status="PASS" endtime="20160705 12:09:40.350" starttime="20160705 12:09:40.349"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>2</arg>
+</arguments>
+<msg timestamp="20160705 12:09:40.350" level="INFO">2</msg>
+<status status="PASS" endtime="20160705 12:09:40.350" starttime="20160705 12:09:40.350"></status>
+</kw>
+<doc>5</doc>
+<timeout value="2 seconds"></timeout>
+<status status="PASS" endtime="20160705 12:09:40.350" critical="yes" starttime="20160705 12:09:40.348"></status>
+</test>
+<doc>11</doc>
+<status status="PASS" endtime="20160705 12:09:40.351" starttime="20160705 12:09:40.343"></status>
+</suite>
+<status status="PASS" endtime="20160705 12:09:40.352" starttime="20160705 12:09:40.323"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="2">Critical Tests</stat>
+<stat fail="0" pass="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="哈哈2" pass="2">哈哈2</stat>
+<stat fail="0" id="s1-s1" name="Suite1" pass="2">哈哈2.Suite1</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20160705 12:09:40.345" level="ERROR">Error in file 'D:\test\5774802151a57da02438381c\哈哈2\suite1.txt': Importing test library '1' failed: ImportError: No module named 1
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Python27\lib\site-packages\setuptools-23.0.0-py2.7.egg
+  C:\Python27\lib\site-packages\pip-8.1.2-py2.7.egg
+  C:\Windows\system32\python27.zip
+  C:\Python27\DLLs
+  C:\Python27\lib
+  C:\Python27\lib\plat-win
+  C:\Python27\lib\lib-tk
+  C:\Python27
+  C:\Python27\lib\site-packages
+  C:\Python27\lib\site-packages\wx-2.8-msw-unicode</msg>
+</errors>
+</robot>
