@@ -33,5 +33,6 @@ router.get('/robot_nodes/:id/parent_list', api.robotNodes.parentList );
 router.post('/robot_nodes/relative_path', api.robotNodes.relativePath );
 
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
+router.get('/actions/runProject/:id',api.actions.runProject );
 
 module.exports = router;

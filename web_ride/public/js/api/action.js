@@ -13,6 +13,13 @@ define([], function () {
             type : 'json'
         });
     };
+    api.runProject = function (id) {
+        return myHttp({
+            url : '/api/actions/runProject/'+id,
+            method:'GET',
+            type : 'json'
+        });
+    };
 
     return api;
 });

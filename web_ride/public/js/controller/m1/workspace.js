@@ -105,6 +105,12 @@ define(['app','common','jquery'], function(myApp,common,$){
                     console.log(data);
                 });
         };
+        s.runProject = function () {
+            s.api.action.runProject(projectId)
+                .success(function (data) {
+                    console.log(data);
+                });
+        };
 
 
         s.ergodicTree = function (children) {
