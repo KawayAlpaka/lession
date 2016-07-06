@@ -8,6 +8,7 @@ mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
 var User = require('./app/model/user');
 var RobotNode = require('./app/model/robot_node');
+var Project = require('./app/model/project');
 
 var routerApi = require('./app/router/api');
 

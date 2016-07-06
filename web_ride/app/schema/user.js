@@ -6,6 +6,7 @@ var userSchema = new Schema({
     user: { type: String,unique: true },
     name: { type: String },
     password: { type: String },
+    role: { type: String,enum:['admin','other'] },
     meta: {
         createAt: {
             type: Date,
