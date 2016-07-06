@@ -18,26 +18,35 @@ chatServer.on('connection', function(client) {
     client.write('Bye!\n');
     clients.push(client);
     client.on('data', function(data) {
+        var str = data.toString();
         try{
-            var str = data.toString();
-            var jsonStr = str.substring(str.indexOf("|") + 1,str.length);
-            jsonStr = jsonStr.replace(/\\\\/g,"/");
-            var json = JSON.parse(jsonStr);
-            console.log( json );
-            if(json[0] == "close"){
-                client.end();
-            }
+            var jsonStrs = str.split(/J\d{1,4}\|/);
+            jsonStrs.forEach(function (jsonStr) {
+                if(jsonStr.trim().length > 0){
+                    var json = JSON.parse(jsonStr);
+                    if(json[0] == "close"){
+
+                    }
+                }
+            });
             // broadcast(data, client);// 接受来自客户端的信息
         }catch(err) {
-            console.log(err);
+            console.log(str);
         }
 
     });
     client.on('error', function(e) {
+        console.log('error:');
         console.log(e);
     });
-    client.on('end', function() {
+    client.on('close',function (e) {
+        console.log('close:');
+        console.log(e);
         clients.splice(clients.indexOf(client), 1); // 删除数组中的制定元素。这是 JS 基本功哦~
+    });
+    client.on('end', function() {
+        console.log('end:');
+        // clients.splice(clients.indexOf(client), 1); // 删除数组中的制定元素。这是 JS 基本功哦~
     });
     // client.end(); // 服务端结束该次会话
 }).on('error', (err) => {
