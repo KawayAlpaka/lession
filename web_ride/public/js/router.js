@@ -35,6 +35,28 @@ define(['app'], function (myApp) {
                                 }
                             },
                             {
+                                name: 'user',
+                                url: '/user',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/user.html',
+                                        controller: 'm1_user_controller'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'login',
+                                        url: '/login',
+                                        views: {
+                                            'user': {
+                                                templateUrl: 'view/m1/user/login.html',
+                                                controller: 'm1_user_login_controller'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
                                 name: 'workspace',
                                 url: '/workspace/:projectId',
                                 views: {

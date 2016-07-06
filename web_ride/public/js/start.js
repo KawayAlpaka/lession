@@ -6,6 +6,7 @@ require.config({
         'statehelper': '../lib/statehelper',
         'jquery': '../lib/jquery',
         'ng-bootstrap': '../lib/ui-bootstrap-tpls-1.2.1',
+        'angular-cookies': '../lib/angular-cookies',
         'lodash': '../lib/lodash'
     },
     shim: {
@@ -18,6 +19,9 @@ require.config({
         'ng-bootstrap': {
             deps: ['angular']
         },
+        'angular-cookies': {
+            deps: ['angular']
+        },
         'rap':{
             deps:['angular']
         },
@@ -28,7 +32,7 @@ require.config({
     waitSeconds: 15
 });
 
-require(['jquery', 'app', 'angular', 'ui-router', 'router','common','api','model','factory','directive' ,'controller',
+require(['jquery', 'app', 'angular', 'ui-router','angular-cookies', 'router','common','api','model','factory','directive' ,'controller',
     'lodash','ng-bootstrap','statehelper'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });

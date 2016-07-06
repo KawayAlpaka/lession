@@ -3,9 +3,9 @@ var api = require('../controller/api');
 var router = express.Router();
 
 
-router.use(function (req, res, next) {
+router.use(api.users.currentUser,function (req, res, next) {
     res.resFormat = {
-        data:null,
+        data:{},
         logicState:0,
         msg:"success",
         state:0
@@ -22,6 +22,8 @@ router.get('/', function(req, res) {
 });
 
 router.post('/users', api.users.create );
+router.post('/users/login', api.users.login );
+router.get('/users/logout', api.users.logout );
 
 router.get('/robot_nodes',api.robotNodes.list);
 router.post('/robot_nodes', api.robotNodes.create );
