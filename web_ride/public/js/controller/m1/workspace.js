@@ -68,6 +68,13 @@ define(['app','common','jquery'], function(myApp,common,$){
             component.inputModal(modalOption);
         };
 
+        s.currentPanel = "edit";
+        s.setCurrentPanel = function (value) {
+            console.log(value);
+            s.currentPanel = value;
+        };
+
+
         s.showSettings = false;
         s.changeShowSettings = function () {
             s.showSettings = !s.showSettings;
