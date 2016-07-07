@@ -3,6 +3,10 @@ define(['app', 'common'], function (myApp, common) {
         function ($scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
             console.log("m1_test_controller");
 
+            // ["a","b","c"].forEach(function () {
+            //     console.log(arguments);
+            // });
+
             // var expireDate = new Date();
             // expireDate.setDate(expireDate.getDate() + 1);
             // $cookieStore.put("m111",{aaa:"aaa"}, {'expires': expireDate.toUTCString()});

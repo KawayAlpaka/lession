@@ -53,6 +53,18 @@
     common.strHelp.firstUpper = function (str) {
         return str.replace(/(\w)/,function(v){return v.toUpperCase()});
     };
+    common.strHelp.fill = function (str,count,mDefault) {
+        if(str.length >= count){
+            return str;
+        }else{
+            while (true){
+                str += mDefault;
+                if (str.length >= count){
+                    return str;
+                }
+            }
+        }
+    };
 
     common.arrHelp = {};
     common.arrHelp.fill = function (array,count,mDefault) {

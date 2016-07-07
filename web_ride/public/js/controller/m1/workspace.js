@@ -83,6 +83,12 @@ define(['app','common','jquery'], function(myApp,common,$){
                 // data:node[attrName],
                 editingNode: s.editingNode,
                 close:function (data) {
+                    if(data.type == "List" || data.type == "Dict" ){
+                        var noEmptyLenght = _.findLastIndex(data.arrayValue,function (item) {
+                            return item.text.length > 0;
+                        });
+                        data.arrayValue = data.arrayValue.slice(0, noEmptyLenght + 1);
+                    }
                     var variables = $.extend([],node.variables);
                     variables.push(data);
                     var updateData = {variables:variables};
@@ -117,17 +123,16 @@ define(['app','common','jquery'], function(myApp,common,$){
         s.array2ShowString = function (array) {
             var tempArray = $.extend([],array);
             var tempArray2 = [];
-            var noEmptyLenght = _.findLastIndex(tempArray,function (item) {
-                return item.text.length > 0;
-            });
-            tempArray = tempArray.slice(0, noEmptyLenght + 1);
             tempArray.forEach(function (item) {
                if(item.text.length == 0){
-                   item.text = "|";
+                   // item.text = "|";
+                   tempArray2.push("|")
+               }else{
+                   tempArray2.push(item.text);
                }
-                tempArray2.push(item.text);
+
             });
-            return tempArray2.join(" ");
+            return tempArray2.join(" | ");
         };
 
         s.showSettings = false;
