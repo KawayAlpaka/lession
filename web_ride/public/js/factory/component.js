@@ -96,6 +96,29 @@ define(['app','jquery','common'], function (myApp,$,common) {
                         $scope.data = {};
                     }
 
+
+                    var dealArrayValueForm = function () {
+                        //初始化表格
+                        $scope.data.arrayValue = [];
+                        common.arrHelp.fill($scope.data.arrayValue,$scope.data.columns * 2, {text:""});
+                        //点击最后一行时添加一行
+                        $scope.clickArrayValue = function (index) {
+                            console.log($scope.data.arrayValue);
+                            if( ($scope.data.arrayValue.length - index) <= $scope.data.columns ){
+                                common.arrHelp.fill($scope.data.arrayValue,$scope.data.arrayValue.length + $scope.data.columns, {text:""});
+                            }
+                        };
+                        $scope.changeColumns = function () {
+                            console.log($scope.data.arrayValue);
+                            var yu = $scope.data.arrayValue.length % $scope.data.columns;
+                            if(yu == 0){
+                                //不处理
+                            }else{
+                                common.arrHelp.fill($scope.data.arrayValue,$scope.data.arrayValue.length + $scope.data.columns - yu, {text:""});
+                            }
+                        };
+                    };
+
                     $scope.robotNode = {};
                     $scope.robotNode.name = "";
                     switch(option.action)
@@ -249,6 +272,44 @@ define(['app','jquery','common'], function (myApp,$,common) {
                                 $uibModalInstance.close($scope.data);
                             };
                             break;
+                        case conf.action.addScalar:
+                            $scope.data.type = "Scalar";
+                            $scope.data.name = "${}";
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.addList:
+                            $scope.data.type = "List";
+                            $scope.data.name = "@{}";
+                            $scope.columnsOptions = [];
+                            for(var i=1;i<=10;i++){
+                                $scope.columnsOptions.push(i);
+                            }
+                            $scope.data.columns = $scope.columnsOptions[4];
+
+                            dealArrayValueForm();
+
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
+                        case conf.action.addDict:
+                            $scope.data.type = "Dict";
+                            $scope.data.name = "&{}";
+                            $scope.data.arrayValue = [];
+                            $scope.columnsOptions = [];
+                            for(var i=1;i<=10;i++){
+                                $scope.columnsOptions.push(i);
+                            }
+                            $scope.data.columns = $scope.columnsOptions[4];
+
+                            dealArrayValueForm();
+                            
+                            $scope.confirm = function () {
+                                $uibModalInstance.close($scope.data);
+                            };
+                            break;
                         default:
                             $scope.confirm = function () {
                                 $uibModalInstance.close("confirm");
@@ -294,7 +355,10 @@ define(['app','jquery','common'], function (myApp,$,common) {
                 editReturnValue:"editReturnValue",
                 addLibrary:"addLibrary",
                 addResource:"addResource",
-                addVariables:"addVariables"
+                addVariables:"addVariables",
+                addScalar:"addScalar",
+                addList:"addList",
+                addDict:"addDict"
             }
         };
 

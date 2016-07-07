@@ -54,10 +54,14 @@
         font-size: 14px;
       }
     }
-    .imports{
+    .table-list{
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
+      margin-bottom: 40px;
+      .show-list{
+        width: 100%;
+      }
     }
   }
 }

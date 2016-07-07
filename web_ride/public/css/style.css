@@ -93,8 +93,25 @@ m-context-menu {
   font-size: 14px;
 }
 /* line 57, ../scss/_workspace.scss */
-.workspace .work-panel .imports {
+.workspace .work-panel .table-list {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  margin-bottom: 40px;
+}
+/* line 62, ../scss/_workspace.scss */
+.workspace .work-panel .table-list .show-list {
+  width: 100%;
+}
+
+/* line 1, ../scss/_component.scss */
+.modal-auto {
+  width: auto !important;
+  position: relative;
+}
+/* line 4, ../scss/_component.scss */
+.modal-auto .modal-content {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

@@ -1,65 +1,92 @@
 <div>
-    <h3>inputModal</h3>
-</div>
-<div ng-if="action == conf.action.newProject || action == conf.action.newTestCase || action == conf.action.newSuite
+    <div>
+        <h3>inputModal</h3>
+    </div>
+    <div ng-if="action == conf.action.newProject || action == conf.action.newTestCase || action == conf.action.newSuite
 || action == conf.action.newDirectory || action == conf.action.newResource || action == conf.action.newUserKeyword">
-    <div>
-        <label>Name:</label>
-        <input type="text" ng-model="robotNode.name">
-    </div>
-    <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'">
-        <label>fileType:</label>
-        <input type="radio" ng-model="robotNode.fileType" value="file"><span>file</span>
-        <input type="radio" ng-model="robotNode.fileType" value="dir"><span>dir</span>
-    </div>
-    <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'
+        <div>
+            <label>Name:</label>
+            <input type="text" ng-model="robotNode.name">
+        </div>
+        <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'">
+            <label>fileType:</label>
+            <input type="radio" ng-model="robotNode.fileType" value="file"><span>file</span>
+            <input type="radio" ng-model="robotNode.fileType" value="dir"><span>dir</span>
+        </div>
+        <div ng-if="robotNode.type == 'project' || robotNode.type == 'suite'
     || robotNode.type == 'resource' || robotNode.type == 'other' ">
-        <label>fileFormat:</label>
-        <input type="radio"  ng-model="robotNode.fileFormat" value="robot"><span>robot</span>
-        <input type="radio"  ng-model="robotNode.fileFormat" value="txt"><span>txt</span>
+            <label>fileFormat:</label>
+            <input type="radio" ng-model="robotNode.fileFormat" value="robot"><span>robot</span>
+            <input type="radio" ng-model="robotNode.fileFormat" value="txt"><span>txt</span>
+        </div>
     </div>
-</div>
-<div ng-if="action == conf.action.editDocumentation">
-    <div>
-        <label>value:</label>
-        <textarea ng-model="data.value"></textarea>
+    <div ng-if="action == conf.action.editDocumentation">
+        <div>
+            <label>value:</label>
+            <textarea ng-model="data.value"></textarea>
+        </div>
     </div>
-</div>
-<div ng-if="action == conf.action.editSetup || action == conf.action.editTeardown
+    <div ng-if="action == conf.action.editSetup || action == conf.action.editTeardown
 || action == conf.action.editTemplate || action == conf.action.editTimeout
 || action == conf.action.editSuiteSetup || action == conf.action.editSuiteTeardown
 || action == conf.action.editTestSetup || action == conf.action.editTestTeardown
 || action == conf.action.editTestTemplate || action == conf.action.editTestTimeout
 || action == conf.action.editArguments || action == conf.action.editReturnValue">
-    <div>
-        <label>value:</label>
-        <input type="text" ng-model="data.value">
+        <div>
+            <label>value:</label>
+            <input type="text" ng-model="data.value">
+        </div>
+        <div>
+            <label>comment:</label>
+            <input type="text" ng-model="data.comment">
+        </div>
+    </div>
+    <div ng-if="action == conf.action.addLibrary || action == conf.action.addResource || action == conf.action.addVariables">
+        <div>
+            <label>path/name:</label>
+            <input type="text" ng-model="data.path">
+            <button ng-click="searchResource()" ng-if="action == conf.action.addResource">Browse</button>
+        </div>
+        <div>
+            <label>args:</label>
+            <input type="text" ng-model="data.args">
+        </div>
+        <div>
+            <label>alias:</label>
+            <input type="text" ng-model="data.alias">
+        </div>
+        <div>
+            <label>comment:</label>
+            <input type="text" ng-model="data.comment">
+        </div>
+    </div>
+    <div ng-if="action == conf.action.addScalar || action == conf.action.addList || action == conf.action.addDict">
+        <div>
+            <label>Name:</label>
+            <input type="text" ng-model="data.name">
+        </div>
+        <div ng-if="data.type == 'Scalar'">
+            <label>Value:</label>
+            <input type="text" ng-model="data.stringValue">
+        </div>
+        <div ng-if="data.type == 'List' || data.type == 'Dict'" style="white-space: nowrap">
+            <label>Value:</label>
+            <span ng-repeat="value in data.arrayValue track by $index">
+                <input type="text" ng-model="value.text" ng-click="clickArrayValue($index)">
+                <br ng-if=" ($index + 1) % data.columns == 0">
+            </span>
+        </div>
+        <div ng-if="data.type == 'List' || data.type == 'Dict'">
+            <label>columns:</label>
+            <select ng-model="data.columns" ng-options="option for option in columnsOptions" ng-change="changeColumns()"></select>
+        </div>
+        <div>
+            <label>Comment:</label>
+            <input type="text" ng-model="data.comment">
+        </div>
     </div>
     <div>
-        <label>comment:</label>
-        <input type="text" ng-model="data.comment">
+        <button class="btn btn-success" ng-click="confirm()">确认</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
     </div>
-</div>
-<div ng-if="action == conf.action.addLibrary || action == conf.action.addResource || action == conf.action.addVariables">
-    <div>
-        <label>path/name:</label>
-        <input type="text" ng-model="data.path">
-        <button ng-click="searchResource()" ng-if="action == conf.action.addResource">Browse</button>
-    </div>
-    <div>
-        <label>args:</label>
-        <input type="text" ng-model="data.args">
-    </div>
-    <div>
-        <label>alias:</label>
-        <input type="text" ng-model="data.alias">
-    </div>
-    <div>
-        <label>comment:</label>
-        <input type="text" ng-model="data.comment">
-    </div>
-</div>
-<div>
-    <button class="btn btn-success" ng-click="confirm()">确认</button>
-    <button class="btn btn-default" ng-click="cancel()">取消</button>
 </div>

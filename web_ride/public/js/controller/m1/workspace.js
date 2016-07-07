@@ -68,12 +68,67 @@ define(['app','common','jquery'], function(myApp,common,$){
             component.inputModal(modalOption);
         };
 
+        s.deleteImport = function (node,index) {
+            var imports = $.extend([],node.imports);
+            imports.splice(index,1);
+            node.fn.update({imports:imports})
+                .success(function () {
+                    node.imports = imports;
+                });
+        };
+
+        s.addVariable = function (node,action) {
+            var modalOption = {
+                action: s.modalConf.action[action],
+                // data:node[attrName],
+                editingNode: s.editingNode,
+                close:function (data) {
+                    var variables = $.extend([],node.variables);
+                    variables.push(data);
+                    var updateData = {variables:variables};
+                    node.fn.update(updateData)
+                        .success(function () {
+                            node.variables = variables;
+                        });
+                },
+                dismiss:function (data) {
+                    console.log(data);
+                }
+            };
+            component.inputModal(modalOption);
+        };
+
+        s.deleteVariable = function (node,index) {
+            var variables = $.extend([],node.variables);
+            variables.splice(index,1);
+            node.fn.update({variables:variables})
+                .success(function () {
+                    node.variables = variables;
+                });
+        };
+
         s.currentPanel = "edit";
         s.setCurrentPanel = function (value) {
             console.log(value);
             s.currentPanel = value;
         };
 
+
+        s.array2ShowString = function (array) {
+            var tempArray = $.extend([],array);
+            var tempArray2 = [];
+            var noEmptyLenght = _.findLastIndex(tempArray,function (item) {
+                return item.text.length > 0;
+            });
+            tempArray = tempArray.slice(0, noEmptyLenght + 1);
+            tempArray.forEach(function (item) {
+               if(item.text.length == 0){
+                   item.text = "|";
+               }
+                tempArray2.push(item.text);
+            });
+            return tempArray2.join(" ");
+        };
 
         s.showSettings = false;
         s.changeShowSettings = function () {
@@ -153,14 +208,6 @@ define(['app','common','jquery'], function(myApp,common,$){
             }
         };
 
-        s.deleteImport = function (node,index) {
-            var imports = $.extend([],node.imports);
-            imports.splice(index,1);
-            node.fn.update({imports:imports})
-                .success(function () {
-                    node.imports = imports;
-                });
-        };
         ////不采用右键删除方案
         // s.rightClickImport = function (editingNode,iImport,index,$event) {
         //     $event.stopPropagation();

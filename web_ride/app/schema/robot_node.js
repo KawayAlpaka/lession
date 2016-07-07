@@ -21,12 +21,23 @@ var robotNodeSchema = new Schema({
     defaultTags:{ type:String },//待设计
     imports: {
         type: [{
-            type: {type: String},
+            type: {type: String,enum:['Library','Resource','Variables']},
             from: {type: String,enum:['file','db'],default:'file'},
             path: {type: String},
             resource: {type: ObjectId ,ref:"RobotNode"},
             args: {type: String},
             alias: {type: String},
+            comment: {type: String}
+        }],
+        default: []
+    },
+    variables:{
+        type: [{
+            type: {type: String,enum:['Scalar','List','Dict']},
+            name: {type: String},
+            stringValue:{type: String},
+            arrayValue:{type: Array,default:[]},
+            columns:{type: Number,default:5},
             comment: {type: String}
         }],
         default: []

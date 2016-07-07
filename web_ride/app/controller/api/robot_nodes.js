@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var RobotNode = mongoose.model('RobotNode');
-
 var extend = require('util')._extend;
 
 var robotNodes = {};

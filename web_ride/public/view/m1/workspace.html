@@ -138,9 +138,8 @@
                 </div>
                 <button ng-click="saveForm(editingNode)">保存</button>
             </div>
-            <div class="imports" ng-if="editingNode.fileType == 'file'">
-                <!--<div style="flex-grow: 5;">-->
-                <div style="width: 100%">
+            <div class="table-list" ng-if="editingNode.fileType == 'file'">
+                <div class="show-list">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -154,9 +153,9 @@
                         <tbody>
                         <tr ng-repeat="import in editingNode.imports">
                             <td ng-bind="import.type"></td>
-                            <td ng-bind="import.path">Selenium2Library</td>
-                            <td ng-bind="import.args">haha</td>
-                            <td ng-bind="import.comment">hehe</td>
+                            <td ng-bind="import.path"></td>
+                            <td ng-bind="import.args"></td>
+                            <td ng-bind="import.comment"></td>
                             <td>
                                 <button ng-click="deleteImport(editingNode,$index)">Delete</button>
                             </td>
@@ -164,7 +163,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="width: 120px">
+                <div class="add-action">
                     <div>Add Import</div>
                     <div>
                         <button ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</button>
@@ -174,6 +173,43 @@
                     </div>
                     <div>
                         <button ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-list" ng-if="editingNode.fileType == 'file'">
+                <div class="show-list">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Value</th>
+                            <th>Comment</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="variable in editingNode.variables">
+                            <td ng-bind="variable.name"></td>
+                            <td ng-bind="variable.stringValue" ng-if="variable.type == 'Scalar'"></td>
+                            <td ng-bind="array2ShowString(variable.arrayValue)" ng-if="variable.type == 'List' || variable.type == 'Dict'"></td>
+                            <td ng-bind="variable.comment"></td>
+                            <td>
+                                <button ng-click="deleteVariable(editingNode,$index)">Delete</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-action">
+                    <div>Add Variable</div>
+                    <div>
+                        <button ng-click="addVariable(editingNode,modalConf.action.addScalar)">Scalar</button>
+                    </div>
+                    <div>
+                        <button ng-click="addVariable(editingNode,modalConf.action.addList)">List</button>
+                    </div>
+                    <div>
+                        <button ng-click="addVariable(editingNode,modalConf.action.addDict)">Dict</button>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,9 @@
     //     //return this.replace(/^\s+|\s+$/g,""); //
     //     return this.replace(/^\s+/g,"").replace(/\s+$/g,"");
     // };
+
     var common = {};
+
     common.timeHelp = {};
     common.timeHelp.number2String = function (number) {
         var millisecond = 0.001;
@@ -52,12 +54,28 @@
         return str.replace(/(\w)/,function(v){return v.toUpperCase()});
     };
 
+    common.arrHelp = {};
+    common.arrHelp.fill = function (array,count,mDefault) {
+        if(array.length >= count){
+            return array;
+        }else{
+            while (true){
+                var de = common.extend({},mDefault);
+                array.push(de);
+                if (array.length >= count){
+                    return array;
+                }
+            }
+        }
+    };
 
     if(typeof window == 'object'){
-        define([], function () {
+        define(['jquery'], function (jquery) {
+            common.extend = jquery.extend;
             return common;
         });
     }else if(typeof global == 'object'){
+        common.extend = require('util')._extend;
         module.exports = common;
     }
 })();

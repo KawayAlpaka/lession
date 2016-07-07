@@ -1,0 +1,9 @@
+.modal-auto{
+  width: auto !important;
+  position: relative;
+  .modal-content{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+  }
+}
