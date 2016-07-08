@@ -7,6 +7,7 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
         s.setSelectedNode = function (node) {
             s.selectedNode = node;
             s.editingNode = node;
+            s.socket.emit('editingNode', { node: s.editingNode._id });
         };
         s.setRightClickNode = function (node) {
             s.rightClickNode = node;

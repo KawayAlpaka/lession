@@ -1,3 +1,8 @@
+/* line 2, ../scss/_test.scss */
+.test-nav .nav-tab.active {
+  background-color: gold;
+}
+
 /* line 1, ../scss/_directive.scss */
 m-context-menu {
   position: fixed;

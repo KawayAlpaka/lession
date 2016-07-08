@@ -32,14 +32,7 @@ var server = app.listen(3030, function () {
     });
 });
 
-var io = require('socket.io')(server);
-
-io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
-});
+require('./app/socket/io').createServer(server);
 
 // //test
 // var RobotNode = mongoose.model('RobotNode');

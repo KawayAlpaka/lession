@@ -1,13 +1,24 @@
 define(['app', 'common','socket'], function (myApp, common,io) {
-    myApp.controller('m1_test_controller', ['$scope', '$scope', '$http', '$uibModal', 'component', '$cookieStore','$cookies',
-        function ($scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
+    myApp.controller('m1_test_controller', ['$rootScope','$scope', '$scope', '$http', '$uibModal', 'component', '$cookieStore','$cookies',
+        function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
             console.log("m1_test_controller");
 
-            // var socket = io.connect();
-            // socket.on('news', function (data) {
-            //     console.log(data);
-            //     socket.emit('my other event', { my: 'data' });
-            // });
+
+            //socket.io
+            var socket = $rootScope.socket;
+            socket.on('news', function (data) {
+                console.log(data);
+                socket.emit('my other event', { my: 'data' });
+            });
+
+            socket.on('s-user', function (data) {
+                console.log(data);
+            });
+
+            s.sendSession = function () {
+                socket.emit('c-mSession', { mSession: $cookies.get("mSession") });
+            };
+
 
             // ["a","b","c"].forEach(function () {
             //     console.log(arguments);
@@ -128,7 +139,5 @@ define(['app', 'common','socket'], function (myApp, common,io) {
                 };
                 component.searchModal(s.modalOption);
             };
-
-
         }]);
 });

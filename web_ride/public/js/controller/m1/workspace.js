@@ -2,11 +2,13 @@ define(['app','common','jquery'], function(myApp,common,$){
     myApp.controller('m1_workspace_controller', ['$scope','component', function (s,component) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
+
         s.nodeTree = {};
 
         s.nodeTree.node = s.model.RobotNode.createNew();
         s.nodeTree.node.fn.findById(projectId)
             .success(function () {
+                s.socket.emit('editingProject', { node: s.nodeTree._id });
             });
 
         s.modalConf = component.inputModal.option;

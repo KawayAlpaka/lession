@@ -246,3 +246,15 @@
     <button ng-click="createProjectFiles()">生成项目文件</button>
     <button ng-click="runProject()">运行项目</button>
 </div>
+<div>
+    <div>
+        <span>当前项目有：</span>
+        <span ng-bind="count.workingOnProjectCount"></span>
+        <span>人</span>
+    </div>
+    <div>
+        <span>当前元素有：</span>
+        <span ng-bind="count.workingOnNodeCount"></span>
+        <span>人</span>
+    </div>
+</div>

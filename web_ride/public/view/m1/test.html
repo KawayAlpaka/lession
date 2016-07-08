@@ -1,7 +1,13 @@
 <div class="test-nav">
-    <div class="nav-tab" ng-click="setTab('component')">组件测试</div>
-    <div class="nav-tab" ng-click="setTab('api')">专用接口测试</div>
-    <div class="nav-tab" ng-click="setTab('apiCommon')">通用接口测试</div>
+    <div class="nav-tab" ng-class="{active: tab == 'component'}"  ng-click="setTab('component')">组件测试</div>
+    <div class="nav-tab" ng-class="{active: tab == 'api'}"  ng-click="setTab('api')">专用接口测试</div>
+    <div class="nav-tab" ng-class="{active: tab == 'apiCommon'}"  ng-click="setTab('apiCommon')">通用接口测试</div>
+    <div class="nav-tab" ng-class="{active: tab == 'socketIo'}" ng-click="setTab('socketIo')">socketIo测试</div>
+</div>
+
+<div ng-show="tab == 'socketIo'">
+    <h3>socketIo测试</h3>
+    <button ng-click="sendSession()">socketIo</button>
 </div>
 
 <div ng-show="tab == 'api'">
