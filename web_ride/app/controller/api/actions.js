@@ -34,6 +34,22 @@ var getFileContent = function (node,cb) {
         insertFileSetting("Suite Teardown",node.suiteTeardown.value,node.suiteTeardown.comment);
         insertFileSetting("Test Setup",node.testSetup.value,node.testSetup.comment);
         insertFileSetting("Test Teardown",node.testTeardown.value,node.testTeardown.comment);
+
+        var tempTagsStr = "";
+        var dealTags = function (tag,index) {
+            if(index == 0){
+                tempTagsStr += tag.text;
+            }else{
+                tempTagsStr += "    " + tag.text;
+            }
+        };
+        node.forceTags.forEach(dealTags);
+        insertFileSetting("Force Tags",tempTagsStr);
+
+        tempTagsStr = "";
+        node.defaultTags.forEach(dealTags);
+        insertFileSetting("Default Tags",tempTagsStr);
+
         insertFileSetting("Test Template",node.testTemplate.value,node.testTemplate.comment);
         insertFileSetting("Test Timeout",node.testTimeout.value,node.testTimeout.comment);
 
@@ -124,7 +140,10 @@ var getFileContent = function (node,cb) {
                     if (strHelp.isNotEmptyStr(child.documentation)) {
                         content += "    [Documentation]    " + child.documentation + "\r\n";
                     }
-                    // 占位 tags
+
+                    tempTagsStr = "";
+                    child.tags.forEach(dealTags);
+                    insertValueComment("Tags", tempTagsStr);
 
                     insertValueComment("Setup", child.setup.value, child.setup.comment);
                     insertValueComment("Template", child.template.value, child.template.comment);
@@ -153,7 +172,10 @@ var getFileContent = function (node,cb) {
                     if (strHelp.isNotEmptyStr(child.documentation)) {
                         content += "    [Documentation]    " + child.documentation + "\r\n";
                     }
-                    // 占位 tags
+
+                    tempTagsStr = "";
+                    child.tags.forEach(dealTags);
+                    insertValueComment("Tags", tempTagsStr);
 
                     insertValueComment("Timeout", child.timeout.value, child.timeout.comment);
 
