@@ -1,7 +1,13 @@
-define(['app', 'common'], function (myApp, common) {
+define(['app', 'common','socket'], function (myApp, common,io) {
     myApp.controller('m1_test_controller', ['$scope', '$scope', '$http', '$uibModal', 'component', '$cookieStore','$cookies',
         function ($scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
             console.log("m1_test_controller");
+
+            // var socket = io.connect();
+            // socket.on('news', function (data) {
+            //     console.log(data);
+            //     socket.emit('my other event', { my: 'data' });
+            // });
 
             // ["a","b","c"].forEach(function () {
             //     console.log(arguments);

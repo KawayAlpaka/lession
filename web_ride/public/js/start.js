@@ -7,7 +7,8 @@ require.config({
         'jquery': '../lib/jquery',
         'ng-bootstrap': '../lib/ui-bootstrap-tpls-1.2.1',
         'angular-cookies': '../lib/angular-cookies',
-        'lodash': '../lib/lodash'
+        'lodash': '../lib/lodash',
+        'socket': '../lib/socket.io'
     },
     shim: {
         'angular': {
@@ -33,7 +34,7 @@ require.config({
 });
 
 require(['jquery', 'app', 'angular', 'ui-router','angular-cookies', 'router','common','api','model','factory','directive' ,'controller',
-    'lodash','ng-bootstrap','statehelper'], function ($, app, angular) {
+    'lodash','ng-bootstrap','statehelper','socket'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });
 

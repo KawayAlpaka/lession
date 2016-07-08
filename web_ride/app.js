@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
+var app = express();
 
 mongoose.connect('mongodb://localhost/web_ride');
 mongoose.Promise = global.Promise; //升级mongoose默认Promise
@@ -12,7 +13,7 @@ var Project = require('./app/model/project');
 
 var routerApi = require('./app/router/api');
 
-var app = express();
+
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(bodyParser.json({limit: '1mb'}));  //body-parser 解析json格式数据
@@ -28,6 +29,15 @@ var server = app.listen(3030, function () {
     console.log('Example app listening at http://%s:%s', host, port);
     process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err.stack);
+    });
+});
+
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function (data) {
+        console.log(data);
     });
 });
 
