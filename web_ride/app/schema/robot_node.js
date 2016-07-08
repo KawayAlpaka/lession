@@ -17,8 +17,16 @@ var robotNodeSchema = new Schema({
     testTeardown:{value:{type:String}, comment: {type:String}},
     testTemplate:{value:{type:String}, comment: {type:String}},
     testTimeout:{value:{type:String}, comment: {type:String}},
-    forceTags:{ type:String },//待设计
-    defaultTags:{ type:String },//待设计
+    forceTags:{type:[{
+        text:String
+    }],
+        default:[]
+    },
+    defaultTags:{type:[{
+        text:String
+    }],
+        default:[]
+    },
     imports: {
         type: [{
             type: {type: String,enum:['Library','Resource','Variables']},
@@ -45,7 +53,11 @@ var robotNodeSchema = new Schema({
     //用例Settings //tags - teardown - timeout 与 case 共用
     setup:{value:{type:String}, comment: {type:String}},
     teardown:{value:{type:String}, comment: {type:String}},
-    tags:{value:{type:String}, comment: {type:String}}, //待设计
+    tags:{type:[{
+            text:String
+        }],
+        default:[]
+    },
     template:{value:{type:String}, comment: {type:String}},
     timeout:{value:{type:String}, comment: {type:String}},
     //User Keyword Settings

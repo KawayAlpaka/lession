@@ -45,6 +45,32 @@ define(['app','common','jquery'], function(myApp,common,$){
             };
             component.inputModal(modalOption);
         };
+        s.addTag = function (tags) {
+            tags.push({text:""});
+        };
+        s.delTag = function (tags,tagName) {
+            tags.pop();
+            var updateData = {};
+            updateData[tagName] = s.editingNode[tagName];
+            s.editingNode.fn.update(updateData)
+                .success(function () {
+                });
+        };
+        var tagText = "";
+        s.tagBlur = function (tag,tagName) {
+            if(tagText == tag.text){
+                //
+            }else{
+                var updateData = {};
+                updateData[tagName] = s.editingNode[tagName];
+                s.editingNode.fn.update(updateData)
+                    .success(function () {
+                    });
+            }
+        };
+        s.tagFocus = function (tag) {
+            tagText = tag.text;
+        };
         
         s.addImport = function (node,action) {
             console.log(s.editingNode);

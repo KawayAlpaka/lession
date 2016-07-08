@@ -44,7 +44,10 @@
                             <div class="setting">
                                 <label>tags</label>
                                 <div class="show-value">
-                                    <input type="text" class="tag" disabled>
+                                    <input type="text" class="tag"  ng-model="tag.text" ng-repeat="tag in editingNode.tags"
+                                           ng-blur="tagBlur(tag,'tags')" ng-focus="tagFocus(tag)">
+                                    <button ng-click="addTag(editingNode.tags)">+</button>
+                                    <button ng-click="delTag(editingNode.tags,'tags')">-</button>
                                 </div>
                                 <button>Edit</button>
                                 <button>Clear</button>
@@ -119,6 +122,28 @@
                                 <div class="show-value"
                                      ng-bind="editingNode.testTimeout.value + ' | # '+ editingNode.testTimeout.comment"></div>
                                 <button ng-click="editValueCommentAttr(editingNode,'testTimeout')">Edit</button>
+                                <button>Clear</button>
+                            </div>
+                            <div class="setting">
+                                <label>forceTags</label>
+                                <div class="show-value">
+                                    <input type="text" class="tag"  ng-model="tag.text" ng-repeat="tag in editingNode.forceTags"
+                                           ng-blur="tagBlur(tag,'forceTags')" ng-focus="tagFocus(tag)">
+                                    <button ng-click="addTag(editingNode.forceTags)">+</button>
+                                    <button ng-click="delTag(editingNode.forceTags,'forceTags')">-</button>
+                                </div>
+                                <button>Edit</button>
+                                <button>Clear</button>
+                            </div>
+                            <div class="setting">
+                                <label>defaultTags</label>
+                                <div class="show-value">
+                                    <input type="text" class="tag"  ng-model="tag.text" ng-repeat="tag in editingNode.defaultTags"
+                                           ng-blur="tagBlur(tag,'defaultTags')" ng-focus="tagFocus(tag)">
+                                    <button ng-click="addTag(editingNode.defaultTags)">+</button>
+                                    <button ng-click="delTag(editingNode.defaultTags,'defaultTags')">-</button>
+                                </div>
+                                <button>Edit</button>
                                 <button>Clear</button>
                             </div>
                         </div>
