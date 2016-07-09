@@ -8,7 +8,7 @@ define(['app','common','jquery'], function(myApp,common,$){
         s.nodeTree.node = s.model.RobotNode.createNew();
         s.nodeTree.node.fn.findById(projectId)
             .success(function () {
-                s.socket.emit('editingProject', { node: s.nodeTree._id });
+                s.socket.emit('editingProject', { node: s.nodeTree.node._id });
             });
 
         s.modalConf = component.inputModal.option;

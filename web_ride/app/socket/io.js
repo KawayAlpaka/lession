@@ -10,6 +10,33 @@ var findSocket = function (socket) {
         return socketObj.socket == socket;
     })
 };
+var sendToAllAboutCount = function () {
+    sockets.forEach(function(socketObj){
+
+        if(socketObj.editingProject == null){
+            //跳过
+        }else{
+            var list = _.filter(sockets,function (obj) {
+                return obj.editingProject == socketObj.editingProject;
+            });
+            list.forEach(function (obj) {
+                obj.socket.emit('workingOnProjectCount', { count: list.length });
+            });
+        }
+
+        if(socketObj.editingNode == null){
+            //跳过
+        }else{
+            var list = _.filter(sockets,function (obj) {
+                return obj.editingNode == socketObj.editingNode;
+            });
+            list.forEach(function (obj) {
+                obj.socket.emit('workingOnNodeCount', { count: list.length });
+            });
+        }
+
+    });
+};
 module.exports.createServer = function (server) {
     var io = socketIo(server);
     io.on('connection', function (socket) {
@@ -29,7 +56,6 @@ module.exports.createServer = function (server) {
             // console.log(data);
         });
         socket.on('editingProject', function (data) {
-
             findSocket(socket).editingProject = data.node;
             var currentProjectList = _.filter(sockets,function (socketObj) {
                 return socketObj.editingProject == data.node;
@@ -46,6 +72,12 @@ module.exports.createServer = function (server) {
             currentNodeList.forEach(function (socketObj) {
                 socketObj.socket.emit('workingOnNodeCount', { count: currentNodeList.length });
             });
+        });
+        socket.on('leaveWorkspace', function (data) {
+            var socketObj = findSocket(socket);
+            socketObj.editingNode = null;
+            socketObj.editingProject = null;
+            sendToAllAboutCount();
         });
         socket.on('c-mSession', function (data) {
             if(data.mSession){

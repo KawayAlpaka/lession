@@ -1,9 +1,7 @@
 define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user', 'controller/m1/test'], function (myApp) {
     myApp.controller('m1_controller', ['$scope', 'component','$cookies', function (s, component,$cookies) {
         console.log("m1_controller");
-
         
-
         s.setSelectedNode = function (node) {
             s.selectedNode = node;
             s.editingNode = node;
