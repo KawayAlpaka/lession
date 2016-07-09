@@ -1,7 +1,7 @@
 require.config({
     baseUrl: "js",
     paths: {
-        'angular': '../lib/angular-1.5.0',
+        'angular': '../lib/angular-1.5.7',
         'ui-router': '../lib/angular-ui-router',
         'statehelper': '../lib/statehelper',
         'jquery': '../lib/jquery',
