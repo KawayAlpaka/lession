@@ -4,20 +4,65 @@ define(['app', 'common','socket'], function (myApp, common,io) {
             console.log("m1_test_controller");
 
 
-            //socket.io
-            var socket = $rootScope.socket;
-            socket.on('news', function (data) {
-                console.log(data);
-                socket.emit('my other event', { my: 'data' });
-            });
+            // // UI-ROUTER 的事件
+            // $scope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeStart');
+            // });
+            // $scope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeSuccess');
+            // });
+            // $scope.$on('$stateChangeError', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeError');
+            // });
+            // $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeStart');
+            //     console.log(arguments);
+            // });
+            // $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeSuccess');
+            //     console.log(arguments);
+            // });
+            // $rootScope.$on('$stateChangeError', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$stateChangeError');
+            //     console.log(arguments);
+            // });
 
-            socket.on('s-user', function (data) {
-                console.log(data);
-            });
+            // // 自带事件
+            // $rootScope.$on('$locationChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$locationChangeStart');
+            //     console.log(arguments);
+            // });
+            // $rootScope.$on('$locationChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$locationChangeSuccess');
+            //     console.log(arguments);
+            // });
 
-            s.sendSession = function () {
-                socket.emit('c-mSession', { mSession: $cookies.get("mSession") });
-            };
+            // // ngRoute 的事件
+            // $rootScope.$on('$routeChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$routeChangeStart');
+            //     console.log(arguments);
+            // });
+            // $rootScope.$on('$routeChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
+            //     console.log('$routeChangeSuccess');
+            //     console.log(arguments);
+            // });
+
+
+
+            // //socket.io
+            // var socket = $rootScope.socket;
+            // socket.on('news', function (data) {
+            //     console.log(data);
+            //     socket.emit('my other event', { my: 'data' });
+            // });
+            //
+            // socket.on('s-user', function (data) {
+            //     console.log(data);
+            // });
+            //
+            // s.sendSession = function () {
+            //     socket.emit('c-mSession', { mSession: $cookies.get("mSession") });
+            // };
 
 
             // ["a","b","c"].forEach(function () {
