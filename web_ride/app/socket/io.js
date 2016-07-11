@@ -83,6 +83,9 @@ module.exports.createServer = function (server) {
             socketObj.editingProject = null;
             sendToAllAboutCount();
         });
+        socket.on('debug', function (data) {
+            console.log("启动调试");
+        });
         socket.on('c-mSession', function (data) {
             if(data.mSession){
                 Session.findOne(data.mSession,function (err,session) {
