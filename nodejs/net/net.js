@@ -55,4 +55,7 @@ chatServer.on('connection', function(client) {
     throw err;
 });
 
-chatServer.listen(9000);
+// chatServer.listen(9000);
+chatServer.listen(function () {
+    console.log(chatServer.address());
+});
