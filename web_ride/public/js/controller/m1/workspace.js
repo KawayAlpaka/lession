@@ -207,21 +207,24 @@ define(['app','common','jquery'], function(myApp,common,$){
                 });
         };
 
-
-        s.ergodicTree = function (children) {
-            if(children){
-                children.forEach(function (node) {
-                    node.selected = false;
-                    s.ergodicTree(node.children);
-                });
-            }
-        };
+        // // 不需要遍历元素
+        // s.ergodicTree = function (children) {
+        //     if(children){
+        //         children.forEach(function (node) {
+        //             node.selected = false;
+        //             s.ergodicTree(node.children);
+        //         });
+        //     }
+        // };
 
         var selectNode = function (node) {
             console.log(node);
             s.getChildren(node);
-            s.nodeTree.node.selected = false;
-            s.ergodicTree(s.nodeTree.node.children);
+
+            // // 不需要遍历元素
+            // s.nodeTree.node.selected = false;
+            // s.ergodicTree(s.nodeTree.node.children);
+
             node.selected = true;
             s.setSelectedNode(node);
         };
@@ -251,8 +254,6 @@ define(['app','common','jquery'], function(myApp,common,$){
         // }
 
         s.$on("nodeUpdate", function (event, data) {
-                console.log("nodeUpdate");
-                console.log(data);
                 if(data._id == s.editingNode._id){
                     $.extend(s.editingNode,data);
                     s.$apply();
@@ -260,7 +261,7 @@ define(['app','common','jquery'], function(myApp,common,$){
             });
 
     }]);
-    
+
     myApp.controller('m1_workspace_edit_controller', ['$scope', function (s) {
         console.log("m1_workspace_edit_controller");
         console.log(s.$state.params.robotNodeId);

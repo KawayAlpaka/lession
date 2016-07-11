@@ -5,6 +5,11 @@ define(['jquery'],function($) {
             var model = {};
             model.C = C;
 
+            //显示状态
+            model.showState = {};
+            model.showState.selected = false;
+            model.showState.extend = true;
+
             //数据操作
             model.fn = {};
             model.fn.update = function(json){

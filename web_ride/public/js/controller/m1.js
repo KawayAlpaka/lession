@@ -3,6 +3,9 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
         console.log("m1_controller");
         
         s.setSelectedNode = function (node) {
+            if(s.selectedNode){
+                s.selectedNode.selected = false;
+            }
             s.selectedNode = node;
             s.editingNode = node;
             s.socket.emit('editingNode', { node: s.editingNode._id });

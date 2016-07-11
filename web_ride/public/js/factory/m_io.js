@@ -11,6 +11,9 @@ define(['app','socket'], function (myApp,io) {
             socket.on('reconnect', function() {
                 console.log("重新连接到服务器");
             });
+            socket.on('disconnect', function() {
+                console.log("disconnect");
+            });
 
             socket.on('workingOnProjectCount', function (data) {
                 console.log(data);

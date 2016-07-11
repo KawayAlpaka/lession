@@ -94,6 +94,7 @@ module.exports.createServer = function (server) {
                 });
             }
         });
+
         socket.on('disconnect', function() {
             connections.splice(connections.findIndex(function (value) {
                 return value.socket == socket;
