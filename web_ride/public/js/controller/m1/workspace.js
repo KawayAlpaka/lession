@@ -172,6 +172,7 @@ define(['app','common','jquery'], function(myApp,common,$){
             node.fn.getChildren();
         };
 
+        // 表格操作
         s.addCell = function (cells) {
             cells.push({
                 text:""
@@ -219,12 +220,14 @@ define(['app','common','jquery'], function(myApp,common,$){
 
         var selectNode = function (node) {
             console.log(node);
-            s.getChildren(node);
 
-            // // 不需要遍历元素
-            // s.nodeTree.node.showState.selected = false;
-            // s.ergodicTree(s.nodeTree.node.children);
-            
+            // 获取子节点
+            if(node.children.length == 0){
+                s.getChildren(node);
+            }
+
+            node.fn.pull();   //刷新本节点
+
             s.setSelectedNode(node);
         };
 

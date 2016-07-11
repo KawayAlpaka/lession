@@ -1,6 +1,8 @@
 <div style="margin-left: 18px">
     <div data-ng-repeat="node in mTreeData" >
         <!--<span ng-bind="'('+node.type[0]+ node.fileType[0] +')'"></span>-->
+        <span ng-show="node.showState.extended == false" ng-click="node.showState.extended = !node.showState.extended">+</span>
+        <span ng-show="node.showState.extended == true" ng-click="node.showState.extended = !node.showState.extended">-</span>
         <input type="checkbox" ng-if="node.type == 'case'">
         <img src="/img/robot.png" alt="" ng-show="node.type == 'case'">
         <img src="/img/cog.png" alt="" ng-show="node.type == 'keyword'">
@@ -11,6 +13,6 @@
               data-ng-click="treeFunctions.click(node)"
               ng-right-click="treeFunctions.rightClick(node,$event)"
               ng-class="{selected:node.showState.selected}"></span>
-        <tree-view m-tree-data="node.children" tree-functions="treeFunctions"></tree-view>
+        <tree-view ng-show="node.showState.extended == true" m-tree-data="node.children" tree-functions="treeFunctions"></tree-view>
     </div>
 </div>

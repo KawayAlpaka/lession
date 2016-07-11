@@ -5,6 +5,9 @@ define(['jquery'],function($) {
             var model = {};
             model.C = C;
 
+
+            model.children = [];
+
             // tree显示状态
             model.showState = {};
             model.showState.selected = false;
@@ -25,6 +28,11 @@ define(['jquery'],function($) {
                 };
                 return model.C.promise(func);
             };
+
+            model.fn.pull = function () {
+                return model.fn.findById(model._id);
+            };
+
 
             model.fn.set = function(json){
                 $.extend(model,json);
