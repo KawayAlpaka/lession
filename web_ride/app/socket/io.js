@@ -4,19 +4,21 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Session = mongoose.model('Session');
 
-var sockets = [];
+console.log("init io");
+
+var connections = [];
 var findSocket = function (socket) {
-    return sockets.find(function (socketObj) {
+    return connections.find(function (socketObj) {
         return socketObj.socket == socket;
     })
 };
 var sendToAllAboutCount = function () {
-    sockets.forEach(function(socketObj){
+    connections.forEach(function(socketObj){
 
         if(socketObj.editingProject == null){
             //跳过
         }else{
-            var list = _.filter(sockets,function (obj) {
+            var list = _.filter(connections,function (obj) {
                 return obj.editingProject == socketObj.editingProject;
             });
             list.forEach(function (obj) {
@@ -27,7 +29,7 @@ var sendToAllAboutCount = function () {
         if(socketObj.editingNode == null){
             //跳过
         }else{
-            var list = _.filter(sockets,function (obj) {
+            var list = _.filter(connections,function (obj) {
                 return obj.editingNode == socketObj.editingNode;
             });
             list.forEach(function (obj) {
@@ -40,7 +42,7 @@ var sendToAllAboutCount = function () {
 module.exports.createServer = function (server) {
     var io = socketIo(server);
     io.on('connection', function (socket) {
-        sockets.push({
+        connections.push({
             socket:socket,
             session:null,
             editingNode:null,
@@ -48,7 +50,7 @@ module.exports.createServer = function (server) {
         });
         socket.emit('news', { hello: 'world' });
         var sendNews = function () {
-            socket.emit('news', { hello: sockets.length });
+            socket.emit('news', { hello: connections.length });
             setTimeout(sendNews,5000);
         };
         sendNews();
@@ -57,7 +59,7 @@ module.exports.createServer = function (server) {
         });
         socket.on('editingProject', function (data) {
             findSocket(socket).editingProject = data.node;
-            var currentProjectList = _.filter(sockets,function (socketObj) {
+            var currentProjectList = _.filter(connections,function (socketObj) {
                 return socketObj.editingProject == data.node;
             });
             currentProjectList.forEach(function (socketObj) {
@@ -66,7 +68,7 @@ module.exports.createServer = function (server) {
         });
         socket.on('editingNode', function (data) {
             findSocket(socket).editingNode = data.node;
-            var currentNodeList = _.filter(sockets,function (socketObj) {
+            var currentNodeList = _.filter(connections,function (socketObj) {
                 return socketObj.editingNode == data.node;
             });
             currentNodeList.forEach(function (socketObj) {
@@ -82,16 +84,16 @@ module.exports.createServer = function (server) {
         socket.on('c-mSession', function (data) {
             if(data.mSession){
                 Session.findOne(data.mSession,function (err,session) {
-                    var index = sockets.findIndex(function (value) {
+                    var index = connections.findIndex(function (value) {
                         return value.socket == socket;
                     });
-                    sockets[index].session = session;
+                    connections[index].session = session;
                     socket.emit('s-user', { user: session.user });
                 });
             }
         });
         socket.on('disconnect', function() {
-            sockets.splice(sockets.findIndex(function (value) {
+            connections.splice(connections.findIndex(function (value) {
                 return value.socket == socket;
             }), 1);
         });

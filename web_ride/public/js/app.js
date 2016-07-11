@@ -14,7 +14,6 @@ define(['angular'], function (angular) {
                 mIo.leaveWorkspace();
             }
         });
-
     }]);
     return myApp;
 });
