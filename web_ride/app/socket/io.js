@@ -1,8 +1,12 @@
 var socketIo = require('socket.io');
 var _ = require('underscore');
+var exec = require('child_process').exec;
+var fileHelper = require('../helper/file_helper');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var RobotNode = mongoose.model('RobotNode');
 var Session = mongoose.model('Session');
+
 
 console.log("init io");
 
@@ -85,6 +89,28 @@ module.exports.createServer = function (server) {
         });
         socket.on('debug', function (data) {
             console.log("启动调试");
+            var nodeId = data.node;
+            console.log(nodeId);
+            var basePath = 'D:/debug/';
+            RobotNode.findOne({_id: nodeId}, function (err, robotNode) {
+                if (robotNode) {
+                    var pNode = robotNode;
+                    var projectPath = basePath + pNode._id;
+                    fileHelper.createProjectFiles(pNode, projectPath, function () {
+                        exec('pybot --outputdir '+projectPath+" "+projectPath + "/" + pNode.name,{},function(error,stdout,stderr){
+                            if(error) {
+                                console.info('stderr : '+stderr);
+                            }
+                            if(stdout.length >1){
+                                socket.emit('debugResult', { result: stdout });
+                            } else {
+                                // console.log('you don\'t offer args');
+                            }
+                        });
+                    });
+                } else {
+                }
+            });
         });
         socket.on('c-mSession', function (data) {
             if(data.mSession){

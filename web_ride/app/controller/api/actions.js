@@ -2,7 +2,7 @@ var fs = require('fs-extra');
 var mongoose = require('mongoose');
 var exec = require('child_process').exec;
 var common = require('../../../public/js/common');
-var fileHelper = require('../helper/file_helper');
+var fileHelper = require('../../helper/file_helper');
 var RobotNode = mongoose.model('RobotNode');
 
 var basePath = 'D:/test/';

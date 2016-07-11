@@ -31,6 +31,11 @@ define(['app','socket'], function (myApp,io) {
                 console.log(data);
                 $rootScope.$broadcast("nodeUpdate", data);
             });
+            socket.on('debugResult', function (data) {
+                console.log('debugResult');
+                console.log(data);
+                $rootScope.$broadcast("debugResult", data);
+            });
         };
         mIo.leaveWorkspace = function () {
             socket.emit('leaveWorkspace', {});
@@ -40,6 +45,9 @@ define(['app','socket'], function (myApp,io) {
         };
         mIo.currentNode = function (nodeId) {
             socket.emit('currentNode', { node: nodeId });
+        };
+        mIo.debug = function (nodeId) {
+            socket.emit('debug', { node: nodeId });
         };
 
         return mIo;

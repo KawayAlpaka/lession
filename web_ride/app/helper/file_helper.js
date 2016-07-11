@@ -1,7 +1,7 @@
 var fs = require('fs-extra');
 var Q = require("q");
 var mongoose = require('mongoose');
-var common = require('../../../public/js/common');
+var common = require('../../public/js/common');
 var RobotNode = mongoose.model('RobotNode');
 var strHelp = common.strHelp;
 

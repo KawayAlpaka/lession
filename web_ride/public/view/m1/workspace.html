@@ -8,6 +8,11 @@
             <button ng-click="setCurrentPanel('run')">Run</button>
         </div>
         <div class="run-panel" ng-show="currentPanel == 'run'">
+            <div>
+                <button type="button" ng-click="debug()">Debug</button>
+            </div>
+            <div style="min-height: 300px;background-color: white;" ng-bind="debug.result"></div>
+            <div style="min-height: 300px;background-color: white;" ng-bind="debug.process"></div>
         </div>
         <div class="edit-panel" ng-show="currentPanel == 'edit'">
             <div>
