@@ -5,10 +5,10 @@ define(['jquery'],function($) {
             var model = {};
             model.C = C;
 
-            //显示状态
+            // tree显示状态
             model.showState = {};
             model.showState.selected = false;
-            model.showState.extend = true;
+            model.showState.extended = true;
 
             //数据操作
             model.fn = {};

@@ -211,7 +211,7 @@ define(['app','common','jquery'], function(myApp,common,$){
         // s.ergodicTree = function (children) {
         //     if(children){
         //         children.forEach(function (node) {
-        //             node.selected = false;
+        //             node.showState.selected = false;
         //             s.ergodicTree(node.children);
         //         });
         //     }
@@ -222,10 +222,9 @@ define(['app','common','jquery'], function(myApp,common,$){
             s.getChildren(node);
 
             // // 不需要遍历元素
-            // s.nodeTree.node.selected = false;
+            // s.nodeTree.node.showState.selected = false;
             // s.ergodicTree(s.nodeTree.node.children);
-
-            node.selected = true;
+            
             s.setSelectedNode(node);
         };
 

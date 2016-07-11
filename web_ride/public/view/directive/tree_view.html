@@ -10,7 +10,7 @@
         <span data-ng-bind="node.name"
               data-ng-click="treeFunctions.click(node)"
               ng-right-click="treeFunctions.rightClick(node,$event)"
-              ng-class="{selected:node.selected}"></span>
+              ng-class="{selected:node.showState.selected}"></span>
         <tree-view m-tree-data="node.children" tree-functions="treeFunctions"></tree-view>
     </div>
 </div>
