@@ -249,10 +249,18 @@ define(['app','common','jquery'], function(myApp,common,$){
         //     s.setContextMenuPoint($event.clientX,$event.clientY);
         //     s.setShowContextMenu(true);
         // }
+
+        s.$on("nodeUpdate", function (event, data) {
+                console.log("nodeUpdate");
+                console.log(data);
+                if(data._id == s.editingNode._id){
+                    $.extend(s.editingNode,data);
+                    s.$apply();
+                }
+            });
+
     }]);
-
-
-
+    
     myApp.controller('m1_workspace_edit_controller', ['$scope', function (s) {
         console.log("m1_workspace_edit_controller");
         console.log(s.$state.params.robotNodeId);

@@ -7,6 +7,11 @@ define(['app','socket'], function (myApp,io) {
             socket = io.connect();
             $rootScope.socket = socket;
             $rootScope.count = {};
+
+            socket.on('reconnect', function() {
+                console.log("重新连接到服务器");
+            });
+
             socket.on('workingOnProjectCount', function (data) {
                 console.log(data);
                 $rootScope.count.workingOnProjectCount = data.count;
@@ -17,6 +22,15 @@ define(['app','socket'], function (myApp,io) {
                 $rootScope.count.workingOnNodeCount = data.count;
                 $rootScope.$apply();
             });
+
+            socket.on('nodeUpdate', function (data) {
+                console.log('nodeUpdate');
+                console.log(data);
+                $rootScope.$broadcast("nodeUpdate", data);
+            });
+
+
+
         };
         mIo.leaveWorkspace = function () {
             socket.emit('leaveWorkspace', {});

@@ -6,7 +6,9 @@ var Session = mongoose.model('Session');
 
 console.log("init io");
 
+var io;
 var connections = [];
+
 var findSocket = function (socket) {
     return connections.find(function (socketObj) {
         return socketObj.socket == socket;
@@ -40,7 +42,7 @@ var sendToAllAboutCount = function () {
     });
 };
 module.exports.createServer = function (server) {
-    var io = socketIo(server);
+    io = socketIo(server);
     io.on('connection', function (socket) {
         connections.push({
             socket:socket,
@@ -98,4 +100,8 @@ module.exports.createServer = function (server) {
             }), 1);
         });
     });
+};
+
+module.exports.nodeUpdate = function (node) {
+    io.sockets.emit("nodeUpdate",node);
 };

@@ -69,6 +69,7 @@ robotNodes.update = function (req, res) {
                 } else {
                     res.resFormat.data = node;
                     res.json(res.resFormat);
+                    mIo.nodeUpdate(node);
                 }
             });
         } else {
