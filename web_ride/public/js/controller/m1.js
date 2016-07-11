@@ -50,7 +50,10 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
                                 action: action,
                                 close: function (data) {
                                     data.parent = s.selectedNode._id;
-                                    s.api.robotNode.create(data);
+                                    s.api.robotNode.create(data)
+                                        .success(function () {
+                                            s.selectedNode.fn.getChildren();
+                                        });
                                 },
                                 dismiss: function (data) {
                                     console.log(data);
