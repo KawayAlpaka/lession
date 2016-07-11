@@ -9,7 +9,7 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
 
             s.selectedNode = node;
             s.selectedNode.showState.selected = true;
-            
+
             s.editingNode = node;
             s.socket.emit('editingNode', { node: s.editingNode._id });
         };
@@ -40,22 +40,25 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
 
                 switch (s.rightClickNodeType) {
                     case "node":
-                        var modalOption = {
-                            action: action,
-                            close: function (data) {
-                                data.parent = s.selectedNode._id;
-                                console.log(data);
-                                s.api.robotNode.create(data)
-                                    .success(function (data) {
-
-                                    });
-                            },
-                            dismiss: function (data) {
-                                console.log(data);
-                            }
-                        };
-                        component.inputModal(modalOption);
-                        break;
+                        if(action == "Refresh"){
+                            console.log(s.selectedNode);
+                            s.selectedNode.fn.pull();
+                            s.selectedNode.fn.getChildren();
+                            break;
+                        }else{
+                            var modalOption = {
+                                action: action,
+                                close: function (data) {
+                                    data.parent = s.selectedNode._id;
+                                    s.api.robotNode.create(data);
+                                },
+                                dismiss: function (data) {
+                                    console.log(data);
+                                }
+                            };
+                            component.inputModal(modalOption);
+                            break;
+                        }
                     case "import":
                         if (action == "Delete") {
                             //
