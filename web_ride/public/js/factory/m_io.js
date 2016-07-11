@@ -15,14 +15,14 @@ define(['app','socket'], function (myApp,io) {
                 console.log("disconnect");
             });
 
-            socket.on('workingOnProjectCount', function (data) {
+            socket.on('currentProjectCount', function (data) {
                 console.log(data);
-                $rootScope.count.workingOnProjectCount = data.count;
+                $rootScope.count.currentProjectCount = data.count;
                 $rootScope.$apply();
             });
-            socket.on('workingOnNodeCount', function (data) {
+            socket.on('currentNodeCount', function (data) {
                 console.log(data);
-                $rootScope.count.workingOnNodeCount = data.count;
+                $rootScope.count.currentNodeCount = data.count;
                 $rootScope.$apply();
             });
 
@@ -31,12 +31,15 @@ define(['app','socket'], function (myApp,io) {
                 console.log(data);
                 $rootScope.$broadcast("nodeUpdate", data);
             });
-
-
-
         };
         mIo.leaveWorkspace = function () {
             socket.emit('leaveWorkspace', {});
+        };
+        mIo.currentProject = function (ProjectId) {
+            socket.emit('currentProject', { node: ProjectId });
+        };
+        mIo.currentNode = function (nodeId) {
+            socket.emit('currentNode', { node: nodeId });
         };
 
         return mIo;

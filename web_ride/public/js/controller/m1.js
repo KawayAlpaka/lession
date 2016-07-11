@@ -1,5 +1,5 @@
 define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user', 'controller/m1/test'], function (myApp) {
-    myApp.controller('m1_controller', ['$scope', 'component','$cookies', function (s, component,$cookies) {
+    myApp.controller('m1_controller', ['$scope', 'component','$cookies','mIo', function (s, component,$cookies,mIo) {
         console.log("m1_controller");
         
         s.setSelectedNode = function (node) {
@@ -11,7 +11,7 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
             s.selectedNode.showState.selected = true;
 
             s.editingNode = node;
-            s.socket.emit('editingNode', { node: s.editingNode._id });
+            mIo.currentNode(s.editingNode._id);
         };
         s.setRightClickNode = function (node) {
             s.rightClickNode = node;

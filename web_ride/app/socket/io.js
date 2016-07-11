@@ -59,22 +59,22 @@ module.exports.createServer = function (server) {
         socket.on('my other event', function (data) {
             // console.log(data);
         });
-        socket.on('editingProject', function (data) {
+        socket.on('currentProject', function (data) {
             findSocket(socket).editingProject = data.node;
             var currentProjectList = _.filter(connections,function (socketObj) {
                 return socketObj.editingProject == data.node;
             });
             currentProjectList.forEach(function (socketObj) {
-                socketObj.socket.emit('workingOnProjectCount', { count: currentProjectList.length });
+                socketObj.socket.emit('currentProjectCount', { count: currentProjectList.length });
             });
         });
-        socket.on('editingNode', function (data) {
+        socket.on('currentNode', function (data) {
             findSocket(socket).editingNode = data.node;
             var currentNodeList = _.filter(connections,function (socketObj) {
                 return socketObj.editingNode == data.node;
             });
             currentNodeList.forEach(function (socketObj) {
-                socketObj.socket.emit('workingOnNodeCount', { count: currentNodeList.length });
+                socketObj.socket.emit('currentNodeCount', { count: currentNodeList.length });
             });
         });
         socket.on('leaveWorkspace', function (data) {

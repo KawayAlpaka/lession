@@ -1,5 +1,5 @@
 define(['app','common','jquery'], function(myApp,common,$){
-    myApp.controller('m1_workspace_controller', ['$scope','component', function (s,component) {
+    myApp.controller('m1_workspace_controller', ['$scope','component','mIo', function (s,component,mIo) {
         console.log("m1_workspace_controller");
         var projectId = s.$state.params.projectId;
 
@@ -8,7 +8,7 @@ define(['app','common','jquery'], function(myApp,common,$){
         s.nodeTree.node = s.model.RobotNode.createNew();
         s.nodeTree.node.fn.findById(projectId)
             .success(function () {
-                s.socket.emit('editingProject', { node: s.nodeTree.node._id });
+                mIo.currentProject(projectId);
             });
 
         s.modalConf = component.inputModal.option;
@@ -22,7 +22,7 @@ define(['app','common','jquery'], function(myApp,common,$){
                 },
                 close:function (data) {
                     node.documentation = data.value;
-                    node.fn.update({documentation:node.documentation});
+                    node.fn.update({documentation:data.value});
                 },
                 dismiss:function (data) {
                     console.log(data);
@@ -36,10 +36,12 @@ define(['app','common','jquery'], function(myApp,common,$){
                 action: s.modalConf.action["edit" + common.strHelp.firstUpper(attrName)],
                 data:node[attrName],
                 close:function (data) {
-                    node[attrName] = data;
                     var updateData = {};
                     updateData[attrName] = node[attrName];
-                    node.fn.update(updateData);
+                    node.fn.update(updateData)
+                        .success(function () {
+                            node[attrName] = data;
+                        });
                 },
                 dismiss:function (data) {
                     console.log(data);
