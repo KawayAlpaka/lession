@@ -264,12 +264,21 @@ define(['app','common','jquery'], function(myApp,common,$){
             }
         });
 
-        s.debug = function () {
+        s.debug = {};
+        s.debug.process = [];
+        s.debug.result = [];
+        s.debug.run = function () {
+            s.debug.process = [];
+            s.debug.result = [];
             mIo.debug(projectId);
         };
-
         s.$on("debugResult", function (event, data) {
-            s.debug.result = data.result;
+            s.debug.result = data.result.split("\r\n");
+            // s.debug.result.push(data.result);
+            s.$apply();
+        });
+        s.$on("debugProcess", function (event, data) {
+            s.debug.process.push(data.result);
             s.$apply();
         });
 

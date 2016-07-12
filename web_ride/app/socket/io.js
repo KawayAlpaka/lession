@@ -2,6 +2,7 @@ var socketIo = require('socket.io');
 var _ = require('underscore');
 var exec = require('child_process').exec;
 var fileHelper = require('../helper/file_helper');
+var listenHelper = require('../helper/listen_helper');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var RobotNode = mongoose.model('RobotNode');
@@ -97,16 +98,33 @@ module.exports.createServer = function (server) {
                     var pNode = robotNode;
                     var projectPath = basePath + pNode._id;
                     fileHelper.createProjectFiles(pNode, projectPath, function () {
-                        exec('pybot --outputdir '+projectPath+" "+projectPath + "/" + pNode.name,{},function(error,stdout,stderr){
-                            if(error) {
-                                console.info('stderr : '+stderr);
-                            }
-                            if(stdout.length >1){
-                                socket.emit('debugResult', { result: stdout });
-                            } else {
-                                // console.log('you don\'t offer args');
+                        listenHelper.start(function (address) {
+                            exec('pybot --outputdir '+projectPath+" "+"--listener D:\\TestRunnerAgent.py:"+address.port+":False "+projectPath + "/" + pNode.name,{},function(error,stdout,stderr){
+                                if(error) {
+                                    console.info('stderr : '+stderr);
+                                }
+                                if(stdout.length >1){
+                                    socket.emit('debugResult', { result: stdout });
+                                } else {
+                                    // console.log('you don\'t offer args');
+                                }
+                            });
+                        },function (data) {
+                            console.log(data);
+                            switch (data[0]){
+                                case "start_test":
+                                    socket.emit('debugProcess', { result:"Starting test: " + data[1][1].longname });
+                                    break;
+                                case "end_test":
+                                    socket.emit('debugProcess', { result:"Ending test:   " + data[1][1].longname });
+                                    break;
+                                case "log_message":
+                                    socket.emit('debugProcess', { result:data[1][0].timestamp + " : " + data[1][0].level + " : "+ data[1][0].message });
+                                    break;
+                                default:
                             }
                         });
+
                     });
                 } else {
                 }

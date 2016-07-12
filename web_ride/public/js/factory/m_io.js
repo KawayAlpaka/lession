@@ -36,6 +36,11 @@ define(['app','socket'], function (myApp,io) {
                 console.log(data);
                 $rootScope.$broadcast("debugResult", data);
             });
+            socket.on('debugProcess', function (data) {
+                console.log('debugProcess');
+                console.log(data);
+                $rootScope.$broadcast("debugProcess", data);
+            });
         };
         mIo.leaveWorkspace = function () {
             socket.emit('leaveWorkspace', {});
