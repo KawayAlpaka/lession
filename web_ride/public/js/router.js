@@ -79,6 +79,50 @@ define(['app'], function (myApp) {
                                 ]
                             },
                             {
+                                name: 'admin',
+                                url: '/admin',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/admin.html',
+                                        controller: 'm1_admin_controller'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'users',
+                                        url: '/users',
+                                        views: {
+                                            'admin': {
+                                                templateUrl: 'view/m1/admin/users.html',
+                                                controller: 'm1_admin_users_controller'
+                                            }
+                                        },
+                                        children:[
+                                            {
+                                                name: 'index',
+                                                url: '/index',
+                                                views: {
+                                                    'users': {
+                                                        templateUrl: 'view/m1/admin/users/index.html',
+                                                        controller: 'm1_admin_users_index_controller'
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                name: 'edit',
+                                                url: '/edit/:id',
+                                                views: {
+                                                    'users': {
+                                                        templateUrl: 'view/m1/admin/users/edit.html',
+                                                        controller: 'm1_admin_users_edit_controller'
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
                                 name: 'test',
                                 url: '/test',
                                 views: {
