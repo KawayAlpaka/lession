@@ -94,7 +94,6 @@ users.currentUser = function (req, res, next) {
             }
         });
     }
-
 };
 
 module.exports = users;

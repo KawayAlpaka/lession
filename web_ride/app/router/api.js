@@ -37,4 +37,7 @@ router.post('/robot_nodes/relative_path', api.robotNodes.relativePath );
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
 router.get('/actions/runProject/:id',api.actions.runProject );
 
+
+router.get('/admins/users',api.admins.requireAdmin,api.admins.users.list );
+
 module.exports = router;

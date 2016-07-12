@@ -7,6 +7,10 @@ define(['app'], function(myApp){
     }]);
     myApp.controller('m1_admin_users_index_controller', ['$scope', function (s) {
         console.log("m1_admin_users_index_controller");
+        s.api.admin.users()
+            .success(function (data) {
+                s.users = data.data;
+            });
     }]);
     myApp.controller('m1_admin_users_edit_controller', ['$scope', function (s) {
         console.log("m1_admin_users_edit_controller");

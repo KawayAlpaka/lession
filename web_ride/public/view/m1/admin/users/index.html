@@ -1,1 +1,17 @@
 <div>index</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>user</th>
+        <th>name</th>
+        <th>role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in users">
+        <td ng-bind="user.user"></td>
+        <td ng-bind="user.name"></td>
+        <td ng-bind="user.role"></td>
+    </tr>
+    </tbody>
+</table>
