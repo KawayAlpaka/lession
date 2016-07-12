@@ -24,8 +24,12 @@ chatServer.on('connection', function(client) {
             jsonStrs.forEach(function (jsonStr) {
                 if(jsonStr.trim().length > 0){
                     var json = JSON.parse(jsonStr);
+                    console.log(json);
                     if(json[0] == "close"){
-
+                        console.log("client destroy");
+                        client.destroy();
+                        console.log("Server close");
+                        chatServer.close();
                     }
                 }
             });
@@ -38,6 +42,7 @@ chatServer.on('connection', function(client) {
     client.on('error', function(e) {
         console.log('error:');
         console.log(e);
+        chatServer.close();
     });
     client.on('close',function (e) {
         console.log('close:');
@@ -56,7 +61,7 @@ chatServer.on('connection', function(client) {
 });
 
 // chatServer.listen(9000);
-chatServer.listen(function () {
+chatServer.listen(9000,function () {
     console.log(chatServer.address());
     // chatServer.close();
 });
