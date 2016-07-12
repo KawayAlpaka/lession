@@ -55,15 +55,12 @@ module.exports.createServer = function (server) {
             editingNode:null,
             editingProject:null
         });
-        socket.emit('news', { hello: 'world' });
-        var sendNews = function () {
-            socket.emit('news', { hello: connections.length });
-            setTimeout(sendNews,5000);
-        };
-        sendNews();
-        socket.on('my other event', function (data) {
-            // console.log(data);
-        });
+        // socket.emit('news', { hello: 'world' });
+        // var sendNews = function () {
+        //     socket.emit('news', { hello: connections.length });
+        //     setTimeout(sendNews,5000);
+        // };
+        // sendNews();
         socket.on('currentProject', function (data) {
             findSocket(socket).editingProject = data.node;
             var currentProjectList = _.filter(connections,function (socketObj) {
