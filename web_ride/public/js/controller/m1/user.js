@@ -3,7 +3,7 @@ define(['app','common','jquery'], function(myApp){
         console.log('m1_user_controller');
     }]);
 
-    myApp.controller('m1_user_login_controller', ['$scope','$cookies', function (s,$cookies) {
+    myApp.controller('m1_user_login_controller', ['$scope','$cookies','mHelp', function (s,$cookies,mHelp) {
         console.log('m1_user_login_controller');
 
         if(s.mHelp.isLogin()){
@@ -19,6 +19,8 @@ define(['app','common','jquery'], function(myApp){
                         var expires = new Date();
                         expires.setDate(expires.getDate() + 30);
                         $cookies.put('mSession', data.data.session._id , {'expires': expires.toUTCString()});
+                        mHelp.setCurrentUser(data.data.user);
+                        console.log(mHelp.getCurrentUser());
                         s.mHelp.go("#/m1/manage");
                     }
                 })

@@ -1,8 +1,12 @@
-<a href="#/m1/manage">管理</a>
-<a href="#/m1/test">测试</a>
-<a href="#/m1/user/login" ng-hide="mHelp.isLogin()">登录</a>
-<a ng-click="logout()" ng-show="mHelp.isLogin()">退出</a>
-
+<div>
+    <a href="#/m1/manage">管理</a>
+    <a href="#/m1/test">测试</a>
+    <a href="#/m1/user/login" ng-hide="mHelp.isLogin()">登录</a>
+    <span ng-show="mHelp.isLogin()" ng-bind="'欢迎'" ></span>
+    <span ng-show="mHelp.isLogin()" ng-bind="mHelp.getCurrentUser().name" ></span>
+    <a ng-click="logout()" ng-show="mHelp.isLogin()">退出</a>
+    <a href="#/m1/admin" ng-if="mHelp.getCurrentUser().role == 'admin'" ng-bind="'后台管理'"></a>
+</div>
 <!--<div data-ui-view="m1" ng-click="setShowContextMenu(false)" ng-right-click="setShowContextMenu(false)" style="min-height: 1200px"></div>-->
 <div data-ui-view="m1" ng-click="setShowContextMenu(false)"  style="min-height: 1200px"></div>
 <m-context-menu data-ng-if="showContextMenu" context-menu-functions="contextMenuFunctions" m-node="rightClickNode" m-node-type="rightClickNodeType" ng-style="contextMenu.style"></m-context-menu>

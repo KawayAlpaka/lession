@@ -1,5 +1,5 @@
-define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user', 'controller/m1/test'], function (myApp) {
-    myApp.controller('m1_controller', ['$scope', 'component','$cookies','mIo', function (s, component,$cookies,mIo) {
+define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user', 'controller/m1/admin', 'controller/m1/test'], function (myApp) {
+    myApp.controller('m1_controller', ['$scope', 'component','$cookies','mIo','mHelp', function (s, component,$cookies,mIo,mHelp) {
         console.log("m1_controller");
         
         s.setSelectedNode = function (node) {
@@ -80,9 +80,11 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
             s.api.user.logout()
                 .success(function () {
                     $cookies.remove("mSession");
+                    mHelp.removeCurrentUser();
                 })
                 .error(function () {
                     $cookies.remove("mSession");
+                    mHelp.removeCurrentUser();
                 });
         };
 

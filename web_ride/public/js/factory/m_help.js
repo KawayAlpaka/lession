@@ -8,6 +8,17 @@ define(['app','common'], function (myApp,common) {
         mHelp.go = function (link) {
             window.location.href = link;
         };
+
+        mHelp.setCurrentUser = function (user) {
+            localStorage.setItem("currentUser", JSON.stringify(user));
+        };
+        mHelp.getCurrentUser = function () {
+            return JSON.parse(localStorage.getItem("currentUser"));
+        };
+        mHelp.removeCurrentUser = function () {
+            localStorage.removeItem("currentUser");
+        };
+
         return mHelp;
     }]);
 });

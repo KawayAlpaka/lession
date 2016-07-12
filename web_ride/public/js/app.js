@@ -8,8 +8,6 @@ define(['angular'], function (angular) {
         mIo.start();
 
         $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-            console.log('$stateChangeSuccess');
-            console.log(arguments);
             if(fromState.name == "m1.workspace"){
                 mIo.leaveWorkspace();
             }
