@@ -11,9 +11,11 @@
             <div>
                 <button type="button" ng-click="debug.run()">Debug</button>
             </div>
+            <div>result:</div>
             <div style="height: 350px;background-color: white;overflow-y: scroll;">
                 <p ng-repeat="text in debug.result track by $index" ng-bind="text"></p>
             </div>
+            <div>process:</div>
             <div style="height: 350px;background-color: white;overflow-y: scroll;">
                 <p ng-repeat="text in debug.process track by $index" ng-bind="text"></p>
             </div>

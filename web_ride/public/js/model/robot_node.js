@@ -45,6 +45,9 @@ define(['jquery'],function($) {
             model.fn.canNewSuite = function(){
                 return model.fileType == "dir";
             };
+            model.fn.canExtend = function () {
+                return model.fileType == "dir" || model.fileType == "file";
+            };
 
             model.fn.findById = function (id) {
                 var func = function (resolve, reject) {
