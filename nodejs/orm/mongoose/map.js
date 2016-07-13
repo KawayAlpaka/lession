@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.ObjectId;
-mongoose.connect('mongodb://localhost/test_mongoose');
+mongoose.connect('mongodb://localhost/test_map');
 
 var Schema = mongoose.Schema;
 
@@ -9,6 +9,11 @@ var studentSchema = new Schema({
 });
 
 var lessonSchema = new Schema({
+    name: String,
+    teacher: {type:ObjectId,ref:"Teacher"}
+});
+
+var teacherSchema = new Schema({
     name: String
 });
 
@@ -19,6 +24,7 @@ var mapSchema = new Schema({
 
 var Student = mongoose.model('Student', studentSchema);
 var Lesson = mongoose.model('Lession', lessonSchema);
+var Teacher = mongoose.model('Teacher', teacherSchema);
 var Map = mongoose.model('Map', mapSchema);
 
 
@@ -26,8 +32,10 @@ var Map = mongoose.model('Map', mapSchema);
 // new Student({name:"Student 1"}).save();
 // new Student({name:"Student 2"}).save();
 // new Student({name:"Student 3"}).save();
-// new Lesson({name:"Lesson 1"}).save();
-// new Lesson({name:"Lesson 2"}).save();
+// new Teacher({name:"Teacher 1"}).save(function (err,teacher) {
+//     new Lesson({name:"Lesson 1",teacher:teacher._id}).save();
+//     new Lesson({name:"Lesson 2",teacher:teacher._id}).save();
+// });
 
 Student.findOne({},function (err, student) {
     Lesson.findOne({},function (err, lesson) {
@@ -36,10 +44,21 @@ Student.findOne({},function (err, student) {
                 console.log(err)
             }
             Map.find({})
-                .populate('lesson')
+                .populate({
+                    path: 'lesson',
+                    // select: '_id name phone merchant',
+                    // model: 'sales',
+                    populate: {
+                        path: 'teacher'
+                        // select: '_id sname',
+                        // model: 'merchant'
+                    }
+                })
                 .populate('student')
                 .exec(function (err,maps) {
-                    console.log(maps[2]);
+                    // maps[0].student.name = "new name";
+                    // maps[0].student.save();
+                    console.log(maps[0]);
                 });
         });
     });
