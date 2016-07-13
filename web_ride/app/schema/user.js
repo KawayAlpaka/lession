@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var userSchema = new Schema({
-    user: { type: String,unique: true },
-    name: { type: String },
-    password: { type: String },
-    role: { type: String,enum:['admin','other'] },
+    user: { type: String , unique: true },
+    name: { type: String ,default:"新用户" },
+    password: { type: String ,default:"123456"},
+    role: { type: String,enum:['admin','tester','guest'] ,default:"tester"},
     meta: {
         createAt: {
             type: Date,

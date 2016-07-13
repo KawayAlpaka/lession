@@ -3,26 +3,11 @@ var User = mongoose.model('User');
 var Session = mongoose.model('Session');
 
 var users = {};
-users.create = function(req, res) {
-    var _user = req.query;
-    User.findOne({user: _user.user},  function(err, user) {
-        if (err) {
-            console.log(err);
-        }
-        if (user) {
-            res.send('用户已经存在');
-        }
-        else {
-            user = new User(_user);
-            console.log(user);
-            user.save(function(err, user) {
-                if (err) {
-                    console.log(err);
-                }
-                res.send('用户创建成功');
-            });
-        }
-    });
+
+users.new = function (req, res) {
+    user = new User({user:"new user"});
+    res.resFormat.data = user;
+    res.json(res.resFormat);
 };
 
 users.login = function(req, res) {
@@ -30,7 +15,6 @@ users.login = function(req, res) {
     User.findOne({user:_user.user},function (err, user) {
         if(user){
             if(user.password == _user.password){
-
                 var session = new Session({user:user._id});
                 session.save(function (err,session) {
                     if(err){

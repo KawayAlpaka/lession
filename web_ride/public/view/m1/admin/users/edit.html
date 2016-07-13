@@ -1,1 +1,21 @@
 <div>edit</div>
+<div>
+    <label>user:</label>
+    <input type="text" ng-model="user.user">
+</div>
+<div>
+    <label>name:</label>
+    <input type="text" ng-model="user.name">
+</div>
+<div>
+    <label>role:</label>
+    <select  data-ng-model="user.role" data-ng-options="role for role in roles"></select>
+</div>
+<div>
+    <label>password:</label>
+    <input type="password" ng-model="user.password">
+</div>
+<div>
+    <button ng-click="save()">保存</button>
+    <button ng-click="back()">返回</button>
+</div>

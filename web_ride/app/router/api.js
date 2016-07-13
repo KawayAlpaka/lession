@@ -21,7 +21,8 @@ router.get('/', function(req, res) {
     res.send('hello api');
 });
 
-router.post('/users', api.users.create );
+// router.post('/users', api.users.create );
+router.get('/users/new', api.users.new );
 router.post('/users/login', api.users.login );
 router.get('/users/logout', api.users.logout );
 
@@ -37,7 +38,10 @@ router.post('/robot_nodes/relative_path', api.robotNodes.relativePath );
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
 router.get('/actions/runProject/:id',api.actions.runProject );
 
-
 router.get('/admins/users',api.admins.requireAdmin,api.admins.users.list );
+router.post('/admins/users',api.admins.requireAdmin, api.admins.users.create );
+router.put('/admins/users/:id',api.admins.requireAdmin, api.admins.users.update );
+router.get('/admins/users/:id',api.admins.requireAdmin, api.admins.users.get );
+router.delete('/admins/users/:id',api.admins.requireAdmin, api.admins.users.del );
 
 module.exports = router;

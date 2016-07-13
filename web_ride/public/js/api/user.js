@@ -22,6 +22,13 @@ define([], function () {
             type : 'json'
         });
     };
+    api.newUser = function () {
+        return myHttp({
+            url : '/api/users/new',
+            method:'GET',
+            type : 'json'
+        });
+    };
     
     return api;
 });
