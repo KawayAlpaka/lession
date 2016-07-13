@@ -38,6 +38,14 @@ router.post('/robot_nodes/relative_path', api.robotNodes.relativePath );
 router.get('/actions/createProjectFiles/:id',api.actions.createProjectFiles);
 router.get('/actions/runProject/:id',api.actions.runProject );
 
+router.get('/projects',api.projects.myProjects );
+router.get('/projects/member',api.projects.myMemberProjects );
+router.get('/projects/guest',api.projects.myGuestProjects );
+router.post('/projects',api.projects.create );
+router.put('/projects',api.projects.update );
+router.get('/projects/:id',api.projects.get );
+router.delete('/projects/:id',api.projects.del );
+
 router.get('/admins/users',api.admins.requireAdmin,api.admins.users.list );
 router.post('/admins/users',api.admins.requireAdmin, api.admins.users.create );
 router.put('/admins/users/:id',api.admins.requireAdmin, api.admins.users.update );
