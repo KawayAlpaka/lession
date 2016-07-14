@@ -28,6 +28,21 @@ define([], function () {
             data : data
         });
     };
+    api.get = function (id) {
+        return mHttp({
+            url : '/api/projects/'+id,
+            method:'GET',
+            type : 'json'
+        });
+    };
+    api.update = function (data) {
+        return mHttp({
+            url : '/api/projects/',
+            method:'PUT',
+            type : 'json',
+            data : data
+        });
+    };
 
     return api;
 });

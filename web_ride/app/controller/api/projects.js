@@ -59,11 +59,20 @@ projects.new = function (req, res) {
     res.json(res.resFormat);
 };
 projects.update = function (req, res) {
+    var _project = req.body;
+    Project.findOneAndUpdate({_id:_project._id},_project,{upsert: true ,new:true},function (err, project) {
+        res.resFormat.data = project;
+        res.json(res.resFormat);
+    });
 };
 projects.del = function (req, res) {
 };
 projects.get = function (req, res) {
-    console.log("get");
+    var projectId = req.params.id;
+    Project.findOne({_id:projectId},function (err,project) {
+        res.resFormat.data = project;
+        res.json(res.resFormat);
+    });
 };
 
 module.exports = projects;
