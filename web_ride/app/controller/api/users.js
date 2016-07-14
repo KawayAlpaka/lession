@@ -80,4 +80,13 @@ users.currentUser = function (req, res, next) {
     }
 };
 
+users.requireLogin = function (req, res, next) {
+    if(req.currentUser){
+        next();
+    }else{
+        res.resFormat.state = 600;
+        res.json(res.resFormat);
+    }
+};
+
 module.exports = users;

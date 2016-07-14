@@ -1,13 +1,13 @@
 define([], function () {
 
-    var myHttp;
+    var mHttp;
     var api = {};
     api.init = function (obj) {
-        myHttp = obj;
+        mHttp = obj;
         return api;
     };
     api.findById = function (id) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/'+id,
             method:'GET',
             type : 'json'
@@ -15,7 +15,7 @@ define([], function () {
     };
 
     api.find = function (data) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/find',
             method:'POST',
             type : 'json',
@@ -27,7 +27,7 @@ define([], function () {
         var data = {
             type: "project"
         };
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/find',
             method:'POST',
             type : 'json',
@@ -35,7 +35,7 @@ define([], function () {
         });
     };
     api.create = function (data) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/',
             method:'POST',
             type : 'json',
@@ -43,7 +43,7 @@ define([], function () {
         });
     };
     api.update = function (id,data) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/'+id,
             method:'PATCH',
             type : 'json',
@@ -51,21 +51,21 @@ define([], function () {
         });
     };
     api.getChildren = function (id) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/'+id+"/children",
             method:'GET',
             type : 'json'
         });
     };
     api.getParentList = function (id) {
-        return myHttp({
+        return mHttp({
             url : '/api/robot_nodes/'+id+"/parent_list",
             method:'GET',
             type : 'json'
         });
     };
     api.getRelativePath = function (data) {
-        return myHttp({
+        return mHttp({
             url : "/api/robot_nodes/relative_path",
             method:'POST',
             type : 'json',

@@ -1,26 +1,26 @@
 define([], function () {
-    var myHttp;
+    var mHttp;
     var api = {};
     api.init = function (obj) {
-        myHttp = obj;
+        mHttp = obj;
         return api;
     };
     api.users = function () {
-        return myHttp({
+        return mHttp({
             url : '/api/admins/users',
             method:'GET',
             type : 'json'
         });
     };
     api.getUser = function (id) {
-        return myHttp({
+        return mHttp({
             url : '/api/admins/users/'+ id,
             method:'GET',
             type : 'json'
         });
     };
     api.createUser = function (data) {
-        return myHttp({
+        return mHttp({
             url : '/api/admins/users',
             method:'POST',
             type : 'json',
@@ -28,7 +28,7 @@ define([], function () {
         });
     };
     api.updateUser = function (id,data) {
-        return myHttp({
+        return mHttp({
             url : '/api/admins/users/'+ id,
             method:'PUT',
             type : 'json',
@@ -36,7 +36,7 @@ define([], function () {
         });
     };
     api.delUser = function (id) {
-        return myHttp({
+        return mHttp({
             url : '/api/admins/users/'+ id,
             method:'DELETE',
             type : 'json'

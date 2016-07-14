@@ -8,6 +8,7 @@ router.use(api.users.currentUser,function (req, res, next) {
         data:{},
         logicState:0,
         msg:"success",
+        // state 0:正常,600:未登录,601:缺少管理员权限
         state:0
     };
     next();

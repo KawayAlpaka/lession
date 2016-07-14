@@ -1,14 +1,14 @@
 define([], function () {
 
-    var myHttp;
+    var mHttp;
     var api = {};
 
     api.init = function (obj) {
-        myHttp = obj;
+        mHttp = obj;
         return api;
     };
     api.login = function (data) {
-        return myHttp({
+        return mHttp({
             url : '/api/users/login',
             method:'POST',
             type : 'json',
@@ -16,14 +16,14 @@ define([], function () {
         });
     };
     api.logout = function () {
-        return myHttp({
+        return mHttp({
             url : '/api/users/logout',
             method:'GET',
             type : 'json'
         });
     };
     api.newUser = function () {
-        return myHttp({
+        return mHttp({
             url : '/api/users/new',
             method:'GET',
             type : 'json'

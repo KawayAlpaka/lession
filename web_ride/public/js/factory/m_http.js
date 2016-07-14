@@ -1,5 +1,5 @@
 define(['app'], function (myApp) {
-    myApp.factory('myHttp', ['$q', '$http', function ($q, $http) {
+    myApp.factory('mHttp', ['$q', '$http', function ($q, $http) {
         return function (request) {
             var promise;
             promise = $q(function (resolve, reject) {
