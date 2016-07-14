@@ -79,6 +79,28 @@ define(['app'], function (myApp) {
                                 ]
                             },
                             {
+                                name: 'project',
+                                url: '/project',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/project.html',
+                                        controller: 'm1_project_controller'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'edit',
+                                        url: '/edit/:id',
+                                        views: {
+                                            'project': {
+                                                templateUrl: 'view/m1/project/edit.html',
+                                                controller: 'm1_project_edit_controller'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
                                 name: 'admin',
                                 url: '/admin',
                                 views: {

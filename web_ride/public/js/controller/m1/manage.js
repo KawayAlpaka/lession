@@ -12,6 +12,7 @@ define(['app'], function(myApp){
             s.api.project.myProjects()
                 .success(function (data) {
                     console.log(data);
+                    s.projects = data.data;
                 });
         };
 
@@ -26,7 +27,7 @@ define(['app'], function(myApp){
                             console.log(data);
                         });
                 });
-            
+
             // s.modalOption = {
             //     action:"New Project",
             //     close:function (data) {
@@ -41,6 +42,13 @@ define(['app'], function(myApp){
             //     }
             // };
             // component.inputModal(s.modalOption);
+        };
+
+        s.enterProject = function (project) {
+            s.mHelp.go("#/m1/workspace/" + project.robotNode);
+        };
+        s.editProject = function (project) {
+            s.mHelp.go("#/m1/project/edit/" + project._id);
         };
 
         s.refreshProject();

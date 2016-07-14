@@ -1,9 +1,10 @@
-define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user', 'controller/m1/admin', 'controller/m1/test'], function (myApp) {
-    myApp.controller('m1_controller', ['$scope', 'component','$cookies','mIo', function (s, component,$cookies,mIo) {
+define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/manage', 'controller/m1/user',
+    'controller/m1/admin', 'controller/m1/test', 'controller/m1/project'], function (myApp) {
+    myApp.controller('m1_controller', ['$scope', 'component', '$cookies', 'mIo', function (s, component, $cookies, mIo) {
         console.log("m1_controller");
-        
+
         s.setSelectedNode = function (node) {
-            if(s.selectedNode){
+            if (s.selectedNode) {
                 s.selectedNode.showState.selected = false;
             }
 
@@ -40,12 +41,12 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
 
                 switch (s.rightClickNodeType) {
                     case "node":
-                        if(action == "Refresh"){
+                        if (action == "Refresh") {
                             console.log(s.selectedNode);
                             s.selectedNode.fn.pull();
                             s.selectedNode.fn.getChildren();
                             break;
-                        }else{
+                        } else {
                             var modalOption = {
                                 action: action,
                                 close: function (data) {
@@ -68,9 +69,9 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
                         }
                         break;
                     default:
-                        $scope.confirm = function () {
-                            $uibModalInstance.close("confirm");
-                        };
+                        // $scope.confirm = function () {
+                        //     $uibModalInstance.close("confirm");
+                        // };
                 }
                 s.showContextMenu = false;
             }
