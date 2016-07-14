@@ -2,8 +2,6 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/test_mongoose');
 
-console.log(1);
-
 var Schema = mongoose.Schema;
 
 var blogSchema = new Schema({
@@ -21,7 +19,7 @@ var blogSchema = new Schema({
     },
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },
-    hidden: Boolean,
+    hidden: {type: Boolean,enum:['member','guest']},
     meta: {
         votes: Number,
         favs:  Number
@@ -41,4 +39,8 @@ var oneBlog  = new Blog({title:11});
 //     console.log(dogs); // woof
 // });
 
-oneBlog.save();
+// oneBlog.save();
+
+// console.log(Blog.schema.paths);
+console.log(Blog.schema.tree.hidden.enum);
+// console.log(Blog.schema);

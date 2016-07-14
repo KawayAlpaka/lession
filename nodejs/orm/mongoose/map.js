@@ -37,30 +37,30 @@ var Map = mongoose.model('Map', mapSchema);
 //     new Lesson({name:"Lesson 2",teacher:teacher._id}).save();
 // });
 
-Student.findOne({},function (err, student) {
-    Lesson.findOne({},function (err, lesson) {
-        new Map({lesson:lesson._id,student:student._id}).save(function (err, map) {
-            if(err){
-                console.log(err)
-            }
-            Map.find({})
-                .populate({
-                    path: 'lesson',
-                    // select: '_id name phone merchant',
-                    // model: 'sales',
-                    populate: {
-                        path: 'teacher'
-                        // select: '_id sname',
-                        // model: 'merchant'
-                    }
-                })
-                .populate('student')
-                .exec(function (err,maps) {
-                    // maps[0].student.name = "new name";
-                    // maps[0].student.save();
-                    console.log(maps[0]);
-                });
-        });
-    });
-});
-
+// Student.findOne({},function (err, student) {
+//     Lesson.findOne({},function (err, lesson) {
+//         new Map({lesson:lesson._id,student:student._id}).save(function (err, map) {
+//             if(err){
+//                 console.log(err)
+//             }
+//             Map.find({})
+//                 .populate({
+//                     path: 'lesson',
+//                     // select: '_id name phone merchant',
+//                     // model: 'sales',
+//                     populate: {
+//                         path: 'teacher'
+//                         // select: '_id sname',
+//                         // model: 'merchant'
+//                     }
+//                 })
+//                 .populate('student')
+//                 .exec(function (err,maps) {
+//                     // maps[0].student.name = "new name";
+//                     // maps[0].student.save();
+//                     console.log(maps[0]);
+//                 });
+//         });
+//     });
+// });
+//
