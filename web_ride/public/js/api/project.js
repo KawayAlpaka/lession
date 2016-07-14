@@ -35,6 +35,21 @@ define([], function () {
             type : 'json'
         });
     };
+    api.getMembers = function (id) {
+        return mHttp({
+            url : '/api/projects/'+id+"/members",
+            method:'GET',
+            type : 'json'
+        });
+    };
+    api.createMember = function (projectId,data) {
+        return mHttp({
+            url : '/api/projects/'+projectId+"/members",
+            method:'POST',
+            type : 'json',
+            data : data
+        });
+    };
     api.update = function (data) {
         return mHttp({
             url : '/api/projects/',

@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var RobotNode = mongoose.model('RobotNode');
 var Project = mongoose.model('Project');
+var User = mongoose.model('User');
+var ProjectUser = mongoose.model('ProjectUser');
 
 var projects = {};
 
@@ -17,13 +19,6 @@ projects.myGuestProjects = function(req, res) {
 
 projects.create = function (req, res) {
     var _project = req.body;
-    // var _projectNode = new RobotNode();
-    // _projectNode.name = _project.name;
-    // _projectNode.type = "project";
-    // _projectNode.fileType = "dir";
-    // _projectNode.fileFormat = "txt";
-    // console.log(_projectNode);
-    // _projectNode.save(function (err,projectNode) {
     RobotNode.create({name:_project.name,type:"project",fileType:"dir",fileFormat:"txt"},function (err,projectNode) {
         if(err){
             console.log(err);
@@ -74,5 +69,36 @@ projects.get = function (req, res) {
         res.json(res.resFormat);
     });
 };
+
+projects.getMembers = function (req, res) {
+    var projectId = req.params.id;
+    ProjectUser.find({project:projectId,relate:"member"})
+        .populate('user')
+        .exec(function (err, projectUsers) {
+            res.resFormat.data = projectUsers;
+            res.json(res.resFormat);
+        });
+};
+projects.createMembers = function (req, res) {
+    var projectId = req.params.id;
+    var user = req.body.user;
+    User.findOne({user:user})
+        .select("_id")
+        .exec(function (err, user) {
+            if(user){
+                ProjectUser.create({project: projectId, user: user._id, relate: "member"}, function (err, projectUser) {
+                    res.resFormat.data = projectUser;
+                    res.resFormat.msg = "添加成功";
+                    res.json(res.resFormat);
+                });
+            }else{
+                res.resFormat.logicState = 1;
+                res.resFormat.msg = "用户名不存在";
+                res.json(res.resFormat);
+            }
+        });
+
+};
+
 
 module.exports = projects;

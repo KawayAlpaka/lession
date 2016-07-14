@@ -67,6 +67,9 @@ router.post('/projects', api.users.requireLogin, api.projects.create);
 router.put('/projects', api.users.requireLogin, api.projects.update);
 router.get('/projects/new', api.projects.new);
 router.get('/projects/:id', api.projects.get);
+router.get('/projects/:id/members', api.projects.getMembers);
+router.post('/projects/:id/members', api.projects.createMembers);
+// router.get('/projects/:id/guests', api.projects.getGuests);
 router.delete('/projects/:id', api.users.requireLogin, api.projects.del);
 
 router.get('/admins/users', api.admins.requireAdmin, api.admins.users.list);
