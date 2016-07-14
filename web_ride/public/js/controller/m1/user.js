@@ -16,11 +16,7 @@ define(['app','common','jquery'], function(myApp){
                 .success(function (data) {
                     console.log(data);
                     if(data.logicState == 0){
-                        var expires = new Date();
-                        expires.setDate(expires.getDate() + 30);
-                        $cookies.put('mSession', data.data.session._id , {'expires': expires.toUTCString()});
-                        mHelp.setCurrentUser(data.data.user);
-                        console.log(mHelp.getCurrentUser());
+                        s.mHelp.setLoginData(data.data.session._id,data.data.user);
                         s.mHelp.go("#/m1/manage");
                     }
                 })
