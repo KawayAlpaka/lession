@@ -35,16 +35,16 @@ define([], function () {
             type : 'json'
         });
     };
-    api.getMembers = function (id) {
+    api.getUsers = function (id,relate) {
         return mHttp({
-            url : '/api/projects/'+id+"/members",
+            url : '/api/projects/'+id+"/users/" + relate,
             method:'GET',
             type : 'json'
         });
     };
-    api.createMember = function (projectId,data) {
+    api.createUser = function (projectId,relate,data) {
         return mHttp({
-            url : '/api/projects/'+projectId+"/members",
+            url : '/api/projects/'+projectId+"/users/"+relate,
             method:'POST',
             type : 'json',
             data : data

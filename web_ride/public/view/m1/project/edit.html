@@ -14,7 +14,7 @@
     <div>
         <label>添加成员</label>
         <input type="text" placeholder="用户名" ng-model="memberUser">
-        <button ng-click="createMember(memberUser)">添加</button>
+        <button ng-click="createUser('member',memberUser)">添加</button>
         <span ng-bind="createMemberMsg"></span>
     </div>
     <div>
@@ -31,7 +31,36 @@
                 <td ng-bind="member.user.user"></td>
                 <td ng-bind="member.user.name"></td>
                 <td>
-                    <button type="button" ng-click="delMember(member)">删除</button>
+                    <button type="button" ng-click="delUser('member',member)">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    <div>游客</div>
+    <div>
+        <label>添加游客</label>
+        <input type="text" placeholder="用户名" ng-model="guestUser">
+        <button ng-click="createUser('guest',guestUser)">添加</button>
+        <span ng-bind="createGuestMsg"></span>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>user</th>
+                <th>name</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="guest in guests">
+                <td ng-bind="guest.user.user"></td>
+                <td ng-bind="guest.user.name"></td>
+                <td>
+                    <button type="button" ng-click="delUser('guest',guest)">删除</button>
                 </td>
             </tr>
             </tbody>

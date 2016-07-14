@@ -70,25 +70,28 @@ projects.get = function (req, res) {
     });
 };
 
-projects.getMembers = function (req, res) {
+projects.getUsers = function (req, res) {
     var projectId = req.params.id;
-    ProjectUser.find({project:projectId,relate:"member"})
+    var relate = req.params.relate;
+    console.log(relate);
+    ProjectUser.find({project:projectId,relate:relate})
         .populate('user')
         .exec(function (err, projectUsers) {
             res.resFormat.data = projectUsers;
             res.json(res.resFormat);
         });
 };
-projects.createMembers = function (req, res) {
+projects.createUser = function (req, res) {
     var projectId = req.params.id;
+    var relate = req.params.relate;
     var user = req.body.user;
     User.findOne({user:user})
         .select("_id")
         .exec(function (err, user) {
             if(user){
-                ProjectUser.create({project: projectId, user: user._id, relate: "member"}, function (err, projectUser) {
+                ProjectUser.create({project: projectId, user: user._id, relate: relate}, function (err, projectUser) {
                     res.resFormat.data = projectUser;
-                    res.resFormat.msg = "添加成功";
+                    res.resFormat.msg = "添加"+relate+"成功";
                     res.json(res.resFormat);
                 });
             }else{
@@ -97,7 +100,6 @@ projects.createMembers = function (req, res) {
                 res.json(res.resFormat);
             }
         });
-
 };
 
 

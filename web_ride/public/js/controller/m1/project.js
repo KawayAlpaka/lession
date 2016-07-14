@@ -1,4 +1,4 @@
-define(['app'], function(myApp){
+define(['app','common'], function(myApp,common){
     myApp.controller('m1_project_controller', ['$scope', function (s) {
         console.log("m1_project_controller");
     }]);
@@ -11,27 +11,25 @@ define(['app'], function(myApp){
                 console.log(data);
                 s.project = data.data;
             });
-        
-        var getMembers = function () {
-            s.api.project.getMembers(projectId)
+
+        var getUsers = function (relate) {
+            s.api.project.getUsers(projectId,relate)
                 .success(function (data) {
                     console.log(data);
-                    s.members = data.data;
+                    s[relate+"s"] = data.data;
                 });
         };
-        getMembers();
-
+        getUsers("member");
+        getUsers("guest");
+        
         s.memberUser = "";
-        s.createMember = function () {
-            s.api.project.createMember(projectId,{user:s.memberUser})
+        s.createUser = function (relate,user) {
+            s.api.project.createUser(projectId,relate,{user:user})
                 .success(function (data) {
-                    console.log(data);
-                    if(data.logicState != 0){
-                        s.createMemberMsg = data.msg;
-                    }else{
-                        s.createMemberMsg = data.msg;
-                        getMembers();
-                    }
+                    var fUpRelate = common.strHelp.firstUpper(relate);
+                    // s.createMemberMsg = data.msg;
+                    s["create"+fUpRelate+"Msg"] = data.msg;
+                    getUsers(relate);
                 });
         };
         
