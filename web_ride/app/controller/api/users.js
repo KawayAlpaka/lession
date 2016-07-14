@@ -42,7 +42,7 @@ users.login = function(req, res) {
 users.logout = function (req, res) {
     console.log(req.cookies.mSession);
     if(req.cookies.mSession){
-        Session.findOneAndRemove(req.cookies.mSession,function (err) {
+        Session.findOneAndRemove({_id:req.cookies.mSession},function (err) {
             if(err){
                 console.log(err);
                 res.resFormat.logicState = 1;
@@ -60,16 +60,17 @@ users.currentUser = function (req, res, next) {
     if(!mSession){
         next();
     }else{
-        Session.findOne(mSession,function (err,session) {
+        Session.findOne({_id:mSession},function (err,session) {
             if(err){
                 console.log(err);
             }
             if(session){
-                User.findOne(session.user,function (err,user) {
+                User.findOne({_id:session.user},function (err,user) {
                     if(err){
                         console.log(err);
                         next();
                     }
+                    console.log(user);
                     req.currentUser = user;
                     next();
                 });

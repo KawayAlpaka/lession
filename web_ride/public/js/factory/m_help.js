@@ -26,7 +26,7 @@ define(['app','common'], function (myApp,common) {
         mHelp.setLoginData = function (sessionId,user) {
             var expires = new Date();
             expires.setDate(expires.getDate() + 30);
-            $cookies.put('mSession', user , {'expires': expires.toUTCString()});
+            $cookies.put('mSession', sessionId , {'expires': expires.toUTCString()});
             mHelp.setCurrentUser(user);
         };
 

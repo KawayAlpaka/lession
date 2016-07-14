@@ -8,6 +8,7 @@ define(['app'], function (myApp) {
                         if(data.state == 600){
                             // 清除登录数据，跳转到登录页面
                             mHelp.clearLoginData();
+                            mHelp.go("#/m1/user/login");
                         }
                         resolve(data, header, config, status);
                     })
