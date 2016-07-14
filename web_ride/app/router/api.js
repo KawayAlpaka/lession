@@ -57,16 +57,17 @@ robotNodesRouter.get('/:id/parent_list', api.robotNodes.parentList);
 robotNodesRouter.post('/relative_path', api.robotNodes.relativePath);
 router.use('/robot_nodes', api.users.requireLogin ,robotNodesRouter);
 
-router.get('/actions/createProjectFiles/:id', api.actions.createProjectFiles);
-router.get('/actions/runProject/:id', api.actions.runProject);
+router.get('/actions/createProjectFiles/:id', api.users.requireLogin, api.actions.createProjectFiles);
+router.get('/actions/runProject/:id', api.users.requireLogin, api.actions.runProject);
 
-router.get('/projects', api.projects.myProjects);
-router.get('/projects/member', api.projects.myMemberProjects);
-router.get('/projects/guest', api.projects.myGuestProjects);
-router.post('/projects', api.projects.create);
-router.put('/projects', api.projects.update);
+router.get('/projects', api.users.requireLogin, api.projects.myProjects);
+router.get('/projects/member', api.users.requireLogin, api.projects.myMemberProjects);
+router.get('/projects/guest', api.users.requireLogin, api.projects.myGuestProjects);
+router.post('/projects', api.users.requireLogin, api.projects.create);
+router.put('/projects', api.users.requireLogin, api.projects.update);
+router.get('/projects/new', api.projects.new);
 router.get('/projects/:id', api.projects.get);
-router.delete('/projects/:id', api.projects.del);
+router.delete('/projects/:id', api.users.requireLogin, api.projects.del);
 
 router.get('/admins/users', api.admins.requireAdmin, api.admins.users.list);
 router.post('/admins/users', api.admins.requireAdmin, api.admins.users.create);

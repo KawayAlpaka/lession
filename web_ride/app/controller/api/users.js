@@ -5,7 +5,7 @@ var Session = mongoose.model('Session');
 var users = {};
 
 users.new = function (req, res) {
-    user = new User({user:"new user"});
+    var user = new User({user:"new user"});
     res.resFormat.data = user;
     res.json(res.resFormat);
 };
@@ -70,7 +70,6 @@ users.currentUser = function (req, res, next) {
                         console.log(err);
                         next();
                     }
-                    console.log(user);
                     req.currentUser = user;
                     next();
                 });

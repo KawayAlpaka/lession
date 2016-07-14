@@ -18,7 +18,7 @@ var schema = new Schema({
     //     }],
     //     default: []
     // },
-    pNode: {type: ObjectId,ref:"RobotNode",required:true },
+    robotNode: {type: ObjectId,ref:"RobotNode",required:true },
     meta: {
         createAt: {
             type: Date,

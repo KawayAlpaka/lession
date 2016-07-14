@@ -125,7 +125,7 @@ define(['app','jquery','common'], function (myApp,$,common) {
                     {
                         case conf.action.newProject:
                             $scope.robotNode.type = "project";
-                            $scope.robotNode.fileType = "file";
+                            $scope.robotNode.fileType = "dir";
                             $scope.robotNode.fileFormat = "txt";
                             $scope.confirm = function () {
                                 $uibModalInstance.close($scope.robotNode);

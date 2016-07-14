@@ -3,28 +3,44 @@ define(['app'], function(myApp){
         console.log("m1_manage_controller");
 
         s.refreshProject = function () {
-            s.api.robotNode.findProjects()
+            // s.api.robotNode.findProjects()
+            //     .success(function (data) {
+            //         console.log(data);
+            //         s.projects = data.data;
+            //     });
+
+            s.api.project.myProjects()
                 .success(function (data) {
                     console.log(data);
-                    s.projects = data.data;
                 });
         };
 
         s.newProject = function () {
-            s.modalOption = {
-                action:"New Project",
-                close:function (data) {
+            s.api.project.new()
+                .success(function (data) {
                     console.log(data);
-                    s.api.robotNode.create(data)
-                        .success(function () {
-                            s.refreshProject();
+                    var project = data.data;
+                    project.name = "new project";
+                    s.api.project.create(project)
+                        .success(function (data) {
+                            console.log(data);
                         });
-                },
-                dismiss:function (data) {
-                    console.log(data);
-                }
-            };
-            component.inputModal(s.modalOption);
+                });
+            
+            // s.modalOption = {
+            //     action:"New Project",
+            //     close:function (data) {
+            //         console.log(data);
+            //         s.api.robotNode.create(data)
+            //             .success(function () {
+            //                 s.refreshProject();
+            //             });
+            //     },
+            //     dismiss:function (data) {
+            //         console.log(data);
+            //     }
+            // };
+            // component.inputModal(s.modalOption);
         };
 
         s.refreshProject();
