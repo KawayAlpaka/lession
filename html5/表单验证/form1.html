@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form</title>
+</head>
+<body>
+<form name="register1" id="register1">
+    <p><label for="runnername">RunnerName:</label>
+        <input id="runnername" name="runnername" type="text" placeholder="First and last name" required="required"
+               autofocus="autofocus"/>
+    </p>
+    <p><label for="phone">Tel #:</label>
+        <input id="phone" name="phone" type="text" pattern="\d{3}-\d{4}-\d{4}"
+               placeholder="xxx-xxxx-xxxx"/></p>
+    <p><label for="emailaddress">E-mail:</label>
+        <input id="emailaddress" name="emailaddress" type="email"
+               placeholder="For confirmation only"/></p>
+    <p><label for="dob">DOB:</label>
+        <input id="dob" name="dob" type="date"
+               placeholder="MM/DD/YYYY"/></p>
+    <p>Count:<input type="number" id="count" name="count" min="0" max="100" step="10"/></p>
+    <p><label for="style">Shirt style:</label>
+        <input id="style" name="style" type="text" list="stylelist" title="Years of participation"
+               autocomplete="off"/></p>
+    <datalist id="stylelist">
+        <option value="White" label="1st Year"/>
+        <option value="Gray" label="2nd - 4th Year"/>
+        <option value="Navy" label="Veteran (5+ Years)"/>
+    </datalist>
+
+    <fieldset>
+        <legend>Expectations:</legend>
+        <p>
+            <label for="confidence">Confidence:</label>
+            <input id="confidence" name="level" type="range"
+                   onchange="setConfidence(this.value)"
+                   min="0" max="100" step="5" value="0"/>
+            <span id="confidenceDisplay">0%</span></p>
+        <p><label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" maxLength="100"></textarea></p>
+    </fieldset>
+
+    <p><input type="submit" name="register" value="Submit" onclick=" checkForm()"/></p>
+</form>
+
+
+<script>
+    var checkForm = function () {
+
+    };
+    //自定义表单控件验证行为
+    var checkvalue = function(e){
+        var el = e.target;
+        var isvalid = el.checkValidity();
+        if(isvalid){
+            el.className= "";
+            el.parentElement.getElementsByTagName("label")[0].className="";
+        }else{
+            el.className= "error";
+            el.parentElement.getElementsByTagName("label")[0].className="error";
+        }
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    //定义表单验证方法
+    function invalidHandler(evt) {
+        checkvalue(evt);
+    }
+    function loadDemo() {
+        var myform = document.getElementById("register1");
+        //注册表单的oninvlid事件
+        myform.addEventListener("invalid", invalidHandler, true);
+        for(var i=0;i< myform.elements.length-1;i++){
+            //注册表单元素的onchange事件，优化用户体验
+            myform.elements[i].addEventListener("change",checkvalue,false);
+        }
+    }
+    //在页面初始化事件（onload）时注册的自定义事件
+    window.addEventListener("load", loadDemo, false);
+</script>
+
+</body>
+</html>

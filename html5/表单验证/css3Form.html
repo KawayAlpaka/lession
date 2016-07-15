@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3</title>
+    <style>
+        input:invalid + .invalid-msg{
+            display: block;
+        }
+        .invalid-msg{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div>
+        <input type="text" required>
+        <div class="invalid-msg">请输入</div>
+    </div>
+</form>
+</body>
+</html>
