@@ -3,7 +3,6 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var app = express();
-
 mongoose.connect('mongodb://localhost/web_ride');
 mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
@@ -33,6 +32,11 @@ var server = app.listen(3030, function () {
 });
 
 require('./app/socket/io').createServer(server);
+
+// // seed
+// var seed = require("./config/seed");
+// seed.start();
+
 
 // //test
 // var RobotNode = mongoose.model('RobotNode');
