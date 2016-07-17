@@ -60,20 +60,15 @@ router.use('/robot_nodes', api.users.requireLogin ,robotNodesRouter);
 router.get('/actions/createProjectFiles/:id', api.users.requireLogin, api.actions.createProjectFiles);
 router.get('/actions/runProject/:id', api.users.requireLogin, api.actions.runProject);
 
-router.get('/projects', api.users.requireLogin, api.projects.myProjects);
-router.get('/projects/member', api.users.requireLogin, api.projects.myMemberProjects);
-router.get('/projects/guest', api.users.requireLogin, api.projects.myGuestProjects);
+router.get('/projects/my', api.users.requireLogin, api.projects.myProjects);
+router.get('/projects/my/:relate', api.users.requireLogin, api.projects.myRelateProjects);
 router.post('/projects', api.users.requireLogin, api.projects.create);
 router.put('/projects', api.users.requireLogin, api.projects.update);
 router.get('/projects/new', api.projects.new);
 router.get('/projects/:id', api.projects.get);
-
 router.get('/projects/:id/users/:relate', api.projects.getUsers);
 router.post('/projects/:id/users/:relate', api.projects.createUser);
-
 router.delete('/projects/:id', api.users.requireLogin, api.projects.del);
-
-
 
 router.get('/admins/users', api.admins.requireAdmin, api.admins.users.list);
 router.post('/admins/users', api.admins.requireAdmin, api.admins.users.create);

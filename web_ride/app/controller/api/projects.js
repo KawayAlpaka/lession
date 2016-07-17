@@ -12,9 +12,23 @@ projects.myProjects = function(req, res) {
         res.json(res.resFormat);
     });
 };
-projects.myMemberProjects = function(req, res) {
-};
-projects.myGuestProjects = function(req, res) {
+projects.myRelateProjects = function(req, res) {
+    var relate = req.params.relate;
+    ProjectUser.find({user:req.currentUser._id,relate:relate})
+        .populate({
+            path: 'project',
+            select:'_id'
+        })
+        .exec(function (err, projectUsers) {
+            var _pIds = [];
+            projectUsers.forEach(function (projectUser) {
+                _pIds.push(projectUser.project._id);
+            });
+            Project.find({_id:{$in:_pIds}},function (err, projects) {
+                res.resFormat.data = projects;
+                res.json(res.resFormat);
+            });
+        });
 };
 
 projects.create = function (req, res) {
@@ -73,7 +87,6 @@ projects.get = function (req, res) {
 projects.getUsers = function (req, res) {
     var projectId = req.params.id;
     var relate = req.params.relate;
-    console.log(relate);
     ProjectUser.find({project:projectId,relate:relate})
         .populate('user')
         .exec(function (err, projectUsers) {

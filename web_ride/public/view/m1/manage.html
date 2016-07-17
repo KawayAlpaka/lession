@@ -4,9 +4,6 @@
     <div>
         <button ng-click="newProject()">新建Project</button>
     </div>
-    <!--<div ng-repeat="project in projects">-->
-        <!--<a href="{{'#/m1/workspace/'+ project._id}}"><span ng-bind="project.name"></span></a>-->
-    <!--</div>-->
     <div>
         <div>我的项目</div>
         <div>
@@ -26,6 +23,54 @@
                         <button type="button" ng-click="editProject(project)">管理项目</button>
                         <button type="button" ng-click="enterProject(project)">进入项目</button>
                         <button type="button" ng-click="delProject(project)">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div>我参与的项目</div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>introduction</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="project in memberProjects">
+                    <td ng-bind="project.name"></td>
+                    <td ng-bind="project.introduction"></td>
+                    <td>
+                        <button type="button" ng-click="editProject(project)">管理项目</button>
+                        <button type="button" ng-click="enterProject(project)">进入项目</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div>我参观的项目</div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>introduction</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="project in guestProjects">
+                    <td ng-bind="project.name"></td>
+                    <td ng-bind="project.introduction"></td>
+                    <td>
+                        <button type="button" ng-click="editProject(project)">管理项目</button>
+                        <button type="button" ng-click="enterProject(project)">进入项目</button>
                     </td>
                 </tr>
                 </tbody>

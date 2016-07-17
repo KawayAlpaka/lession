@@ -2,17 +2,18 @@ define(['app'], function(myApp){
     myApp.controller('m1_manage_controller', ['$scope','component', function (s,component) {
         console.log("m1_manage_controller");
 
-        s.refreshProject = function () {
-            // s.api.robotNode.findProjects()
-            //     .success(function (data) {
-            //         console.log(data);
-            //         s.projects = data.data;
-            //     });
-
+        s.refreshMyProject = function () {
             s.api.project.myProjects()
                 .success(function (data) {
                     console.log(data);
                     s.projects = data.data;
+                });
+        };
+        s.refreshMyRelateProjects = function (relate) {
+            s.api.project.myRelateProjects(relate)
+                .success(function (data) {
+                    console.log(data);
+                    s[relate+"Projects"] = data.data;
                 });
         };
 
@@ -51,6 +52,8 @@ define(['app'], function(myApp){
             s.mHelp.go("#/m1/project/edit/" + project._id);
         };
 
-        s.refreshProject();
+        s.refreshMyProject();
+        s.refreshMyRelateProjects("member");
+        s.refreshMyRelateProjects("guest");
     }]);
 });

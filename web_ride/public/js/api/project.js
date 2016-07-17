@@ -8,7 +8,14 @@ define([], function () {
     };
     api.myProjects = function () {
         return mHttp({
-            url : '/api/projects',
+            url : '/api/projects/my',
+            method:'GET',
+            type : 'json'
+        });
+    };
+    api.myRelateProjects = function (relate) {
+        return mHttp({
+            url : '/api/projects/my/' + relate,
             method:'GET',
             type : 'json'
         });
