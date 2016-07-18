@@ -1,5 +1,5 @@
 define(['app','common'], function (myApp,common) {
-    myApp.factory('mHelp', ['$cookieStore','$cookies',function ($cookieStore,$cookies) {
+    myApp.factory('mHelp', ['$cookieStore','$cookies','$rootScope',function ($cookieStore,$cookies,$rootScope) {
         var mHelp = {};
         mHelp.isLogin = function () {
             return common.strHelp.isNotEmptyStr($cookies.get("mSession"));
@@ -9,6 +9,15 @@ define(['app','common'], function (myApp,common) {
             window.location.href = link;
         };
 
+        mHelp.pullCurrentUser = function (cb) {
+            $rootScope.api.user.getCurrentUser()
+                .success(function (data) {
+                    mHelp.setCurrentUser(data.data);
+                    if(cb){
+                        cb();
+                    }
+                });
+        };
         mHelp.setCurrentUser = function (user) {
             localStorage.setItem("currentUser", JSON.stringify(user));
         };

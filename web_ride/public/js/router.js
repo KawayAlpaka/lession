@@ -101,6 +101,38 @@ define(['app'], function (myApp) {
                                 ]
                             },
                             {
+                                name: 'user_center',
+                                url: '/user_center',
+                                views: {
+                                    'm1': {
+                                        templateUrl: 'view/m1/user_center.html',
+                                        controller: 'm1_userCenter_controller'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'profile',
+                                        url: '/profile',
+                                        views: {
+                                            'user_center': {
+                                                templateUrl: 'view/m1/user_center/profile.html',
+                                                controller: 'm1_userCenter_profile_controller'
+                                            }
+                                        }
+                                    },
+                                    {
+                                        name: 'debug',
+                                        url: '/debug',
+                                        views: {
+                                            'user_center': {
+                                                templateUrl: 'view/m1/user_center/debug.html',
+                                                controller: 'm1_userCenter_debug_controller'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
                                 name: 'admin',
                                 url: '/admin',
                                 views: {

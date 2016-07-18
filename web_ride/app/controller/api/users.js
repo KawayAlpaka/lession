@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Session = mongoose.model('Session');
+var extend = require('util')._extend;
 
 var users = {};
 
@@ -8,6 +9,21 @@ users.new = function (req, res) {
     var user = new User({user:"new user"});
     res.resFormat.data = user;
     res.json(res.resFormat);
+};
+
+users.getCurrentUser = function (req, res) {
+    res.resFormat.data = req.currentUser;
+    res.json(res.resFormat);
+};
+users.updateCurrentUser = function (req, res) {
+    var _user = req.body;
+    delete _user.user;
+    delete _user.role;
+    extend(req.currentUser, _user);
+    req.currentUser.save(function (err, user) {
+        res.resFormat.data = user;
+        res.json(res.resFormat);
+    });
 };
 
 users.login = function(req, res) {

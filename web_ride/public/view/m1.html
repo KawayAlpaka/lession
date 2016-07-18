@@ -3,7 +3,7 @@
     <a href="#/m1/test">测试</a>
     <a href="#/m1/user/login" ng-hide="mHelp.isLogin()">登录</a>
     <span ng-show="mHelp.isLogin()" ng-bind="'欢迎'" ></span>
-    <span ng-show="mHelp.isLogin()" ng-bind="mHelp.getCurrentUser().name" ></span>
+    <a href="#/m1/user_center" ng-show="mHelp.isLogin()" ng-bind="mHelp.getCurrentUser().name" ></a>
     <a ng-click="logout()" ng-show="mHelp.isLogin()">退出</a>
     <a href="#/m1/admin" ng-if="mHelp.getCurrentUser().role == 'admin'" ng-bind="'后台管理'"></a>
 </div>

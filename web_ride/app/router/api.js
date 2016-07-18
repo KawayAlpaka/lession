@@ -32,6 +32,8 @@ router.use(api.users.currentUser, defaultResFormatFn, errFn);
 // router.get('/users/logout', api.users.logout);
 
 var usersRouter = express.Router();
+usersRouter.get('/currentUser',api.users.requireLogin,api.users.getCurrentUser);
+usersRouter.patch('/currentUser',api.users.requireLogin, api.users.updateCurrentUser);
 usersRouter.get('/new', api.users.new);
 usersRouter.post('/login', api.users.login);
 usersRouter.get('/logout', api.users.logout);
