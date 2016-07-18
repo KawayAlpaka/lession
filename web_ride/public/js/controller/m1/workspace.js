@@ -209,6 +209,9 @@ define(['app','common','jquery'], function(myApp,common,$){
                     console.log(data);
                 });
         };
+        s.downloadProjectFiles = function () {
+            s.mHelp.go('/api/actions/downloadProjectFiles/'+projectId);
+        };
 
         // // 不需要遍历元素
         // s.ergodicTree = function (children) {

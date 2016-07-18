@@ -20,6 +20,13 @@ define([], function () {
             type : 'json'
         });
     };
+    // api.downloadProjectFiles = function (id) {
+    //     return mHttp({
+    //         url : '/api/actions/downloadProjectFiles/'+id,
+    //         method:'GET',
+    //         type : 'json'
+    //     });
+    // };
 
     return api;
 });
