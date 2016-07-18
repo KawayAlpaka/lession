@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preview</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<div>
+    <img src="" alt="" id="imgx">
+    <form action="/file/uploading" method="post" enctype='multipart/form-data'>
+        <input type="file" id="filex" name="file1">
+        <button type="submit">提交</button>
+    </form>
+
+    <button onclick="preview()">preview</button>
+</div>
+<script>
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+    function preview() {
+        var objUrl = getObjectURL(document.getElementById("filex").files[0]) ;
+        console.log("objurl:"+objUrl);
+        $("#imgx").css("width","100%").css("height","100%").attr("src",objUrl);
+    }
+</script>
+</body>
+</html>
