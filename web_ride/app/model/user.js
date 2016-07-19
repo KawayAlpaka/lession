@@ -9,4 +9,7 @@ var Session = mongoose.model('Session', sessionSchema);
 var projectUserSchema = require('../schema/project_user');
 var ProjectUser = mongoose.model('ProjectUser', projectUserSchema);
 
+var debugOptionSchema = require('../schema/debug_option');
+var DebugOption = mongoose.model('DebugOption', debugOptionSchema);
+
 module.exports = User;

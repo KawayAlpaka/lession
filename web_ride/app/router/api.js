@@ -73,6 +73,12 @@ router.get('/projects/:id/users/:relate', api.projects.getUsers);
 router.post('/projects/:id/users/:relate', api.projects.createUser);
 router.delete('/projects/:id', api.users.requireLogin, api.projects.del);
 
+router.get('/debug_options', api.users.requireLogin, api.debugOptions.list);
+router.post('/debug_options', api.users.requireLogin, api.debugOptions.create);
+router.get('/debug_options/new', api.users.requireLogin, api.debugOptions.new);
+router.put('/debug_options', api.users.requireLogin, api.debugOptions.update);
+router.delete('/debug_options/:id', api.users.requireLogin, api.debugOptions.del);
+
 router.get('/admins/users', api.admins.requireAdmin, api.admins.users.list);
 router.post('/admins/users', api.admins.requireAdmin, api.admins.users.create);
 router.put('/admins/users/:id', api.admins.requireAdmin, api.admins.users.update);
