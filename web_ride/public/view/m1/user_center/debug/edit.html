@@ -1,1 +1,25 @@
 <div>edit</div>
+<div>
+    <div>
+        <label>name:</label>
+        <input type="text" ng-model="option.name">
+    </div>
+    <div>
+        <label>way:</label>
+        <select ng-model="option.way" ng-options="way for way in ways"></select>
+    </div>
+    <div>
+        <div>
+            <label>keyword:</label>
+            <input type="text" ng-model="option.params.keyword">
+        </div>
+        <div>
+            <label>param:</label>
+            <input type="text" ng-model="option.params.param">
+        </div>
+    </div>
+    <div>
+        <button type="button" ng-click="save(option)">保存</button>
+        <button type="button">返回</button>
+    </div>
+</div>

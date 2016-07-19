@@ -30,6 +30,13 @@ define([], function () {
             type : 'json'
         });
     };
+    api.get = function (id) {
+        return mHttp({
+            url : '/api/debug_options/' + id,
+            method:'GET',
+            type : 'json'
+        });
+    };
     api.update = function (data) {
         return mHttp({
             url : '/api/debug_options',

@@ -28,6 +28,13 @@ controllers.new = function(req, res) {
     res.resFormat.data = debugOption;
     res.json(res.resFormat);
 };
+controllers.get = function(req, res) {
+    var _id = req.params.id;
+    DebugOption.findOne({_id:_id},function (err,debugOption) {
+        res.resFormat.data = debugOption;
+        res.json(res.resFormat);
+    });
+};
 controllers.update = function(req, res) {
     var _debugOption = req.body;
     DebugOption.findOneAndUpdate({_id:_debugOption._id},_debugOption,{upsert: true ,new:true},function (err, debugOption) {

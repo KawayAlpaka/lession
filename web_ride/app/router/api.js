@@ -76,6 +76,7 @@ router.delete('/projects/:id', api.users.requireLogin, api.projects.del);
 router.get('/debug_options', api.users.requireLogin, api.debugOptions.list);
 router.post('/debug_options', api.users.requireLogin, api.debugOptions.create);
 router.get('/debug_options/new', api.users.requireLogin, api.debugOptions.new);
+router.get('/debug_options/:id', api.users.requireLogin, api.debugOptions.get);
 router.put('/debug_options', api.users.requireLogin, api.debugOptions.update);
 router.delete('/debug_options/:id', api.users.requireLogin, api.debugOptions.del);
 

@@ -4,7 +4,6 @@ define(['app','common'], function(myApp,common){
     }]);
     myApp.controller('m1_project_edit_controller', ['$scope', function (s) {
         console.log("m1_project_edit_controller");
-        console.log(s.$state.params.id);
         var projectId = s.$state.params.id;
         s.api.project.get(projectId)
             .success(function (data) {
