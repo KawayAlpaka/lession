@@ -88,13 +88,12 @@ module.exports.createServer = function (server) {
         socket.on('debug', function (data) {
             console.log("启动调试");
             var nodeId = data.node;
-            console.log(nodeId);
             var basePath = 'D:/debug/';
             RobotNode.findOne({_id: nodeId}, function (err, robotNode) {
                 if (robotNode) {
                     var pNode = robotNode;
                     var projectPath = basePath + pNode._id;
-                    fileHelper.createProjectFiles(pNode, projectPath, function () {
+                    fileHelper.createProjectFiles(pNode , projectPath , data.options , function () {
                         listenHelper.start(function (address) {
                             exec('pybot --outputdir '+projectPath+" "+"--listener D:\\TestRunnerAgent.py:"+address.port+":False "+projectPath + "/" + pNode.name,{},function(error,stdout,stderr){
                                 if(error) {
@@ -107,7 +106,7 @@ module.exports.createServer = function (server) {
                                 }
                             });
                         },function (data) {
-                            console.log(data);
+                            // console.log(data);
                             switch (data[0]){
                                 case "start_test":
                                     socket.emit('debugProcess', { result:"Starting test: " + data[1][1].longname });

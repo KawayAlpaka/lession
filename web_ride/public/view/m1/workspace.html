@@ -10,6 +10,10 @@
         <div class="run-panel" ng-show="currentPanel == 'run'">
             <div>
                 <button type="button" ng-click="debug.run()">Debug</button>
+                <span ng-repeat="option in debug.options">
+                    <input type="checkbox" ng-model="option.ck">
+                    <span ng-bind="option.name"></span>
+                </span>
             </div>
             <div>result:</div>
             <div style="height: 350px;background-color: white;overflow-y: scroll;">

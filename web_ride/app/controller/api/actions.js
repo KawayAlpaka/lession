@@ -17,7 +17,7 @@ actions.createProjectFiles = function (req, res) {
         if (robotNode) {
             var pNode = robotNode;
             var projectPath = basePath + pNode._id;
-            fileHelper.createProjectFiles(pNode, projectPath, function () {
+            fileHelper.createProjectFiles(pNode, projectPath,null, function () {
                 res.json(res.resFormat);
             });
         } else {
@@ -38,7 +38,7 @@ actions.downloadProjectFiles = function (req, res) {
         if (robotNode) {
             var pNode = robotNode;
             var projectPath = basePath + pNode._id;
-            fileHelper.createProjectFiles(pNode, projectPath, function () {
+            fileHelper.createProjectFiles(pNode, projectPath,null, function () {
                 console.log("finish");
                 var path = projectPath+"/"+pNode.name;
                 var output = fs.createWriteStream(path+".zip");
@@ -79,7 +79,7 @@ actions.runProject = function (req, res) {
         if (robotNode) {
             var pNode = robotNode;
             var projectPath = basePath + pNode._id;
-            fileHelper.createProjectFiles(pNode, projectPath, function () {
+            fileHelper.createProjectFiles(pNode, projectPath,null, function () {
                 console.log("文件生成完成");
                 exec('pybot --outputdir '+projectPath+" "+projectPath + "/" + pNode.name,function(error,stdout,stderr){
                     console.log("执行完成");

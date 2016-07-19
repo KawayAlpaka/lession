@@ -70,6 +70,9 @@ projects.new = function (req, res) {
 projects.update = function (req, res) {
     var _project = req.body;
     Project.findOneAndUpdate({_id:_project._id},_project,{upsert: true ,new:true},function (err, project) {
+        RobotNode.findOneAndUpdate({_id:project.robotNode},{name:_project.name},{new:true},function (err, robotNode) {
+            console.log(robotNode);
+        });
         res.resFormat.data = project;
         res.json(res.resFormat);
     });

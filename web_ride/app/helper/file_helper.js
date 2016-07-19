@@ -2,15 +2,23 @@ var fs = require('fs-extra');
 var Q = require("q");
 var mongoose = require('mongoose');
 var common = require('../../public/js/common');
+var _ = require('underscore');
 var RobotNode = mongoose.model('RobotNode');
 var strHelp = common.strHelp;
 
 var fileHelper = {};
 
-var getFileContent = function (node,cb) {
+var getFileContent = function (node,debugOptions,cb) {
     if (node.fileType == "dir") {
 
     } else if (node.fileType == "file") {
+        var addParamOptions = [];
+        if (debugOptions != null) {
+            addParamOptions = _.filter(debugOptions, function (option) {
+                return option.way == "add param after keyword";
+            });
+        }
+
         var content = "";
 
         var insertFileSetting = function (settingName,value,comment) {
@@ -150,11 +158,24 @@ var getFileContent = function (node,cb) {
                     insertValueComment("Template", child.template.value, child.template.comment);
                     insertValueComment("Timeout", child.timeout.value, child.timeout.comment);
 
+                    // debugOptions
+                    // addParamOptions
                     if (child.form) {
                         child.form.rows.forEach(function (row) {
                             row.cells.forEach(function (cell) {
                                 content += "    " + cell.text;
                             });
+
+                            // 添加调试 参数
+                            if(row.cells.length > 0){
+                                var matchOptions = _.filter(addParamOptions,function (option) {
+                                    return option.params.keyword == row.cells[0].text;
+                                });
+                                matchOptions.forEach(function (option) {
+                                    content += "    " + option.params.param;
+                                });
+                            }
+                            
                             content += "\r\n";
                         });
                     }
@@ -201,7 +222,7 @@ var getFileContent = function (node,cb) {
 };
 
 //生成文件代码
-fileHelper.createProjectFiles = function (pNode,projectPath,cb) {
+fileHelper.createProjectFiles = function (pNode,projectPath,debugOptions,cb) {
     var removeOldFiles = function () {
         var deferred = Q.defer();
         fs.remove(projectPath, function (err) {
@@ -302,7 +323,7 @@ fileHelper.createProjectFiles = function (pNode,projectPath,cb) {
                 });
             }else if(child.fileType == "file"){
                 var fileFullName = data.path + '/' + child.name + '.txt';
-                getFileContent(child,function (content) {
+                getFileContent(child,debugOptions,function (content) {
                     fs.writeFile(fileFullName, content , {flag: 'w'}, function (err) {
                         if (err) {
                             console.error(err);

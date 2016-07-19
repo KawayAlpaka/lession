@@ -51,8 +51,8 @@ define(['app','socket'], function (myApp,io) {
         mIo.currentNode = function (nodeId) {
             socket.emit('currentNode', { node: nodeId });
         };
-        mIo.debug = function (nodeId) {
-            socket.emit('debug', { node: nodeId });
+        mIo.debug = function (nodeId,options) {
+            socket.emit('debug', { node: nodeId ,options:options });
         };
 
         return mIo;

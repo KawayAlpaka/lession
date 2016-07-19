@@ -267,13 +267,24 @@ define(['app','common','jquery'], function(myApp,common,$){
             }
         });
 
+
         s.debug = {};
+        s.debug.getDebugOptions = function () {
+            s.api.debugOption.list()
+                .success(function (data) {
+                    s.debug.options = data.data
+                });
+        };
+
         s.debug.process = [];
         s.debug.result = [];
+        s.debug.getDebugOptions();
         s.debug.run = function () {
             s.debug.process = [];
             s.debug.result = [];
-            mIo.debug(projectId);
+            mIo.debug(projectId,_.filter(s.debug.options,function (option) {
+                return option.ck == true;
+            }));
         };
         s.$on("debugResult", function (event, data) {
             s.debug.result = data.result.split("\r\n");
