@@ -128,7 +128,29 @@ define(['app'], function (myApp) {
                                                 templateUrl: 'view/m1/user_center/debug.html',
                                                 controller: 'm1_userCenter_debug_controller'
                                             }
-                                        }
+                                        },
+                                        children:[
+                                            {
+                                                name: 'index',
+                                                url: '/index',
+                                                views: {
+                                                    'debug': {
+                                                        templateUrl: 'view/m1/user_center/debug/index.html',
+                                                        controller: 'm1_userCenter_debug_index_controller'
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                name: 'edit',
+                                                url: '/edit/:id',
+                                                views: {
+                                                    'debug': {
+                                                        templateUrl: 'view/m1/user_center/debug/edit.html',
+                                                        controller: 'm1_userCenter_debug_edit_controller'
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             },

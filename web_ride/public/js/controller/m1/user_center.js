@@ -18,4 +18,10 @@ define(['app'], function(myApp){
     myApp.controller('m1_userCenter_debug_controller', ['$scope', function (s) {
         console.log("m1_userCenter_debug_controller");
     }]);
+    myApp.controller('m1_userCenter_debug_index_controller', ['$scope', function (s) {
+        console.log("m1_userCenter_debug_index_controller");
+    }]);
+    myApp.controller('m1_userCenter_debug_edit_controller', ['$scope', function (s) {
+        console.log("m1_userCenter_debug_edit_controller");
+    }]);
 });
