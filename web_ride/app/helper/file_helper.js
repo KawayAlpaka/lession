@@ -353,4 +353,162 @@ fileHelper.createProjectFiles = function (pNode,projectPath,debugOptions,cb) {
 };
 
 
+
+
+// 项目导入部分
+fileHelper.readLines = function (path,cb) {
+    input = fs.createReadStream(path);
+    var remaining = '';
+    var array = [];
+    input.on('data', function(data) {
+        remaining += data;
+        var index = remaining.indexOf('\n');
+        while (index > -1) {
+            var line = remaining.substring(0, index);
+            remaining = remaining.substring(index + 1);
+            index = remaining.indexOf('\n');
+            line = line.replace("\r","");
+            line = line.replace("\n","");
+            array.push(line);
+        }
+    });
+
+    input.on('end', function() {
+        if (cb) {
+            cb(array,remaining);
+        }
+    });
+};
+
+var walkDir =  function(path,node) {
+    console.log("walkDir");
+    var deferred = Q.defer();
+
+    var arrTemp = path.split("/");
+    node.name = arrTemp[arrTemp.length-1];
+    node.children = [];
+
+    fs.readdir(path, function(err, files) {
+        if (err) {
+            console.log('read dir error');
+            deferred.resolve();
+        } else {
+            var len = files.length;
+            var willResolve = function () {
+                if(len <= 0){
+                    deferred.resolve();
+                }
+            };
+            willResolve();
+            files.forEach(function(item) {
+                var tmpPath = path + '/' + item;
+                fs.stat(tmpPath, function(err1, stats) {
+                    if (err1) {
+                        console.log('stat error');
+                    } else {
+                        if (stats.isDirectory()) {
+                            var dirNode = new RobotNode({fileType:"dir",fileFormat:"txt",parent:node._id});
+                            node.children.push(dirNode);
+                            walkDir(tmpPath,dirNode)
+                                .then(function () {
+                                    len -- ;
+                                    willResolve();
+                                });
+                        } else {
+                            if(item == "__init__.txt"){
+                                //处理初始化文件
+                                len -- ;
+                                willResolve();
+                            }else{
+                                //处理文件
+                                var fileNode = new RobotNode({name:item,fileType:"file",fileFormat:"txt",parent:node._id});
+                                node.children.push(fileNode);
+                                fileHelper.readLines(tmpPath,function (arr) {
+                                    // console.log(arr);
+                                    //开始逐行解析文件
+                                    var typeFlag = "";
+                                    arr.forEach(function (lineStr) {
+                                        switch (lineStr) {
+                                            case "*** Settings ***":
+                                                typeFlag = "Settings";
+                                                break;
+                                            case "*** Variables ***":
+                                                typeFlag = "Variables";
+                                                break;
+                                            case "*** Test Cases ***":
+                                                typeFlag = "Test Cases";
+                                                break;
+                                            case "*** Keywords ***":
+                                                typeFlag = "Keywords";
+                                                break;
+                                            default:
+                                                switch (typeFlag) {
+                                                    case "Settings":
+                                                        if(lineStr.trim().length == 0){
+                                                            // 空字符串基本就是结束标记，不处理
+                                                        }else{
+                                                            var strArr = lineStr.split("    ");
+                                                            strArr = _.filter(strArr,function (str) {
+                                                                return str.trim().length > 0;
+                                                            });
+                                                            console.log(strArr);
+                                                            switch (strArr[0].trim()) {
+                                                                case "Documentation":
+                                                                    fileNode.documentation = strArr[1];
+                                                                    break;
+                                                                case "Force Tags":
+                                                                    var tempTags = [];
+                                                                    strArr.splice(0,1).forEach(function (tag) {
+                                                                        tempTags.push({
+                                                                            text:tag
+                                                                        })
+                                                                    });
+                                                                    fileNode.forceTags = tempTags;
+                                                                    break;
+                                                                case "Default Tags":
+                                                                    fileNode.defaultTags = strArr[1];
+                                                                    break;
+                                                                default:
+                                                                    break;
+                                                            }
+                                                        }
+                                                        break;
+                                                    case "Variables":
+                                                        break;
+                                                    case "Test Cases":
+                                                        break;
+                                                    case "Keywords":
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                                break;
+                                        }
+                                    });
+                                    len -- ;
+                                    willResolve();
+                                });
+                            }
+
+                        }
+                    }
+                })
+            });
+
+        }
+    });
+
+
+    return deferred.promise;
+};
+
+
+fileHelper.importProject = function (path) {
+    var node = new RobotNode({type:"project",fileType:"dir",fileFormat:"txt"});
+    walkDir(path,node)
+        .then(function () {
+            console.log("finish")
+        });
+};
+
 module.exports = fileHelper;

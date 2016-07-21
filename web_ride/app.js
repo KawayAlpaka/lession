@@ -42,3 +42,12 @@ require('./app/socket/io').createServer(server);
 // var RobotNode = mongoose.model('RobotNode');
 // var robotNode = new RobotNode({name:"haha"});
 // robotNode.getParentList();
+
+var fileHelper = require('./app/helper/file_helper');
+// fileHelper.readLines('F:/robot/workspace/hello/suite.txt',
+//     function (line) {
+//         console.log(line);
+//     }, function (all) {
+//
+//     });
+fileHelper.importProject('F:/robot/workspace/sample');

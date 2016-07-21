@@ -143,6 +143,11 @@ module.exports.createServer = function (server) {
                 return value.socket == socket;
             }), 1);
         });
+
+        // 测试服务端reconnect 不知道是什么效果
+        socket.on('reconnect', function() {
+            console.log("reconnect");
+        });
     });
 };
 
