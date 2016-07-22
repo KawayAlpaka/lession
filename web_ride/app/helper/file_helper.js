@@ -542,11 +542,30 @@ var walkDir =  function(path,node) {
                                                                                 break;
                                                                         }
                                                                     };
-                                                                    console.log(getLibrary(strArr));
-                                                                    console.log(strArr);
+                                                                    // console.log(getLibrary(strArr));
+                                                                    // console.log(strArr);
                                                                     fileNode.imports.push( getLibrary(strArr) );
                                                                     break;
                                                                 case "Resource":
+                                                                    strArr.splice(0,1);
+                                                                    var getResource = function (arr) {
+                                                                        var tempObj = {
+                                                                            type:"Resource"
+                                                                        };
+                                                                        if(arr.length == 2){
+                                                                            tempObj.path = arr[0];
+                                                                            tempObj.comment = arr[1].replace("# ","");
+                                                                        }
+                                                                        if(arr.length == 1){
+                                                                            if(arr[0][0] == "#"){
+                                                                                tempObj.comment = arr[0].replace("# ","");
+                                                                            }else{
+                                                                                tempObj.path = arr[0];
+                                                                            }
+                                                                        }
+                                                                        return tempObj;
+                                                                    };
+                                                                    fileNode.imports.push( getResource(strArr) );
                                                                     break;
                                                                 case "Variables":
                                                                     break;
