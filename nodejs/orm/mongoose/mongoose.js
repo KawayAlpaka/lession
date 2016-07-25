@@ -43,4 +43,5 @@ var oneBlog  = new Blog({title:11});
 
 // console.log(Blog.schema.paths);
 console.log(Blog.schema.tree.hidden.enum);
+console.log(Blog.schema);
 // console.log(Blog.schema);
