@@ -56,7 +56,6 @@ users.login = function(req, res) {
     });
 };
 users.logout = function (req, res) {
-    console.log(req.cookies.mSession);
     if(req.cookies.mSession){
         Session.findOneAndRemove({_id:req.cookies.mSession},function (err) {
             if(err){

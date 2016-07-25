@@ -3,6 +3,14 @@ define(['app', 'common','socket'], function (myApp, common,io) {
         function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
             console.log("m1_test_controller");
 
+            // s.api.model.schema("User")
+            //     .success(function (data) {
+            //         console.log(data);
+            //     });
+            // s.api.model.schema("haha")
+            //     .success(function (data) {
+            //         console.log(data);
+            //     });
 
             // // UI-ROUTER 的事件
             // $scope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {

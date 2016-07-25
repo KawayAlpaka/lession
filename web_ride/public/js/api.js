@@ -1,5 +1,5 @@
-define(['app', './api/robot_node', './api/action', './api/user', './api/admin', './api/project', './api/debug_option'],
-    function (myApp, robot_node, action, user, admin, project,debug_option) {
+define(['app', './api/robot_node', './api/action', './api/user', './api/admin', './api/project', './api/debug_option', './api/model'],
+    function (myApp, robot_node, action, user, admin, project,debug_option,model) {
         myApp.factory('api', ['mHttp', function (mHttp) {
             var api = {};
 
@@ -9,6 +9,7 @@ define(['app', './api/robot_node', './api/action', './api/user', './api/admin', 
             api.admin = admin.init(mHttp);
             api.project = project.init(mHttp);
             api.debugOption = debug_option.init(mHttp);
+            api.model = model.init(mHttp);
 
             return api;
         }]);

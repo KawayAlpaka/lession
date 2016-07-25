@@ -86,4 +86,6 @@ router.put('/admins/users/:id', api.admins.requireAdmin, api.admins.users.update
 router.get('/admins/users/:id', api.admins.requireAdmin, api.admins.users.get);
 router.delete('/admins/users/:id', api.admins.requireAdmin, api.admins.users.del);
 
+router.get('/models/schema/:modelName', api.models.schema);
+
 module.exports = router;
