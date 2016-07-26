@@ -620,13 +620,15 @@ var walkDir =  function(path,node) {
                                 willResolve();
                             }else{
                                 //处理文件
-                                var fileNode = new RobotNode({name:item,fileType:"file",fileFormat:"txt",parent:node._id});
+                                var fileNode = new RobotNode({name:item,type:"suite",fileType:"file",fileFormat:"txt",parent:node._id});
+                                fileNode.children = [];
                                 node.children.push(fileNode);
                                 fileHelper.readLines(tmpPath,function (arr) {
                                     // console.log(arr);
                                     //开始逐行解析文件
                                     var typeFlag = "";
                                     var preVariables;
+                                    var currentCase;
                                     arr.forEach(function (lineStr) {
                                         switch (lineStr) {
                                             case "*** Settings ***":
@@ -718,6 +720,31 @@ var walkDir =  function(path,node) {
                                                         }
                                                         break;
                                                     case "Test Cases":
+                                                        if(lineStr.trim().length == 0){
+                                                            // 空字符串基本就是结束标记，不处理
+                                                        }else{
+                                                            var strArr = lineStr.split("    ");
+                                                            for(var tempIndex in strArr ){
+                                                                strArr[tempIndex] = strArr[tempIndex].trim();
+                                                            }
+                                                            // console.log(strArr);
+                                                            if(strArr[0].trim().length != 0){
+                                                                currentCase = new RobotNode({name:strArr[0].trim(),type:"case",fileType:"content",parent:fileNode._id});
+                                                                fileNode.children.push(currentCase);
+                                                                currentCase.form.rows = [];
+                                                            }else {
+                                                                strArr.splice(0,1);
+                                                                var cells = [];
+                                                                strArr.forEach(function (str) {
+                                                                    cells.push({
+                                                                        text:str
+                                                                    })
+                                                                });
+                                                                currentCase.form.rows.push({
+                                                                    cells:cells
+                                                                })
+                                                            }
+                                                        }
                                                         break;
                                                     case "Keywords":
                                                         break;
