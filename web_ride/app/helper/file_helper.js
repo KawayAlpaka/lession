@@ -381,6 +381,204 @@ fileHelper.readLines = function (path,cb) {
     });
 };
 
+
+// 处理 Variables
+var dealVariables = function (fileNode,lineStr) {
+    if(lineStr.trim().length == 0){
+        // 空字符串基本就是结束标记，不处理
+    }else{
+        var strArr = lineStr.split("    ");
+        for(var tempIndex in strArr ){
+            strArr[tempIndex] = strArr[tempIndex].trim();
+        }
+        strArr = _.filter(strArr,function (str) {
+            return str.trim().length > 0;
+        });
+    }
+};
+
+// 处理Settings
+var dealSettings = function (fileNode,lineStr) {
+    if(lineStr.trim().length == 0){
+        // 空字符串基本就是结束标记，不处理
+    }else{
+        var strArr = lineStr.split("    ");
+        for(var tempIndex in strArr ){
+            strArr[tempIndex] = strArr[tempIndex].trim();
+        }
+        strArr = _.filter(strArr,function (str) {
+            return str.trim().length > 0;
+        });
+        switch (strArr[0].trim()) {
+            case "Documentation":
+                fileNode.documentation = strArr[1];
+                break;
+            case "Force Tags":
+                strArr.splice(0,1);
+                strArr.forEach(function (tag) {
+                    fileNode.forceTags.push({
+                        text:tag
+                    });
+                });
+                break;
+            case "Default Tags":
+                strArr.splice(0,1);
+                strArr.forEach(function (tag) {
+                    fileNode.defaultTags.push({
+                        text:tag
+                    });
+                });
+                break;
+            case "Library":
+                strArr.splice(0,1);
+                var getLibrary = function (arr) {
+                    switch (arr.length) {
+                        case 5:
+                            return {
+                                type:"Library",
+                                path:arr[0],
+                                args:arr[1],
+                                alias:arr[3],
+                                comment:arr[4].replace("# ","")
+                            };
+                            break;
+                        case 4:
+                            var tempObj =                                                                             {
+                                type:"Library"
+                            };
+                            for(var tempIndex in arr){
+                                if(tempIndex == 0){
+                                    tempObj.path = arr[tempIndex];
+                                }else{
+                                    if(arr[tempIndex][0] == "#" && tempIndex == arr.length-1){
+                                        tempObj.comment = arr[tempIndex].replace("# ","");
+                                    }
+                                    if(arr[tempIndex] == "WITH NAME"){
+                                        tempObj.alias = arr[tempIndex + 1];
+                                    }
+                                    if(arr[tempIndex] != "WITH NAME" && tempIndex == 1 && arr[tempIndex][0] != "#"){
+                                        tempObj.args = arr[tempIndex];
+                                    }
+                                }
+                            }
+                            return tempObj;
+                            break;
+                        // 还需要补充
+                        case 2:
+                            var tempObj =                                                                             {
+                                type:"Library"
+                            };
+                            for(var tempIndex in arr){
+                                if(tempIndex == 0){
+                                    tempObj.path = arr[tempIndex];
+                                }else{
+                                    if(arr[tempIndex][0] == "#" && tempIndex == arr.length-1){
+                                        tempObj.comment = arr[tempIndex].replace("# ","");
+                                    }
+                                    if(arr[tempIndex] == "WITH NAME"){
+                                        tempObj.alias = arr[tempIndex + 1];
+                                    }
+                                    if(arr[tempIndex] != "WITH NAME" && tempIndex == 1 && arr[tempIndex][0] != "#"){
+                                        tempObj.args = arr[tempIndex];
+                                    }
+                                }
+                            }
+                            return tempObj;
+                            break;
+                        case 1:
+                            return {
+                                type:"Library",
+                                path:arr[0]
+                            };
+                            break;
+                        default:
+                            return {};
+                            break;
+                    }
+                };
+                // console.log(getLibrary(strArr));
+                // console.log(strArr);
+                fileNode.imports.push( getLibrary(strArr) );
+                break;
+            case "Resource":
+                strArr.splice(0,1);
+                var getResource = function (arr) {
+                    var tempObj = {
+                        type:"Resource"
+                    };
+                    if(arr.length == 2){
+                        tempObj.path = arr[0];
+                        tempObj.comment = arr[1].replace("# ","");
+                    }
+                    if(arr.length == 1){
+                        if(arr[0][0] == "#"){
+                            tempObj.comment = arr[0].replace("# ","");
+                        }else{
+                            tempObj.path = arr[0];
+                        }
+                    }
+                    return tempObj;
+                };
+                fileNode.imports.push( getResource(strArr) );
+                break;
+            case "Variables":
+                strArr.splice(0,1);
+                var getVariables = function (arr) {
+                    var tempObj = {
+                        type:"Variables"
+                    };
+                    if(arr.length == 3){
+                        tempObj.path = arr[0];
+                        tempObj.args = arr[1];
+                        tempObj.comment = arr[2].replace("# ","");
+                    }
+                    if(arr.length == 2){
+                        tempObj.path = arr[0];
+                        if(arr[1][0] == "#"){
+                            tempObj.comment = arr[1].replace("# ","");
+                        }else{
+                            tempObj.args = arr[1];
+                        }
+                    }
+                    if(arr.length == 1){
+                        tempObj.path = arr[0];
+                    }
+                    return tempObj;
+                };
+                fileNode.imports.push( getVariables(strArr) );
+                break;
+            default:
+                var tempKey = Inflector.camelize(strArr[0].trim(), false).replace(" ","");
+                var  getValueComment = function (arr) {
+                    console.log(arr);
+                    if(arr.length > 1){
+                        return {
+                            value:arr[0].trim(),
+                            comment:arr[1].trim().replace("# ","")
+                        };
+                    }else if(arr.length = 1){
+                        if(arr[0].trim()[0] == "#"){
+                            return{
+                                comment:arr[0].trim().replace("# ","")
+                            };
+                        }else {
+                            return{
+                                value:arr[0].trim()
+                            };
+                        }
+                    }else {
+                        return {};
+                    }
+                };
+                strArr.splice(0,1);
+                fileNode[tempKey] = getValueComment(strArr);
+                break;
+        }
+    }
+};
+
+
+
 var walkDir =  function(path,node) {
     console.log("walkDir");
     var deferred = Q.defer();
@@ -428,6 +626,7 @@ var walkDir =  function(path,node) {
                                     // console.log(arr);
                                     //开始逐行解析文件
                                     var typeFlag = "";
+                                    var preVariables;
                                     arr.forEach(function (lineStr) {
                                         switch (lineStr) {
                                             case "*** Settings ***":
@@ -445,6 +644,9 @@ var walkDir =  function(path,node) {
                                             default:
                                                 switch (typeFlag) {
                                                     case "Settings":
+                                                        dealSettings(fileNode,lineStr);
+                                                        break;
+                                                    case "Variables":
                                                         if(lineStr.trim().length == 0){
                                                             // 空字符串基本就是结束标记，不处理
                                                         }else{
@@ -455,150 +657,65 @@ var walkDir =  function(path,node) {
                                                             strArr = _.filter(strArr,function (str) {
                                                                 return str.trim().length > 0;
                                                             });
-                                                            switch (strArr[0].trim()) {
-                                                                case "Documentation":
-                                                                    fileNode.documentation = strArr[1];
-                                                                    break;
-                                                                case "Force Tags":
-                                                                    strArr.splice(0,1);
-                                                                    strArr.forEach(function (tag) {
-                                                                        fileNode.forceTags.push({
-                                                                            text:tag
-                                                                        });
-                                                                    });
-                                                                    break;
-                                                                case "Default Tags":
-                                                                    strArr.splice(0,1);
-                                                                    strArr.forEach(function (tag) {
-                                                                        fileNode.defaultTags.push({
-                                                                            text:tag
-                                                                        });
-                                                                    });
-                                                                    break;
-                                                                case "Library":
-                                                                    strArr.splice(0,1);
-                                                                    var getLibrary = function (arr) {
-                                                                        switch (arr.length) {
-                                                                            case 5:
-                                                                                return {
-                                                                                    type:"Library",
-                                                                                    path:arr[0],
-                                                                                    args:arr[1],
-                                                                                    alias:arr[3],
-                                                                                    comment:arr[4].replace("# ","")
-                                                                                };
-                                                                                break;
-                                                                            case 4:
-                                                                                var tempObj =                                                                             {
-                                                                                    type:"Library"
-                                                                                };
-                                                                                for(var tempIndex in arr){
-                                                                                    if(tempIndex == 0){
-                                                                                        tempObj.path = arr[tempIndex];
-                                                                                    }else{
-                                                                                        if(arr[tempIndex][0] == "#" && tempIndex == arr.length-1){
-                                                                                            tempObj.comment = arr[tempIndex].replace("# ","");
-                                                                                        }
-                                                                                        if(arr[tempIndex] == "WITH NAME"){
-                                                                                            tempObj.alias = arr[tempIndex + 1];
-                                                                                        }
-                                                                                        if(arr[tempIndex] != "WITH NAME" && tempIndex == 1 && arr[tempIndex][0] != "#"){
-                                                                                            tempObj.args = arr[tempIndex];
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                                return tempObj;
-                                                                                break;
-                                                                            // 还需要补充
-                                                                            case 2:
-                                                                                var tempObj =                                                                             {
-                                                                                    type:"Library"
-                                                                                };
-                                                                                for(var tempIndex in arr){
-                                                                                    if(tempIndex == 0){
-                                                                                        tempObj.path = arr[tempIndex];
-                                                                                    }else{
-                                                                                        if(arr[tempIndex][0] == "#" && tempIndex == arr.length-1){
-                                                                                            tempObj.comment = arr[tempIndex].replace("# ","");
-                                                                                        }
-                                                                                        if(arr[tempIndex] == "WITH NAME"){
-                                                                                            tempObj.alias = arr[tempIndex + 1];
-                                                                                        }
-                                                                                        if(arr[tempIndex] != "WITH NAME" && tempIndex == 1 && arr[tempIndex][0] != "#"){
-                                                                                            tempObj.args = arr[tempIndex];
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                                return tempObj;
-                                                                                break;
-                                                                            case 1:
-                                                                                return {
-                                                                                    type:"Library",
-                                                                                    path:arr[0]
-                                                                                };
-                                                                                break;
-                                                                            default:
-                                                                                return {};
-                                                                                break;
-                                                                        }
+                                                            switch (strArr[0][0]){
+                                                                case "$":
+                                                                    var tempObj = {
+                                                                        type:"Scalar",
+                                                                        name:strArr[0],
+                                                                        comment:strArr[2]
                                                                     };
-                                                                    // console.log(getLibrary(strArr));
-                                                                    // console.log(strArr);
-                                                                    fileNode.imports.push( getLibrary(strArr) );
+                                                                    if(strArr[1] == "\\"){
+                                                                        tempObj.stringValue = "";
+                                                                    }else {
+                                                                        tempObj.stringValue = strArr[1];
+                                                                    }
+                                                                    fileNode.variables.push(tempObj);
+                                                                    preVariables = tempObj;
                                                                     break;
-                                                                case "Resource":
+                                                                case "@":
+                                                                    var tempObj = {
+                                                                        type:"List",
+                                                                        name:strArr[0],
+                                                                        arrayValue:[]
+                                                                    };
                                                                     strArr.splice(0,1);
-                                                                    var getResource = function (arr) {
-                                                                        var tempObj = {
-                                                                            type:"Resource"
-                                                                        };
-                                                                        if(arr.length == 2){
-                                                                            tempObj.path = arr[0];
-                                                                            tempObj.comment = arr[1].replace("# ","");
-                                                                        }
-                                                                        if(arr.length == 1){
-                                                                            if(arr[0][0] == "#"){
-                                                                                tempObj.comment = arr[0].replace("# ","");
+                                                                    strArr.forEach(function (str) {
+                                                                        tempObj.arrayValue.push(str)
+                                                                    });
+                                                                    fileNode.variables.push(tempObj);
+                                                                    preVariables = tempObj;
+                                                                    break;
+                                                                case "&":
+                                                                    var tempObj = {
+                                                                        type:"Dict",
+                                                                        name:strArr[0],
+                                                                        arrayValue:[]
+                                                                    };
+                                                                    strArr.splice(0,1);
+                                                                    strArr.forEach(function (str) {
+                                                                        tempObj.arrayValue.push(str)
+                                                                    });
+                                                                    fileNode.variables.push(tempObj);
+                                                                    preVariables = tempObj;
+                                                                    break;
+                                                                case ".":
+                                                                    strArr.splice(0,1);
+                                                                    strArr.forEach(function (str) {
+                                                                        if(str[0] == "#"){
+                                                                            preVariables.comment = str.replace("# ","");
+                                                                        }else{
+                                                                            if(str == "\\"){
+                                                                                preVariables.arrayValue.push("");
                                                                             }else{
-                                                                                tempObj.path = arr[0];
+                                                                                preVariables.arrayValue.push(str);
                                                                             }
                                                                         }
-                                                                        return tempObj;
-                                                                    };
-                                                                    fileNode.imports.push( getResource(strArr) );
-                                                                    break;
-                                                                case "Variables":
+                                                                    });
                                                                     break;
                                                                 default:
-                                                                    var tempKey = Inflector.camelize(strArr[0].trim(), false).replace(" ","");
-                                                                    var  getValueComment = function (arr) {
-                                                                        console.log(arr);
-                                                                        if(arr.length > 1){
-                                                                            return {
-                                                                                value:arr[0].trim(),
-                                                                                comment:arr[1].trim().replace("# ","")
-                                                                            };
-                                                                        }else if(arr.length = 1){
-                                                                            if(arr[0].trim()[0] == "#"){
-                                                                                return{
-                                                                                    comment:arr[0].trim().replace("# ","")
-                                                                                };
-                                                                            }else {
-                                                                                return{
-                                                                                    value:arr[0].trim()
-                                                                                };
-                                                                            }
-                                                                        }else {
-                                                                            return {};
-                                                                        }
-                                                                    };
-                                                                    strArr.splice(0,1);
-                                                                    fileNode[tempKey] = getValueComment(strArr);
                                                                     break;
                                                             }
                                                         }
-                                                        break;
-                                                    case "Variables":
                                                         break;
                                                     case "Test Cases":
                                                         break;
@@ -610,7 +727,7 @@ var walkDir =  function(path,node) {
                                                 break;
                                         }
                                     });
-                                    // console.log(fileNode);
+                                    console.log(fileNode);
                                     len -- ;
                                     willResolve();
                                 });
@@ -627,6 +744,8 @@ var walkDir =  function(path,node) {
 
     return deferred.promise;
 };
+
+
 
 
 fileHelper.importProject = function (path) {

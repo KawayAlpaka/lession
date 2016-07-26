@@ -45,8 +45,8 @@ require('./app/socket/io').createServer(server);
 
 
 // // 导入项目测试
-// var fileHelper = require('./app/helper/file_helper');
-// fileHelper.importProject('F:/robot/workspace/sample');
+var fileHelper = require('./app/helper/file_helper');
+fileHelper.importProject('F:/robot/workspace/sample');
 
 // fileHelper.readLines('F:/robot/workspace/hello/suite.txt',
 //     function (line) {
