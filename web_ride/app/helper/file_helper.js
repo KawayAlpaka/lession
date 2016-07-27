@@ -729,20 +729,72 @@ var walkDir =  function(path,node) {
                                                             }
                                                             // console.log(strArr);
                                                             if(strArr[0].trim().length != 0){
+                                                                // console.log(strArr);
                                                                 currentCase = new RobotNode({name:strArr[0].trim(),type:"case",fileType:"content",parent:fileNode._id});
                                                                 fileNode.children.push(currentCase);
                                                                 currentCase.form.rows = [];
                                                             }else {
                                                                 strArr.splice(0,1);
-                                                                var cells = [];
-                                                                strArr.forEach(function (str) {
-                                                                    cells.push({
-                                                                        text:str
-                                                                    })
-                                                                });
-                                                                currentCase.form.rows.push({
-                                                                    cells:cells
-                                                                })
+                                                                var  getValueComment = function (arr) {
+                                                                    if(arr.length > 1){
+                                                                        return {
+                                                                            value:arr[0].trim(),
+                                                                            comment:arr[1].trim().replace("# ","")
+                                                                        };
+                                                                    }else if(arr.length = 1){
+                                                                        if(arr[0].trim()[0] == "#"){
+                                                                            return{
+                                                                                comment:arr[0].trim().replace("# ","")
+                                                                            };
+                                                                        }else {
+                                                                            return{
+                                                                                value:arr[0].trim()
+                                                                            };
+                                                                        }
+                                                                    }else {
+                                                                        return {};
+                                                                    }
+                                                                };
+                                                                switch (strArr[0]){
+                                                                    case "[Documentation]":
+                                                                        currentCase.documentation = strArr[1];
+                                                                        break;
+                                                                    case "[Tags]":
+                                                                        strArr.splice(0,1);
+                                                                        strArr.forEach(function (str) {
+                                                                            currentCase.tags.push({
+                                                                                text:str
+                                                                            });
+                                                                        });
+                                                                        break;
+                                                                    case "[Setup]":
+                                                                        strArr.splice(0,1);
+                                                                        currentCase["setup"] = getValueComment(strArr);
+                                                                        break;
+                                                                    case "[Template]":
+                                                                        strArr.splice(0,1);
+                                                                        currentCase["template"] = getValueComment(strArr);
+                                                                        break;
+                                                                    case "[Timeout]":
+                                                                        strArr.splice(0,1);
+                                                                        currentCase["timeout"] = getValueComment(strArr);
+                                                                        break;
+                                                                    case "[Teardown]":
+                                                                        strArr.splice(0,1);
+                                                                        currentCase["teardown"] = getValueComment(strArr);
+                                                                        break;
+                                                                    default:
+                                                                        var cells = [];
+                                                                        strArr.forEach(function (str) {
+                                                                            cells.push({
+                                                                                text:str
+                                                                            })
+                                                                        });
+                                                                        currentCase.form.rows.push({
+                                                                            cells:cells
+                                                                        });
+                                                                        break;
+                                                                }
                                                             }
                                                         }
                                                         break;
@@ -754,7 +806,8 @@ var walkDir =  function(path,node) {
                                                 break;
                                         }
                                     });
-                                    console.log(fileNode);
+                                    // console.log(fileNode);
+                                    // console.log(currentCase);
                                     len -- ;
                                     willResolve();
                                 });
