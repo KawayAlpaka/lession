@@ -54,3 +54,23 @@ fileHelper.importProject('F:/robot/workspace/sample');
 //     }, function (all) {
 //
 //     });
+
+// var UserModel = mongoose.model("User");
+// var testUsers = {};
+// testUsers.user1 = new UserModel();
+// testUsers.user2 = new UserModel();
+// testUsers.user1.name = "111";
+// testUsers.user2.name = "222";
+// console.log(testUsers.user1);
+// console.log(testUsers.user2);
+
+// var RobotNodeModel = mongoose.model("RobotNode");
+// var testRobotNode = {};
+// function test(obj,name) {
+//     testRobotNode[name] = new RobotNodeModel();
+//     testRobotNode[name].form = obj;
+// }
+// test({haha:"1"},"node1");
+// test({hehe:"2"},"node2");
+// console.log(testRobotNode["node1"].form);
+// console.log(testRobotNode["node2"].form);

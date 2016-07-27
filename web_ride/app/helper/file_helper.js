@@ -5,6 +5,7 @@ var common = require('../../public/js/common');
 var _ = require('underscore');
 var RobotNode = mongoose.model('RobotNode');
 var Inflector = require('inflected');
+var extend = require('util')._extend;
 var strHelp = common.strHelp;
 
 var fileHelper = {};
@@ -628,7 +629,92 @@ var walkDir =  function(path,node) {
                                     //开始逐行解析文件
                                     var typeFlag = "";
                                     var preVariables;
-                                    var currentCase;
+                                    var currentNode = {};
+
+                                    var dealCase = function (lineStr,nodeType,rObj) {
+                                        if(lineStr.trim().length == 0){
+                                            // 空字符串基本就是结束标记，不处理
+                                        }else{
+                                            var strArr = lineStr.split("    ");
+                                            for(var tempIndex in strArr ){
+                                                strArr[tempIndex] = strArr[tempIndex].trim();
+                                            }
+                                            // console.log(strArr);
+                                            if(strArr[0].trim().length != 0){
+                                                // console.log(strArr);
+                                                rObj[nodeType] = new RobotNode({name:strArr[0].trim(),type:nodeType,fileType:"content",parent:fileNode._id});
+                                                fileNode.children.push(rObj[nodeType]);
+                                                // rObj[nodeType].form.rows = new Array();
+                                                rObj[nodeType].form = extend({},{rows:[]},true);  //解决一个匪夷所思的问题，后续有待研究
+                                            }else {
+                                                strArr.splice(0,1);
+                                                var  getValueComment = function (arr) {
+                                                    if(arr.length > 1){
+                                                        return {
+                                                            value:arr[0].trim(),
+                                                            comment:arr[1].trim().replace("# ","")
+                                                        };
+                                                    }else if(arr.length = 1){
+                                                        if(arr[0].trim()[0] == "#"){
+                                                            return{
+                                                                comment:arr[0].trim().replace("# ","")
+                                                            };
+                                                        }else {
+                                                            return{
+                                                                value:arr[0].trim()
+                                                            };
+                                                        }
+                                                    }else {
+                                                        return {};
+                                                    }
+                                                };
+                                                switch (strArr[0]){
+                                                    case "[Documentation]":
+                                                        rObj[nodeType].documentation = strArr[1];
+                                                        break;
+                                                    case "[Tags]":
+                                                        strArr.splice(0,1);
+                                                        strArr.forEach(function (str) {
+                                                            rObj[nodeType].tags.push({
+                                                                text:str
+                                                            });
+                                                        });
+                                                        break;
+                                                    case "[Setup]":
+                                                        strArr.splice(0,1);
+                                                        rObj[nodeType]["setup"] = getValueComment(strArr);
+                                                        break;
+                                                    case "[Template]":
+                                                        strArr.splice(0,1);
+                                                        rObj[nodeType]["template"] = getValueComment(strArr);
+                                                        break;
+                                                    case "[Timeout]":
+                                                        strArr.splice(0,1);
+                                                        rObj[nodeType]["timeout"] = getValueComment(strArr);
+                                                        break;
+                                                    case "[Teardown]":
+                                                        strArr.splice(0,1);
+                                                        rObj[nodeType]["teardown"] = getValueComment(strArr);
+                                                        break;
+                                                    case "[Return]":
+                                                        strArr.splice(0,1);
+                                                        rObj[nodeType]["returnValue"] = getValueComment(strArr);
+                                                        break;
+                                                    default:
+                                                        var cells = [];
+                                                        strArr.forEach(function (str) {
+                                                            cells.push({
+                                                                text:str
+                                                            })
+                                                        });
+                                                        rObj[nodeType].form.rows.push({
+                                                            cells:cells
+                                                        });
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    };
                                     arr.forEach(function (lineStr) {
                                         switch (lineStr) {
                                             case "*** Settings ***":
@@ -720,85 +806,10 @@ var walkDir =  function(path,node) {
                                                         }
                                                         break;
                                                     case "Test Cases":
-                                                        if(lineStr.trim().length == 0){
-                                                            // 空字符串基本就是结束标记，不处理
-                                                        }else{
-                                                            var strArr = lineStr.split("    ");
-                                                            for(var tempIndex in strArr ){
-                                                                strArr[tempIndex] = strArr[tempIndex].trim();
-                                                            }
-                                                            // console.log(strArr);
-                                                            if(strArr[0].trim().length != 0){
-                                                                // console.log(strArr);
-                                                                currentCase = new RobotNode({name:strArr[0].trim(),type:"case",fileType:"content",parent:fileNode._id});
-                                                                fileNode.children.push(currentCase);
-                                                                currentCase.form.rows = [];
-                                                            }else {
-                                                                strArr.splice(0,1);
-                                                                var  getValueComment = function (arr) {
-                                                                    if(arr.length > 1){
-                                                                        return {
-                                                                            value:arr[0].trim(),
-                                                                            comment:arr[1].trim().replace("# ","")
-                                                                        };
-                                                                    }else if(arr.length = 1){
-                                                                        if(arr[0].trim()[0] == "#"){
-                                                                            return{
-                                                                                comment:arr[0].trim().replace("# ","")
-                                                                            };
-                                                                        }else {
-                                                                            return{
-                                                                                value:arr[0].trim()
-                                                                            };
-                                                                        }
-                                                                    }else {
-                                                                        return {};
-                                                                    }
-                                                                };
-                                                                switch (strArr[0]){
-                                                                    case "[Documentation]":
-                                                                        currentCase.documentation = strArr[1];
-                                                                        break;
-                                                                    case "[Tags]":
-                                                                        strArr.splice(0,1);
-                                                                        strArr.forEach(function (str) {
-                                                                            currentCase.tags.push({
-                                                                                text:str
-                                                                            });
-                                                                        });
-                                                                        break;
-                                                                    case "[Setup]":
-                                                                        strArr.splice(0,1);
-                                                                        currentCase["setup"] = getValueComment(strArr);
-                                                                        break;
-                                                                    case "[Template]":
-                                                                        strArr.splice(0,1);
-                                                                        currentCase["template"] = getValueComment(strArr);
-                                                                        break;
-                                                                    case "[Timeout]":
-                                                                        strArr.splice(0,1);
-                                                                        currentCase["timeout"] = getValueComment(strArr);
-                                                                        break;
-                                                                    case "[Teardown]":
-                                                                        strArr.splice(0,1);
-                                                                        currentCase["teardown"] = getValueComment(strArr);
-                                                                        break;
-                                                                    default:
-                                                                        var cells = [];
-                                                                        strArr.forEach(function (str) {
-                                                                            cells.push({
-                                                                                text:str
-                                                                            })
-                                                                        });
-                                                                        currentCase.form.rows.push({
-                                                                            cells:cells
-                                                                        });
-                                                                        break;
-                                                                }
-                                                            }
-                                                        }
+                                                        dealCase(lineStr,"case",currentNode);
                                                         break;
                                                     case "Keywords":
+                                                        dealCase(lineStr,"keyword",currentNode);
                                                         break;
                                                     default:
                                                         break;
@@ -807,7 +818,11 @@ var walkDir =  function(path,node) {
                                         }
                                     });
                                     // console.log(fileNode);
-                                    // console.log(currentCase);
+                                    // console.log(currentNode.case.form.rows.length);
+                                    // console.log(currentNode.keyword.form.rows.length);
+                                    console.log(currentNode["case"]);
+                                    console.log(currentNode["keyword"]);
+
                                     len -- ;
                                     willResolve();
                                 });
