@@ -621,11 +621,22 @@ var walkDir =  function(path,node) {
                                 willResolve();
                             }else{
                                 //处理文件
-                                var fileNode = new RobotNode({name:item,type:"suite",fileType:"file",fileFormat:"txt",parent:node._id});
-                                fileNode.children = [];
-                                node.children.push(fileNode);
+                                // var fileNode = new RobotNode({name:item,type:"suite",fileType:"file",fileFormat:"txt",parent:node._id});
+                                // fileNode.children = [];
+                                // node.children.push(fileNode);
                                 fileHelper.readLines(tmpPath,function (arr) {
-                                    // console.log(arr);
+                                    var fileNode;
+
+                                    // 判断是套件还是资源
+                                    if(_.contains(arr,"*** Test Cases ***")){
+                                        fileNode = new RobotNode({name:item,type:"suite",fileType:"file",fileFormat:"txt",parent:node._id});
+                                    }else{
+                                        fileNode = new RobotNode({name:item,type:"resource",fileType:"file",fileFormat:"txt",parent:node._id});
+                                    }
+
+                                    fileNode.children = [];
+                                    node.children.push(fileNode);
+
                                     //开始逐行解析文件
                                     var typeFlag = "";
                                     var preVariables;
@@ -817,12 +828,11 @@ var walkDir =  function(path,node) {
                                                 break;
                                         }
                                     });
-                                    // console.log(fileNode);
+                                    console.log(fileNode);
                                     // console.log(currentNode.case.form.rows.length);
                                     // console.log(currentNode.keyword.form.rows.length);
-                                    console.log(currentNode["case"]);
-                                    console.log(currentNode["keyword"]);
-
+                                    // console.log(currentNode["case"]);
+                                    // console.log(currentNode["keyword"]);
                                     len -- ;
                                     willResolve();
                                 });
