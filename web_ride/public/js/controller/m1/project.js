@@ -1,4 +1,4 @@
-define(['app','common'], function(myApp,common){
+define(['app','common','WebUploader'], function(myApp,common,WebUploader){
     myApp.controller('m1_project_controller', ['$scope', function (s) {
         console.log("m1_project_controller");
     }]);
@@ -42,6 +42,32 @@ define(['app','common'], function(myApp,common){
         s.back = function () {
             s.mHelp.go("#/m1/manage");
         };
-        
+
+
+
+        // 上传项目文件
+        var uploader = WebUploader.create({
+            formData: {
+                pid: 123
+            },
+            server: '/file/webuploader',
+            pick: '#picker',
+            resize: false
+        });
+
+        uploader.on( 'uploadSuccess', function( file,response  ) {
+            console.log(response);
+        });
+
+        uploader.on( 'fileQueued', function( file ) {
+            console.log('fileQueued');
+            s.fileName = file.name;
+            s.$apply();
+        });
+
+        $("#ctlBtn").on("click",function () {
+            uploader.upload();
+        });
+
     }]);
 });

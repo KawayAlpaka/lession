@@ -8,6 +8,7 @@ require.config({
         'ng-bootstrap': '../lib/ui-bootstrap-tpls-1.2.1',
         'angular-cookies': '../lib/angular-cookies',
         'lodash': '../lib/lodash',
+        'WebUploader': '//cdn.staticfile.org/webuploader/0.1.5/webuploader',
         'socket': '../lib/socket.io'
     },
     shim: {
