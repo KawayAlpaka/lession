@@ -58,6 +58,7 @@ var upload = multer({dest: './public/images/user'});
 app.post('/file/webuploader', upload.fields([
     {name: 'file'}
 ]), function(req, res, next){
+    console.log(req.body);
     for(var i in req.files){
         console.log(req.files[i]);
         req.files[i].forEach(function (file) {

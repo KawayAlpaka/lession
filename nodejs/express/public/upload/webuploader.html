@@ -19,7 +19,9 @@
 <script>
     $(function () {
         var uploader = WebUploader.create({
-
+            formData: {
+                pid: 123
+            },
             // 文件接收服务端。
             server: '/file/webuploader',
 
@@ -29,6 +31,11 @@
 
             // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
             resize: false
+        });
+
+        uploader.on( 'uploadSuccess', function( file,response  ) {
+            // do some things.
+            console.log(response);
         });
 
         $("#ctlBtn").on("click",function () {
