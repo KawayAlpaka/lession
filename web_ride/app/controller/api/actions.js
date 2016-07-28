@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 var exec = require('child_process').exec;
 var common = require('../../../public/js/common');
 var fileHelper = require('../../helper/file_helper');
+var multer = require('multer');
+
 var RobotNode = mongoose.model('RobotNode');
+
 
 var archiver = require('archiver');
 
@@ -101,5 +104,15 @@ actions.runProject = function (req, res) {
         }
     });
 };
+
+
+var uploadProject = multer({dest: 'D:/web_ride/upload/projects'});
+actions.importProject = [uploadProject.fields([
+    {name: 'file'}
+]),function (req, res) {
+    console.log(req.body);
+    console.log(req.params);
+    res.json(res.resFormat);
+}];
 
 module.exports = actions;

@@ -62,6 +62,7 @@ router.use('/robot_nodes', api.users.requireLogin ,robotNodesRouter);
 router.get('/actions/createProjectFiles/:id', api.users.requireLogin, api.actions.createProjectFiles);
 router.get('/actions/runProject/:id', api.users.requireLogin, api.actions.runProject);
 router.get('/actions/downloadProjectFiles/:id', api.users.requireLogin, api.actions.downloadProjectFiles);
+router.post('/actions/importProject/:id', api.users.requireLogin, api.actions.importProject);
 
 router.get('/projects/my', api.users.requireLogin, api.projects.myProjects);
 router.get('/projects/my/:relate', api.users.requireLogin, api.projects.myRelateProjects);

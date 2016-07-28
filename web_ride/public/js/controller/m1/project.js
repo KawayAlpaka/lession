@@ -50,7 +50,7 @@ define(['app','common','WebUploader'], function(myApp,common,WebUploader){
             formData: {
                 pid: 123
             },
-            server: '/file/webuploader',
+            server: '/api/actions/importProject/'+projectId,
             pick: '#picker',
             resize: false
         });
