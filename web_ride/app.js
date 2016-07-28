@@ -25,7 +25,7 @@ app.use('/api', routerApi);
 var server = app.listen(3030, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('ride listening at http://%s:%s', host, port);
     process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err.stack);
     });
@@ -45,8 +45,8 @@ require('./app/socket/io').createServer(server);
 
 
 // // 导入项目测试
-var fileHelper = require('./app/helper/file_helper');
-fileHelper.importProject('F:/robot/workspace/sample');
+// var fileHelper = require('./app/helper/file_helper');
+// fileHelper.importProject('F:/robot/workspace/sample');
 
 // fileHelper.readLines('F:/robot/workspace/hello/suite.txt',
 //     function (line) {
@@ -55,22 +55,3 @@ fileHelper.importProject('F:/robot/workspace/sample');
 //
 //     });
 
-// var UserModel = mongoose.model("User");
-// var testUsers = {};
-// testUsers.user1 = new UserModel();
-// testUsers.user2 = new UserModel();
-// testUsers.user1.name = "111";
-// testUsers.user2.name = "222";
-// console.log(testUsers.user1);
-// console.log(testUsers.user2);
-
-// var RobotNodeModel = mongoose.model("RobotNode");
-// var testRobotNode = {};
-// function test(obj,name) {
-//     testRobotNode[name] = new RobotNodeModel();
-//     testRobotNode[name].form = obj;
-// }
-// test({haha:"1"},"node1");
-// test({hehe:"2"},"node2");
-// console.log(testRobotNode["node1"].form);
-// console.log(testRobotNode["node2"].form);
