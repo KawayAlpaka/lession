@@ -8,6 +8,9 @@ define(['app','common'], function (myApp,common) {
         mHelp.go = function (link) {
             window.location.href = link;
         };
+        mHelp.open = function (link) {
+            window.open(link);
+        };
 
         mHelp.pullCurrentUser = function (cb) {
             $rootScope.api.user.getCurrentUser()

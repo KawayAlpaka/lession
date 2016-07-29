@@ -210,7 +210,7 @@ define(['app','common','jquery'], function(myApp,common,$){
                 });
         };
         s.downloadProjectFiles = function () {
-            s.mHelp.go('/api/actions/downloadProjectFiles/'+projectId);
+            s.mHelp.open('/api/actions/downloadProjectFiles/'+projectId);
         };
 
         // // 不需要遍历元素

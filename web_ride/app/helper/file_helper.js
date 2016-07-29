@@ -14,6 +14,7 @@ var getFileContent = function (node,debugOptions,cb) {
     if (node.fileType == "dir") {
 
     } else if (node.fileType == "file") {
+
         var addParamOptions = [];
         if (debugOptions != null) {
             addParamOptions = _.filter(debugOptions, function (option) {
@@ -69,7 +70,6 @@ var getFileContent = function (node,debugOptions,cb) {
         });
         content += "\r\n";
 
-
         // 变量信息
         if(node.variables.length > 0){
             content += "*** Variables ***\r\n";
@@ -122,6 +122,7 @@ var getFileContent = function (node,debugOptions,cb) {
             content += "\r\n";
         }
 
+
         //children 信息
         node.children(function (err,children) {
             if(err){
@@ -144,48 +145,49 @@ var getFileContent = function (node,debugOptions,cb) {
 
 
             //用例信息
-            content += "*** Test Cases ***\r\n";
-            children.forEach(function (child) {
-                if (child.type == "case") {
-                    content += child.name + "\r\n";
-                    if (strHelp.isNotEmptyStr(child.documentation)) {
-                        content += "    [Documentation]    " + child.documentation + "\r\n";
-                    }
+            if(node.type == "suite"){
+                content += "*** Test Cases ***\r\n";
+                children.forEach(function (child) {
+                    if (child.type == "case") {
+                        content += child.name + "\r\n";
+                        if (strHelp.isNotEmptyStr(child.documentation)) {
+                            content += "    [Documentation]    " + child.documentation + "\r\n";
+                        }
 
-                    tempTagsStr = "";
-                    child.tags.forEach(dealTags);
-                    insertValueComment("Tags", tempTagsStr);
+                        tempTagsStr = "";
+                        child.tags.forEach(dealTags);
+                        insertValueComment("Tags", tempTagsStr);
 
-                    insertValueComment("Setup", child.setup.value, child.setup.comment);
-                    insertValueComment("Template", child.template.value, child.template.comment);
-                    insertValueComment("Timeout", child.timeout.value, child.timeout.comment);
+                        insertValueComment("Setup", child.setup.value, child.setup.comment);
+                        insertValueComment("Template", child.template.value, child.template.comment);
+                        insertValueComment("Timeout", child.timeout.value, child.timeout.comment);
 
-                    // debugOptions
-                    // addParamOptions
-                    if (child.form) {
-                        child.form.rows.forEach(function (row) {
-                            row.cells.forEach(function (cell) {
-                                content += "    " + cell.text;
+                        // debugOptions
+                        // addParamOptions
+                        if (child.form) {
+                            child.form.rows.forEach(function (row) {
+                                row.cells.forEach(function (cell) {
+                                    content += "    " + cell.text;
+                                });
+
+                                // 添加调试 参数
+                                if(row.cells.length > 0){
+                                    var matchOptions = _.filter(addParamOptions,function (option) {
+                                        return option.params.keyword == row.cells[0].text;
+                                    });
+                                    matchOptions.forEach(function (option) {
+                                        content += "    " + option.params.param;
+                                    });
+                                }
+
+                                content += "\r\n";
                             });
-
-                            // 添加调试 参数
-                            if(row.cells.length > 0){
-                                var matchOptions = _.filter(addParamOptions,function (option) {
-                                    return option.params.keyword == row.cells[0].text;
-                                });
-                                matchOptions.forEach(function (option) {
-                                    content += "    " + option.params.param;
-                                });
-                            }
-                            
-                            content += "\r\n";
-                        });
+                        }
+                        insertValueComment("Teardown", child.teardown.value, child.teardown.comment);
+                        content += "\r\n";
                     }
-                    insertValueComment("Teardown", child.teardown.value, child.teardown.comment);
-                    content += "\r\n";
-                }
-            });
-
+                });
+            }
 
             //用户关键字信息
             content += "*** Keywords ***\r\n";
@@ -325,7 +327,10 @@ fileHelper.createProjectFiles = function (pNode,projectPath,debugOptions,cb) {
                 });
             }else if(child.fileType == "file"){
                 var fileFullName = data.path + '/' + child.name + '.txt';
+                console.log(fileFullName);
                 getFileContent(child,debugOptions,function (content) {
+                    console.log("content:");
+                    console.log(content);
                     fs.writeFile(fileFullName, content , {flag: 'w'}, function (err) {
                         if (err) {
                             console.error(err);
@@ -780,7 +785,9 @@ var walkDir =  function(path,node) {
                                                                     };
                                                                     strArr.splice(0,1);
                                                                     strArr.forEach(function (str) {
-                                                                        tempObj.arrayValue.push(str)
+                                                                        tempObj.arrayValue.push({
+                                                                            text:str
+                                                                        });
                                                                     });
                                                                     fileNode.variables.push(tempObj);
                                                                     preVariables = tempObj;
@@ -793,7 +800,9 @@ var walkDir =  function(path,node) {
                                                                     };
                                                                     strArr.splice(0,1);
                                                                     strArr.forEach(function (str) {
-                                                                        tempObj.arrayValue.push(str)
+                                                                        tempObj.arrayValue.push({
+                                                                            text:str
+                                                                        });
                                                                     });
                                                                     fileNode.variables.push(tempObj);
                                                                     preVariables = tempObj;
@@ -805,9 +814,13 @@ var walkDir =  function(path,node) {
                                                                             preVariables.comment = str.replace("# ","");
                                                                         }else{
                                                                             if(str == "\\"){
-                                                                                preVariables.arrayValue.push("");
+                                                                                preVariables.arrayValue.push({
+                                                                                    text:""
+                                                                                });
                                                                             }else{
-                                                                                preVariables.arrayValue.push(str);
+                                                                                preVariables.arrayValue.push({
+                                                                                    text:str
+                                                                                });
                                                                             }
                                                                         }
                                                                     });
