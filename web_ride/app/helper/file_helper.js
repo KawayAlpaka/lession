@@ -551,7 +551,7 @@ var dealSettings = function (fileNode,lineStr) {
             default:
                 var tempKey = Inflector.camelize(strArr[0].trim(), false).replace(" ","");
                 var  getValueComment = function (arr) {
-                    console.log(arr);
+                    // console.log(arr);
                     if(arr.length > 1){
                         return {
                             value:arr[0].trim(),
@@ -596,7 +596,7 @@ var walkDir =  function(path,node) {
             var len = files.length;
             var willResolve = function () {
                 if(len <= 0){
-                    deferred.resolve();
+                    deferred.resolve(node);
                 }
             };
             willResolve();
@@ -607,7 +607,7 @@ var walkDir =  function(path,node) {
                         console.log('stat error');
                     } else {
                         if (stats.isDirectory()) {
-                            var dirNode = new RobotNode({fileType:"dir",fileFormat:"txt",parent:node._id});
+                            var dirNode = new RobotNode({fileType:"dir",type:"other",fileFormat:"txt",parent:node._id});
                             node.children.push(dirNode);
                             walkDir(tmpPath,dirNode)
                                 .then(function () {
@@ -654,6 +654,7 @@ var walkDir =  function(path,node) {
                                             if(strArr[0].trim().length != 0){
                                                 // console.log(strArr);
                                                 rObj[nodeType] = new RobotNode({name:strArr[0].trim(),type:nodeType,fileType:"content",parent:fileNode._id});
+                                                rObj[nodeType].children = [];
                                                 fileNode.children.push(rObj[nodeType]);
                                                 // rObj[nodeType].form.rows = new Array();
                                                 rObj[nodeType].form = extend({},{rows:[]},true);  //解决一个匪夷所思的问题，后续有待研究
@@ -828,7 +829,7 @@ var walkDir =  function(path,node) {
                                                 break;
                                         }
                                     });
-                                    console.log(fileNode);
+                                    // console.log(fileNode);
                                     // console.log(currentNode.case.form.rows.length);
                                     // console.log(currentNode.keyword.form.rows.length);
                                     // console.log(currentNode["case"]);
@@ -842,7 +843,6 @@ var walkDir =  function(path,node) {
                     }
                 })
             });
-
         }
     });
 
@@ -850,14 +850,48 @@ var walkDir =  function(path,node) {
     return deferred.promise;
 };
 
+var walkNode = function (node) {
+    console.log(node.name);
+    console.log(node.children.length);
+    console.log(node);
+
+    var deferred = Q.defer();
+
+    node.save(function (err) {
+        var len = node.children.length;
+        var willResolve = function () {
+            if(len <= 0){
+                deferred.resolve(node);
+            }
+        };
+        if(err){
+            console.log(err);
+            deferred.resolve(node)
+        }else{
+            willResolve();
+            node.children.forEach(function (child) {
+                // console.log(child);
+                walkNode(child)
+                    .then(function () {
+                        len --;
+                        willResolve()
+                    });
+            });
+        }
+    });
+
+    return deferred.promise;
+
+};
 
 
-
-fileHelper.importProject = function (path) {
+fileHelper.importProject = function (path,cb) {
     var node = new RobotNode({type:"project",fileType:"dir",fileFormat:"txt"});
     walkDir(path,node)
+        .then(walkNode)
         .then(function () {
-            console.log("finish")
+            console.log("importProject finish");
+            cb(node);
         });
 };
 

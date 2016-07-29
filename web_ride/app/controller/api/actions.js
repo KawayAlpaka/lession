@@ -3,9 +3,11 @@ var mongoose = require('mongoose');
 var exec = require('child_process').exec;
 var common = require('../../../public/js/common');
 var fileHelper = require('../../helper/file_helper');
+var zipHelper = require('../../helper/zip_helper');
 var multer = require('multer');
 
 var RobotNode = mongoose.model('RobotNode');
+var Project = mongoose.model('Project');
 
 
 var archiver = require('archiver');
@@ -112,7 +114,33 @@ actions.importProject = [uploadProject.fields([
 ]),function (req, res) {
     console.log(req.body);
     console.log(req.params);
-    res.json(res.resFormat);
+
+    for(var i in req.files){
+        console.log(req.files[i]);
+        req.files[i].forEach(function (file) {
+            var basePath = "D:/web_ride/upload/projects/";
+            var dstPath = 'D:/web_ride/upload/projects/' + file.originalname;
+            fs.rename(file.path, dstPath, function(err) {
+                if(err){
+                    console.log('rename error: ' + err);
+                } else {
+                    console.log('rename ok');
+                    zipHelper.unzip(dstPath,basePath,function () {
+                        console.log("unzip finish");
+                        fileHelper.importProject(dstPath.replace(".zip",""),function (node) {
+                            Project.findOne({_id:req.params.id},function (err, project) {
+                                project.robotNode = node._id;
+                                project.save(function (err, project) {
+                                    res.resFormat.data = project;
+                                    res.json(res.resFormat);
+                                });
+                            });
+                        });
+                    });
+                }
+            });
+        });
+    }
 }];
 
 module.exports = actions;

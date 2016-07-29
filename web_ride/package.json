@@ -11,6 +11,7 @@
     "q": "^1.4.1",
     "socket.io": "^1.4.8",
     "underscore": "^1.8.3",
+    "unzip": "^0.1.11",
     "util": "^0.10.3"
   },
   "name": "web_ride",

@@ -43,7 +43,9 @@ define(['app','common','WebUploader'], function(myApp,common,WebUploader){
             s.mHelp.go("#/m1/manage");
         };
 
-
+        s.enterProject = function (project) {
+            s.mHelp.go("#/m1/workspace/" + project.robotNode);
+        };
 
         // 上传项目文件
         var uploader = WebUploader.create({
@@ -57,6 +59,8 @@ define(['app','common','WebUploader'], function(myApp,common,WebUploader){
 
         uploader.on( 'uploadSuccess', function( file,response  ) {
             console.log(response);
+            s.project = response.data;
+            s.$apply();
         });
 
         uploader.on( 'fileQueued', function( file ) {
