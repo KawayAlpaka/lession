@@ -128,6 +128,11 @@ var RobotNode = mongoose.model('RobotNode', robotNodeSchema);
 //     testRobotNode[name] = new RobotNodeModel();
 //     testRobotNode[name].form.rows = [];
 //     testRobotNode[name].form.rows.push(obj);
+//     // console.log(testRobotNode[name].__proto__);
+//     testRobotNode[name].name = "11";
+//     console.log(testRobotNode[name].name);
+//
+//     // console.log(testRobotNode[name].prototype);
 // }
 // test({haha:"1"},"node1");
 // test({hehe:"2"},"node2");
@@ -146,3 +151,10 @@ var RobotNode = mongoose.model('RobotNode', robotNodeSchema);
 // test({hehe:"2"},"node2");
 // console.log(pObj["node1"].rows);
 // console.log(pObj["node2"].rows);
+
+// var RobotNodeModel = mongoose.model("RobotNode");
+// var robotNode = new RobotNodeModel();
+// robotNode.name = "hello";
+// console.log(robotNode);
+// console.log(robotNode.name);
+// console.log("finish");
