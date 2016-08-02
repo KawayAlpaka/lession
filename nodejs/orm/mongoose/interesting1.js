@@ -152,9 +152,11 @@ var RobotNode = mongoose.model('RobotNode', robotNodeSchema);
 // console.log(pObj["node1"].rows);
 // console.log(pObj["node2"].rows);
 
-// var RobotNodeModel = mongoose.model("RobotNode");
-// var robotNode = new RobotNodeModel();
-// robotNode.name = "hello";
-// console.log(robotNode);
-// console.log(robotNode.name);
-// console.log("finish");
+var RobotNodeModel = mongoose.model("RobotNode");
+var robotNode = new RobotNodeModel();
+robotNode.name = "hello";
+console.log(robotNode);
+console.log(robotNode.name);
+console.log(robotNode.__lookupGetter__("name").toString());
+console.log(robotNode.get.toString());
+console.log("finish");
