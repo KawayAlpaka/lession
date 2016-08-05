@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>CSS3</title>
-
-    <script src="/lib/jquery-1.12.4.js"></script>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
     <script>
         function submitTest1() {
             alert(1);
 
-            var form = $("form");
-            $.post("",form,function (data) {
-                console.log(data);
-            });
+//            var form = $("form");
+//            $.post("",form,function (data) {
+//                console.log(data);
+//            });
             return false;
         }
 
-        //jq绑定的事件，没有生效
         $(function () {
            $("form").on("submit",function () {
                alert(2);
