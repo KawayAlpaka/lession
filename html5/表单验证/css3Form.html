@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>CSS3</title>
+
+    <script src="/lib/jquery-1.12.4.js"></script>
+    <script>
+//        function submitTest1() {
+//            alert(1);
+//            return false;
+//        }
+
+        //jq绑定的事件，没有生效
+        $(function () {
+           $("form").on("submit",function () {
+               alert(2);
+               return false;
+           });
+        });
+    </script>
+
+
     <style>
         input:invalid + .invalid-msg{
             display: block;
@@ -13,10 +31,13 @@
     </style>
 </head>
 <body>
-<form>
+<form onsubmit="submitTest1()">
     <div>
         <input type="text" required>
         <div class="invalid-msg">请输入</div>
+    </div>
+    <div>
+        <button type="submit">提交</button>
     </div>
 </form>
 </body>
