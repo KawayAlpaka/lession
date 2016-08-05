@@ -6,10 +6,15 @@
 
     <script src="/lib/jquery-1.12.4.js"></script>
     <script>
-//        function submitTest1() {
-//            alert(1);
-//            return false;
-//        }
+        function submitTest1() {
+            alert(1);
+
+            var form = $("form");
+            $.post("",form,function (data) {
+                console.log(data);
+            });
+            return false;
+        }
 
         //jq绑定的事件，没有生效
         $(function () {

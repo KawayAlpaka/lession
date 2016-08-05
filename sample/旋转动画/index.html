@@ -39,9 +39,32 @@
             top: 42px;
             animation:xz-f 1s linear infinite;
         }
+
+
+        .full-screen{
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(222,222,222,0.8);
+        }
+        .center{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
     </style>
 </head>
 <body>
-    <div class="xz-circle"></div>
+<div style="min-height: 500px">
+    哈哈啊
+</div>
+<div class="full-screen">
+    <div class="center">
+        <div class="xz-circle"></div>
+    </div>
+</div>
+
 </body>
 </html>
