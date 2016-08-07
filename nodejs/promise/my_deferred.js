@@ -1,4 +1,28 @@
-var Q = require("q");
+// var Q = require("q");
+
+
+
+function Q() {
+    Q.defer = function () {
+        var deferred = {};
+        deferred.promise = {};
+
+        deferred.promise.then = function (success,error) {
+            deferred.resolve = function () {
+                success(arguments);
+            };
+            deferred.reject = function () {
+                error(arguments);
+            };
+        };
+
+        return deferred;
+    }
+}
+
+
+
+
 var fun1 = function (data) {
     var deferred = Q.defer();
     deferred.resolve(data+" fun1");
