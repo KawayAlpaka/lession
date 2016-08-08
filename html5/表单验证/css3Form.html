@@ -7,11 +7,6 @@
     <script>
         function submitTest1() {
             alert(1);
-
-//            var form = $("form");
-//            $.post("",form,function (data) {
-//                console.log(data);
-//            });
             return false;
         }
 
@@ -20,6 +15,10 @@
                alert(2);
                return false;
            });
+            $("form").on("submit",function () {
+                alert(3);
+                return false;
+            });
         });
     </script>
 
