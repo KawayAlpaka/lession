@@ -57,7 +57,8 @@ Q.defer = function () {
                 }
             }
 
-        },100);
+        },1);
+        // }, parseInt(5000 * Math.random() ) );
     };
     deferred.reject = function () {
         var _arguments = arguments;
@@ -76,7 +77,8 @@ Q.defer = function () {
                     promise.list = deferred.promise.list;
                 }
             }
-        },100);
+        },1);
+        // },parseInt(5000 * Math.random() ));
     };
 
     return deferred;
