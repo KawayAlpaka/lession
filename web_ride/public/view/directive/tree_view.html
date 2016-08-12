@@ -4,11 +4,11 @@
         <span ng-show="node.showState.extended == false && node.fn.canExtend()" ng-click="node.showState.extended = !node.showState.extended">+</span>
         <span ng-show="node.showState.extended == true && node.fn.canExtend()" ng-click="node.showState.extended = !node.showState.extended">-</span>
         <input type="checkbox" ng-if="node.type == 'case'">
-        <img src="/img/robot.png" alt="" ng-show="node.type == 'case'">
-        <img src="/img/cog.png" alt="" ng-show="node.type == 'keyword'">
-        <img src="/img/page_white.png" alt="" ng-show="node.fileType == 'file' && node.type == 'suite'">
-        <img src="/img/page_white_gear.png" alt="" ng-show="node.fileType == 'file' && node.type == 'resource'">
-        <img src="/img/folder.png" alt="" ng-show="node.fileType == 'dir'">
+        <img src="img/robot.png" alt="" ng-show="node.type == 'case'">
+        <img src="img/cog.png" alt="" ng-show="node.type == 'keyword'">
+        <img src="img/page_white.png" alt="" ng-show="node.fileType == 'file' && node.type == 'suite'">
+        <img src="img/page_white_gear.png" alt="" ng-show="node.fileType == 'file' && node.type == 'resource'">
+        <img src="img/folder.png" alt="" ng-show="node.fileType == 'dir'">
         <span data-ng-bind="node.name"
               data-ng-click="treeFunctions.click(node)"
               ng-right-click="treeFunctions.rightClick(node,$event)"
