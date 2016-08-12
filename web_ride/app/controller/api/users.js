@@ -71,6 +71,7 @@ users.logout = function (req, res) {
 };
 
 users.currentUser = function (req, res, next) {
+    console.log(req.cookies);
     var mSession = req.cookies.mSession;
     if(!mSession){
         next();

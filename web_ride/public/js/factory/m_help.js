@@ -1,4 +1,4 @@
-define(['app','common'], function (myApp,common) {
+define(['app','common','env'], function (myApp,common,env) {
     myApp.factory('mHelp', ['$cookieStore','$cookies','$rootScope',function ($cookieStore,$cookies,$rootScope) {
         var mHelp = {};
         mHelp.isLogin = function () {

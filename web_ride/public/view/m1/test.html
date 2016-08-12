@@ -3,6 +3,7 @@
     <div class="nav-tab" ng-class="{active: tab == 'api'}"  ng-click="setTab('api')">专用接口测试</div>
     <div class="nav-tab" ng-class="{active: tab == 'apiCommon'}"  ng-click="setTab('apiCommon')">通用接口测试</div>
     <div class="nav-tab" ng-class="{active: tab == 'socketIo'}" ng-click="setTab('socketIo')">socketIo测试</div>
+    <div class="nav-tab" ng-class="{active: tab == 'location'}" ng-click="setTab('location')">当前地址</div>
 </div>
 
 <div ng-show="tab == 'socketIo'">
@@ -40,5 +41,16 @@
     <div>
         <button ng-click="openInputModal()">打开input modal</button>
         <button ng-click="openSearchModal()">打开search modal</button>
+    </div>
+</div>
+
+<div ng-show="tab == 'location'">
+    <h3>测试location</h3>
+    <div>
+        <div ng-repeat="(key, value) in location">
+            <label ng-bind="key"></label>
+            <span>：</span>
+            <span ng-bind="value"></span>
+        </div>
     </div>
 </div>

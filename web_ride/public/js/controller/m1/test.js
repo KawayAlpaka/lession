@@ -1,7 +1,14 @@
 define(['app', 'common','socket'], function (myApp, common,io) {
-    myApp.controller('m1_test_controller', ['$rootScope','$scope', '$scope', '$http', '$uibModal', 'component', '$cookieStore','$cookies',
-        function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies) {
+    myApp.controller('m1_test_controller', ['$rootScope','$scope', '$scope', '$http', '$uibModal', 'component', '$cookieStore','$cookies','$location',
+        function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies,$location) {
             console.log("m1_test_controller");
+
+            s.location = {};
+            s.location.absUrl = $location.absUrl();
+            s.location.host = $location.host();
+            s.location.port = $location.port();
+            s.location.protocol = $location.protocol();
+            s.location.url = $location.url();
 
             // s.api.model.schema("User")
             //     .success(function (data) {
