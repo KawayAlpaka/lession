@@ -3,6 +3,19 @@ define(['app', 'common','socket'], function (myApp, common,io) {
         function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies,$location) {
             console.log("m1_test_controller");
 
+            s.getCurrentCookies = function () {
+                s.currentCookies = $cookies.getAll();
+            };
+            s.getCurrentCookies();
+
+
+            s.newCookie = {};
+            s.newCookie.key = "key";
+            s.newCookie.value = "value";
+            s.addCookie = function (key, value) {
+                $cookieStore.put(key,value);
+            };
+
             s.location = {};
             s.location.absUrl = $location.absUrl();
             s.location.host = $location.host();

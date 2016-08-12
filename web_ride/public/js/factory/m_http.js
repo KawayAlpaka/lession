@@ -14,8 +14,9 @@ define(['app','env'], function (myApp,env) {
                     request.url = request.url + "?random=" + random;
                 }
 
-                // request.headers = {'aaa' : 123};
-                
+                request.headers = {'aaa' : 123};
+                request.headers = {'mSession' : $cookies.get("mSession")};
+
                 return $http(request)
                     .success(function (data, header, config, status) {
                         if(data.state == 600){

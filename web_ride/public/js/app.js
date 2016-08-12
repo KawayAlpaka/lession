@@ -14,8 +14,8 @@ define(['angular'], function (angular) {
         });
     }]);
     myApp.config(['$httpProvider', function($httpProvider) {
-        console.log("myApp.config");
-        $httpProvider.defaults.withCredentials = true;
+        // console.log("myApp.config");
+        // $httpProvider.defaults.withCredentials = true;
     }]);
     return myApp;
 });

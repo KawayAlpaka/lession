@@ -4,6 +4,7 @@
     <div class="nav-tab" ng-class="{active: tab == 'apiCommon'}"  ng-click="setTab('apiCommon')">通用接口测试</div>
     <div class="nav-tab" ng-class="{active: tab == 'socketIo'}" ng-click="setTab('socketIo')">socketIo测试</div>
     <div class="nav-tab" ng-class="{active: tab == 'location'}" ng-click="setTab('location')">当前地址</div>
+    <div class="nav-tab" ng-class="{active: tab == 'cookies'}" ng-click="setTab('cookies')">cookies</div>
 </div>
 
 <div ng-show="tab == 'socketIo'">
@@ -48,6 +49,22 @@
     <h3>测试location</h3>
     <div>
         <div ng-repeat="(key, value) in location">
+            <label ng-bind="key"></label>
+            <span>：</span>
+            <span ng-bind="value"></span>
+        </div>
+    </div>
+</div>
+<div ng-show="tab == 'cookies'">
+    <h3>cookies</h3>
+    <div class="btn btn-default" ng-click="getCurrentCookies()">刷新当前cookies</div>
+    <div>
+        <input type="text" ng-model="newCookie.key">
+        <input type="text" ng-model="newCookie.value">
+        <button type="button" class="btn btn-default" ng-click="addCookie(newCookie.key,newCookie.value)">新增cookie</button>
+    </div>
+    <div>
+        <div ng-repeat="(key, value) in currentCookies">
             <label ng-bind="key"></label>
             <span>：</span>
             <span ng-bind="value"></span>
