@@ -1,8 +1,11 @@
-define(['app'], function (myApp) {
+define(['app','env'], function (myApp,env) {
     myApp.factory('mHttp', ['$q', '$http','mHelp', function ($q, $http,mHelp) {
         return function (request) {
             var promise;
             promise = $q(function (resolve, reject) {
+                if(env.server){
+                    request.url = env.server + request.url;
+                }
                 return $http(request)
                     .success(function (data, header, config, status) {
                         if(data.state == 600){

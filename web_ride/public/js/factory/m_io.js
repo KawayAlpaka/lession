@@ -1,10 +1,14 @@
-define(['app','socket'], function (myApp,io) {
+define(['app','socket','env'], function (myApp,io,env) {
     myApp.factory('mIo', ['$rootScope',function ($rootScope) {
         var mIo = {};
         var socket;
         mIo.start = function () {
             //socket.io
-            socket = io.connect();
+            var server = "";
+            if(env.server){
+                server = env.server;
+            }
+            socket = io.connect(server);
             $rootScope.socket = socket;
             $rootScope.count = {};
 

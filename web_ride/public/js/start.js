@@ -8,7 +8,8 @@ require.config({
         'ng-bootstrap': '../lib/ui-bootstrap-tpls-1.2.1',
         'angular-cookies': '../lib/angular-cookies',
         'lodash': '../lib/lodash',
-        'WebUploader': '//cdn.staticfile.org/webuploader/0.1.5/webuploader',
+        'env': 'env',
+        'WebUploader': 'http://cdn.staticfile.org/webuploader/0.1.5/webuploader',
         'socket': '../lib/socket.io'
     },
     shim: {
@@ -35,7 +36,7 @@ require.config({
 });
 
 require(['jquery', 'app', 'angular', 'ui-router','angular-cookies', 'router','common','api','model','factory','directive' ,'controller',
-    'lodash','ng-bootstrap','statehelper','socket'], function ($, app, angular) {
+    'lodash','ng-bootstrap','statehelper','socket','env'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });
 
