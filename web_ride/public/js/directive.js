@@ -3,7 +3,7 @@ define(['app'], function (myApp) {
     myApp.directive('mContextMenu', function($parse) {
         return {
             restrict: 'E',
-            templateUrl: '/view/directive/m_context_menu.html',
+            templateUrl: 'view/directive/m_context_menu.html',
             scope: {
                 mNode:'=',
                 contextMenuFunctions:'=',
@@ -34,7 +34,7 @@ define(['app'], function (myApp) {
 
         return {
             restrict: 'E',
-            templateUrl: '/view/directive/tree_view.html',
+            templateUrl: 'view/directive/tree_view.html',
             scope: {
                 // treeData: '=',
                 // canChecked: '=',
