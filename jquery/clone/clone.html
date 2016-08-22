@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clone</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<h3>使用clone()方法复制元素</h3>
+    <div class="red" title="www.aseoe.com">
+        <button class="btn-clone">克隆我</button>
+        <span>哈哈1</span>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            var eventFunc = function () {
+                console.log(1);
+                var cloneEle = $(this).parent().clone();
+                //给克隆的元素绑定方法
+                cloneEle.find(".btn-clone").on("click",eventFunc);
+                $("body").append(cloneEle);
+//                refreshEvent();
+            };
+            var refreshEvent = function () {
+                // 移除事件，再添加事件
+                $(".btn-clone").unbind("click",eventFunc);
+                $(".btn-clone").on("click",eventFunc);
+            };
+            refreshEvent();
+
+        });
+    </script>
+</body>
+</html>
