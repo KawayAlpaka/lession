@@ -1,0 +1,7 @@
+{
+  "main": "index.html",
+  "name": "Hello NW.js",
+  "window": {
+    "toolbar": false
+  }
+}
