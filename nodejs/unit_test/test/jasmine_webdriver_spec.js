@@ -4,7 +4,7 @@ var driver = new webdriver.Builder().
 withCapabilities(webdriver.Capabilities.chrome()).
 build();
 
-describe('basic test',function(done){
+describe('basic test',function(){
     it('should be on correct page',function(done){
         driver.get('http://www.baidu.com');
         driver.getTitle().then(function(title){
