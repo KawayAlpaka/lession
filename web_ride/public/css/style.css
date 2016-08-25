@@ -3,28 +3,61 @@
   background-color: gold;
 }
 
-/* line 9, ../scss/_test.scss */
+/* line 8, ../scss/_test.scss */
 .test-ng-animate .test-ng-animate-ng-if {
   background-color: greenyellow;
   width: 100%;
 }
-/* line 13, ../scss/_test.scss */
+/* line 12, ../scss/_test.scss */
 .test-ng-animate .test-ng-animate-ng-if.ng-enter {
   transition: all linear 3s;
   width: 0%;
 }
-/* line 17, ../scss/_test.scss */
+/* line 16, ../scss/_test.scss */
 .test-ng-animate .test-ng-animate-ng-if.ng-enter.ng-enter-active {
   width: 100%;
 }
-/* line 20, ../scss/_test.scss */
+/* line 19, ../scss/_test.scss */
 .test-ng-animate .test-ng-animate-ng-if.ng-leave {
   transition: all linear 1s;
   width: 100%;
 }
-/* line 24, ../scss/_test.scss */
+/* line 23, ../scss/_test.scss */
 .test-ng-animate .test-ng-animate-ng-if.ng-leave.ng-leave-active {
   width: 0%;
+}
+/* line 27, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-show {
+  transition: all linear 2s;
+  background-color: greenyellow;
+  width: 100%;
+}
+/* line 32, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-show.ng-hide {
+  width: 0%;
+}
+/* line 36, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-hide {
+  background-color: greenyellow;
+  width: 100%;
+}
+/* line 40, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-hide.ng-hide-add {
+  transition: all linear 3s;
+  width: 100%;
+}
+/* line 44, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-hide.ng-hide-add-active {
+  width: 0%;
+}
+/* line 47, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-hide.ng-hide-remove {
+  transition: all linear 1s;
+  width: 0%;
+}
+/* line 51, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-hide.ng-hide-remove-active {
+  width: 100%;
 }
 
 /* line 1, ../scss/_directive.scss */

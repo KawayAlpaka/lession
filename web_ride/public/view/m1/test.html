@@ -76,11 +76,29 @@
 <div ng-show="tab == 'ngAnimate'">
     <h3>ngAnimate</h3>
     <div class="test-ng-animate">
-        <h4>ng-if</h4>
         <div>
-            <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIfShow',true)">显示</button>
-            <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIfShow',false)">隐藏</button>
+            <h4>ng-if</h4>
+            <div>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIf',true)">显示</button>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIf',false)">隐藏</button>
+            </div>
+            <div class="test-ng-animate-ng-if" ng-if="ngAnimate.ngIf">哈哈</div>
         </div>
-        <div class="test-ng-animate-ng-if" ng-if="ngAnimate.ngIfShow">哈哈</div>
+        <div>
+            <h4>ng-show</h4>
+            <div>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngShow',true)">显示</button>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngShow',false)">隐藏</button>
+            </div>
+            <div class="test-ng-animate-ng-show" ng-show="ngAnimate.ngShow">哈哈</div>
+        </div>
+        <div>
+            <h4>ng-hide</h4>
+            <div>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngHide',false)">显示</button>
+                <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngHide',true)">隐藏</button>
+            </div>
+            <div class="test-ng-animate-ng-hide" ng-hide="ngAnimate.ngHide">哈哈</div>
+        </div>
     </div>
 </div>

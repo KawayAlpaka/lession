@@ -23,4 +23,33 @@
   .test-ng-animate-ng-if.ng-leave.ng-leave-active{
     width: 0%;
   }
+
+  .test-ng-animate-ng-show{
+    transition: all linear 2s;
+    background-color: greenyellow;
+    width: 100%;
+  }
+  .test-ng-animate-ng-show.ng-hide{
+    width: 0%;
+  }
+
+  .test-ng-animate-ng-hide{
+    background-color: greenyellow;
+    width: 100%;
+  }
+  .test-ng-animate-ng-hide.ng-hide-add{
+    transition: all linear 3s;
+    width: 100%;
+  }
+  .test-ng-animate-ng-hide.ng-hide-add-active{
+    width: 0%;
+  }
+  .test-ng-animate-ng-hide.ng-hide-remove{
+    transition: all linear 1s;
+    width: 0%;
+  }
+  .test-ng-animate-ng-hide.ng-hide-remove-active{
+    width: 100%;
+  }
+
 }
