@@ -9,6 +9,18 @@ define(['app', 'common','socket'], function (myApp, common,io) {
                 s.ngAnimate[attrName] = value;
             };
 
+            s.ngAnimate.ngRepeat = {};
+            s.ngAnimate.ngRepeat.add = function (index,value) {
+                s.ngAnimate.ngRepeat.items.splice(index,0,value);
+            };
+            s.ngAnimate.ngRepeat.remove = function (index) {
+                s.ngAnimate.ngRepeat.items.splice(index,1);
+            };
+            s.ngAnimate.ngRepeat.items = [
+                "哈哈1",
+                "哈哈2",
+                "哈哈3"
+            ];
 
 
 

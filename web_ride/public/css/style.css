@@ -59,6 +59,24 @@
 .test-ng-animate .test-ng-animate-ng-hide.ng-hide-remove-active {
   width: 100%;
 }
+/* line 57, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-repeat.ng-enter {
+  transition: all linear 0.5s;
+  height: 0px;
+}
+/* line 61, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-repeat.ng-enter.ng-enter-active {
+  height: 20px;
+}
+/* line 64, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-repeat.ng-leave {
+  transition: all linear 0.5s;
+  height: 20px;
+}
+/* line 68, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-repeat.ng-leave.ng-leave-active {
+  height: 0px;
+}
 
 /* line 1, ../scss/_directive.scss */
 m-context-menu {

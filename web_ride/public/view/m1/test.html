@@ -100,5 +100,15 @@
             </div>
             <div class="test-ng-animate-ng-hide" ng-hide="ngAnimate.ngHide">哈哈</div>
         </div>
+        <div>
+            <h4>ng-repeat</h4>
+            <!--<div>ngAnimate和track by $index一起使用有问题</div>-->
+            <!--<div ng-repeat="item in ngAnimate.ngRepeat.items track by $index" class="test-ng-animate-ng-repeat">-->
+            <div ng-repeat="item in ngAnimate.ngRepeat.items" class="test-ng-animate-ng-repeat">
+                <span ng-bind="item"></span>
+                <button ng-click="ngAnimate.ngRepeat.add($index,$index+'Add')">添加</button>
+                <button ng-click="ngAnimate.ngRepeat.remove($index)">删除</button>
+            </div>
+        </div>
     </div>
 </div>

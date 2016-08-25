@@ -52,4 +52,23 @@
     width: 100%;
   }
 
+  .test-ng-animate-ng-repeat{
+  }
+  .test-ng-animate-ng-repeat.ng-enter{
+    transition: all linear 0.5s;
+    height: 0px;
+  }
+  .test-ng-animate-ng-repeat.ng-enter.ng-enter-active{
+    height: 20px;
+  }
+  .test-ng-animate-ng-repeat.ng-leave{
+    transition: all linear 0.5s;
+    height: 20px;
+  }
+  .test-ng-animate-ng-repeat.ng-leave.ng-leave-active{
+    height: 0px;
+  }
+
+
+
 }
