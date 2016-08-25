@@ -10,7 +10,8 @@ require.config({
         'lodash': '../lib/lodash',
         'env': 'env',
         'WebUploader': 'http://cdn.staticfile.org/webuploader/0.1.5/webuploader',
-        'socket': '../lib/socket.io'
+        'socket': '../lib/socket.io',
+        'angular-animate': '//cdn.bootcss.com/angular.js/1.5.8/angular-animate'
     },
     shim: {
         'angular': {
@@ -25,6 +26,9 @@ require.config({
         'angular-cookies': {
             deps: ['angular']
         },
+        'angular-animate': {
+            deps: ['angular']
+        },
         'rap':{
             deps:['angular']
         },
@@ -35,7 +39,7 @@ require.config({
     waitSeconds: 15
 });
 
-require(['jquery', 'app', 'angular', 'ui-router','angular-cookies', 'router','common','api','model','factory','directive' ,'controller',
+require(['jquery', 'app', 'angular', 'ui-router','angular-cookies','angular-animate', 'router','common','api','model','factory','directive' ,'controller',
     'lodash','ng-bootstrap','statehelper','socket','env'], function ($, app, angular) {
     return angular.bootstrap(document, ['myApp']);
 });

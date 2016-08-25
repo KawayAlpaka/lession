@@ -3,6 +3,30 @@
   background-color: gold;
 }
 
+/* line 9, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-if {
+  background-color: greenyellow;
+  width: 100%;
+}
+/* line 13, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-if.ng-enter {
+  transition: all linear 3s;
+  width: 0%;
+}
+/* line 17, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-if.ng-enter.ng-enter-active {
+  width: 100%;
+}
+/* line 20, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-if.ng-leave {
+  transition: all linear 1s;
+  width: 100%;
+}
+/* line 24, ../scss/_test.scss */
+.test-ng-animate .test-ng-animate-ng-if.ng-leave.ng-leave-active {
+  width: 0%;
+}
+
 /* line 1, ../scss/_directive.scss */
 m-context-menu {
   position: fixed;

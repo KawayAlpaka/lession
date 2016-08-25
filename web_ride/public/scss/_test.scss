@@ -3,3 +3,24 @@
     background-color: gold;
   }
 }
+
+.test-ng-animate{
+  .test-ng-animate-ng-if{
+    background-color: greenyellow;
+    width: 100%;
+  }
+  .test-ng-animate-ng-if.ng-enter{
+    transition: all linear 3s;
+    width: 0%;
+  }
+  .test-ng-animate-ng-if.ng-enter.ng-enter-active{
+    width: 100%;
+  }
+  .test-ng-animate-ng-if.ng-leave{
+    transition: all linear 1s;
+    width: 100%;
+  }
+  .test-ng-animate-ng-if.ng-leave.ng-leave-active{
+    width: 0%;
+  }
+}

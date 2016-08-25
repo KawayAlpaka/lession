@@ -3,11 +3,19 @@ define(['app', 'common','socket'], function (myApp, common,io) {
         function ($rootScope,$scope, s, $http, $uibModal, component, $cookieStore,$cookies,$location) {
             console.log("m1_test_controller");
 
+            // ngAnimate 测试
+            s.ngAnimate = {};
+            s.ngAnimate.setAttr = function (attrName, value) {
+                s.ngAnimate[attrName] = value;
+            };
+
+
+
+
             s.getCurrentCookies = function () {
                 s.currentCookies = $cookies.getAll();
             };
             s.getCurrentCookies();
-
 
             s.newCookie = {};
             s.newCookie.key = "key";

@@ -5,6 +5,7 @@
     <div class="nav-tab" ng-class="{active: tab == 'socketIo'}" ng-click="setTab('socketIo')">socketIo测试</div>
     <div class="nav-tab" ng-class="{active: tab == 'location'}" ng-click="setTab('location')">当前地址</div>
     <div class="nav-tab" ng-class="{active: tab == 'cookies'}" ng-click="setTab('cookies')">cookies</div>
+    <div class="nav-tab" ng-class="{active: tab == 'ngAnimate'}" ng-click="setTab('ngAnimate')">ngAnimate</div>
 </div>
 
 <div ng-show="tab == 'socketIo'">
@@ -69,5 +70,17 @@
             <span>：</span>
             <span ng-bind="value"></span>
         </div>
+    </div>
+</div>
+
+<div ng-show="tab == 'ngAnimate'">
+    <h3>ngAnimate</h3>
+    <div class="test-ng-animate">
+        <h4>ng-if</h4>
+        <div>
+            <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIfShow',true)">显示</button>
+            <button class="btn btn-default" ng-click="ngAnimate.setAttr('ngIfShow',false)">隐藏</button>
+        </div>
+        <div class="test-ng-animate-ng-if" ng-if="ngAnimate.ngIfShow">哈哈</div>
     </div>
 </div>

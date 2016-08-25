@@ -1,5 +1,5 @@
 define(['angular'], function (angular) {
-    var myApp = angular.module('myApp', ['ui.router','ui.router.stateHelper', 'ui.bootstrap','ngCookies']);
+    var myApp = angular.module('myApp', ['ui.router','ui.router.stateHelper', 'ui.bootstrap','ngCookies', 'ngAnimate']);
     myApp.run(['$rootScope','$state','api','model','mHelp','mIo', function ($rootScope,$state,api,model,mHelp,mIo) {
         $rootScope.$state = $state;
         $rootScope.api = api;
