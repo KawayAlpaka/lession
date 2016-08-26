@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab1</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script>
+        var setTabElement = function (text) {
+            window.opener.document.getElementById("test1").innerHTML = text;
+        };
+    </script>
+</head>
+<body>
+<div>
+    <button onclick="setTabElement('string')">控制父Tab</button>
+</div>
+<div id="test1"></div>
+</body>
+</html>

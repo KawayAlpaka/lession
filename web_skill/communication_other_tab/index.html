@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作其他Tab</title>
+
+    <script>
+        var tab;
+        var openTab = function (page) {
+            tab = window.open(page,'预览');
+//            console.log(tab);
+//            window.open(page,'parent','width=300,height=300,toolbar=no');
+        };
+        var closeTab = function () {
+            tab.close();
+        };
+        var tabGoTo = function (url) {
+            tab.location.href = url;
+        };
+        var setTabBody = function (text) {
+            tab.document.body.innerHTML = text;
+        };
+        var setTabElement = function (text) {
+            tab.document.getElementById("test1").innerHTML = text;
+        };
+        var runTabJquery = function () {
+            tab.$("#test1").html("jquery set text")
+        };
+
+    </script>
+
+</head>
+<body>
+<div>
+    <button onclick="openTab('tab1.html')">打开tab1</button>
+    <button onclick="closeTab()">关闭tab</button>
+    <button onclick="tabGoTo('http://www.baidu.com')">tab跳转</button>
+    <button onclick="setTabBody('your code here')">设置tab body</button>
+    <button onclick="setTabElement('your code here Element')">设置tab Element</button>
+    <button onclick="runTabJquery()">runTabJquery</button>
+</div>
+<div>
+    <button onclick="window.open()">打开空页面</button>
+</div>
+<div id="test1">
+
+</div>
+</body>
+</html>
