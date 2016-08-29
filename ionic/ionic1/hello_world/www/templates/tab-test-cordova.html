@@ -1,7 +1,32 @@
 <ion-view view-title="TestCordova">
   <ion-content class="padding">
-    <p>
+    <h2>
       TestCordova
-    </p>
+    </h2>
+    <div class="row">
+      <div class="col">
+        <button class="button"
+                ng-class="{'button-stable':testPlugin != 'device','button-balanced':testPlugin == 'device'}"
+                on-tap="setTestPlugin('device')">
+          device
+        </button>
+      </div>
+      <div class="col">
+        <button class="button" ng-class="{'button-stable':testPlugin != 'file','button-balanced':testPlugin == 'file'}"
+                on-tap="setTestPlugin('file')">
+          file
+        </button>
+      </div>
+    </div>
+    <div ng-show="testPlugin == 'device'">
+      <button class="button button-block button-positive" on-tap="getDevice()">
+        GetDevice
+      </button>
+      <div ng-repeat="(key, value) in device">
+        <label ng-bind="key"></label>
+        <span>：</span>
+        <span ng-bind="value"></span>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

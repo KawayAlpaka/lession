@@ -1,8 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('TestCordovaCtrl', function($scope) {
+.controller('TestCordovaCtrl',["$scope","$rootScope" ,function(s,$rootScope) {
   console.log("TestCordovaCtrl");
-})
+
+  s.getDevice = function () {
+    // console.log(cordova);
+    console.log(device.platform);
+    s.device = device;
+  };
+
+  s.setTestPlugin = function (value) {
+    s.testPlugin = value;
+    console.log(s.testPlugin);
+  }
+
+}])
 
 .controller('DashCtrl', function($scope) {})
 
