@@ -1,7 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('TestCordovaCtrl',["$scope","$rootScope" ,function(s,$rootScope) {
+.controller('TestCordovaCtrl',["$scope","$rootScope","$location" ,function(s,$rootScope,$location) {
   console.log("TestCordovaCtrl");
+  
+  s.location = {};
+  s.location.absUrl = $location.absUrl();
+  s.location.host = $location.host();
+  s.location.port = $location.port();
+  s.location.protocol = $location.protocol();
+  s.location.url = $location.url();
 
   s.getDevice = function () {
     // console.log(cordova);
@@ -17,21 +24,21 @@ angular.module('starter.controllers', [])
   s.imageUrl = "还没有上传";
   s.testCamera = function () {
     navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-      // destinationType: Camera.DestinationType.FILE_URI });
-      destinationType: Camera.DestinationType.DATA_URL });
+      destinationType: Camera.DestinationType.FILE_URI });
+      // destinationType: Camera.DestinationType.DATA_URL });
 
-    // function onSuccess(imageURI) {
-    //   var image = document.getElementById('myImage');
-    //   image.src = imageURI;
-    //   s.imageUrl = imageURI;
-    //   console.log(s.imageUrl);
-    //   s.$apply();
-    // }
-
-    function onSuccess(imageData) {
+    function onSuccess(imageURI) {
       var image = document.getElementById('myImage');
-      image.src = "data:image/jpeg;base64," + imageData;
+      image.src = imageURI;
+      s.imageUrl = imageURI;
+      console.log(s.imageUrl);
+      s.$apply();
     }
+
+    // function onSuccess(imageData) {
+    //   var image = document.getElementById('myImage');
+    //   image.src = "data:image/jpeg;base64," + imageData;
+    // }
 
     function onFail(message) {
       alert('Failed because: ' + message);

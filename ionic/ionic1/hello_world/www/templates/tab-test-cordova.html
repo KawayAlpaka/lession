@@ -17,6 +17,12 @@
           camera
         </button>
       </div>
+      <div class="col">
+        <button class="button" ng-class="{'button-stable':testPlugin != 'location','button-balanced':testPlugin == 'location'}"
+                ng-click="setTestPlugin('location')">
+          location
+        </button>
+      </div>
     </div>
     <div ng-show="testPlugin == 'device'">
       <button class="button button-block button-positive" on-tap="getDevice()">
@@ -30,9 +36,9 @@
     </div>
     <div ng-show="testPlugin == 'camera'">
       <div>
-        <button class="button button-block button-positive" on-tap="testCamera()">
-          TestCamera
-        </button>
+        <!--<button class="button button-block button-positive" on-tap="testCamera()">TestCamera</button>-->
+        <button class="button button-block button-positive" ng-click="testCamera()">TestCamera</button>
+
         <div>
           <img style="height: 100px;width: 100px" ng-src="{{imageUrl}}" alt="">
           <img style="height: 100px;width: 100px" src="" alt="" id="myImage">
@@ -42,7 +48,16 @@
           </div>
         </div>
       </div>
-
+    </div>
+    <div ng-show="testPlugin == 'location'">
+      <h3>测试location</h3>
+      <div>
+        <div ng-repeat="(key, value) in location">
+          <label ng-bind="key"></label>
+          <span>：</span>
+          <span ng-bind="value"></span>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
