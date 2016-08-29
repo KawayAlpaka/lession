@@ -27,6 +27,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.helloworld288380"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.helloworld288380"
         }
     },
     "dependent_plugins": {
