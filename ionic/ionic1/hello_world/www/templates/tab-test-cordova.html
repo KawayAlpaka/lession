@@ -23,6 +23,12 @@
           location
         </button>
       </div>
+      <div class="col">
+        <button class="button" ng-class="{'button-stable':testPlugin != 'location','button-balanced':testPlugin == 'geolocation'}"
+                ng-click="setTestPlugin('geolocation')">
+          geolocation
+        </button>
+      </div>
     </div>
     <div ng-show="testPlugin == 'device'">
       <button class="button button-block button-positive" on-tap="getDevice()">
@@ -57,6 +63,12 @@
           <span>：</span>
           <span ng-bind="value"></span>
         </div>
+      </div>
+    </div>
+    <div ng-show="testPlugin == 'geolocation'">
+      <h3>测试geolocation</h3>
+      <div>
+        <button class="button button-block button-positive" ng-click="getGeolocation()">GetCamera</button>
       </div>
     </div>
   </ion-content>
