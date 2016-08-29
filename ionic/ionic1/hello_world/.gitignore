@@ -3,5 +3,7 @@
 
 node_modules/
 platforms/
-plugins/
+plugins/*
 www/lib
+!plugins/android.json
+!plugins/fetch.json
