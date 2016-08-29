@@ -1,5 +1,9 @@
 angular.module('starter.controllers', [])
 
+.controller('TestCordovaCtrl', function($scope) {
+  console.log("TestCordovaCtrl");
+})
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {

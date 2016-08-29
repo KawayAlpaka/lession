@@ -49,7 +49,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-
+  .state('tab.test-cordova', {
+    url: '/test-cordova',
+    views: {
+      'tab-test-cordova': {
+        templateUrl: 'templates/tab-test-cordova.html',
+        controller: 'TestCordovaCtrl'
+      }
+    }
+  })
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -68,6 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
 
   .state('tab.account', {
     url: '/account',
