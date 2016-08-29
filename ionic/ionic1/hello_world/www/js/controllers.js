@@ -13,13 +13,24 @@ angular.module('starter.controllers', [])
     s.testPlugin = value;
   };
 
+
+  s.imageUrl = "还没有上传";
   s.testCamera = function () {
     navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI });
+      // destinationType: Camera.DestinationType.FILE_URI });
+      destinationType: Camera.DestinationType.DATA_URL });
 
-    function onSuccess(imageURI) {
+    // function onSuccess(imageURI) {
+    //   var image = document.getElementById('myImage');
+    //   image.src = imageURI;
+    //   s.imageUrl = imageURI;
+    //   console.log(s.imageUrl);
+    //   s.$apply();
+    // }
+
+    function onSuccess(imageData) {
       var image = document.getElementById('myImage');
-      image.src = imageURI;
+      image.src = "data:image/jpeg;base64," + imageData;
     }
 
     function onFail(message) {

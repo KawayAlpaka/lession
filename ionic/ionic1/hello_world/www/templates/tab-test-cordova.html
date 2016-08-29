@@ -29,12 +29,20 @@
       </div>
     </div>
     <div ng-show="testPlugin == 'camera'">
-      <button class="button button-block button-positive" on-tap="testCamera()">
-        TestCamera
-      </button>
       <div>
-        <img src="" alt="" id="myImage">
+        <button class="button button-block button-positive" on-tap="testCamera()">
+          TestCamera
+        </button>
+        <div>
+          <img style="height: 100px;width: 100px" ng-src="{{imageUrl}}" alt="">
+          <img style="height: 100px;width: 100px" src="" alt="" id="myImage">
+          <div>
+            <label>file url:</label>
+            <span ng-bind="imageUrl"></span>
+          </div>
+        </div>
       </div>
+
     </div>
   </ion-content>
 </ion-view>
