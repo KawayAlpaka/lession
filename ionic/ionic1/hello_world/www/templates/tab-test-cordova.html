@@ -12,9 +12,9 @@
         </button>
       </div>
       <div class="col">
-        <button class="button" ng-class="{'button-stable':testPlugin != 'file','button-balanced':testPlugin == 'file'}"
-                on-tap="setTestPlugin('file')">
-          file
+        <button class="button" ng-class="{'button-stable':testPlugin != 'camera','button-balanced':testPlugin == 'camera'}"
+                on-tap="setTestPlugin('camera')">
+          camera
         </button>
       </div>
     </div>
@@ -26,6 +26,14 @@
         <label ng-bind="key"></label>
         <span>：</span>
         <span ng-bind="value"></span>
+      </div>
+    </div>
+    <div ng-show="testPlugin == 'camera'">
+      <button class="button button-block button-positive" on-tap="testCamera()">
+        TestCamera
+      </button>
+      <div>
+        <img src="" alt="" id="myImage">
       </div>
     </div>
   </ion-content>
