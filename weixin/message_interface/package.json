@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express": "^4.14.0",
+    "wechat": "^2.0.3"
+  }
+}
