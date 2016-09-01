@@ -8,6 +8,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(["$rootScope","$ionicPlatform",function($rootScope,$ionicPlatform) {
+  console.log($ionicPlatform);
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
