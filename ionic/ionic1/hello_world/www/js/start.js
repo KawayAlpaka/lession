@@ -1,7 +1,7 @@
 require.config({
   baseUrl: "js",
   paths: {
-    'ionic.bundle': 'http://cdn.bootcss.com/ionic/1.3.1/js/ionic.bundle.min',
+    'ionic.bundle': 'http://cdn.bootcss.com/ionic/1.3.1/js/ionic.bundle',
     'cordova' : '../cordova',
     'app' : 'app',
     'controllers': 'controllers',
