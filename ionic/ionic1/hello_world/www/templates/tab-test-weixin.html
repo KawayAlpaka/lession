@@ -1,7 +1,19 @@
 <ion-view view-title="TestWeixin">
-  <ion-content class="padding">
-    <h2>
-      TestWeixin
-    </h2>
+  <ion-content>
+    <div class="tabs tabs-icon-top" style="position: static">
+      <a title="OAuth" class="tab-item" href="#/tab/test-weixin/OAuth">
+        <i class="icon ion-home"></i>
+        OAuth
+      </a>
+      <a class="tab-item"  href="#/tab/test-weixin/js">
+        <i class="icon ion-star"></i>
+        js
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-gear-a"></i>
+        Settings
+      </a>
+    </div>
+    <div ui-view="test-weixin"></div>
   </ion-content>
 </ion-view>

@@ -50,6 +50,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
       })
+      .state('tab.test-weixin.OAuth', {
+        url: '/OAuth',
+        views: {
+          'test-weixin': {
+            templateUrl: 'templates/test_weixin/OAuth.html',
+            controller: 'TestWeixin_OAuth_Ctrl'
+          }
+        }
+      })
+      .state('tab.test-weixin.js', {
+        url: '/js',
+        views: {
+          'test-weixin': {
+            templateUrl: 'templates/test_weixin/js.html',
+            controller: 'TestWeixin_js_Ctrl'
+          }
+        }
+      })
       .state('tab.test-cordova', {
         url: '/test-cordova',
         views: {

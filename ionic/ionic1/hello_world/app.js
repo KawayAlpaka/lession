@@ -1,14 +1,20 @@
 var express = require('express');
 var app = express();
+var bodyParser = require("body-parser");
+
+var OAuth = require('wechat-oauth');
+var client = new OAuth('wx13f06fd9ec831ed6', '396e23200d59276bcf9c4a3eb2b0d05d');
+
 var wechat = require('wechat');
 var config = {
     token: 'ltoken',
-    appid: 'appid'
+    appid: 'wx13f06fd9ec831ed6'
     // encodingAESKey: '12345678'
 };
 
 app.use(express.static('www'));
 app.use(express.query());
+app.use(bodyParser.json({limit: '1mb'}));
 app.use('/wechat', wechat(config, function (req, res, next) {
     // 微信输入信息都在req.weixin上
     var message = req.weixin;
@@ -46,6 +52,24 @@ app.use('/wechat', wechat(config, function (req, res, next) {
         ]);
     }
 }));
+
+app.use('/OAuth', function (req, res, next) {
+    console.log(req.body);
+    console.log(req.params);
+    console.log(req.query);
+    var url = client.getAuthorizeURL('http://www.yangtuos.com/OAuth', '123', 'snsapi_base');
+    console.log(url);
+    client.getAccessToken(req.query.code, function (err, result) {
+        var accessToken = result.data.access_token;
+        var openid = result.data.openid;
+        console.log(result.data);
+        client.getUser(openid, function (err, result) {
+            var userInfo = result;
+            console.log(userInfo);
+        });
+    });
+    res.json({});
+});
 
 var server = app.listen(80, function () {
     var host = server.address().address;

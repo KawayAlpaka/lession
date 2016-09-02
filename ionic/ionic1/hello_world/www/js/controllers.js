@@ -1,7 +1,18 @@
 angular.module('starter.controllers', [])
-  
+
   .controller('TestWeixinCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
     console.log("TestWeixinCtrl");
+  }])
+  .controller('TestWeixin_OAuth_Ctrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
+    console.log("TestWeixin_OAuth_Ctrl");
+    s.getOpenId = function () {
+      console.log("getOpenId");
+      // window.open("www.baidu.com");
+      window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx13f06fd9ec831ed6&redirect_uri=http%3A%2F%2Fwww.yangtuos.com%2FOAuth&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    };
+  }])
+  .controller('TestWeixin_js_Ctrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
+    console.log("TestWeixin_js_Ctrl");
   }])
 
   .controller('TestCordovaCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
