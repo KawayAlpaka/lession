@@ -1,3 +1,6 @@
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
 var mongoose = require('mongoose');
 var express = require('express');
 var cookieParser = require('cookie-parser');
@@ -9,6 +12,8 @@ mongoose.Promise = global.Promise; //升级mongoose默认Promise
 var User = require('./app/model/user');
 var RobotNode = require('./app/model/robot_node');
 var Project = require('./app/model/project');
+
+var mIo = require('./app/socket/io');
 
 var routerApi = require('./app/router/api');
 
@@ -22,16 +27,45 @@ app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下
 
 app.use('/api', routerApi);
 
-var server = app.listen(3030, function () {
-    var host = server.address().address;
-    var port = server.address().port;
+// // 原始版本
+// var server = app.listen(3030, function () {
+//     var host = server.address().address;
+//     var port = server.address().port;
+//     console.log('ride listening at http://%s:%s', host, port);
+//     process.on('uncaughtException', function (err) {
+//         console.log('Caught exception: ', err.stack);
+//     });
+// });
+// mIo.createServer(server);
+
+// http 版本
+var httpServer = http.createServer(app).listen(3030, function () {
+    var host = httpServer.address().address;
+    var port = httpServer.address().port;
     console.log('ride listening at http://%s:%s', host, port);
     process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err.stack);
     });
 });
+mIo.createServer(httpServer);
 
-require('./app/socket/io').createServer(server);
+// //https 版本
+// var httpsOptions = {
+//     key: fs.readFileSync('D:/ssl/privatekey.pem'),
+//     cert: fs.readFileSync('D:/ssl/certificate.pem'),
+//     rejectUnauthorized: false
+// };
+// var httpsServer = https.createServer(httpsOptions,app).listen(3031, function () {
+//     var host = httpsServer.address().address;
+//     var port = httpsServer.address().port;
+//     console.log(httpsServer.address());
+//     console.log('ride listening at https://%s:%s', host, port);
+//     process.on('uncaughtException', function (err) {
+//         console.log('Caught exception: ', err.stack);
+//     });
+// });
+// mIo.createServer(httpsServer);
+
 
 // // seed
 // var seed = require("./config/seed");

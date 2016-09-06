@@ -10,7 +10,7 @@ require.config({
         'angular-cookies': '../lib/angular-cookies',
         'lodash': '../lib/lodash',
         'env': 'env',
-        'WebUploader': 'http://cdn.staticfile.org/webuploader/0.1.5/webuploader',
+        'WebUploader': '../lib/webuploader',
         'socket': '../lib/socket.io',
         'angular-animate': '//cdn.bootcss.com/angular.js/1.5.8/angular-animate'
     },
