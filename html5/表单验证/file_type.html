@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件验证</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <span>文件类型：</span>
+        <span id="file-type"></span>
+    </div>
+    <div style="width: 200px;height: 200px">
+        <img style="width: 100%;height: 100%" src="" alt="" id="imgx">
+    </div>
+
+    <form action="/file/uploading" method="post" enctype='multipart/form-data'>
+        <!--accept只能在选择文件的时候有轻微的控制-->
+        <input type="file" id="filex" name="file1" accept="image/*" multiple="multiple">
+        <button type="submit">提交</button>
+    </form>
+
+    <button onclick="preview()">preview</button>
+</div>
+<script>
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+    function preview() {
+        console.log(document.getElementById("filex").files);
+        var objUrl = getObjectURL(document.getElementById("filex").files[0]) ;
+        var fileType = document.getElementById("filex").files[0].type;
+        console.log("objurl:"+objUrl);
+        $("#imgx").attr("src",objUrl);
+        $("#file-type").html(fileType);
+    }
+</script>
+</body>
+</html>
