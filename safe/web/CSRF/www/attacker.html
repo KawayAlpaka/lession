@@ -11,11 +11,16 @@
     <input type="text" name="haha" value="2">
     <button type="submit">提交</button>
 </form>
-<button class="ajax-req-post" type="button">ajax-post</button>
-<button class="ajax-req-get" type="button">ajax-get</button>
+<div>
+    <button class="ajax-req-post" type="button">ajax-post</button>
+    <button class="ajax-req-get" type="button">ajax-get</button>
+</div>
+<div>
+    <button class="open-tab">open-tab</button>
+</div>
 <script>
-    // ajax 测试没有通过
     $(function () {
+        // ajax 测试没有通过 发送信息不带cookies
         $(".ajax-req-post").on("click",function () {
             $.post("http://localhost:5050/victim.html",{},function (data) {
                 console.log(data);
@@ -25,6 +30,15 @@
             $.get("http://localhost:5050/victim.html",function (data) {
                 console.log(data);
             });
+        });
+
+        //open-tab 跨域执行js失败，浏览器有跨域限制
+        $(".open-tab").on("click",function () {
+            var victim = window.open("http://localhost:5050/victim.html");
+            console.log(victim);
+            setTimeout(function () {
+                victim.console.log("222");
+            },3000);
         });
     });
 </script>
