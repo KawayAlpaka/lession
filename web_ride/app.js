@@ -25,7 +25,10 @@ app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下
     extended: true
 }));
 
-app.use('/api', routerApi);
+app.use('/api', routerApi,function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Api Something broke : \r\n'+err.stack);
+});
 
 // // 原始版本
 // var server = app.listen(3030, function () {
@@ -43,9 +46,6 @@ var httpServer = http.createServer(app).listen(3030, function () {
     var host = httpServer.address().address;
     var port = httpServer.address().port;
     console.log('ride listening at http://%s:%s', host, port);
-    process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ', err.stack);
-    });
 });
 mIo.createServer(httpServer);
 
@@ -60,9 +60,6 @@ mIo.createServer(httpServer);
 //     var port = httpsServer.address().port;
 //     console.log(httpsServer.address());
 //     console.log('ride listening at https://%s:%s', host, port);
-//     process.on('uncaughtException', function (err) {
-//         console.log('Caught exception: ', err.stack);
-//     });
 // });
 // mIo.createServer(httpsServer);
 

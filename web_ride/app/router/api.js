@@ -2,10 +2,6 @@ var express = require('express');
 var api = require('../controller/api');
 var router = express.Router();
 
-var errFn = function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-};
 var defaultResFormatFn = function (req, res, next) {
     res.resFormat = {
         data: {},
@@ -32,7 +28,7 @@ var crossDomain = function (req, res, next) {
     }
 };
 
-router.use(api.users.currentUser, defaultResFormatFn, errFn,crossDomain);
+router.use(api.users.currentUser, defaultResFormatFn,crossDomain);
 
 // router.get('/', function(req, res) {
 //     console.log('hello api');
