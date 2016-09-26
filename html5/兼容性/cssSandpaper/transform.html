@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transform</title>
+
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+    <script type="text/javascript" src="./js/html5shiv.js"></script>
+    <script type="text/javascript" src="./js/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/es5-shim/4.5.9/es5-shim.min.js"></script>
+
+    <script type="text/javascript" src="./js/cssSandpaper/cssQuery-p.js"></script>
+    <script type="text/javascript" src="./js/cssSandpaper/sylvester.js"></script>
+    <script type="text/javascript" src="./js/cssSandpaper/cssSandpaper.js"></script>
+
+    <!--cssSandpaper 与 bootstrap 冲突 匪夷所思 -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #o1 {
+            border:solid 1px black;
+            width:200px;
+            height:200px;
+            padding:10px;
+            margin:60px;
+            background-color:#f0f3f9;
+            -sand-transform:rotate(45deg);
+            float:left;
+        }
+        #o2 {
+            background:red;
+            width:200px;
+            height:300px;
+            padding:10px;
+            margin-left:200px;
+            -sand-transform:rotate(-45deg);
+            float:left;
+        }
+    </style>
+</head>
+<body>
+<div id="o1">
+    -sand-transform:rotate(45deg);
+</div>
+<div id="o2">
+    -sand-transform:rotate(-45deg);
+</div>
+</body>
+</html>
