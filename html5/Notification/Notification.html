@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification</title>
+
+</head>
+<body>
+<button id="notifyButton">notifyButton</button>
+<button id="requestButton">requestButton</button>
+<script>
+
+    var btn = document.getElementById('notifyButton');
+    console.log(btn);
+    btn.onclick = function () {
+        var doNotification = function () {
+            var n = new Notification('Hello Notification', {body: "I hope that all the browser will support this\                   function!"});
+        };
+        setTimeout(doNotification,5000);
+        if (window.Notification) {
+            if (Notification.Permission === 'granted') {
+                console.log('granted');
+                var notification = new Notification('Hello Notification', {body: "I hope that all the browser will support this\                   function!"});
+            } else {
+                console.log('not granted');
+                document.getElementById('requestButton').onclick = function () {
+                    console.log("requestPermission");
+                    Notification.requestPermission();
+                };
+            }
+        } else {
+            alert('你的浏览器不支持此特性，请下载谷歌浏览器试用该功能');
+        }
+
+    };
+
+</script>
+</body>
+</html>
