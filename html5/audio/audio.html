@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>audio</title>
+
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+
+</head>
+<body>
+<div id="audioControl">
+    <div class="play">
+        <span id="play">Play</span>
+    </div>
+</div>
+
+<audio id="media" src="357b47d791c30937876a0fc810922998.mp3"></audio>
+
+<script>
+    var media = $('#media')[0];
+    var audioTimer = null;
+
+    //绑定播放暂停控制
+    $('.play').bind('click', function() {
+        playAudio();
+    });
+
+    //播放暂停切换
+    function playAudio() {
+        if(media.paused) {
+            play();
+        } else {
+            pause();
+        }
+    }
+
+    //播放
+    function play() {
+        media.play();
+        $('#play').html('Pause');
+    }
+
+    //暂停
+    function pause() {
+        media.pause();
+        $('#play').html('Play');
+    }
+</script>
+</body>
+</html>
