@@ -1,14 +1,14 @@
 <div ui-view="tabs"></div>
 <div class="tabs tabs-icon-top">
-    <a class="tab-item" ui-sref="m1.tabs.content">
+    <a class="tab-item" ng-class="{active:tabName == 'content'}"  ui-sref="m1.tabs.content">
         <i class="icon ion-home"></i>
         content
     </a>
-    <a class="tab-item active" ui-sref="m1.tabs.2level">
+    <a class="tab-item" ng-class="{active:tabName == 'Two Level'}" ui-sref="m1.tabs.2level">
         <i class="icon ion-star"></i>
         Two Level
     </a>
-    <a class="tab-item">
+    <a class="tab-item" ng-class="{active:tabName == 'Settings'}"  ui-sref="m1.tabs.settings">
         <i class="icon ion-gear-a"></i>
         Settings
     </a>

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCookies'])
 
     .run(["$rootScope", "$ionicPlatform", function ($rootScope, $ionicPlatform) {
         console.log($ionicPlatform);
@@ -80,8 +80,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                         controller: 'M1_Tabs_2level_2Ctrl'
                     }
                 }
+            })
+            .state('m1.tabs.settings', {
+                url: '/settings',
+                views: {
+                    'tabs': {
+                        templateUrl: 'templates/m1/tabs/settings.html',
+                        controller: 'M1_Tabs_SettingsCtrl'
+                    }
+                }
             });
 
-        $urlRouterProvider.otherwise('/m1');
+        $urlRouterProvider.otherwise('/m1/tabs');
 
     });

@@ -5,6 +5,7 @@ require.config({
     'cordova' : '../cordova',
     'app' : 'app',
     'controllers': 'controllers',
+    'angular-cookies': '//cdn.bootcss.com/angular.js/1.5.8/angular-cookies.min',
     'services': 'services'
   },
   shim: {
@@ -17,14 +18,18 @@ require.config({
     'controllers': {
         deps: ['app']
     },
+    'angular-cookies': {
+      deps: ['app']
+    },
     'services': {
         deps: ['app']
     }
+
   },
   waitSeconds: 15
 });
 
-require(['ionic.bundle', 'app', 'controllers', 'services'], function () {
+require(['ionic.bundle', 'app', 'controllers', 'services','angular-cookies'], function () {
 
   // require(['cordova']);
 
