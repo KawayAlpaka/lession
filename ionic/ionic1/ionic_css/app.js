@@ -28,6 +28,12 @@ app.use('/wechat', wechat(config, function (req, res, next) {
             content: 'http://119.29.225.69',
             type: 'text'
         });
+    }  else if (message.Content === '22') {
+        //你也可以这样回复text类型的信息
+        res.reply({
+            content: 'http://weixin.yangtuos.com',
+            type: 'text'
+        });
     } else if (message.Content === '3') {
         // 回复一段音乐
         res.reply({
