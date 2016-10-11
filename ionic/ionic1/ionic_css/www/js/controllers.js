@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
         s.setTabName("Settings");
         s.getOpenID = function () {
             console.log("getOpenID");
-            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx13f06fd9ec831ed6&redirect_uri=http%3A%2F%2Fwww.yangtuos.com%2FOAuth&response_type=code&scope=snsapi_base&state="+encodeURIComponent("/#/m1/tabs/settings")+"#wechat_redirect";
+            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx13f06fd9ec831ed6&redirect_uri=http%3A%2F%2Fweixin.yangtuos.com%2FOAuth&response_type=code&scope=snsapi_base&state="+encodeURIComponent("/#/m1/tabs/settings")+"#wechat_redirect";
         };
         s.openid = $cookies.get("openid");
         // console.log(encodeURI("#"));
