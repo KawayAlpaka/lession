@@ -4,6 +4,7 @@
   "description": "ionic_css: An Ionic project",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "commander": "^2.9.0",
     "express": "^4.14.0",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",

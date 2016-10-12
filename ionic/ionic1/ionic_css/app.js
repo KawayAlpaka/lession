@@ -64,29 +64,56 @@ app.use('/OAuth', function (req, res, next) {
     console.log(req.params);
     console.log(req.query);
     var url = client.getAuthorizeURL('http://www.yangtuos.com/OAuth', '123', 'snsapi_base');
-    console.log(url);
+    // console.log(url);
     client.getAccessToken(req.query.code, function (err, result) {
-        var accessToken = result.data.access_token;
-        var openid = result.data.openid;
-        console.log(result.data);
-        client.getUser(openid, function (err, result) {
-            var userInfo = result;
-            console.log(userInfo);
-            res.cookie('openid',userInfo.openid,{ maxAge: 20000000,httpOnly:false, path:'/'});
-            res.location(req.query.state);
+        // console.log(result.data);
+        if(result.data){
+            var accessToken = result.data.access_token;
+            var openid = result.data.openid;
+            client.getUser(openid, function (err, result) {
+                var userInfo = result;
+                // console.log(userInfo);
+                res.cookie('openid',userInfo.openid,{ maxAge: 20000000,httpOnly:false, path:'/'});
+                res.location(req.query.state);
+                res.statusCode = 301;
+                res.end('');
+            });
+        }else{
+            res.location("/");
             res.statusCode = 301;
-            res.end('响应的内容');
-        });
+            res.end('');
+        }
+
     });
 
     // res.json({});
 });
 
-var server = app.listen(80, function () {
+
+
+//使用 commander 获取启动参数
+// https://github.com/tj/commander.js
+var program = require('commander');
+//定义参数,以及参数内容的描述
+program
+    .version('0.0.1')
+    .usage('[options] [value ...]')
+    .option('-p, --port <n>', 'input a integet argument.', parseInt);
+
+//解析commandline arguments
+program.parse(process.argv);
+console.log(program.port);
+var port = 80;
+if(program.port){
+    port = program.port;
+}
+
+var server = app.listen(port, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log('ride listening at http://%s:%s', host, port);
+    console.log('listening at http://%s:%s', host, port);
     process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err.stack);
     });
 });
+
