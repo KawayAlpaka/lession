@@ -18,7 +18,8 @@ try:
 
     driver.find_element_by_name("9").click()
 
-    driver.find_element_by_name("删除").click()
+    # driver.find_element_by_name("删除").click()
+    driver.find_element_by_id("com.android.calculator2:id/del").click()
 
     driver.find_element_by_name("9").click()
 
