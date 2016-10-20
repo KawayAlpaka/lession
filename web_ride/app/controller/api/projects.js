@@ -78,6 +78,18 @@ projects.update = function (req, res) {
     });
 };
 projects.del = function (req, res) {
+    var projectId = req.params.id;
+    Project.findOne({_id:projectId},function (err,project) {
+        if(project.creator.toString() == req.currentUser._id.toString()){
+            project.remove(function (err,project) {
+                res.resFormat.msg = "删除成功";
+                res.json(res.resFormat);
+            });
+        }else{
+            res.resFormat.msg = "没有权限删除";
+            res.json(res.resFormat);
+        }
+    });
 };
 projects.get = function (req, res) {
     var projectId = req.params.id;

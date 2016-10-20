@@ -65,6 +65,13 @@ define([], function () {
             data : data
         });
     };
+    api.del = function (id) {
+        return mHttp({
+            url : '/api/projects/' + id,
+            method:'DELETE',
+            type : 'json'
+        });
+    };
 
     return api;
 });

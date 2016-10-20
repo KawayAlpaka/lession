@@ -24,8 +24,8 @@ define(['app'], function(myApp){
                     var project = data.data;
                     project.name = "new project";
                     s.api.project.create(project)
-                        .success(function (data) {
-                            console.log(data);
+                        .success(function () {
+                            s.refreshMyProject();
                         });
                 });
 
@@ -50,6 +50,13 @@ define(['app'], function(myApp){
         };
         s.editProject = function (project) {
             s.mHelp.go("#/m1/project/edit/" + project._id);
+        };
+        s.delProject = function (project) {
+            s.api.project.del(project._id)
+                .success(function (data) {
+                    console.log(data);
+                    s.refreshMyProject();
+                })
         };
 
         s.refreshMyProject();
