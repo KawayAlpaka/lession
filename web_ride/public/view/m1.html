@@ -10,7 +10,7 @@
     </div>
     <div class="header-group"  ng-show="mHelp.isLogin()" >
         <span ng-bind="'欢迎'" ></span>
-        <a href="#/m1/user_center"ng-bind="mHelp.getCurrentUser().name" ></a>
+        <a href="#/m1/user_center/profile"ng-bind="mHelp.getCurrentUser().name" ></a>
     </div>
     <div class="header-group" ng-show="mHelp.isLogin()">
         <a ng-click="logout()">退出</a>

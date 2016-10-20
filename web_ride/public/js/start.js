@@ -12,6 +12,7 @@ require.config({
         'env': 'env',
         'WebUploader': '../lib/webuploader',
         'socket': '../lib/socket.io',
+        // 'bootstrap': '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min',
         'angular-animate': '//cdn.bootcss.com/angular.js/1.5.8/angular-animate'
     },
     shim: {

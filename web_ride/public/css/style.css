@@ -234,5 +234,14 @@ m-context-menu {
 }
 /* line 8, ../scss/_manage.scss */
 .manage .project-action {
-  width: 40%;
+  width: 30%;
+}
+
+/* line 2, ../scss/_user_center.scss */
+.user-center .user-center-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: greenyellow;
+  height: 100%;
 }

@@ -1,8 +1,12 @@
 define(['app','common','env'], function (myApp,common,env) {
-    myApp.factory('mHelp', ['$cookieStore','$cookies','$rootScope',function ($cookieStore,$cookies,$rootScope) {
+    myApp.factory('mHelp', ['$cookieStore','$cookies','$rootScope','$location',function ($cookieStore,$cookies,$rootScope,$location) {
         var mHelp = {};
         mHelp.isLogin = function () {
             return common.strHelp.isNotEmptyStr($cookies.get("mSession"));
+        };
+
+        mHelp.getLocation = function () {
+            return $location;
         };
 
         mHelp.go = function (link) {
@@ -41,8 +45,7 @@ define(['app','common','env'], function (myApp,common,env) {
             $cookies.put('mSession', sessionId , {'expires': expires.toUTCString()});
             mHelp.setCurrentUser(user);
         };
-
-
+        
         return mHelp;
     }]);
 });
