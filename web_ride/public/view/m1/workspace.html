@@ -3,13 +3,14 @@
         <tree-view m-tree-data="[nodeTree.node]" tree-functions="treeFunctions"></tree-view>
     </div>
     <div class="work-panel">
-        <div>
-            <button ng-click="setCurrentPanel('edit')">Edit</button>
-            <button ng-click="setCurrentPanel('run')">Run</button>
+        <div class="work-panel-nav">
+            <div class="nav-item" ng-class="{active:currentPanel == 'edit'}" ng-click="setCurrentPanel('edit')">Edit</div>
+            <div class="nav-item" ng-class="{active:currentPanel == 'run'}" ng-click="setCurrentPanel('run')">Run</div>
         </div>
         <div class="run-panel" ng-show="currentPanel == 'run'">
             <div>
-                <button type="button" ng-click="debug.run()">Debug</button>
+                <button class="btn btn-success btn-sm" type="button" ng-click="debug.run()">运行调试</button>
+                <span>调试选项：</span>
                 <span ng-repeat="option in debug.options">
                     <input type="checkbox" ng-model="option.ck">
                     <span ng-bind="option.name"></span>
@@ -30,7 +31,8 @@
             </div>
             <div class="settings">
                 <div>
-                    <button ng-click="changeShowSettings()">Settings</button>
+                    <button class="btn btn-default btn-sm" ng-show="showSettings == false" ng-click="changeShowSettings()">Settings >></button>
+                    <button class="btn btn-default btn-sm" ng-show="showSettings == true" ng-click="changeShowSettings()">Settings <<</button>
                 </div>
                 <div ng-if="showSettings == true">
                     <div>
@@ -38,23 +40,23 @@
                             <label>documentation</label>
                             <div class="show-value" ng-bind="editingNode.documentation"
                                  ng-click="editDocumentation(editingNode)"></div>
-                            <button ng-click="editDocumentation(editingNode)">Edit</button>
-                            <button>Clear</button>
+                            <button class="btn btn-default btn-sm" ng-click="editDocumentation(editingNode)">Edit</button>
+                            <button class="btn btn-default btn-sm" >Clear</button>
                         </div>
                         <div ng-if="editingNode.type == 'case' || editingNode.type == 'keyword'">
                             <div class="setting" ng-if="editingNode.type == 'case'">
                                 <label>setup</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.setup.value + ' | # '+ editingNode.setup.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'setup')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'setup')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>teardown</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.teardown.value + ' | # '+ editingNode.teardown.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'teardown')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'teardown')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>tags</label>
@@ -64,36 +66,36 @@
                                     <button ng-click="addTag(editingNode.tags)">+</button>
                                     <button ng-click="delTag(editingNode.tags,'tags')">-</button>
                                 </div>
-                                <button>Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>timeout</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.timeout.value + ' | # '+ editingNode.timeout.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'timeout')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'timeout')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting" ng-if="editingNode.type == 'case'">
                                 <label>template</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.template.value + ' | # '+ editingNode.template.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'template')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'template')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting" ng-if="editingNode.type == 'keyword'">
                                 <label>arguments</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.arguments.value + ' | # '+ editingNode.arguments.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'arguments')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'arguments')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting" ng-if="editingNode.type == 'keyword'">
                                 <label>returnValue</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.returnValue.value + ' | # '+ editingNode.returnValue.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'returnValue')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'returnValue')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                         </div>
                         <div ng-if="editingNode.type == 'suite'">
@@ -101,43 +103,43 @@
                                 <label>Suite Setup</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.suiteSetup.value + ' | # '+ editingNode.suiteSetup.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'suiteSetup')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'suiteSetup')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>Suite Teardown</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.suiteTeardown.value + ' | # '+ editingNode.suiteTeardown.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'suiteTeardown')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'suiteTeardown')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>Test Setup</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.testSetup.value + ' | # '+ editingNode.testSetup.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'testSetup')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'testSetup')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>Test Teardown</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.testTeardown.value + ' | # '+ editingNode.testTeardown.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'testTeardown')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'testTeardown')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>Test Template</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.testTemplate.value + ' | # '+ editingNode.testTemplate.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'testTemplate')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'testTemplate')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>Test Timeout</label>
                                 <div class="show-value"
                                      ng-bind="editingNode.testTimeout.value + ' | # '+ editingNode.testTimeout.comment"></div>
-                                <button ng-click="editValueCommentAttr(editingNode,'testTimeout')">Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm" ng-click="editValueCommentAttr(editingNode,'testTimeout')">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>forceTags</label>
@@ -147,8 +149,8 @@
                                     <button ng-click="addTag(editingNode.forceTags)">+</button>
                                     <button ng-click="delTag(editingNode.forceTags,'forceTags')">-</button>
                                 </div>
-                                <button>Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                             <div class="setting">
                                 <label>defaultTags</label>
@@ -158,8 +160,8 @@
                                     <button ng-click="addTag(editingNode.defaultTags)">+</button>
                                     <button ng-click="delTag(editingNode.defaultTags,'defaultTags')">-</button>
                                 </div>
-                                <button>Edit</button>
-                                <button>Clear</button>
+                                <button class="btn btn-default btn-sm">Edit</button>
+                                <button class="btn btn-default btn-sm">Clear</button>
                             </div>
                         </div>
                     </div>
@@ -176,7 +178,7 @@
                     <button ng-click="addRow(editingNode.form.rows)">+</button>
                     <button ng-click="removeRow(editingNode.form.rows)">-</button>
                 </div>
-                <button ng-click="saveForm(editingNode)">保存</button>
+                <button class="btn btn-success" ng-click="saveForm(editingNode)">保存</button>
             </div>
             <div class="table-list" ng-if="editingNode.fileType == 'file'">
                 <div class="show-list">
@@ -197,7 +199,7 @@
                             <td ng-bind="import.args"></td>
                             <td ng-bind="import.comment"></td>
                             <td>
-                                <button ng-click="deleteImport(editingNode,$index)">Delete</button>
+                                <button class="btn btn-default btn-sm" ng-click="deleteImport(editingNode,$index)">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -206,13 +208,13 @@
                 <div class="add-action">
                     <div>Add Import</div>
                     <div>
-                        <button ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addImport(editingNode,modalConf.action.addLibrary)">Library</button>
                     </div>
                     <div>
-                        <button ng-click="addImport(editingNode,modalConf.action.addResource)">Resource</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addImport(editingNode,modalConf.action.addResource)">Resource</button>
                     </div>
                     <div>
-                        <button ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addImport(editingNode,modalConf.action.addVariables)">Variables</button>
                     </div>
                 </div>
             </div>
@@ -234,7 +236,7 @@
                             <td ng-bind="array2ShowString(variable.arrayValue)" ng-if="variable.type == 'List' || variable.type == 'Dict'"></td>
                             <td ng-bind="variable.comment"></td>
                             <td>
-                                <button ng-click="deleteVariable(editingNode,$index)">Delete</button>
+                                <button class="btn btn-default btn-sm" ng-click="deleteVariable(editingNode,$index)">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -243,13 +245,13 @@
                 <div class="add-action">
                     <div>Add Variable</div>
                     <div>
-                        <button ng-click="addVariable(editingNode,modalConf.action.addScalar)">Scalar</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addVariable(editingNode,modalConf.action.addScalar)">Scalar</button>
                     </div>
                     <div>
-                        <button ng-click="addVariable(editingNode,modalConf.action.addList)">List</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addVariable(editingNode,modalConf.action.addList)">List</button>
                     </div>
                     <div>
-                        <button ng-click="addVariable(editingNode,modalConf.action.addDict)">Dict</button>
+                        <button class="btn btn-default btn-sm btn-add-variable" ng-click="addVariable(editingNode,modalConf.action.addDict)">Dict</button>
                     </div>
                 </div>
             </div>
@@ -258,9 +260,9 @@
     <div data-ui-view="workspace"></div>
 </div>
 <div>
-    <button ng-click="createProjectFiles()">生成项目文件</button>
-    <button ng-click="downloadProjectFiles()">下载项目文件</button>
-    <button ng-click="runProject()">运行项目</button>
+    <button class="btn btn-default btn-sm" ng-click="createProjectFiles()">生成项目文件</button>
+    <button class="btn btn-default btn-sm" ng-click="downloadProjectFiles()">下载项目文件</button>
+    <button class="btn btn-default btn-sm" ng-click="runProject()">运行项目</button>
 </div>
 <div>
     <div>

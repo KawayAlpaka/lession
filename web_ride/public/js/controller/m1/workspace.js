@@ -145,7 +145,6 @@ define(['app','common','jquery'], function(myApp,common,$){
 
         s.currentPanel = "edit";
         s.setCurrentPanel = function (value) {
-            console.log(value);
             s.currentPanel = value;
         };
 

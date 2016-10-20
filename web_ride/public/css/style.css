@@ -159,57 +159,92 @@ m-context-menu {
   background-color: #EEEEEE;
 }
 /* line 21, ../scss/_workspace.scss */
+.workspace .work-panel .work-panel-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: solid 1px #dddddd;
+}
+/* line 26, ../scss/_workspace.scss */
+.workspace .work-panel .work-panel-nav .nav-item {
+  line-height: 36px;
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 33, ../scss/_workspace.scss */
+.workspace .work-panel .work-panel-nav .nav-item.active {
+  background-color: orange;
+  color: white;
+}
+/* line 38, ../scss/_workspace.scss */
 .workspace .work-panel .settings {
   padding: 20px 0;
 }
-/* line 23, ../scss/_workspace.scss */
+/* line 40, ../scss/_workspace.scss */
 .workspace .work-panel .settings .setting {
   display: flex;
   flex-direction: row;
 }
-/* line 26, ../scss/_workspace.scss */
+/* line 43, ../scss/_workspace.scss */
 .workspace .work-panel .settings .setting label {
   width: 180px;
 }
-/* line 30, ../scss/_workspace.scss */
+/* line 47, ../scss/_workspace.scss */
 .workspace .work-panel .settings .setting input,
 .workspace .work-panel .settings .setting textarea,
 .workspace .work-panel .settings .setting .show-value {
   width: 90%;
 }
-/* line 35, ../scss/_workspace.scss */
+/* line 52, ../scss/_workspace.scss */
 .workspace .work-panel .settings .setting .tag {
   width: 60px;
 }
-/* line 40, ../scss/_workspace.scss */
+/* line 57, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor {
   font-size: 0;
   background-color: white;
   min-height: 600px;
 }
-/* line 46, ../scss/_workspace.scss */
+/* line 63, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor label {
   font-size: 14px;
   margin-bottom: 0;
+  width: 40px;
+  text-align: center;
 }
-/* line 50, ../scss/_workspace.scss */
+/* line 69, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor input {
   font-size: 14px;
 }
-/* line 53, ../scss/_workspace.scss */
+/* line 72, ../scss/_workspace.scss */
 .workspace .work-panel .form-editor button {
   font-size: 14px;
 }
-/* line 57, ../scss/_workspace.scss */
+/* line 76, ../scss/_workspace.scss */
 .workspace .work-panel .table-list {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   margin-bottom: 40px;
 }
-/* line 62, ../scss/_workspace.scss */
+/* line 81, ../scss/_workspace.scss */
 .workspace .work-panel .table-list .show-list {
   width: 100%;
+}
+/* line 86, ../scss/_workspace.scss */
+.workspace .add-action {
+  min-width: 120px;
+  text-align: center;
+}
+/* line 89, ../scss/_workspace.scss */
+.workspace .add-action .btn-add-variable {
+  width: 100%;
+}
+/* line 93, ../scss/_workspace.scss */
+.workspace .show-list {
+  background-color: white;
 }
 
 /* line 1, ../scss/_component.scss */
