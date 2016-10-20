@@ -1,0 +1,22 @@
+.header{
+  background-color: grey;
+  .header-group{
+    display: inline-block;
+    line-height: 48px;
+    padding: 0 12px;
+    *{
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    a{
+      cursor: pointer;
+    }
+  }
+}
+
+.m-row::after{
+  content: " ";
+  display: table;
+  clear: both;
+}

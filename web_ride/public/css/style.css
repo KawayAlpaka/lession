@@ -1,3 +1,31 @@
+/* line 1, ../scss/_common.scss */
+.header {
+  background-color: grey;
+}
+/* line 3, ../scss/_common.scss */
+.header .header-group {
+  display: inline-block;
+  line-height: 48px;
+  padding: 0 12px;
+}
+/* line 7, ../scss/_common.scss */
+.header .header-group * {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 12, ../scss/_common.scss */
+.header .header-group a {
+  cursor: pointer;
+}
+
+/* line 18, ../scss/_common.scss */
+.m-row::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
 /* line 2, ../scss/_test.scss */
 .test-nav .nav-tab.active {
   background-color: gold;
@@ -194,4 +222,17 @@ m-context-menu {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+/* line 2, ../scss/_manage.scss */
+.manage .project-name {
+  width: 20%;
+}
+/* line 5, ../scss/_manage.scss */
+.manage .project-introduction {
+  width: 50%;
+}
+/* line 8, ../scss/_manage.scss */
+.manage .project-action {
+  width: 40%;
 }
