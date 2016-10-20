@@ -1,19 +1,26 @@
-<div>个人资料</div>
-<div>
-    <div>
-        <label>user:</label>
-        <span ng-bind="currentUser.user"></span>
+<h3>个人资料</h3>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">用户名：</label>
+        <div class="col-sm-9">
+            <span class="form-control" ng-bind="currentUser.user"></span>
+        </div>
     </div>
-    <div>
-        <label>name:</label>
-        <input type="text" ng-model="currentUser.name">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-9">
+            <input type="text" ng-model="currentUser.name" class="form-control">
+        </div>
     </div>
-    <div>
-        <label>password:</label>
-        <input type="text"  ng-model="currentUser.password">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">密码：</label>
+        <div class="col-sm-9">
+            <input type="password" class="form-control" ng-model="currentUser.password">
+        </div>
     </div>
-    <div>
-        <button type="button" ng-click="updateCurrentUser()">修改</button>
-        <button type="button" ng-click="mHelp.go('#/m1/user_center')">返回</button>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            <button type="button" class="btn btn-default" ng-click="updateCurrentUser()">保存</button>
+        </div>
     </div>
-</div>
+</form>

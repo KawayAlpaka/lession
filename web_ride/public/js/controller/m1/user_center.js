@@ -11,7 +11,9 @@ define(['app'], function(myApp){
         s.updateCurrentUser = function () {
             s.api.user.updateCurrentUser(s.currentUser)
                 .success(function (data) {
-                    s.mHelp.go('#/m1/user_center');
+                    s.mHelp.pullCurrentUser(function () {
+                        s.mHelp.go('#/m1/user_center');
+                    });
                 });
         };
     }]);
