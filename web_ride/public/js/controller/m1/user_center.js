@@ -43,6 +43,12 @@ define(['app'], function(myApp){
         s.editOption = function (option) {
             s.mHelp.go("#/m1/user_center/debug/edit/" + option._id);
         };
+        s.delOption = function (option) {
+            s.api.debugOption.del(option._id)
+                .success(function (data) {
+                    s.refreshOptions();
+                });
+        };
 
         s.stringify  =function (json) {
             return JSON.stringify(json);

@@ -1,25 +1,35 @@
-<div>edit</div>
-<div>
-    <div>
-        <label>name:</label>
-        <input type="text" ng-model="option.name">
-    </div>
-    <div>
-        <label>way:</label>
-        <select ng-model="option.way" ng-options="way for way in ways"></select>
-    </div>
-    <div>
-        <div>
-            <label>keyword:</label>
-            <input type="text" ng-model="option.params.keyword">
+<form class="form-horizontal" role="form" ng-submit="save(option)">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">名称：</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="option.name" required placeholder="名称">
         </div>
-        <div>
-            <label>param:</label>
-            <input type="text" ng-model="option.params.param">
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">方式：</label>
+        <div class="col-sm-9">
+            <select ng-model="option.way" class="form-control" ng-options="way for way in ways"></select>
         </div>
     </div>
     <div>
-        <button type="button" ng-click="save(option)">保存</button>
-        <button type="button">返回</button>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">keyword：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="option.params.keyword" required placeholder="keyword">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">param：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="option.params.param" required placeholder="param">
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            <button type="submit" class="btn btn-default">保存</button>
+            <a type="button" class="btn btn-default" href="#/m1/user_center/debug/index">返回</a>
+        </div>
+    </div>
+</form>
