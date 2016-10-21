@@ -1,21 +1,36 @@
-<div>edit</div>
-<div>
-    <label>user:</label>
-    <input type="text" ng-model="user.user">
-</div>
-<div>
-    <label>name:</label>
-    <input type="text" ng-model="user.name">
-</div>
-<div>
-    <label>role:</label>
-    <select  data-ng-model="user.role" data-ng-options="role for role in roles"></select>
-</div>
-<div>
-    <label>password:</label>
-    <input type="password" ng-model="user.password">
-</div>
-<div>
-    <button ng-click="save()">保存</button>
-    <button ng-click="back()">返回</button>
+<div class="container">
+    <h3>用户资料</h3>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">用户名：</label>
+            <div class="col-sm-9">
+                <span class="form-control" ng-bind="user.user"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">姓名：</label>
+            <div class="col-sm-9">
+                <input type="text" ng-model="user.name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">角色：</label>
+            <div class="col-sm-9">
+                <select class="form-control" data-ng-model="user.role"
+                        data-ng-options="role for role in roles"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">密码：</label>
+            <div class="col-sm-9">
+                <input type="password" ng-model="user.password" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+                <button type="button" class="btn btn-default" ng-click="save()">保存</button>
+                <button type="button" class="btn btn-default" ng-click="back()">返回</button>
+            </div>
+        </div>
+    </form>
 </div>
