@@ -105,6 +105,13 @@ define(['app'], function(myApp){
                 });
         };
 
+        s.refreshSystemSetting = function () {
+            s.api.admin.systemSetting.refresh()
+                .success(function (data) {
+                    console.log(data);
+                    s.msg = "刷新成功";
+                });
+        }
     }]);
     myApp.controller('m1_admin_system_settings_edit_controller', ['$scope','mHelp', function (s,mHelp) {
         console.log("m1_admin_system_settings_edit_controller");

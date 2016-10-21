@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var SystemSetting = mongoose.model('SystemSetting');
+var systemSettingHelper = require('../../helper/system_setting_helper');
 
 var controllers = {};
 
@@ -47,6 +48,12 @@ controllers.del = function(req, res) {
         res.resFormat.data = systemSetting;
         res.json(res.resFormat);
     });
+};
+
+controllers.refresh = function (req, res) {
+    console.log(systemSettingHelper);
+    systemSettingHelper.refresh();
+    res.json(res.resFormat);
 };
 
 module.exports = controllers;

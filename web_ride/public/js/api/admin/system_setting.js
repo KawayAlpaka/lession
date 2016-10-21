@@ -52,6 +52,13 @@ define([], function () {
             type : 'json'
         });
     };
+    api.refresh = function () {
+        return mHttp({
+            url : '/api/system_settings/refresh',
+            method:'GET',
+            type : 'json'
+        });
+    };
 
     return api;
 });
