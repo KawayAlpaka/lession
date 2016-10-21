@@ -1,24 +1,26 @@
-<div>
-    <button type="button" ng-click="createUser()">新增用户</button>
+<div class="container">
+    <div>
+        <button type="button" class="btn btn-default" ng-click="createUser()">新增用户</button>
+    </div>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>user</th>
+            <th>name</th>
+            <th>role</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td ng-bind="user.user"></td>
+            <td ng-bind="user.name"></td>
+            <td ng-bind="user.role"></td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm" ng-click="editUser(user)">编辑</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="delUser(user)">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>user</th>
-        <th>name</th>
-        <th>role</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="user in users">
-        <td ng-bind="user.user"></td>
-        <td ng-bind="user.name"></td>
-        <td ng-bind="user.role"></td>
-        <td>
-            <button type="button" ng-click="editUser(user)">编辑</button>
-            <button type="button" ng-click="delUser(user)">删除</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
