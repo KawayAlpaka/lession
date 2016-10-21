@@ -1,4 +1,4 @@
-define([], function () {
+define(['./admin/system_setting'], function (system_setting) {
     var mHttp;
     var api = {};
     api.init = function (obj) {
@@ -42,6 +42,8 @@ define([], function () {
             type : 'json'
         });
     };
+
+    api.systemSetting = system_setting.init(mHttp);
 
     return api;
 });

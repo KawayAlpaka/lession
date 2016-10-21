@@ -92,6 +92,14 @@ router.get('/debug_options/:id', api.users.requireLogin, api.debugOptions.get);
 router.put('/debug_options', api.users.requireLogin, api.debugOptions.update);
 router.delete('/debug_options/:id', api.users.requireLogin, api.debugOptions.del);
 
+router.get('/system_settings', api.users.requireLogin, api.systemSettings.list);
+router.post('/system_settings', api.users.requireLogin, api.systemSettings.create);
+router.get('/system_settings/new', api.users.requireLogin, api.systemSettings.new);
+router.get('/system_settings/:id', api.users.requireLogin, api.systemSettings.get);
+router.put('/system_settings', api.users.requireLogin, api.systemSettings.update);
+router.delete('/system_settings/:id', api.users.requireLogin, api.systemSettings.del);
+
+
 router.get('/admins/users', api.admins.requireAdmin, api.admins.users.list);
 router.post('/admins/users', api.admins.requireAdmin, api.admins.users.create);
 router.put('/admins/users/:id', api.admins.requireAdmin, api.admins.users.update);

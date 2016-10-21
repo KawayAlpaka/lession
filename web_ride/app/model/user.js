@@ -12,4 +12,7 @@ var ProjectUser = mongoose.model('ProjectUser', projectUserSchema);
 var debugOptionSchema = require('../schema/debug_option');
 var DebugOption = mongoose.model('DebugOption', debugOptionSchema);
 
+var systemSettingSchema = require('../schema/system_setting');
+var SystemSetting = mongoose.model('SystemSetting', systemSettingSchema);
+
 module.exports = User;
