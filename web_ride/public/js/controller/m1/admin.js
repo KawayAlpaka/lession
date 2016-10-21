@@ -68,4 +68,66 @@ define(['app'], function(myApp){
         };
         
     }]);
+
+
+    myApp.controller('m1_admin_system_settings_controller', ['$scope', function (s) {
+        console.log("m1_admin_system_settings_controller");
+    }]);
+    myApp.controller('m1_admin_system_settings_index_controller', ['$scope','mHelp', function (s,mHelp) {
+        console.log("m1_admin_system_settings_index_controller");
+
+
+        var refreshList = function () {
+            s.api.admin.systemSetting.list()
+                .success(function (data) {
+                    s.systemSettings = data.data;
+                });
+        };
+        refreshList();
+
+        s.createSystemSetting = function () {
+            s.api.admin.systemSetting.new()
+                .success(function (data) {
+                    s.api.admin.systemSetting.create(data.data)
+                        .success(function () {
+                            refreshList();
+                        });
+                });
+        };
+        s.editSystemSetting = function (systemSetting) {s
+            mHelp.go("#/m1/admin/system_settings/edit/"+systemSetting._id);
+        };
+        s.delSystemSetting = function (systemSetting) {
+            console.log(systemSetting);
+            s.api.admin.systemSetting.del(systemSetting._id)
+                .success(function () {
+                    refreshList();
+                });
+        };
+
+    }]);
+    myApp.controller('m1_admin_system_settings_edit_controller', ['$scope','mHelp', function (s,mHelp) {
+        console.log("m1_admin_system_settings_edit_controller");
+        var systemSettingId = s.$state.params.id;
+
+
+
+        s.api.admin.systemSetting.get(systemSettingId)
+            .success(function (data) {
+                s.systemSetting = data.data;
+            });
+
+        s.save = function () {
+            s.api.admin.systemSetting.update(s.systemSetting)
+                .success(function () {
+                    mHelp.go("#/m1/admin/system_settings/index");
+                });
+        };
+
+        s.back = function () {
+            mHelp.go("#/m1/admin/system_settings/index");
+        };
+
+    }]);
+
 });

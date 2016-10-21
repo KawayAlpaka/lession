@@ -3,6 +3,7 @@ define(['./admin/system_setting'], function (system_setting) {
     var api = {};
     api.init = function (obj) {
         mHttp = obj;
+        api.systemSetting = system_setting.init(mHttp);
         return api;
     };
     api.users = function () {
@@ -42,8 +43,6 @@ define(['./admin/system_setting'], function (system_setting) {
             type : 'json'
         });
     };
-
-    api.systemSetting = system_setting.init(mHttp);
 
     return api;
 });

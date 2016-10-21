@@ -195,6 +195,38 @@ define(['app'], function (myApp) {
                                                 }
                                             }
                                         ]
+                                    },
+                                    {
+                                        name: 'system_settings',
+                                        url: '/system_settings',
+                                        views: {
+                                            'admin': {
+                                                templateUrl: 'view/m1/admin/system_settings.html',
+                                                controller: 'm1_admin_system_settings_controller'
+                                            }
+                                        },
+                                        children:[
+                                            {
+                                                name: 'index',
+                                                url: '/index',
+                                                views: {
+                                                    'system_settings': {
+                                                        templateUrl: 'view/m1/admin/system_settings/index.html',
+                                                        controller: 'm1_admin_system_settings_index_controller'
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                name: 'edit',
+                                                url: '/edit/:id',
+                                                views: {
+                                                    'system_settings': {
+                                                        templateUrl: 'view/m1/admin/system_settings/edit.html',
+                                                        controller: 'm1_admin_system_settings_edit_controller'
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             },
