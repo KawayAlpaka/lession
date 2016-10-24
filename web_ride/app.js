@@ -67,3 +67,9 @@ mIo.createServer(httpServer);
 // // seed
 // var seed = require("./config/seed");
 // seed.start();
+
+// 处理异常临时方案，domian是后续方案
+// express错误处理中间件无法捕获异步的异常
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ', err.stack);
+});
