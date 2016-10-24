@@ -30,18 +30,6 @@ var crossDomain = function (req, res, next) {
 
 router.use(api.users.currentUser, defaultResFormatFn,crossDomain);
 
-// router.get('/', function(req, res) {
-//     console.log('hello api');
-//     res.send('hello api');
-// });
-
-
-
-// // router.post('/users', api.users.create );
-// router.get('/users/new', api.users.new);
-// router.post('/users/login', api.users.login);
-// router.get('/users/logout', api.users.logout);
-
 var usersRouter = express.Router();
 usersRouter.get('/currentUser',api.users.requireLogin,api.users.getCurrentUser);
 usersRouter.patch('/currentUser',api.users.requireLogin, api.users.updateCurrentUser);
