@@ -3,6 +3,8 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
     myApp.controller('m1_controller', ['$scope', 'component', '$cookies', 'mIo', function (s, component, $cookies, mIo) {
         console.log("m1_controller");
 
+
+        //右键菜单逻辑
         s.setSelectedNode = function (node) {
             if (s.selectedNode) {
                 s.selectedNode.showState.selected = false;
@@ -81,9 +83,11 @@ define(['app', 'controller/m1/home', 'controller/m1/workspace', 'controller/m1/m
             s.api.user.logout()
                 .success(function () {
                     s.mHelp.clearLoginData();
+                    s.mHelp.go("#/m1/home");
                 })
                 .error(function () {
                     s.mHelp.clearLoginData();
+                    s.mHelp.go("#/m1/home");
                 });
         };
 
