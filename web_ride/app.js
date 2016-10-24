@@ -67,24 +67,3 @@ mIo.createServer(httpServer);
 // // seed
 // var seed = require("./config/seed");
 // seed.start();
-
-
-// //test
-// var RobotNode = mongoose.model('RobotNode');
-// var robotNode = new RobotNode({name:"haha"});
-// robotNode.getParentList();
-
-
-// // 导入项目测试
-// var fileHelper = require('./app/helper/file_helper');
-// fileHelper.importProject('F:/robot/workspace/sample',function (node) {
-//     console.log(node);
-// });
-
-// fileHelper.readLines('F:/robot/workspace/hello/suite.txt',
-//     function (line) {
-//         console.log(line);
-//     }, function (all) {
-//
-//     });
-
