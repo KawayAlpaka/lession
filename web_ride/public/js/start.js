@@ -8,11 +8,11 @@ require.config({
         'ng-bootstrap': '//cdn.bootcss.com/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls',
         'angular-cookies': '//cdn.bootcss.com/angular.js/1.5.8/angular-cookies',
         'lodash': '//cdn.bootcss.com/lodash.js/4.16.4/lodash',
-        'env': 'env',
-        'WebUploader': '../lib/webuploader',
         'socket': '//cdn.bootcss.com/socket.io/1.5.0/socket.io',
         // 'bootstrap': '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min',
-        'angular-animate': '//cdn.bootcss.com/angular.js/1.5.8/angular-animate'
+        'angular-animate': '//cdn.bootcss.com/angular.js/1.5.8/angular-animate',
+        'WebUploader': '../lib/webuploader',
+        'env': 'env'
     },
     shim: {
         'angular': {
