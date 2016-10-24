@@ -129,22 +129,31 @@ robotNodes.relativePath = function (req, res) {
                                     return;
                                 }
                             });
-                            for(var i = 0 ;i<index1;i++){
-                                rPath += "../";
+
+
+                            //如果找到就继续，没找到，返回错误
+                            if(target1){
+                                for(var i = 0 ;i<index1;i++){
+                                    rPath += "../";
+                                }
+
+                                var targetList2 = targetList.reverse();
+                                var index2 = _.findIndex(targetList2,function (target) {
+                                    return target._id.toString() == target1._id.toString();
+                                });
+                                console.log(index2);
+                                for(var i = index2 + 1;i<targetList2.length;i++ ){
+                                    rPath += targetList2[i].name + "/";
+                                }
+                                rPath += targetNode.name + "." + targetNode.fileFormat;
+
+                                res.resFormat.data = rPath;
+                                res.json(res.resFormat);
+                            }else{
+                                res.resFormat.data = "未找到路径";
+                                res.json(res.resFormat);
                             }
 
-                            var targetList2 = targetList.reverse();
-                            var index2 = _.findIndex(targetList2,function (target) {
-                                return target._id.toString() == target1._id.toString();
-                            });
-                            console.log(index2);
-                            for(var i = index2 + 1;i<targetList2.length;i++ ){
-                                rPath += targetList2[i].name + "/";
-                            }
-                            rPath += targetNode.name + "." + targetNode.fileFormat;
-
-                            res.resFormat.data = rPath;
-                            res.json(res.resFormat);
                         });
                     }
                 });

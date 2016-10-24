@@ -104,7 +104,7 @@ robotNodeSchema.methods.getParentList = function (cb) {
             return;
         }
         if(nodes.length == 0){
-            console.log("已经到顶层");
+            // console.log("已经到顶层");
             cb(list);
             return;
         }else{
