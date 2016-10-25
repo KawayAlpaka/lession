@@ -259,6 +259,12 @@ m-context-menu {
   transform: translate(-50%, 0);
 }
 
+/* line 11, ../scss/_component.scss */
+.form-control.no-border-form-control {
+  border: none;
+  box-shadow: none;
+}
+
 /* line 2, ../scss/_manage.scss */
 .manage .project-name {
   width: 20%;

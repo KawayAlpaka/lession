@@ -1,5 +1,23 @@
 define(['app'], function (myApp) {
 
+    myApp.directive('btFormGroup2', [function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'view/directive/bt_form_group_2.html',
+            scope: false,
+            replace:true,
+            transclude:true,
+            link:function (s,element,attrs) {
+                var labelOptions,inputOptions,selectOptions;
+                if(attrs.labelOptions){
+                    labelOptions = JSON.parse(attrs.labelOptions);
+                    element.find("label").html(labelOptions.text);
+                }
+            }
+        };
+    }]);
+
+
     myApp.directive('btFormGroup', [function() {
         return {
             restrict: 'E',

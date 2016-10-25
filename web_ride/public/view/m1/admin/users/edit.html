@@ -7,25 +7,9 @@
                 <span class="form-control" ng-bind="user.user"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">姓名：</label>
-            <div class="col-sm-9">
-                <input type="text" ng-model="user.name" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">角色：</label>
-            <div class="col-sm-9">
-                <select class="form-control" data-ng-model="user.role"
-                        data-ng-options="role for role in roles"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">密码：</label>
-            <div class="col-sm-9">
-                <input type="password" ng-model="user.password" class="form-control">
-            </div>
-        </div>
+        <bt-form-group label-options='{"text":"姓名："}' input-options='{"type":"text","required":false ,"placeholder":"姓名"}' d-ng-model="user.name"></bt-form-group>
+        <bt-form-group label-options='{"text":"角色："}' select-options='{}' d-ng-model="user.role" d-select-ng-options="roles"></bt-form-group>
+        <bt-form-group label-options='{"text":"密码："}' input-options='{"type":"password","required":false ,"placeholder":"密码"}' d-ng-model="user.password"></bt-form-group>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-9">
                 <button type="button" class="btn btn-default" ng-click="save()">保存</button>
