@@ -1,31 +1,10 @@
 <form class="form-horizontal" role="form" ng-submit="save(option)">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">名称：</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control" ng-model="option.name" required placeholder="名称">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">方式：</label>
-        <div class="col-sm-9">
-            <select ng-model="option.way" class="form-control" ng-options="way for way in ways"></select>
-        </div>
-    </div>
+    <bt-form-group label-options='{"text":"名称："}' input-options='{"type":"text","required":true ,"placeholder":"名称"}' d-ng-model="option.name"></bt-form-group>
+    <bt-form-group label-options='{"text":"方式："}' select-options='{}' d-ng-model="option.way" d-select-ng-options="ways"></bt-form-group>
     <div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">keyword：</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" ng-model="option.params.keyword" required placeholder="keyword">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">param：</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" ng-model="option.params.param" required placeholder="param">
-            </div>
-        </div>
+        <bt-form-group label-options='{"text":"keyword："}' input-options='{"type":"text","required":true ,"placeholder":"keyword"}' d-ng-model="option.params.keyword"></bt-form-group>
+        <bt-form-group label-options='{"text":"param："}' input-options='{"type":"text","required":true ,"placeholder":"param"}' d-ng-model="option.params.param"></bt-form-group>
     </div>
-
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
             <button type="submit" class="btn btn-default">保存</button>

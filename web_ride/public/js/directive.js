@@ -1,5 +1,58 @@
 define(['app'], function (myApp) {
 
+    myApp.directive('btFormGroup', [function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'view/directive/bt_form_group.html',
+            scope: {
+                ngModel : "=dNgModel",
+                ngOptions : "=dSelectNgOptions"
+            },
+            replace:true,
+            // compile:function compile(tElement,tAttrs,transclude){
+            //     //compile和link混用要注意,或者不能混用?
+            //     return{
+            //         pre:function preLink(scope,iElement,iAttrs,controller){},
+            //         post:function postLink(scope,iElement,iAttrs,controller){}
+            //     }
+            // },
+            link:function (s,element,attrs) {
+                var labelOptions,inputOptions,selectOptions;
+                if(attrs.labelOptions){
+                    labelOptions = JSON.parse(attrs.labelOptions);
+                    element.find("label").html(labelOptions.text);
+                }
+                if(attrs.inputOptions){
+                    inputOptions = JSON.parse(attrs.inputOptions);
+                    var input = element.find("input");
+                    input.show();
+                    if(inputOptions.type){
+                        input.attr("type",inputOptions.type);
+                    }
+                    if(inputOptions.required && inputOptions.required == true){
+                        input.attr("required","required");
+                    }
+                    if(inputOptions.placeholder ){
+                        input.attr("placeholder",inputOptions.placeholder);
+                    }
+                }else{
+                    var input = element.find("input");
+                    input.remove();
+                }
+                if(attrs.selectOptions){
+                    selectOptions = JSON.parse(attrs.selectOptions);
+                    var select = element.find("select");
+                }else{
+                    var select = element.find("select");
+                    select.remove();
+                }
+            }
+        };
+    }]);
+
+
+
+
     myApp.directive('mContextMenu', function($parse) {
         return {
             restrict: 'E',
