@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下
 }));
 
 app.use('/api', routerApi,function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Api Something broke : \r\n'+err.stack);
+    res.resFormat.data = err.stack;
+    res.json(res.resFormat);
 });
 
 // // 原始版本
