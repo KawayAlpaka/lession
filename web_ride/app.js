@@ -6,7 +6,9 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var app = express();
-mongoose.connect('mongodb://localhost/web_ride');
+var env = require("./config/env");
+
+mongoose.connect('mongodb://' + env.db.host + ':' + env.db.port + '/' + env.db.database);
 mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
 var User = require('./app/model/user');
@@ -30,46 +32,44 @@ app.use('/api', routerApi,function (err, req, res, next) {
     res.json(res.resFormat);
 });
 
-// // 原始版本
-// var server = app.listen(3030, function () {
-//     var host = server.address().address;
-//     var port = server.address().port;
-//     console.log('ride listening at http://%s:%s', host, port);
-//     process.on('uncaughtException', function (err) {
-//         console.log('Caught exception: ', err.stack);
-//     });
-// });
-// mIo.createServer(server);
 
-// http 版本
-var httpServer = http.createServer(app).listen(3030, function () {
-    var host = httpServer.address().address;
-    var port = httpServer.address().port;
-    console.log('ride listening at http://%s:%s', host, port);
-});
-mIo.createServer(httpServer);
-
-// //https 版本
-// var httpsOptions = {
-//     key: fs.readFileSync('D:/ssl/privatekey.pem'),
-//     cert: fs.readFileSync('D:/ssl/certificate.pem'),
-//     rejectUnauthorized: false
-// };
-// var httpsServer = https.createServer(httpsOptions,app).listen(3031, function () {
-//     var host = httpsServer.address().address;
-//     var port = httpsServer.address().port;
-//     console.log(httpsServer.address());
-//     console.log('ride listening at https://%s:%s', host, port);
-// });
-// mIo.createServer(httpsServer);
-
+switch (env.net.protocol){
+    case "http":
+        var httpServer = http.createServer(app).listen(env.net.port, function () {
+            var host = httpServer.address().address;
+            var port = httpServer.address().port;
+            console.log('ride listening at http://%s:%s', host, port);
+            // 处理异常临时方案，domian是后续方案
+            // express错误处理中间件无法捕获异步的异常
+            process.on('uncaughtException', function (err) {
+                console.log('Caught exception: ', err.stack);
+            });
+            mIo.createServer(httpServer);
+        });
+        break;
+    case "https":
+        var httpsOptions = {
+            key: fs.readFileSync(env.net.ssl.key),
+            cert: fs.readFileSync(env.net.ssl.cert),
+            rejectUnauthorized: false
+        };
+        var httpsServer = https.createServer(httpsOptions,app).listen(env.net.port, function () {
+            var host = httpsServer.address().address;
+            var port = httpsServer.address().port;
+            console.log(httpsServer.address());
+            console.log('ride listening at https://%s:%s', host, port);
+            process.on('uncaughtException', function (err) {
+                console.log('Caught exception: ', err.stack);
+            });
+            mIo.createServer(httpsServer);
+        });
+        break;
+    default:
+        console.log("dose not set net.protocol");
+        break;
+}
 
 // // seed
 // var seed = require("./config/seed");
 // seed.start();
 
-// 处理异常临时方案，domian是后续方案
-// express错误处理中间件无法捕获异步的异常
-process.on('uncaughtException', function (err) {
-    console.log('Caught exception: ', err.stack);
-});
