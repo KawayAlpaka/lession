@@ -29,6 +29,10 @@ users.updateCurrentUser = function (req, res) {
 users.login = function(req, res) {
     var _user = req.body;
     User.findOne({user:_user.user},function (err, user) {
+        if(err){
+            res.resFormat.msg = err;
+            res.json(res.resFormat);
+        }
         if(user){
             if(user.password == _user.password){
                 var session = new Session({user:user._id});

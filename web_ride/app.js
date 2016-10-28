@@ -12,6 +12,9 @@ if(env.db.user){
 }else{
     mongoose.connect('mongodb://' + env.db.host + ':' + env.db.port + '/' + env.db.database);
 }
+mongoose.connection.on('error', function (err) {
+    console.log(err);
+});
 mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
 var User = require('./app/model/user');
