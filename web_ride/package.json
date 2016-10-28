@@ -14,9 +14,9 @@
     "unzip": "^0.1.11",
     "util": "^0.10.3"
   },
-  "name": "web_ride",
-  "version": "1.0.0",
-  "main": "app.js",
+  "name": "ride",
+  "version": "0.0.1",
+  "main": "ride.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

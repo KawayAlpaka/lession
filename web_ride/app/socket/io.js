@@ -8,9 +8,6 @@ var User = mongoose.model('User');
 var RobotNode = mongoose.model('RobotNode');
 var Session = mongoose.model('Session');
 
-
-console.log("init io");
-
 var io;
 var connections = [];
 
