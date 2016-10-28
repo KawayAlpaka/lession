@@ -7,8 +7,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var app = express();
 var env = require("./config/env");
-
-mongoose.connect('mongodb://' + env.db.host + ':' + env.db.port + '/' + env.db.database);
+if(env.db.user){
+    mongoose.connect('mongodb://' + env.db.user.user + ':'+ env.db.user.pwd + "@" + env.db.host + ':' + env.db.port + '/' + env.db.database);
+}else{
+    mongoose.connect('mongodb://' + env.db.host + ':' + env.db.port + '/' + env.db.database);
+}
 mongoose.Promise = global.Promise; //升级mongoose默认Promise
 
 var User = require('./app/model/user');

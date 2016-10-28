@@ -1,15 +1,19 @@
 var env = {
     net:{
         protocol:"http",
-        ssl:{
-            key:"D:/ssl/privatekey.pem",
-            cert:"D:/ssl/certificate.pem"
-        },
+        // ssl:{
+        //     key:"D:/ssl/privatekey.pem",
+        //     cert:"D:/ssl/certificate.pem"
+        // },
         port: 3030
     },
     db:{
         host: "localhost",
         port: "27017",
+        user: {
+            user:"ride",
+            pwd:"ride"
+        },
         database:"web_ride"
     }
 };
