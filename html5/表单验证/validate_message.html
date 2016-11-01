@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<form action="">
+    <div>
+        <label>验证提示信息</label>
+        <input id="test-validate" type="text" required step="2" >
+    </div>
+    <div>
+        <button type="submit">提交</button>
+    </div>
+</form>
+<script>
+    $(function () {
+        $("#test-validate")[0].setCustomValidity("111");
+    });
+</script>
+</body>
+</html>
