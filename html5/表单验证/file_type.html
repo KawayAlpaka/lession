@@ -17,14 +17,16 @@
 
     <form action="/file/uploading" method="post" enctype='multipart/form-data'>
         <!--accept只能在选择文件的时候有轻微的控制-->
-        <input type="file" id="filex" name="file1" accept="image/*" multiple="multiple">
+        <input type="file" id="filex" name="file1" required accept="image/*" multiple="multiple">
         <button type="submit">提交</button>
     </form>
 
     <button onclick="preview()">preview</button>
+    <button onclick="remove()">remove</button>
 </div>
 <script>
     //建立一個可存取到該file的url
+
     function getObjectURL(file) {
         var url = null ;
         if (window.createObjectURL!=undefined) { // basic
@@ -36,14 +38,64 @@
         }
         return url ;
     }
+
+
+    var imgPreviewer = document.getElementById("imgx");
+    var fileInput = document.getElementById("filex");
+
     function preview() {
-        console.log(document.getElementById("filex").files);
-        var objUrl = getObjectURL(document.getElementById("filex").files[0]) ;
-        var fileType = document.getElementById("filex").files[0].type;
-        console.log("objurl:"+objUrl);
-        $("#imgx").attr("src",objUrl);
-        $("#file-type").html(fileType);
+//        console.log(document.getElementById("filex").files);
+//        var objUrl = getObjectURL(document.getElementById("filex").files[0]) ;
+//        var fileType = document.getElementById("filex").files[0].type;
+//        console.log("objurl:"+objUrl);
+//        $("#imgx").attr("src",objUrl);
+//        $("#file-type").html(fileType);
+
+
+
+
+        if(fileInput.files){
+            var objUrl = getObjectURL(fileInput.files[0]) ;
+            var fileType = fileInput.files[0].type;
+            console.log("objurl:"+objUrl);
+            $("#imgx").attr("src",objUrl);
+            $("#file-type").html(fileType);
+        }else if(imgPreviewer.filters){
+            imgPreviewer.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod = scale)";
+            imgPreviewer.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = fileInput.value;
+        }
+
     }
+    function remove() {
+        var fileInputTemp = document.getElementById("filex");
+        console.log(fileInputTemp.outerHTML);
+        fileInputTemp.outerHTML = fileInputTemp.outerHTML;
+        fileInputTemp = document.getElementById("filex");
+        $(fileInputTemp).on("change",onChange);
+        if(fileInput.files){
+            $("#imgx").removeAttr("src");
+        }else if(imgPreviewer.filters){
+            imgPreviewer.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod = scale)";
+//            imgPreviewer.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = "C:\\Users\\dell\\Desktop\\三证\\税务登记证.jpg";
+            imgPreviewer.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = "http://static.wenku.bdimg.com/static/wkcommon/widget/header/search_box/images/logo-wk-137-46_8c9a463.png";
+        }
+    }
+    var onChange = function (e) {
+        var src=e.target || window.event.srcElement;
+        src.style.background='red';
+        console.log(typeof src.value);
+        if(src.value ){
+            var reg = new RegExp(".jpg$|.jpeg$|.png$|.png$","i");
+            console.log(reg.test(src.value));
+            if(reg.test(src.value)){
+                
+                preview();
+            }else{
+                remove();
+            }
+        }
+    };
+    $("#filex").on("change",onChange);
 </script>
 </body>
 </html>
