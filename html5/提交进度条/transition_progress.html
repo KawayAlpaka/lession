@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>progress bar</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<style>
+    .l-progress-bar-01{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: red;
+        height: 4px;
+        /*transition: width 100ms;*/
+    }
+    .l-progress-bar-01.l-start{
+        width: 0%;
+    }
+    .l-progress-bar-01.l-start.l-full{
+        width: 99%;
+    }
+    .l-progress-bar-01.l-run{
+        transition: width 10s;
+        transition-timing-function: cubic-bezier(0,0,0,1);
+    }
+    .l-progress-bar-01.l-run.l-end{
+        width: 100%;
+        transition: width 100ms;
+        transition-timing-function: cubic-bezier(0,0,0,1);
+    }
+</style>
+<div class="l-progress-bar-01"></div>
+<br>
+<div onclick="lStartSubmitProgress()">start</div>
+<div onclick="lEndSubmitProgress()">end</div>
+<div onclick="lResetSubmitProgress()">reset</div>
+<script>
+    function lStartSubmitProgress() {
+        lResetSubmitProgress();
+        setTimeout(function () {
+            $(".l-progress-bar-01").addClass("l-start");
+            $(".l-progress-bar-01").addClass("l-run");
+            setTimeout(function () {
+                $(".l-progress-bar-01").addClass("l-full");
+            },100);
+        },100);
+    }
+    function lEndSubmitProgress() {
+        $(".l-progress-bar-01").addClass("l-end");
+        setTimeout(function () {
+            lResetSubmitProgress();
+        },200);
+    }
+    function lResetSubmitProgress() {
+        $(".l-progress-bar-01")
+                .removeClass("l-run")
+                .removeClass("l-start")
+                .removeClass("l-full")
+                .removeClass("l-end");
+    }
+</script>
+</body>
+</html>
