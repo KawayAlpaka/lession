@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生ajax提交文件</title>
+    <!--<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+</head>
+<body>
+<p><input type="file" id="upfile"></p>
+<p><input type="button" id="upJS" value="用原生JS上传"></p>
+<!--<p><input type="button" id="upJQuery" value="用jQuery上传"></p>-->
+<script>
+    /*原生JS版*/
+    document.getElementById("upJS").onclick = function() {
+        /* FormData 是表单数据类 */
+        var fd = new FormData();
+        var ajax = new XMLHttpRequest();
+        fd.append("upload", 1);
+        /* 把文件添加到表单里 */
+        fd.append("file", document.getElementById("upfile").files[0]);
+        ajax.open("post", "/file/webuploader", true);
+        ajax.onload = function () {
+            console.log(ajax.responseText);
+        };
+        var upload = ajax.upload;
+        upload.addEventListener("progress" , function () {
+            console.log("progress");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("loadstart" , function () {
+            console.log("loadstart");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("error" , function () {
+            console.log("error");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("abort" , function () {
+            console.log("abort");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("load" , function () {
+            console.log("load");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("loadend" , function () {
+            console.log("loadend");
+            console.log(arguments);
+        }, false);
+        ajax.send(fd);
+    };
+
+//    /* jQuery 版 */
+//    $('#upJQuery').on('click', function() {
+//        var fd = new FormData();
+//        fd.append("upload", 1);
+//        fd.append("upfile", $("#upfile").get(0).files[0]);
+//        $.ajax({
+//            url: "test.php",
+//            type: "POST",
+//            processData: false,
+//            contentType: false,
+//            data: fd,
+//            success: function(d) {
+//                console.log(d);
+//            }
+//        });
+//    });
+</script>
+</body>
+</html>
