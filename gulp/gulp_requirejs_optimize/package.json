@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-requirejs-optimize": "^1.2.0"
+  }
+}
