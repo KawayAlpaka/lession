@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+</head>
+<body>
+<div data-lazyload="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"></div>
+<script>
+    $(function () {
+        console.log($("[data-lazyload]"));
+        $("[data-lazyload]").each(function (index, ele) {
+            var img = new Image();
+            img.src = $(ele).attr("data-lazyload");
+            $(ele).html("图片加载中");
+            img.onload=function(){
+                console.log("加载完成");
+                $(ele).html("");
+                $(ele).append(img);
+            };
+            img.onerror=function(){
+                console.log("加载错误");
+            };
+        })
+    });
+</script>
+</body>
+</html>
