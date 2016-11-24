@@ -103,7 +103,7 @@ program
 //解析commandline arguments
 program.parse(process.argv);
 console.log(program.port);
-var port = 80;
+var port = 3050;
 if(program.port){
     port = program.port;
 }

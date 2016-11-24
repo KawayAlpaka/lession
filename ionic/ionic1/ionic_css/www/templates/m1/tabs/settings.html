@@ -3,12 +3,20 @@
 </div>
 <div>
     <ion-content class="has-tabs has-header">
-        <button class="button button-positive" on-tap="getOpenID()">
-            GetOpenID
-        </button>
+        <div>
+            <button class="button button-positive" on-tap="getOpenID()">
+                GetOpenID
+            </button>
+        </div>
         <div>
             <label>openid:</label>
             <span ng-bind="openid"></span>
+        </div>
+        <div>
+            <button class="button button-positive" on-tap="scanQRCode()">
+                扫一扫
+            </button>
+            <div ng-bind="scanQRCodeRes"></div>
         </div>
     </ion-content>
 </div>
