@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCookies'])
 
-    .run(["$rootScope", "$ionicPlatform", function ($rootScope, $ionicPlatform) {
+    .run(["$rootScope", "$ionicPlatform","$http", function ($rootScope, $ionicPlatform,$http) {
         console.log($ionicPlatform);
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,6 +23,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
                 StatusBar.styleDefault();
             }
         });
+
+        //启动微信js接口
+        $http({
+            url: '/api/weixin/config' ,
+            method: 'GET'
+        }).success(function (res) {
+            console.log(res);
+            wx.config(res.data);
+            wx.ready(function(){
+                console.log(arguments);
+            });
+            wx.error(function(res){
+                console.log(arguments);
+            });
+        });
+
     }])
 
     .config(function ($stateProvider, $urlRouterProvider) {

@@ -7,10 +7,15 @@
             <button class="button button-positive" on-tap="getOpenID()">
                 GetOpenID
             </button>
+            <div>
+                <label>openid:</label>
+                <span ng-bind="openid"></span>
+            </div>
         </div>
         <div>
-            <label>openid:</label>
-            <span ng-bind="openid"></span>
+            <button class="button button-positive" on-tap="updateAccessToken()">
+                updateAccessToken
+            </button>
         </div>
         <div>
             <button class="button button-positive" on-tap="scanQRCode()">
