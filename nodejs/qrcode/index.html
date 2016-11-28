@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR code</title>
+    <script src="node_modules/qrcode/build/qrcode.js"></script>
+</head>
+<body>
+<canvas id="test"></canvas>
+<script>
+
+    var qrcodedraw = new QRCodeLib.QRCodeDraw();
+
+    qrcodedraw.draw(document.getElementById('test'),"this text will be in the code!", function(error,canvas){
+        if(error){
+            return console.log('Error =( ',error);
+        }
+        console.log('success!');
+    });
+</script>
+</body>
+</html>
