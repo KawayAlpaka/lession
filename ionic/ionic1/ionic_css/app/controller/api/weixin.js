@@ -9,7 +9,6 @@ fns.getConfig = function (req, res) {
         if(err){
 
         }else if(accessToken){
-
             var createNonceStr = function() {
                 return Math.random().toString(36).substr(2, 15);
             };
@@ -18,7 +17,7 @@ fns.getConfig = function (req, res) {
             var url = "http://weixin.yangtuos.com/";
             var string1Obj = {
                 noncestr: noncestr,
-                jsapi_ticket:"kgt8ON7yVITDhtdwci0qeYjkVaAMp7a_c1j3mlzHueXq2iwInTLhcKhhOzO18qJfELp9HdY9rVh3wI6dTb-_tQ",
+                jsapi_ticket: accessToken.jsapiTicket,
                 timestamp: timestamp ,
                 url:url
             };
