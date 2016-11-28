@@ -70,6 +70,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
                     }
                 }
             })
+            .state('m1.tabs.js', {
+                url: '/js',
+                views: {
+                    'tabs': {
+                        templateUrl: 'templates/m1/tabs/js.html',
+                        controller: 'M1_Tabs_JsCtrl'
+                    }
+                }
+            })
             .state('m1.tabs.2level', {
                 url: '/2level',
                 views: {

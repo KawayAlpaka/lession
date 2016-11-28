@@ -35,7 +35,7 @@ fns.getConfig = function (req, res) {
                 timestamp: timestamp,
                 nonceStr: noncestr,
                 signature: sha1(string1),
-                jsApiList: ["scanQRCode"]
+                jsApiList: ["scanQRCode","getLocation","openLocation","getNetworkType"]
             };
             res.json(res.resFormat);
         }

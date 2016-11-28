@@ -12,6 +12,60 @@ angular.module('starter.controllers', [])
         console.log("M1_Tabs_ContentCtrl");
         s.setTabName("content");
     }])
+    .controller('M1_Tabs_JsCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
+        console.log("M1_Tabs_JsCtrl");
+        s.setTabName("JS");
+        s.scanQRCode = function () {
+            wx.scanQRCode({
+                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                    console.log(1);
+                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    console.log(res);
+                    s.scanQRCodeRes = JSON.stringify(res);
+                    s.$apply();
+                }
+            });
+        };
+        s.getLocation = function () {
+            wx.getLocation({
+                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    var speed = res.speed; // 速度，以米/每秒计
+                    var accuracy = res.accuracy; // 位置精度
+                    console.log(res);
+                    s.getLocationRes = JSON.stringify(res);
+                    s.$apply();
+                }
+            });
+        };
+        s.openLocation = function () {
+            wx.getLocation({
+                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    var location = res;
+                    location.name = "name";
+                    location.address = "address";
+                    location.scale = "1";
+                    location.infoUrl = "http://www.baidu.com";
+                    wx.openLocation(location);
+                }
+            });
+        };
+        s.getNetworkType = function () {
+            wx.getNetworkType({
+                success: function (res) {
+                    var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+                    console.log(networkType);
+                    s.getNetworkTypeRes = networkType;
+                    s.$apply();
+                }
+            });
+        };
+    }])
     .controller('M1_Tabs_2levelCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
         console.log("M1_Tabs_2levelCtrl");
         s.setTabName("Two Level");
@@ -39,20 +93,6 @@ angular.module('starter.controllers', [])
                 method: 'PUT'
             }).success(function (res) {
                 console.log(res);
-            });
-        };
-
-        s.scanQRCode = function () {
-            wx.scanQRCode({
-                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-                success: function (res) {
-                    console.log(1);
-                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                    console.log(res);
-                    s.scanQRCodeRes = JSON.stringify(res);
-                    s.$apply();
-                }
             });
         };
     }]);
