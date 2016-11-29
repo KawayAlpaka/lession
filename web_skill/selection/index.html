@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>selection</title>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+</head>
+<body>
+<div class="text">haha</div>
+<div class="text">hehe</div>
+<button type="button" onclick="showSelection()">showSelection</button>
+<script>
+    function showSelection() {
+        var selection = window.getSelection();
+        console.log(selection);
+
+        var bo = document.selection.createRange();
+        bo.execCommand("Bold");
+    }
+    $(function () {
+        $(".text").on("select",function () {
+            //没有触发
+            console.log(arguments);
+        });
+        $(".text").on("selectstart",function () {
+            console.log(arguments);
+        });
+        $(".text").on("selected",function () {
+            //没有触发
+            console.log(arguments);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>execCommand</title>
+</head>
+<body>
+<h3>execCommand</h3>
+<p>execCommand</p>
+<div>
+    <button type="button" onclick="selectAll()">selectAll</button>
+    <button type="button" onclick="open()">open</button>
+    <button type="button" onclick="saveAs()">saveAs</button>
+    <button type="button" onclick="Copy()">Copy</button>
+</div>
+<script>
+    function selectAll() {
+        document.execCommand("selectAll");
+    }
+    function open() {
+        document.execCommand("open");
+    }
+    function saveAs() {
+        document.execCommand("saveAs");
+    }
+    function Copy() {
+        document.execCommand("Copy","false",null);
+    }
+</script>
+</body>
+</html>
