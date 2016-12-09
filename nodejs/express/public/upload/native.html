@@ -8,6 +8,20 @@
 <body>
 <p><input type="file" id="upfile"></p>
 <p><input type="button" id="upJS" value="用原生JS上传"></p>
+<div>
+    <div>
+        <lable>百分比：</lable><span id="baifenbi"></span>
+    </div>
+    <div>
+        <lable>timeStamp：</lable><span id="timeStamp"></span>
+    </div>
+    <div>
+        <lable>用时：</lable><span id="yongshi"></span>
+    </div>
+    <div>
+        <lable>速度：</lable><span id="sudu"></span>
+    </div>
+</div>
 <!--<p><input type="button" id="upJQuery" value="用jQuery上传"></p>-->
 <script>
     /*原生JS版*/
@@ -23,13 +37,31 @@
             console.log(ajax.responseText);
         };
         var upload = ajax.upload;
-        upload.addEventListener("progress" , function () {
+        var startTimeStamp = 0;
+        var preTimeStamp = 0;
+        var preLoaded = 0;
+        upload.addEventListener("progress" , function (event) {
             console.log("progress");
             console.log(arguments);
+            var baifenbi = ( event.loaded / event.total).toFixed(4);
+            var loadedDur = event.loaded - preLoaded;
+            var timeStampDur = event.timeStamp-preTimeStamp;
+            console.log(loadedDur);
+            console.log(timeStampDur);
+            console.log(baifenbi);
+            document.getElementById("baifenbi").innerHTML = baifenbi;
+            document.getElementById("timeStamp").innerHTML = event.timeStamp;
+            document.getElementById("yongshi").innerHTML = ((event.timeStamp - startTimeStamp) / 1000).toFixed(0) + "s";
+            document.getElementById("sudu").innerHTML = (((event.loaded - preLoaded)/1024)/((event.timeStamp-preTimeStamp)/1000)).toFixed(3) + "kb/s";
+
+            preTimeStamp = event.timeStamp;
+            preLoaded = event.loaded;
         }, false);
-        upload.addEventListener("loadstart" , function () {
+        upload.addEventListener("loadstart" , function (event) {
             console.log("loadstart");
             console.log(arguments);
+            startTimeStamp = event.timeStamp;
+            preTimeStamp = startTimeStamp;
         }, false);
         upload.addEventListener("error" , function () {
             console.log("error");
