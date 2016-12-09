@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xhr</title>
+</head>
+<body>
+<button onclick="download()">下载</button>
+<script>
+    function download() {
+        var ajax = new XMLHttpRequest();
+//        ajax.open("get", "http://cdn.bootcss.com/angular.js/1.6.0/angular.js", true);
+        ajax.open("get", "/files/QuickInstall.exe", true);
+        ajax.onload = function () {
+            console.log(ajax);
+            var blob = new Blob([ajax.response], {type: 'image/png'});
+            console.log(blob);
+
+////            var blob = new Blob([content]);
+//            var aLink = document.createElement('a');
+//
+//            var evt = document.createEvent("HTMLEvents");
+//            evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+//            aLink.download = "111.haha";
+//            aLink.href = URL.createObjectURL(blob);
+//            aLink.dispatchEvent(evt);
+        };
+        ajax.responseType = 'blob';
+        var upload = ajax.upload;
+        upload.addEventListener("progress" , function (event) {
+            console.log("progress");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("loadstart" , function (event) {
+            console.log("loadstart");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("error" , function () {
+            console.log("error");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("abort" , function () {
+            console.log("abort");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("load" , function () {
+            console.log("load");
+            console.log(arguments);
+        }, false);
+        upload.addEventListener("loadend" , function () {
+            console.log("loadend");
+            console.log(arguments);
+        }, false);
+        ajax.send();
+    }
+</script>
+</body>
+</html>
