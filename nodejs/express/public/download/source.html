@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>source</title>
+</head>
+<body>
+<audio id="warp" preload="auto" controls>
+    <source src="/files/QuickInstall.exe" type="audio/mp3">
+    <source src="/files/QuickInstall.exe" type="audio/ogg">
+</audio>
+<script>
+    var a = document.getElementById('warp');
+    var t = a.currentTime;
+    var d = a.duration;
+    console.log(a);
+    console.log(t);
+    console.log(d);
+//    var z = a.buffered.end(a.buffered.length-1);
+</script>
+</body>
+</html>
