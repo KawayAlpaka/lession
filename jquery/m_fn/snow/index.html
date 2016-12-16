@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>snow</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <style>
+        body{
+            background-color: saddlebrown;
+        }
+        .snow{
+            position: absolute;
+            border-radius: 50%;
+            background-color: white;
+            transition: all 1s linear;
+            /*width: 30px;*/
+            /*height: 30px;*/
+            /*opacity: 0.3;*/
+            /*top: 0px;*/
+            /*left: 0px;*/
+        }
+    </style>
+    <script>
+        var snows = [];
+        var env = {
+            xa:0,
+            xs:0
+        };
+        var documentHeight = 0;
+        var documentWidth = 0;
+        $(function () {
+
+            documentHeight = document.body.scrollHeight;
+            documentWidth = document.body.scrollWidth;
+
+            $(".add").on("click",function () {
+                var snow = document.createElement("div");
+                snow.setAttribute("class", "snow");
+                var left = Math.random() * 1280;
+                $(snow).css("left",left+"px");
+                $("body")[0].appendChild(snow);
+
+                snows.push({
+                    element:snow,
+                    left:left,
+                    top:0,
+                    width:30,
+                    opacity:0.3,
+                    xs:0,
+                    xa:0,
+                    ys:0,
+                    ya:20
+                });
+            });
+            $(".del").on("click",function () {
+                $(snows[0].element).remove();
+                snows.splice(0,1);
+            });
+
+            function refreshSnow() {
+
+                snows.forEach(function (snow,index) {
+                    if(snow.top > documentHeight || snow.left > documentWidth){
+                        $(snow.element).remove();
+                        snows.splice(index,1);
+                    }else{
+                        snow.xa = env.xs;
+                        snow.xs +=snow.xa;
+                        snow.left += snow.xs;
+                        console.log(snow.left);
+                        snow.ys += snow.ya;
+                        snow.top += snow.ys;
+                        snow.width = 30;
+                        snow.height = 30;
+                        snow.opacity = 0.3;
+
+                        $(snow.element).css("top",snow.top +"px");
+                        $(snow.element).css("left",snow.left +"px");
+                        $(snow.element).css("width",snow.width +"px");
+                        $(snow.element).css("height",snow.height +"px");
+                    }
+                });
+            }
+            function refreshEnv() {
+                env.xa = Math.random() * 30 - 15;
+                env.xs += env.xa;
+            }
+            refreshEnv();
+            var snowInt = self.setInterval(refreshSnow, 1000);
+            var envInt = self.setInterval(refreshEnv, 2000);
+
+            console.log(document.body.scrollHeight);
+        });
+    </script>
+</head>
+<body>
+<button class="add">add</button>
+<button class="del">del</button>
+</body>
+</html>
