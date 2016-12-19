@@ -55,10 +55,11 @@
 
             documentHeight = document.body.scrollHeight;
             documentWidth = document.body.scrollWidth;
-
-            $(".add").on("click",function () {
+            var addSnow = function () {
                 snows.push(createSnow());
-            });
+            };
+
+            $(".add").on("click",addSnow);
             $(".del").on("click",function () {
                 $(snows[0].element).remove();
                 snows.splice(0,1);
@@ -67,7 +68,7 @@
             function refreshSnow() {
 
                 snows.forEach(function (snow,index) {
-                    if (snow.top > documentHeight || snow.left > documentWidth || snow.left < 0) {
+                    if ( (snow.top + snow.width + 20) > documentHeight || (snow.left + snow.width) > documentWidth || (snow.left + snow.width) < 0) {
                         $(snow.element).remove();
                         snows.splice(index, 1);
                     } else {
@@ -78,9 +79,6 @@
                         }
                         snow.xs +=snow.xa;
                         snow.left += snow.xs;
-
-                        console.log(snow.left);
-
 
                         snow.ys += snow.ya;
                         snow.top += snow.ys;
@@ -102,6 +100,7 @@
             refreshEnv();
             var snowInt = self.setInterval(refreshSnow, 1000);
             var envInt = self.setInterval(refreshEnv, 2000);
+            var addSnowInt = self.setInterval(addSnow, 1000);
         });
     </script>
 </head>
