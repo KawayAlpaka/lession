@@ -1,1 +1,7 @@
 div= "hello world"
+- @articles.each do |article|
+  div
+    span= article._id
+    span &nbsp;
+    span= article.name
+end
