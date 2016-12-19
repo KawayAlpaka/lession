@@ -13,6 +13,9 @@
       <div>
         <span><%= current_user.email %></span>
         <span><%= link_to "注销", destroy_user_session_path, :method => :delete%></span>
+        <% if current_user.role == "admin" %>
+            <span><%= link_to "后台管理", rails_admin_path %></span>
+        <% end  %>
       </div>
     <% else %>
       <div>
