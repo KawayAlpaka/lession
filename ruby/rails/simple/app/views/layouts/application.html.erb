@@ -9,6 +9,16 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <div>
+        <span><%= current_user.email %></span>
+        <span><%= link_to "注销", destroy_user_session_path, :method => :delete%></span>
+      </div>
+    <% else %>
+      <div>
+        <span><%= link_to "登录",new_user_session_path %></span>
+      </div>
+    <% end  %>
     <%= yield %>
   </body>
 </html>
