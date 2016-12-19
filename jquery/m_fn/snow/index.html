@@ -12,7 +12,7 @@
             position: absolute;
             border-radius: 50%;
             background-color: white;
-            transition: all 1s linear;
+            transition: all 1.5s linear;
             /*width: 30px;*/
             /*height: 30px;*/
             /*opacity: 0.3;*/
@@ -23,34 +23,41 @@
     <script>
         var snows = [];
         var env = {
-            xa:0,
             xs:0
         };
         var documentHeight = 0;
         var documentWidth = 0;
+        
+        function createSnow() {
+            var snow = {};
+
+            var snowElement = document.createElement("div");
+            var left = Math.random() * documentWidth;
+
+            snow.element = snowElement;
+            snow.left = left;
+            snow.top = 0;
+            snow.width = 1;
+            snow.opacity = 0.3;
+            snow.xs = Math.random() * 10 - 5;
+            snow.xa = Math.random() * 50 - 25;
+            snow.ys = 10;
+            snow.ya = 1;
+
+            snowElement.setAttribute("class", "snow");
+            $(snowElement).css("width",snow.width + "px");
+            $(snowElement).css("height",snow.width + "px");
+            $("body")[0].appendChild(snowElement);
+
+            return snow;
+        }
         $(function () {
 
             documentHeight = document.body.scrollHeight;
             documentWidth = document.body.scrollWidth;
 
             $(".add").on("click",function () {
-                var snow = document.createElement("div");
-                snow.setAttribute("class", "snow");
-                var left = Math.random() * 1280;
-                $(snow).css("left",left+"px");
-                $("body")[0].appendChild(snow);
-
-                snows.push({
-                    element:snow,
-                    left:left,
-                    top:0,
-                    width:30,
-                    opacity:0.3,
-                    xs:0,
-                    xa:0,
-                    ys:0,
-                    ya:20
-                });
+                snows.push(createSnow());
             });
             $(".del").on("click",function () {
                 $(snows[0].element).remove();
@@ -60,36 +67,41 @@
             function refreshSnow() {
 
                 snows.forEach(function (snow,index) {
-                    if(snow.top > documentHeight || snow.left > documentWidth){
+                    if (snow.top > documentHeight || snow.left > documentWidth || snow.left < 0) {
                         $(snow.element).remove();
-                        snows.splice(index,1);
-                    }else{
-                        snow.xa = env.xs;
+                        snows.splice(index, 1);
+                    } else {
+//                        snow.xa = env.xs;
+
+                        if(Math.abs(snow.xs) > 60){
+                            snow.xa = -1 * snow.xa;
+                        }
                         snow.xs +=snow.xa;
                         snow.left += snow.xs;
+
                         console.log(snow.left);
+
+
                         snow.ys += snow.ya;
                         snow.top += snow.ys;
-                        snow.width = 30;
-                        snow.height = 30;
+                        snow.width = Math.random() * 10 + 15;
+                        snow.height = snow.width;
                         snow.opacity = 0.3;
 
                         $(snow.element).css("top",snow.top +"px");
                         $(snow.element).css("left",snow.left +"px");
                         $(snow.element).css("width",snow.width +"px");
                         $(snow.element).css("height",snow.height +"px");
+                        $(snow.element).css("opacity",snow.opacity);
                     }
                 });
             }
             function refreshEnv() {
-                env.xa = Math.random() * 30 - 15;
-                env.xs += env.xa;
+                env.xs = Math.random() * 30 - 15;
             }
             refreshEnv();
             var snowInt = self.setInterval(refreshSnow, 1000);
             var envInt = self.setInterval(refreshEnv, 2000);
-
-            console.log(document.body.scrollHeight);
         });
     </script>
 </head>
