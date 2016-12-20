@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  extend Enumerize
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -34,6 +36,9 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
-  field :role, type: String, default: "guest"
-
+  field :role
+  enumerize :role,
+            in: [:guest, :user, :admin],
+            default: :guest,
+            scope: true
 end
