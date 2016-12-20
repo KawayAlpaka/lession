@@ -4,108 +4,34 @@
     <meta charset="UTF-8">
     <title>snow</title>
     <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <script src="js/jquery.snow.js"></script>
     <style>
         body{
             background-color: saddlebrown;
         }
-        .snow{
-            position: absolute;
-            border-radius: 50%;
-            background-color: white;
-            transition: all 1.5s linear;
-            /*width: 30px;*/
-            /*height: 30px;*/
-            /*opacity: 0.3;*/
-            /*top: 0px;*/
-            /*left: 0px;*/
+        .snow-panel-1{
+            width: 300px;
+            height: 300px;
+            margin: 50px;
+        }
+        .snow-panel-2{
+            height: 2000px
         }
     </style>
     <script>
-        var snows = [];
-        var env = {
-            xs:0
-        };
-        var documentHeight = 0;
-        var documentWidth = 0;
-        
-        function createSnow() {
-            var snow = {};
-
-            var snowElement = document.createElement("div");
-            var left = Math.random() * documentWidth;
-
-            snow.element = snowElement;
-            snow.left = left;
-            snow.top = 0;
-            snow.width = 1;
-            snow.opacity = 0.3;
-            snow.xs = Math.random() * 10 - 5;
-            snow.xa = Math.random() * 50 - 25;
-            snow.ys = 10;
-            snow.ya = 1;
-
-            snowElement.setAttribute("class", "snow");
-            $(snowElement).css("width",snow.width + "px");
-            $(snowElement).css("height",snow.width + "px");
-            $("body")[0].appendChild(snowElement);
-
-            return snow;
-        }
         $(function () {
-
-            documentHeight = document.body.scrollHeight;
-            documentWidth = document.body.scrollWidth;
-            var addSnow = function () {
-                snows.push(createSnow());
-            };
-
-            $(".add").on("click",addSnow);
-            $(".del").on("click",function () {
-                $(snows[0].element).remove();
-                snows.splice(0,1);
-            });
-
-            function refreshSnow() {
-
-                snows.forEach(function (snow,index) {
-                    if ( (snow.top + snow.width + 20) > documentHeight || (snow.left + snow.width) > documentWidth || (snow.left + snow.width) < 0) {
-                        $(snow.element).remove();
-                        snows.splice(index, 1);
-                    } else {
-//                        snow.xa = env.xs;
-
-                        if(Math.abs(snow.xs) > 60){
-                            snow.xa = -1 * snow.xa;
-                        }
-                        snow.xs +=snow.xa;
-                        snow.left += snow.xs;
-
-                        snow.ys += snow.ya;
-                        snow.top += snow.ys;
-                        snow.width = Math.random() * 10 + 15;
-                        snow.height = snow.width;
-                        snow.opacity = 0.3;
-
-                        $(snow.element).css("top",snow.top +"px");
-                        $(snow.element).css("left",snow.left +"px");
-                        $(snow.element).css("width",snow.width +"px");
-                        $(snow.element).css("height",snow.height +"px");
-                        $(snow.element).css("opacity",snow.opacity);
-                    }
-                });
-            }
-            function refreshEnv() {
-                env.xs = Math.random() * 30 - 15;
-            }
-            refreshEnv();
-            var snowInt = self.setInterval(refreshSnow, 1000);
-            var envInt = self.setInterval(refreshEnv, 2000);
-            var addSnowInt = self.setInterval(addSnow, 1000);
+//            $("body").snow();
+            $(".snow-panel-1").snow();
+            $(".snow-panel-2").snow();
         });
     </script>
 </head>
-<body>
-<button class="add">add</button>
-<button class="del">del</button>
+<body id="body">
+<div class="snow-panel-1"></div>
+<div class="snow-panel-1"></div>
+<div class="snow-panel-2">
+    <!--<button class="add">add</button>-->
+    <!--<button class="del">del</button>-->
+</div>
 </body>
 </html>
