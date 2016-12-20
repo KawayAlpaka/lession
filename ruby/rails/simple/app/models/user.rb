@@ -36,6 +36,8 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  field :name,    type: String
+
   field :role
   enumerize :role,
             in: [:guest, :user, :admin],
@@ -43,5 +45,7 @@ class User
             scope: true
 
   mount_uploader :avatar, AvatarUploader
+
+  has_many :articles
 
 end
