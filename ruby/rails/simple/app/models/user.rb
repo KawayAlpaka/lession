@@ -41,4 +41,7 @@ class User
             in: [:guest, :user, :admin],
             default: :guest,
             scope: true
+
+  mount_uploader :avatar, AvatarUploader
+
 end

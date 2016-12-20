@@ -49,3 +49,7 @@ gem 'mongoid'
 gem 'enumerize'
 gem 'devise'
 gem 'rails_admin', '~> 1.0'
+# file uploader, github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
