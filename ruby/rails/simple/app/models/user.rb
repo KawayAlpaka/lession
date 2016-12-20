@@ -48,4 +48,14 @@ class User
 
   has_many :articles
 
+  RailsAdmin.config do |config|
+    config.model 'User' do
+      list do
+        field :name
+        field :email
+        field :role
+      end
+    end
+  end
+
 end
