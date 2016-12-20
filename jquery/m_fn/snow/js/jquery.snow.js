@@ -8,6 +8,7 @@
             var elementHeight = containerElement.offsetHeight;
             var elementWidth = containerElement.offsetWidth;
             $(containerElement).css("position","relative");
+            $(containerElement).css("overflow","hidden");
 
             var getSnowInitXS = function () {
                 return Math.random() * (elementWidth / 100) - (elementWidth / 100)/2;
