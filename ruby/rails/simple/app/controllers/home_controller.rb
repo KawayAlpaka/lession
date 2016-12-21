@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @articles = Article.all()
     puts @articles
     puts I18n.t 'hello'
-    I18n.locale = :zh
+    I18n.locale = :"zh-CN"
     puts I18n.t 'hello'
   end
 end

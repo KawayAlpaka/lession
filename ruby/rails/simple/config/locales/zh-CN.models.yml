@@ -1,0 +1,26 @@
+zh-CN:
+  enumerize:
+    defaults:
+      gender:
+        male: "男"
+        female: "女"
+    user:
+      role:
+        guest: "游客"
+        user: "普通用户"
+        admin: "管理员"
+  mongoid:
+    models:
+      article: "文章"
+      user: "用户"
+    attributes:
+      article:
+        name: "名称"
+        user: "作者"
+      user:
+        email: "邮箱"
+        role: "角色"
+        articles: "文章"
+        avatar: "头像"
+        name: "姓名"
+
