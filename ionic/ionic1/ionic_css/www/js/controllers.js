@@ -8,9 +8,44 @@ angular.module('starter.controllers', [])
             s.tabName = value;
         };
     }])
-    .controller('M1_Tabs_ContentCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
+    .controller('M1_Tabs_ContentCtrl', ["$scope","$scope" ,"$rootScope","$ionicModal", function (s,$scope,$rootScope, $ionicModal) {
         console.log("M1_Tabs_ContentCtrl");
         s.setTabName("content");
+        $ionicModal.fromTemplateUrl('templates/modal/modal.html', {
+            // scope: $scope,
+            scope: $scope,
+            animation: 'slide-in-up',
+            controller:function () {
+                console.log(2);
+            }
+        }).then(function(modal) {
+            console.log("init");
+            $scope.modal = modal;
+        });
+        $scope.openModal = function() {
+            console.log("openModal");
+            $scope.modal.show();
+        };
+        $scope.closeModal = function() {
+            console.log("closeModal");
+            $scope.modal.hide();
+        };
+        //当我们用到模型时，清除它！
+        $scope.$on('$destroy', function() {
+            console.log('$destroy');
+            $scope.modal.remove();
+        });
+        // 当隐藏的模型时执行动作
+        $scope.$on('modal.hide', function() {
+            console.log('modal.hide');
+            // 执行动作
+        });
+        // 当移动模型时执行动作
+        $scope.$on('modal.removed', function() {
+            console.log('modal.removed');
+            // 执行动作
+        });
+
     }])
     .controller('M1_Tabs_JsCtrl', ["$scope", "$rootScope", "$location", function (s, $rootScope, $location) {
         console.log("M1_Tabs_JsCtrl");
