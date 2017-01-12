@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>moment</title>
+    <script src="node_modules/moment/moment.js"></script>
+    <script src="http://cdn.bootcss.com/require.js/2.3.2/require.js"></script>
+    <script>
+        console.log(moment(Date.now()).format("YYYYMMDDHHmmssSSS"));
+        require(["./js/moment.min"],function (moment2) {
+            console.log(moment2(Date.now()).format("YYYYMMDDHHmmssSSS"));
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>
