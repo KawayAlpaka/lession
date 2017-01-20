@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost:27017/test_mongoose');
 mongoose.connection.on('error', function (err) {
     console.log(err);
 });
 mongoose.connection.on('connected',function () {
     console.log(arguments);
-
-    var Schema = mongoose.Schema;
     var schema = new Schema({
         name: {type: String, required: true},
         text: {type: String},
