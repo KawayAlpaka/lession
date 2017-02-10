@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>open qq</title>
+    <script>
+        //微信有白名单机制，这些连接在微信中不能生效
+        function chatQQ() {
+            window.location.href = "mqqwpa://im/chat?chat_type=wpa&uin=370556565&version=1&src_type=web&web_src=oicqzone.com";
+        }
+        function openQQ() {
+            window.location.href = "mqq:";
+        }
+    </script>
+</head>
+<body>
+<div><a href="javascript:void(0);" onclick="chatQQ()">370556565</a></div>
+<div><a href="javascript:void(0);" onclick="openQQ()">QQ</a></div>
+<div><a href="mqq:">QQ</a></div>
+</body>
+</html>
