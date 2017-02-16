@@ -11,10 +11,11 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: red;
+        background-color: #5eac82;
         height: 4px;
         z-index: 9999;
     }
+
     .l-progress-bar-01.l-start{
         width: 0%;
     }
@@ -33,9 +34,9 @@
 </style>
 <div class="l-progress-bar-01"></div>
 <br>
-<div onclick="lStartSubmitProgress()">start</div>
-<div onclick="lEndSubmitProgress()">end</div>
-<div onclick="lResetSubmitProgress()">reset</div>
+<button onclick="lStartSubmitProgress()">start</button>
+<button onclick="lEndSubmitProgress()">end</button>
+<button onclick="lResetSubmitProgress()">reset</button>
 <script>
     function lStartSubmitProgress() {
         lResetSubmitProgress();
