@@ -1,5 +1,18 @@
 (function ($) {
     $.fn.snow = function (options) {
+        if(!options){
+            options = {};
+        }
+        if(!options.createInterval){
+            options.createInterval = 1000;
+        }
+        if(!options.color){
+            options.color = "white";
+        }
+        if(!options.opacity){
+            options.opacity = 0.3;
+        }
+
         this.each(function (containerIndex,containerElement) {
             var snows = [];
             // var env = {
@@ -33,19 +46,19 @@
                 snow.left = left;
                 snow.top = 0;
                 snow.width = 0;
-                snow.opacity = 0.3;
+                snow.opacity = 0.01;
                 snow.xs = getSnowInitXS();
                 snow.xa = getSnowInitXA();
                 snow.ys = 10;
                 snow.ya = getSnowInitYA();
 
-                // snowElement.setAttribute("class", "snow");
                 $(snowElement).css("position","absolute");
                 $(snowElement).css("border-radius","50%");
-                $(snowElement).css("background-color","white");
+                $(snowElement).css("background-color",options.color);
                 $(snowElement).css("transition","all 1.5s linear");
                 $(snowElement).css("width",snow.width + "px");
                 $(snowElement).css("height",snow.width + "px");
+                $(snowElement).css("opacity", snow.opacity);
 
                 containerElement.appendChild(snowElement);
 
@@ -81,7 +94,7 @@
                         snow.top += snow.ys;
                         snow.width = getSnowWidth();
                         snow.height = snow.width;
-                        snow.opacity = 0.3;
+                        snow.opacity = options.opacity;
 
                         $(snow.element).css("top", snow.top + "px");
                         $(snow.element).css("left", snow.left + "px");
@@ -94,9 +107,9 @@
             // var refreshEnv = function () {
             //     env.xs = Math.random() * 30 - 15;
             // };
-            var snowInt = self.setInterval(refreshSnow, 1000);
+            var refreshInterval = self.setInterval(refreshSnow, 1000);
             // var envInt = self.setInterval(refreshEnv, 2000);
-            var addSnowInt = self.setInterval(addSnow, 1000);
+            var createSnowInterval = self.setInterval(addSnow, options.createInterval);
         });
     }
 }($));

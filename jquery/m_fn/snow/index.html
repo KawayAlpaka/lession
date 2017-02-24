@@ -13,21 +13,22 @@
             width: 300px;
             height: 300px;
             margin: 50px;
+            background-color: yellowgreen;
         }
         .snow-panel-2{
-            height: 2000px
+            height: 2000px;
+            background-color: burlywood;
         }
     </style>
     <script>
         $(function () {
 //            $("body").snow();
-            $(".snow-panel-1").snow();
-            $(".snow-panel-2").snow();
+            $(".snow-panel-1").snow({color:"blue",createInterval:1000});
+            $(".snow-panel-2").snow({opacity:0.9,createInterval:300});
         });
     </script>
 </head>
 <body id="body">
-<div class="snow-panel-1"></div>
 <div class="snow-panel-1"></div>
 <div class="snow-panel-2">
     <!--<button class="add">add</button>-->
