@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angular上传控件</title>
+    <style>
+        .preview{
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+        .preview-img{
+            width: 100%;
+            height: 100%;
+        }
+        .preview-process{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+            left: 0;
+            bottom: 0;
+            background-color: black;
+        }
+    </style>
+
+    <script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.11/angular.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.directive("fileUploader1", function () {
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) { // basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            }
+            return {
+                template: "<div><h1 ng-click='upload()'>文件上传</h1><input style='display: none' ng-model='file' type='file'><div class='preview'><img class='preview-img' src='' alt=''><div class='preview-process'></div></div></div>",
+                scope: true,
+                link: function (s, element, attr) {
+                    var input = $(element).find("input");
+                    var previewImg = $(element).find(".preview-img");
+                    var previewProcess = $(element).find(".preview-process");
+                    input.on("change", function () {
+                        console.log("change");
+                        var fd = new FormData();
+                        var ajax = new XMLHttpRequest();
+                        fd.append("upload", 1);
+                        /* 把文件添加到表单里 */
+                        fd.append("file", input[0].files[0]);
+                        ajax.open("post", "/file/webuploader", true);
+                        ajax.onload = function () {
+                            console.log(ajax.responseText);
+                            previewProcess.hide();
+                        };
+                        var upload = ajax.upload;
+                        upload.addEventListener("progress" , function (event) {
+                            console.log("progress");
+                            var baifenbi = ( event.loaded / event.total).toFixed(4);
+                            previewProcess.css("height",(1 - baifenbi)*100+"%");
+                            console.log(baifenbi);
+                        }, false);
+                        upload.addEventListener("loadend" , function () {
+                            console.log("loadend");
+                            console.log(arguments);
+                        }, false);
+                        ajax.send(fd);
+                        var objUrl = getObjectURL(input[0].files[0]) ;
+                        previewImg.attr("src",objUrl);
+                    });
+
+                    s.upload = function () {
+                        input.click();
+                        console.log(22);
+                    };
+                }
+            };
+        });
+    </script>
+</head>
+<body>
+<file-uploader1></file-uploader1>
+
+<div>
+    <input type="text" ng-model="aaa">
+    <div>{{aaa}}</div>
+</div>
+
+
+</body>
+</html>
