@@ -1,4 +1,4 @@
-var Promise = require("./Promise_m");
+// var Promise = require("./Promise_m");
 console.log("A");
 var p1 =  new Promise(function (resolve,reject) {
     console.log("a");
@@ -10,10 +10,8 @@ var p2 = p1.then(function (data) {
     console.log("b");
     console.log(data);
     var p = new Promise(function (resolve,reject) {
-        // console.log("b2");
         resolve(data + 1);
     });
-    // console.log("b3");
     return p;
 });
 console.log("C");
