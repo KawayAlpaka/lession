@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch</title>
+</head>
+<body>
+<div>
+    <button onclick="test1()">Request参数</button>
+</div>
+<div>
+    <button onclick="test2()">Request+Init参数</button>
+</div>
+<img>
+
+<script>
+    function test1() {
+        var myImage = document.querySelector('img');
+
+        var myRequest = new Request('building.jpg');
+
+        fetch(myRequest).then(function(response) {
+            return response.blob();
+        }).then(function(response) {
+            var objectURL = URL.createObjectURL(response);
+            myImage.src = objectURL;
+        });
+    }
+    function test2() {
+        var myImage = document.querySelector('img');
+
+        var myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'image/jpeg');
+
+        var myInit = { method: 'GET',
+            headers: myHeaders,
+            mode: 'cors',
+            cache: 'default' };
+
+        var myRequest = new Request('building.jpg');
+
+        fetch(myRequest,myInit).then(function(response) {
+            var promise = response.blob();
+            console.log(promise);
+            return promise;
+        }).then(function(response) {
+            var objectURL = URL.createObjectURL(response);
+            myImage.src = objectURL;
+        });
+    }
+</script>
+</body>
+</html>
