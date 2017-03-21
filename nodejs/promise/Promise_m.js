@@ -1,27 +1,25 @@
+const Pending = "Pending";
+const Resolved = "Resolved";
+const Rejected = "Rejected";
 var Promise = function (fn) {
-
     var self = this;
-
-    self.state = "Pending"; // Resolved Rejected
+    self.state = Pending; // Resolved Rejected
     self.resolve = function (data) {
-        if(self.state == "Pending") {
+        if(self.state == Pending) {
             self.data = data;
             self.fulfilleds.forEach(function (func) {
                 self._run(func,self.data);
-                // func(self.data);
-                // console.log("fulfilled1:"+data);
             });
-            self.state = "Resolved";
+            self.state = Resolved;
         }
     };
     self.reject = function (data) {
-        if(self.state == "Pending") {
+        if(self.state == Pending) {
             self.data = data;
             self.rejecteds.forEach(function (func) {
                 self._run(func,self.data);
-                // func(self.data);
             });
-            self.state = "Rejected";
+            self.state = Rejected;
         }
 
     };
@@ -34,8 +32,12 @@ var Promise = function (fn) {
             func(data);
         },1);
     };
+    try {
+        fn && fn(self.resolve,self.reject);
+    }catch (err){
+        self.reject(err);
+    }
 
-    fn && fn(self.resolve,self.reject);
 
     return self;
 };
@@ -64,19 +66,17 @@ Promise.prototype.then = function (fulfilled,rejected) {
                     reject(data);
                 });
             }else {
-                reject(p2);
+                resolve(p2);
             }
         };
         self.fulfilleds.push(success);
         self.rejecteds.push(error);
-        if(self.state == "Resolved"){
+        if(self.state == Resolved){
             self._run(success,self.data);
-            // success(self.data);
         }
 
-        if(self.state == "Rejected"){
+        if(self.state == Rejected){
             self._run(error,self.data);
-            // error(self.data);
         }
     });
     return p;
