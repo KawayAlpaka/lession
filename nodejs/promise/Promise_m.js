@@ -98,4 +98,19 @@ Promise.isPromise = function (obj) {
     return obj && obj.then;
 };
 
+Promise.resolve = function (obj) {
+    if(Promise.isPromise(obj)){
+        return obj;
+    }else if(obj){
+        return new Promise(function (resolve) {
+            resolve(obj);
+        });
+    }else {
+        var _p = new Promise(function (resolve) {
+            resolve();
+        });
+        return _p;
+    }
+};
+
 module.exports = Promise;
