@@ -1,4 +1,4 @@
-var Promise = require("./Promise_m");
+// var Promise = require("./Promise_m");
 
 
 // // 测试then
@@ -40,45 +40,57 @@ var Promise = require("./Promise_m");
 
 
 
-//测试catch
+// //测试 then 的第二个参数
+// var pc1 =  new Promise(function (resolve,reject) {
+//     console.log("pc1");
+//     throw new Error('pc1 throw');
+//     return resolve("pc1 resolve");
+// });
+//
+// var pc2 = pc1.then(function (data) {
+//     console.log("pc1 success 1");
+//     console.log(data);
+// },function (err) {
+//     console.log("pc1 error 1");
+//     console.log(err.toString());
+// });
+//
+// pc2.then(function (data) {
+//     console.log("pc2 success 1");
+//     console.log(data);
+// },function (err) {
+//     console.log("pc2 error 1");
+//     console.log(err.toString());
+// });
+//
+// pc1.then(function (data) {
+//     console.log("pc1 success 2");
+//     console.log(data);
+// },function (err) {
+//     console.log("pc1 error 2");
+//     console.log(err.toString());
+// });
+
+//测试 catch
 var pc1 =  new Promise(function (resolve,reject) {
     console.log("pc1");
     throw new Error('pc1 throw');
     return resolve("pc1 resolve");
 });
-
-var pc2 = pc1.then(function (data) {
-    console.log("pc1 success 1");
-    console.log(data);
-},function (err) {
-    console.log("pc1 error 1");
+var pc2 = pc1.catch(function (err) {
+    console.log("pc1 catch 1");
+    console.log(err.toString());
+    // throw new Error('pc1 catch throw');
+});
+pc2.catch(function (err) {
+    console.log("pc2 catch 1");
     console.log(err.toString());
 });
-
-pc2.then(function (data) {
-    console.log("pc2 success 1");
-    console.log(data);
-},function (err) {
-    console.log("pc2 error 1");
+pc1.catch(function (err) {
+    console.log("pc1 catch 2");
     console.log(err.toString());
+    // throw new Error('pc1 catch throw');
 });
-
-pc1.then(function (data) {
-    console.log("pc1 success 2");
-    console.log(data);
-},function (err) {
-    console.log("pc1 error 2");
-    console.log(err.toString());
-});
-
-
-
-
-
-
-
-
-
 
 
 

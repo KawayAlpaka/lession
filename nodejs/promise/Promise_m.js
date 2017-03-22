@@ -45,28 +45,37 @@ Promise.prototype.then = function (fulfilled,rejected) {
     var self = this;
     var p = new Promise(function (resolve,reject) {
         var success = function (data) {
-            var p1 = fulfilled(data);
-            if(p1 && p1.then){
-                p1.then(function (data) {
-                    resolve(data);
-                },function () {
-                    reject(data);
-                });
-            }else {
-                resolve(p1);
+            try{
+                var _p = fulfilled && fulfilled(data);
+                if(Promise.isPromise(_p)){
+                    _p.then(function (data) {
+                        resolve(data);
+                    },function () {
+                        reject(data);
+                    });
+                }else {
+                    resolve(_p);
+                }
+            }catch (err){
+                reject(err);
             }
+
         };
 
         var error = function (data) {
-            var p2 = rejected(data);
-            if(p2 && p2.then){
-                p2.then(function (data) {
-                    resolve(data);
-                },function () {
-                    reject(data);
-                });
-            }else {
-                resolve(p2);
+            try {
+                var _p = rejected && rejected(data);
+                if(Promise.isPromise(_p)){
+                    _p.then(function (data) {
+                        resolve(data);
+                    },function () {
+                        reject(data);
+                    });
+                }else {
+                    resolve(_p);
+                }
+            }catch (err){
+                reject(err);
             }
         };
         self.fulfilleds.push(success);
@@ -80,6 +89,13 @@ Promise.prototype.then = function (fulfilled,rejected) {
         }
     });
     return p;
+};
+Promise.prototype.catch = function (rejected) {
+    return this.then(null,rejected);
+};
+
+Promise.isPromise = function (obj) {
+    return obj && obj.then;
 };
 
 module.exports = Promise;
