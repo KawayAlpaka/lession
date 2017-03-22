@@ -74,13 +74,14 @@
 //测试 catch
 var pc1 =  new Promise(function (resolve,reject) {
     console.log("pc1");
-    throw new Error('pc1 throw');
-    return resolve("pc1 resolve");
+    // throw new Error('pc1 throw');
+    reject('pc1 reject');
+    resolve("pc1 resolve");
 });
 var pc2 = pc1.catch(function (err) {
     console.log("pc1 catch 1");
     console.log(err.toString());
-    // throw new Error('pc1 catch throw');
+    throw new Error('pc1 catch throw');
 });
 pc2.catch(function (err) {
     console.log("pc2 catch 1");
