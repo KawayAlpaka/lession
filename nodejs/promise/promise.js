@@ -1,4 +1,4 @@
-// var Promise = require("./Promise_m");
+var Promise = require("./Promise_m");
 
 
 // // 测试then
@@ -71,28 +71,40 @@
 //     console.log(err.toString());
 // });
 
-//测试 catch
-var pc1 =  new Promise(function (resolve,reject) {
-    console.log("pc1");
-    // throw new Error('pc1 throw');
-    reject('pc1 reject');
-    resolve("pc1 resolve");
-});
-var pc2 = pc1.catch(function (err) {
-    console.log("pc1 catch 1");
-    console.log(err.toString());
-    throw new Error('pc1 catch throw');
-});
-pc2.catch(function (err) {
-    console.log("pc2 catch 1");
-    console.log(err.toString());
-});
-pc1.catch(function (err) {
-    console.log("pc1 catch 2");
-    console.log(err.toString());
-    // throw new Error('pc1 catch throw');
-});
+// //测试 catch
+// var pc1 =  new Promise(function (resolve,reject) {
+//     console.log("pc1");
+//     // throw new Error('pc1 throw');
+//     reject('pc1 reject');
+//     resolve("pc1 resolve");
+// });
+// var pc2 = pc1.catch(function (err) {
+//     console.log("pc1 catch 1");
+//     console.log(err.toString());
+//     throw new Error('pc1 catch throw');
+// });
+// pc2.catch(function (err) {
+//     console.log("pc2 catch 1");
+//     console.log(err.toString());
+// });
+// pc1.catch(function (err) {
+//     console.log("pc1 catch 2");
+//     console.log(err.toString());
+//     // throw new Error('pc1 catch throw');
+// });
 
+// 测试 all
+Promise.all([new Promise(function (resolve,reject) {
+    setTimeout(() => resolve(1),3000);
+}),new Promise(function (resolve,reject) {
+    setTimeout(() => resolve(2),1000);
+// }),new Promise(function (resolve,reject) {
+//     setTimeout(() => reject(3),5000);
+})]).then(function (data) {
+    console.log(data)
+},function (err) {
+    console.log(err)
+});
 
 
 

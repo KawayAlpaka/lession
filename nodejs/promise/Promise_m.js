@@ -95,7 +95,8 @@ Promise.prototype.catch = function (rejected) {
 };
 
 Promise.isPromise = function (obj) {
-    return obj && obj.then;
+    return obj instanceof Promise;
+    // return obj && obj.then;
 };
 
 Promise.resolve = function (obj) {
@@ -111,6 +112,28 @@ Promise.resolve = function (obj) {
         });
         return _p;
     }
+};
+
+Promise.all = function (arr) {
+    var promise = new Promise(function (resolve,reject) {
+        var results = [];
+        var ps = [];
+        for(var pIndex in arr ){
+            let _p = Promise.resolve(arr[pIndex]);
+            let i = parseInt(pIndex) + 0;
+            _p.then(function (data) {
+                results[i] = data;
+                var noResolvedIndex = ps.findIndex(function (p) {
+                    return p.state == Pending || p.state == Rejected;
+                });
+                if(noResolvedIndex < 0){
+                    resolve(results);
+                }
+            });
+            ps.push(_p);
+        }
+    });
+    return promise;
 };
 
 module.exports = Promise;
