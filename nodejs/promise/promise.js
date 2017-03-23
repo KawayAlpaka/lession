@@ -1,4 +1,4 @@
-var Promise = require("./Promise_m");
+// var Promise = require("./Promise_m");
 
 
 // // 测试then
@@ -99,11 +99,13 @@ Promise.all([new Promise(function (resolve,reject) {
 }),new Promise(function (resolve,reject) {
     setTimeout(() => resolve(2),1000);
 // }),new Promise(function (resolve,reject) {
-//     setTimeout(() => reject(3),5000);
+//     setTimeout(() => {throw new Error('Promise.all throw 3')},5000);//异步中的异常还是无法被catch捕获
+// }),new Promise(function (resolve,reject) {
+//     setTimeout(() => reject(4) ,5000);
 })]).then(function (data) {
     console.log(data)
 },function (err) {
-    console.log(err)
+    console.log(err.message)
 });
 
 

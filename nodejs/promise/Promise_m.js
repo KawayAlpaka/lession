@@ -120,7 +120,7 @@ Promise.all = function (arr) {
         var ps = [];
         for(var pIndex in arr ){
             let _p = Promise.resolve(arr[pIndex]);
-            let i = parseInt(pIndex) + 0;
+            let i = parseInt(pIndex);
             _p.then(function (data) {
                 results[i] = data;
                 var noResolvedIndex = ps.findIndex(function (p) {
@@ -129,6 +129,8 @@ Promise.all = function (arr) {
                 if(noResolvedIndex < 0){
                     resolve(results);
                 }
+            },function (err) {
+                reject(err);
             });
             ps.push(_p);
         }
