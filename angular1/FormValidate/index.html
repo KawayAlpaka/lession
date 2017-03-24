@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/angular.js/1.2.8/angular.js"></script>
+    <!--<script src="//cdn.bootcss.com/angular.js/1.2.8/angular.js"></script>-->
+    <script src="//cdn.bootcss.com/angular.js/1.2.12/angular.js"></script>
+    <!--1.2.32版本不能双向绑定file-->
+    <!--<script src="//cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>-->
     <style type="text/css">
         body { padding-top: 30px; }
     </style>
 </head>
 <body>
 
-<div class="col-md-6" ng-Controller="MyController">
+<div class="col-md-12" ng-Controller="MyController">
     <form role="form" name="myForm" ng-submit="submitForm(myForm.$valid)" class="form-horizontal" novalidate>
         <div class="form-group  has-feedback">
             <div class="col-md-4">
@@ -85,56 +88,74 @@
                               ng-show="myForm.url.$dirty && myForm.url.$valid"></span>
             </div>
         </div>
+        <div class="form-group  has-feedback">
+            <div class="col-md-4">
+                <label for="url"> 8. 文件</label>
+            </div>
+            <div class="col-md-8">
+                <input type="file" required id="avatar" name="avatar" ng-model="user.avatar" class="form-control" />
+                        <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-show="myForm.avatar.$dirty && myForm.avatar.$valid"></span>
+            </div>
+        </div>
         <div class="form-group  text-center">
             <input class="btn btn-primary btn-lg" ng-disabled="myForm.$invalid" type="submit" value="提交" />
         </div>
     </form>
+    <div class="col-md-12">
+        1.必填项:{{user.name}}&nbsp;&nbsp;
+        $pristine 【没修改】：{{myForm.name.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.name.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.name.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.name.$valid}}&nbsp;&nbsp;
+        required：{{myForm.name.$error.required}}&nbsp;&nbsp;
+        <br>
+        2.最小长度=5:{{user.minlength}}
+        $pristine 【没修改】：{{myForm.minlength.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.minlength.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.minlength.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.minlength.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.minlength.$error}}&nbsp;&nbsp;<br>
+        3.最大长度=20:{{user.maxlength}}
+        $pristine 【没修改】：{{myForm.maxlength.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.maxlength.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.maxlength.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.maxlength.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.maxlength.$error}}&nbsp;&nbsp;<br>
+        4.模式匹配:{{user.pattern}}
+        $pristine 【没修改】：{{myForm.pattern.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.pattern.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.pattern.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.pattern.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.pattern.$error}}&nbsp;&nbsp;<br>
+        5.电子邮件:{{user.email}}
+        $pristine 【没修改】：{{myForm.email.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.email.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.email.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.email.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.email.$error}}&nbsp;&nbsp;<br>
+        6.数字:{{user.age}}
+        $pristine 【没修改】：{{myForm.age.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.age.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.age.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.age.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.age.$error}}&nbsp;&nbsp;<br>
+        7.URL:{{user.url}}
+        $pristine 【没修改】：{{myForm.url.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.url.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm.url.$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.url.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.url.$error}}&nbsp;&nbsp;<br>
+        8.文件:{{user.avatar}}
+        $pristine 【没修改】：{{myForm.avatar.$pristine }}&nbsp;&nbsp;
+        $dirty【修改过】：{{myForm.avatar.$dirty}}&nbsp;&nbsp;
+        $invalid【验证失败】：{{myForm['avatar'].$invalid}}&nbsp;&nbsp;
+        $valid【验证成功】：{{myForm.avatar.$valid}}&nbsp;&nbsp;
+        $error【错误详情】：{{myForm.avatar.$error}}&nbsp;&nbsp;
+        required：{{myForm.avatar.$error.required}}&nbsp;&nbsp;<br>
+    </div>
 </div>
-<div class="col-md-12">
-    1.必填项:{{user.name}}&nbsp;&nbsp;
-    $pristine 【没修改】：{{myForm.name.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.name.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.name.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.name.$valid}}&nbsp;&nbsp;
-    required：{{myForm.name.$error.required}}&nbsp;&nbsp;
-    <br>
-    2.最小长度=5:{{user.minlength}}
-    $pristine 【没修改】：{{myForm.minlength.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.minlength.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.minlength.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.minlength.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.minlength.$error}}&nbsp;&nbsp;<br>
-    3.最大长度=20:{{user.maxlength}}
-    $pristine 【没修改】：{{myForm.maxlength.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.maxlength.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.maxlength.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.maxlength.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.maxlength.$error}}&nbsp;&nbsp;<br>
-    4.模式匹配:{{user.pattern}}
-    $pristine 【没修改】：{{myForm.pattern.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.pattern.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.pattern.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.pattern.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.pattern.$error}}&nbsp;&nbsp;<br>
-    5.电子邮件:{{user.email}}
-    $pristine 【没修改】：{{myForm.email.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.email.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.email.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.email.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.email.$error}}&nbsp;&nbsp;<br>
-    6.数字:{{user.age}}
-    $pristine 【没修改】：{{myForm.age.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.age.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.age.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.age.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.age.$error}}&nbsp;&nbsp;<br>
-    7.URL:{{user.url}}
-    $pristine 【没修改】：{{myForm.url.$pristine }}&nbsp;&nbsp;
-    $dirty【修改过】：{{myForm.url.$dirty}}&nbsp;&nbsp;
-    $invalid【验证失败】：{{myForm.url.$invalid}}&nbsp;&nbsp;
-    $invalid【验证成功】：{{myForm.url.$valid}}&nbsp;&nbsp;
-    $error【错误详情】：{{myForm.url.$error}}&nbsp;&nbsp;<br>
-</div>
+
 </body>
 </html>
 <script type="text/javascript">
