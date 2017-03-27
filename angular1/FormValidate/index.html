@@ -6,9 +6,9 @@
     <title>Index</title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!--<script src="//cdn.bootcss.com/angular.js/1.2.8/angular.js"></script>-->
-    <script src="//cdn.bootcss.com/angular.js/1.2.12/angular.js"></script>
-    <!--1.2.32版本不能双向绑定file-->
-    <!--<script src="//cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>-->
+    <!--<script src="//cdn.bootcss.com/angular.js/1.2.12/angular.js"></script>-->
+    <!--1.2.13版本及以后不能直接通过ng-model双向绑定file-->
+    <script src="//cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>
     <style type="text/css">
         body { padding-top: 30px; }
     </style>
@@ -93,7 +93,7 @@
                 <label for="url"> 8. 文件</label>
             </div>
             <div class="col-md-8">
-                <input type="file" required id="avatar" name="avatar" ng-model="user.avatar" class="form-control" />
+                <input type="file" required id="avatar" name="avatar" ng-model="user.avatar" class="form-control" onchange="bindFile(this)"/>
                         <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="myForm.avatar.$dirty && myForm.avatar.$valid"></span>
             </div>
@@ -167,6 +167,11 @@
                             }
                         };
                         console.log($scope.myForm);
-                    }
-            );
+                    });
+    //  // 1.2.13及以后版本 文件的 验证
+    var bindFile = function(that) {
+        angular.element(that).scope().user.avatar = that.files[0];
+//        angular.element(that).scope().uploadFile(that);
+        angular.element(that).scope().$digest();
+    }
 </script>
