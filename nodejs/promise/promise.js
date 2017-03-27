@@ -1,4 +1,4 @@
-// var Promise = require("./Promise_m");
+var Promise = require("./Promise_m");
 
 
 // // 测试then
@@ -93,22 +93,35 @@
 //     // throw new Error('pc1 catch throw');
 // });
 
-// 测试 all
-Promise.all([new Promise(function (resolve,reject) {
+// // 测试 all
+// Promise.all([new Promise(function (resolve,reject) {
+//     setTimeout(() => resolve(1),3000);
+// }),new Promise(function (resolve,reject) {
+//     setTimeout(() => resolve(2),1000);
+// // }),new Promise(function (resolve,reject) {
+// //     setTimeout(() => {throw new Error('Promise.all throw 3')},5000);//异步中的异常还是无法被catch捕获
+// // }),new Promise(function (resolve,reject) {
+// //     setTimeout(() => reject(new Error('4')) ,5000);
+// })]).then(function (data) {
+//     console.log(data)
+// },function (err) {
+//     console.log(err.message)
+// });
+
+// 测试 race
+Promise.race([new Promise(function (resolve,reject) {
     setTimeout(() => resolve(1),3000);
 }),new Promise(function (resolve,reject) {
     setTimeout(() => resolve(2),1000);
 // }),new Promise(function (resolve,reject) {
 //     setTimeout(() => {throw new Error('Promise.all throw 3')},5000);//异步中的异常还是无法被catch捕获
-// }),new Promise(function (resolve,reject) {
-//     setTimeout(() => reject(4) ,5000);
+}),new Promise(function (resolve,reject) {
+    setTimeout(() => reject(new Error('4')) ,5000);
 })]).then(function (data) {
     console.log(data)
 },function (err) {
     console.log(err.message)
 });
-
-
 
 
 

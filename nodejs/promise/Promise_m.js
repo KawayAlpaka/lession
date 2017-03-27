@@ -138,4 +138,21 @@ Promise.all = function (arr) {
     return promise;
 };
 
+
+Promise.race = function (arr) {
+    var promise = new Promise(function (resolve,reject) {
+        var ps = [];
+        for(var pIndex in arr ){
+            let _p = Promise.resolve(arr[pIndex]);
+            _p.then(function (data) {
+                resolve(data);
+            },function (err) {
+                reject(err);
+            });
+            ps.push(_p);
+        }
+    });
+    return promise;
+};
+
 module.exports = Promise;
