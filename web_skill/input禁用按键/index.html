@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<div>
+    <div>
+        <input type="number" >
+    </div>
+    <div>
+        <input type="number" >
+    </div>
+</div>
+<script>
+    //禁用上下键 按下上下键时第二个输入框获得焦点 代码很乱有待优化
+    (function () {
+        var numberInputArr = document.querySelectorAll("input[type='number']");
+        var numberInput1 = numberInputArr[0];
+        var numberInput2 = numberInputArr[1];
+        var _value = "";
+        var downing = false;
+        var deal = function (self,keyCode) {
+            if(downing){
+                self.value = _value;
+            }else {
+                downing = true;
+                _value = self.value;
+            }
+            numberInput2.focus();
+            onkeyup(self);
+        };
+        var onkeyup = function (self) {
+            downing = false;
+            setTimeout(function () {
+                self.value = _value;
+            },1);
+        };
+        numberInput1.addEventListener("keypress",function () {
+            console.log("onkeypress");
+        });
+        var onKeyDown = function (keyboardEvent) {
+            console.log("onkeydown");
+            var self = this;
+            switch (keyboardEvent.keyCode){
+                case 38:
+                    deal(self,keyboardEvent.keyCode);
+                    break;
+                case 40:
+                    deal(self,keyboardEvent.keyCode);
+                    break;
+                default:break;
+            }
+        };
+        numberInput1.addEventListener("keydown",onKeyDown);
+//        numberInput1.removeEventListener("keydown",onKeyDown);
+    })();
+
+</script>
+</body>
+</html>
