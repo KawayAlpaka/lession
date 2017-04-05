@@ -5,14 +5,17 @@
     <title>index</title>
 </head>
 <body>
-<div>
+<form>
     <div>
         <input type="number" >
     </div>
     <div>
         <input type="number" >
     </div>
-</div>
+    <div>
+        <button type="submit">submit</button>
+    </div>
+</form>
 <script>
     //禁用上下键 按下上下键时第二个输入框获得焦点 代码很乱有待优化
     (function () {
@@ -39,9 +42,12 @@
         };
         numberInput1.addEventListener("keypress",function () {
             console.log("onkeypress");
+            console.log(arguments);
         });
         var onKeyDown = function (keyboardEvent) {
+
             console.log("onkeydown");
+            console.log(arguments);
             var self = this;
             switch (keyboardEvent.keyCode){
                 case 38:
