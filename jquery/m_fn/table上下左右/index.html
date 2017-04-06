@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <script src="js/jquery.table.js"></script>
+    <style>
+        .l-hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+    </tr>
+    <tr class="l-hide">
+        <td>
+            <input type="number">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="number">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+        <td>
+            <input type="text">
+        </td>
+    </tr>
+</table>
+<script>
+    $(function () {
+        $("table").table({not:".l-hide",up:true,down:true,left:false,right:false,"return":"down"});
+    });
+</script>
+</body>
+</html>
