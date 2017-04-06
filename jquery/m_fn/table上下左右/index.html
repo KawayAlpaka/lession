@@ -9,6 +9,9 @@
         .l-hide{
             display: none;
         }
+        .remove{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -60,7 +63,7 @@
 </table>
 <script>
     $(function () {
-        $("table").table({not:".l-hide",up:true,down:true,left:false,right:false,"return":"down"});
+        $("table").table({not:".l-hide,.remove",up:true,down:true,left:false,right:false,"return":"down"});
     });
 </script>
 </body>

@@ -19,9 +19,11 @@
         if(option.not){
             selector += ":not("+option.not+")";
         }
-        var rows = $(table).find("tr"+selector);
-        var cells = $(rows[rowNum-1]).find("td"+selector+",th"+selector);
-        $(cells[colNum-1]).find("input").focus();
+        var rows = $(table).find("tbody tr"+selector);
+        var cells = $(rows[rowNum - 1]).find("td" + selector + ",th" + selector);
+        var cellInput = $(cells[colNum - 1]).find("input");
+        console.log(cellInput.val());
+        cellInput.focus();
         // :nth-child(n)
     };
     var backValue = function (self,_value) {
