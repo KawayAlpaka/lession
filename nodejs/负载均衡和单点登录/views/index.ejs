@@ -7,5 +7,23 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <p>当前服务端口为 <%= env.PORT %></p>
+
+    <% if(typeof user == "undefined") { %>
+      <div>
+        <form action="/signin" method="POST">
+          <div>
+            <label>用户名:</label>
+            <input name="user" type="text">
+          </div>
+          <div>
+            <button type="submit">登录</button>
+          </div>
+        </form>
+      </div>
+    <% } else { %>
+      <div><span>欢迎<%= user %></span></div>
+      <div><a href="/signout">退出</a></div>
+    <% }%>
   </body>
 </html>
