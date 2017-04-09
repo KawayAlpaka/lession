@@ -25,5 +25,70 @@
       <div><span>欢迎<%= user %></span></div>
       <div><a href="/signout">退出</a></div>
     <% }%>
+    <div>
+      <form onsubmit="return setCookieByServer()">
+        <h4>设置cookie</h4>
+        <div>
+          <label>域名</label>
+          <input type="text" required name="yuming" id="yuming" value="localhost">
+        </div>
+        <div>
+          <label>端口</label>
+          <input type="text" required name="port" id="port" value="3001">
+        </div>
+        <div>
+          <label>key</label>
+          <input type="text" required name="key" id="key" value="key">
+        </div>
+        <div>
+          <label>value</label>
+          <input type="text" required name="value" id="value" value="value">
+        </div>
+        <!--<div>-->
+          <!--<label>value</label>-->
+          <!--<input type="text" required name="value" id="value" value="value">-->
+        <!--</div>-->
+        <div>
+          <button type="submit">设置</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <h4>查看connect.sid</h4>
+      <button type="button" onclick="showConnectSid()">刷新</button>
+      <div id="connectSid"></div>
+    </div>
+  <script>
+    function getCookie(name)
+    {
+      var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+      if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+      else
+        return null;
+    }
+
+    var setCookieByServer = function () {
+
+      //fetch 不会自动设置cookie
+      var url = "http://" + yuming.value + ":" + port.value + "/setcookie" + "?key=" + key.value +"&value=" + value.value;
+      var myRequest = new Request(url);
+      fetch(myRequest).then(function(response) {
+        console.log(response);
+      });
+
+      //jsonp 会自动设置cookie ，如果是跨域请求，设置的就是被请求域名的cookie
+      var script = document.createElement('script');
+      script.setAttribute('src', url);
+      // 把script标签加入head，此时调用开始
+      document.getElementsByTagName('head')[0].appendChild(script);
+
+      return false;
+    };
+
+    var showConnectSid = function () {
+      connectSid.innerHTML = getCookie("connect.sid");
+    };
+  </script>
   </body>
 </html>
