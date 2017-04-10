@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rxjs</title>
+    <script src="https://unpkg.com/rxjs@5.3.0/bundles/Rx.min.js"></script>
+    <script>
+//        console.log(Rx);
+        var  haha = Rx.Observable.of("haha");
+//        console.log(haha);
+        var hehe = Rx.Observable.create(function (observer) {
+            console.log(observer);
+            observer.onNext("hehe");
+        });
+        hehe.subscribe(function(response) {
+            console.log(response);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
