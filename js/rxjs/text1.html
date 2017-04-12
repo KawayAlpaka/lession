@@ -5,16 +5,43 @@
     <title>rxjs</title>
     <script src="https://unpkg.com/rxjs@5.3.0/bundles/Rx.min.js"></script>
     <script>
-//        console.log(Rx);
         var  haha = Rx.Observable.of("haha");
-//        console.log(haha);
         var hehe = Rx.Observable.create(function (observer) {
             console.log(observer);
-            observer.onNext("hehe");
-        });
+            observer.next("hehe");
+        })
+//                .skip(1)
+//                .startWith("startWith");
+        //订阅才会触发流，每订阅一次，流触发一次
         hehe.subscribe(function(response) {
+            console.log("hehe.subscribe 1");
             console.log(response);
         });
+        hehe.subscribe(function(response) {
+            console.log("hehe.subscribe 2");
+        });
+
+//        var numbers = Rx.Observable.of(10, 20, 30);
+//        var letters = Rx.Observable.of('a', 'b', 'c');
+//        var interval = Rx.Observable.interval(1000);
+//        var result = numbers.concat(letters).concat(interval);
+//        result.subscribe(x => console.log(x));
+
+//        var seconds = Rx.Observable.interval(1000);
+//        var clicks = Rx.Observable.fromEvent(document, 'click');
+//        var result = seconds.sample(clicks);
+//        result.subscribe(x => console.log(x));
+
+//        var clicks = Rx.Observable.fromEvent(document, 'click');
+//        var timer = Rx.Observable.interval(1000);
+//        var clicksOrTimer = clicks.merge(timer);
+//        clicksOrTimer.subscribe(x => console.log(x));
+
+//        var weight = Rx.Observable.of(70, 72, 76, 79, 75);
+//        var height = Rx.Observable.of(1.76, 1.77, 1.78);
+//        var bmi = weight.combineLatest(height, (w, h) => {console.log(w,h); return w / (h * h);});
+//        bmi.subscribe(x => console.log('BMI is ' + x));
+
     </script>
 </head>
 <body>

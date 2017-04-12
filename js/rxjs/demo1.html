@@ -58,7 +58,8 @@
         var close2ClickStream = Rx.Observable.fromEvent(closeButton2, 'click');
         var close3ClickStream = Rx.Observable.fromEvent(closeButton3, 'click');
 
-        var requestStream = refreshClickStream.startWith('startup1 click')
+        var requestStream = refreshClickStream
+                .startWith('startup click') //开始时就发射，不用等到点击
                 .map(function() {
                     var randomOffset = Math.floor(Math.random()*500);
                     return 'https://api.github.com/users?since=' + randomOffset;
@@ -70,18 +71,21 @@
                 });
 
         function createSuggestionStream(closeClickStream) {
-            return closeClickStream.startWith('startup click')
+            return closeClickStream
+                    .startWith('startup click') //在流前面加入一个值，让 responseStream 到来时，就能触发发射，详情看 combineLatest
                     .combineLatest(responseStream,
                             function(click, listUsers) {
+                                console.log(click,listUsers);
                                 return listUsers[Math.floor(Math.random()*listUsers.length)];
                             }
                     )
                     .merge(
                             refreshClickStream.map(function(){
+                                console.log("refreshClickStream.map");
                                 return null;
                             })
                     )
-                    .startWith(null);
+                    .startWith(null);//没加载完成默认隐藏
         }
 
         var suggestion1Stream = createSuggestionStream(close1ClickStream);
@@ -106,6 +110,7 @@
         }
 
         suggestion1Stream.subscribe(function (suggestedUser) {
+            console.log("suggestion1Stream.subscribe");
             renderSuggestion(suggestedUser, '.suggestion1');
         });
 
