@@ -1,8 +1,24 @@
 var Router = function() {
+    arguments
     this.funcs = [];
 };
-Router.prototype.use  = function (func) {
-    this.funcs.push(func);
+Router.prototype.use  = function () {
+    var self = this;
+    var addFunc = function (arg) {
+        if (typeof arg == "function") {
+            self.funcs.push(arg);
+        } else {
+            throw new Error("is not function")
+        }
+    };
+    for(var i=0;i<arguments.length;i++){
+        var arg = arguments[i];
+        if (arg instanceof Array) {
+            arg.forEach(addFunc);
+        }else{
+            addFunc(arg);
+        }
+    }
 };
 Router.prototype.run = function () {
     var self = this;

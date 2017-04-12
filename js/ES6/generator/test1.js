@@ -46,15 +46,16 @@ var router = new Router();
 router.use(function (req,res) {
     req.a = 1;
     console.log(req);
-});
-router.use(function (req,res,next) {
+},[function (req,res,next) {
     req.b = 2;
     console.log(req);
     next();
-});
-router.use(function (req,res,next) {
+},function (req,res) {
     req.c = 3;
     console.log(req);
-    next();
+}]);
+router.use(function (req,res) {
+    req.d = 4;
+    console.log(req);
 });
 router.run();
