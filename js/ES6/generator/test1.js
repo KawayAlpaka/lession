@@ -57,5 +57,18 @@ router.use(function (req,res) {
 router.use(function (req,res) {
     req.d = 4;
     console.log(req);
+    throw "测试错误";
+});
+router.use(function (err,req,res,next) {
+    req.e = 5;
+    console.log(req);
+    next();
+},function (req,res) {
+    req.f = 6;
+    console.log(req);
+});
+router.use(function (err,req,res,next) {
+    req.g = 7;
+    console.log(req);
 });
 router.run();

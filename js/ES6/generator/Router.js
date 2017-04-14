@@ -25,18 +25,42 @@ Router.prototype.run = function () {
     self.req = {};
     self.res = {};
     var G = function* () {
+        var err = null;
         for(var i in self.funcs){
+
             yield setTimeout(function () {
-                switch (self.funcs[i].length){
-                    case 3:
-                        self.funcs[i](self.req,self.res,next);
-                        break;
-                    default:
-                        self.funcs[i](self.req,self.res);
-                        next();
-                        break;
+                try {
+                    if(err){
+                        switch (self.funcs[i].length) {
+                            case 4:
+                                self.funcs[i](err,self.req, self.res, next);
+                                break;
+                            default:
+                                next();
+                                break;
+                        }
+                    }else {
+                        switch (self.funcs[i].length) {
+                            case 3:
+                                self.funcs[i](self.req, self.res, next);
+                                break;
+                            case 2:
+                                self.funcs[i](self.req, self.res);
+                                next();
+                                break;
+                            default:
+                                next();
+                                break;
+                        }
+                    }
+                } catch (e) {
+                    console.log(e);
+                    next();
+                    err = e;
                 }
-            },1);
+            }, 1);
+
+
         }
     };
     var g = G();
