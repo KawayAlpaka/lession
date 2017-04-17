@@ -22,6 +22,7 @@
                 var self = this;
                 var _tempPos = self.selectionStart;
                 var oldCommaCount = oldValue.match(/，/g) ?  oldValue.match(/，/g).length : 0;
+                var sign = /^-/.test(self.value) ? "-" : "";
                 var _temp = self.value.replace(/[^0-9\.]/g,"");
 
                 var arrText = _temp.split(".");
@@ -30,14 +31,15 @@
                     return s + '，';
                 });
                 if(arrText.length >1){
-                    self.value += "."+arrText[1].substr(0,2);
+                    self.value +=  "."+arrText[1].substr(0,2);
                 }
+                self.value = sign + self.value;
                 newValue = self.value;
                 var newCommaCount = newValue.match(/，/g) ?  newValue.match(/，/g).length : 0;
                 var commaChazhi = newCommaCount - oldCommaCount;
-                if(Math.abs(commaChazhi) > 0 ){
-                    console.log(commaChazhi);
-                }
+                // if(Math.abs(commaChazhi) > 0 ){
+                //     console.log(commaChazhi);
+                // }
                 set_text_value_position(self,_tempPos+commaChazhi);
                 oldValue = newValue;
             };
