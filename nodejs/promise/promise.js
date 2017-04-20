@@ -41,6 +41,7 @@ var Promise = require("./Promise_m");
 
 
 // //测试 then 的第二个参数
+// // Error会被抛出的它的promise之后的第一个带有catch的promise捕获到
 // var pc1 =  new Promise(function (resolve,reject) {
 //     console.log("pc1");
 //     throw new Error('pc1 throw');
@@ -50,9 +51,6 @@ var Promise = require("./Promise_m");
 // var pc2 = pc1.then(function (data) {
 //     console.log("pc1 success 1");
 //     console.log(data);
-// },function (err) {
-//     console.log("pc1 error 1");
-//     console.log(err.toString());
 // });
 //
 // pc2.then(function (data) {
@@ -66,9 +64,6 @@ var Promise = require("./Promise_m");
 // pc1.then(function (data) {
 //     console.log("pc1 success 2");
 //     console.log(data);
-// },function (err) {
-//     console.log("pc1 error 2");
-//     console.log(err.toString());
 // });
 
 // //测试 catch
@@ -108,20 +103,20 @@ var Promise = require("./Promise_m");
 //     console.log(err.message)
 // });
 
-// 测试 race
-Promise.race([new Promise(function (resolve,reject) {
-    setTimeout(() => resolve(1),3000);
-}),new Promise(function (resolve,reject) {
-    setTimeout(() => resolve(2),1000);
+// // 测试 race
+// Promise.race([new Promise(function (resolve,reject) {
+//     setTimeout(() => resolve(1),3000);
 // }),new Promise(function (resolve,reject) {
-//     setTimeout(() => {throw new Error('Promise.all throw 3')},5000);//异步中的异常还是无法被catch捕获
-}),new Promise(function (resolve,reject) {
-    setTimeout(() => reject(new Error('4')) ,5000);
-})]).then(function (data) {
-    console.log(data)
-},function (err) {
-    console.log(err.message)
-});
+//     setTimeout(() => resolve(2),1000);
+// // }),new Promise(function (resolve,reject) {
+// //     setTimeout(() => {throw new Error('Promise.all throw 3')},5000);//异步中的异常还是无法被catch捕获
+// }),new Promise(function (resolve,reject) {
+//     setTimeout(() => reject(new Error('4')) ,5000);
+// })]).then(function (data) {
+//     console.log(data)
+// },function (err) {
+//     console.log(err.message)
+// });
 
 
 

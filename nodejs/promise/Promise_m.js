@@ -64,15 +64,20 @@ Promise.prototype.then = function (fulfilled,rejected) {
 
         var error = function (data) {
             try {
-                var _p = rejected && rejected(data);
-                if(Promise.isPromise(_p)){
-                    _p.then(function (data) {
-                        resolve(data);
-                    },function () {
-                        reject(data);
-                    });
-                }else {
-                    resolve(_p);
+                var _p;
+                if(rejected){
+                    _p = rejected(data);
+                    if(Promise.isPromise(_p)){
+                        _p.then(function (data) {
+                            resolve(data);
+                        },function () {
+                            reject(data);
+                        });
+                    }else {
+                        resolve(_p);
+                    }
+                }else{
+                    reject(data);
                 }
             }catch (err){
                 reject(err);
