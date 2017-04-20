@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取数据示例</title>
+    <script src="js/getJson.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        var asyncGetJson = function () {
+            getJson(1,function (data) {
+                alert(data.value);
+            });
+        };
+        var syncGetJson = function () {
+            var data = getJsonSync(2);
+            alert(data.value);
+        };
+        
+        var asyncAddOneToFive = function () {
+            getJson(1,function (data1) {
+                console.log(data1);
+                getJson(2,function (data2) {
+                    console.log(data2);
+                    getJson(3,function (data3) {
+                        console.log(data3);
+                        getJson(4,function (data4) {
+                            console.log(data4);
+                            getJson(5,function (data5) {
+                                console.log(data5);
+                                var result = data1.value + data2.value + data3.value + data4.value + data5.value;
+                                alert("结果是:"+result);
+                            });
+                        });
+                    });
+                });
+            });
+        };
+        var syncAddOneToFive = function () {
+            var data1 = getJsonSync(1);
+            console.log(data1);
+            var data2 = getJsonSync(2);
+            console.log(data2);
+            var data3 = getJsonSync(3);
+            console.log(data3);
+            var data4 = getJsonSync(4);
+            console.log(data4);
+            var data5 = getJsonSync(5);
+            console.log(data5);
+            alert(data1.value + data2.value + data3.value + data4.value + data5.value);
+        };
+
+
+        var addOneToFive = function () {
+            var datas = [];
+            var alertResult = function () {
+                if(datas.length == 5){
+                    var result = 0;
+                    datas.forEach(function (data) {
+                        result += data.value;
+                    });
+                    alert(result);
+                }
+            };
+            getJson(1,function (data){
+                console.log(data);
+                datas.push(data);
+                alertResult();
+            });
+            getJson(2,function (data){
+                console.log(data);
+                datas.push(data);
+                alertResult();
+            });
+            getJson(3,function (data){
+                console.log(data);
+                datas.push(data);
+                alertResult();
+            });
+            getJson(4,function (data){
+                console.log(data);
+                datas.push(data);
+                alertResult();
+            });
+            getJson(5,function (data){
+                console.log(data);
+                datas.push(data);
+                alertResult();
+            });
+        };
+    </script>
+</head>
+<body>
+<div class="body">
+    <div class="test-render"></div>
+    <div>
+        <button onclick="asyncGetJson()">async</button>
+        <button onclick="syncGetJson()">sync</button>
+    </div>
+    <div>
+        <h3>串行读取:</h3>
+        <button onclick="asyncAddOneToFive()">async数据1~5相加</button>
+        <button onclick="syncAddOneToFive()">sync数据1~5相加</button>
+    </div>
+    <div>
+        <h3>并行读取:</h3>
+        <button onclick="addOneToFive()">数据1~5相加</button>
+    </div>
+</div>
+</body>
+</html>
