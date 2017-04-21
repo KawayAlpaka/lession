@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取数据示例</title>
+    <script src="js/getJson.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        var asyncAddOneToFive = function () {
+            var datas = [];
+            var alertResult = function () {
+                var result = 0;
+                datas.forEach(function (data) {
+                    result += data.value;
+                });
+                alert(result);
+            };
+            getJson(1)
+                .then(function (data) {
+                    console.log(data);
+                    datas.push(data);
+                    return getJson(2)
+                })
+                .then(function (data) {
+                    console.log(data);
+                    datas.push(data);
+                    return getJson(3)
+                })
+                .then(function (data) {
+                    console.log(data);
+                    datas.push(data);
+                    return getJson(4)
+                })
+                .then(function (data) {
+                    console.log(data);
+                    datas.push(data);
+                    return getJson(5)
+                })
+                .then(function (data) {
+                    console.log(data);
+                    datas.push(data);
+                    alertResult();
+                });
+
+        };
+
+        var addOneToFive = function () {
+            Promise.all([getJson(1),getJson(2),getJson(3),getJson(4),getJson(5)])
+                    .then(function (datas) {
+                        console.log(datas);
+                        var result = 0;
+                        datas.forEach(function (data) {
+                            result += data.value;
+                        });
+                        alert(result);
+                    });
+        };
+    </script>
+</head>
+<body>
+<div class="body">
+    <div class="test-render"></div>
+    <div>
+        <h3>串行读取:</h3>
+        <button onclick="asyncAddOneToFive()">async数据1~5相加</button>
+    </div>
+    <div>
+        <h3>并行读取:</h3>
+        <button onclick="addOneToFive()">数据1~5相加</button>
+    </div>
+</div>
+</body>
+</html>

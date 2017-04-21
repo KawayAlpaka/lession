@@ -1,0 +1,10 @@
+@keyframes test
+{
+    from {width: 0%;}
+    to {width: 100%;}
+}
+.test-render{
+    height: 100px;
+    background-color: orangered;
+    animation: test 5s infinite;
+}
