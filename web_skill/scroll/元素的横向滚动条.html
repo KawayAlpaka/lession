@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素的横向滚动条</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            padding: 20px;
+            background-color: orange;
+            overflow-x: scroll;
+        }
+        .content{
+            width: 600px;
+            height: 100%;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <div id="content" class="content"></div>
+</div>
+<script>
+    box.addEventListener('mousewheel',function (event) {
+        box.scrollLeft = box.scrollLeft + event.deltaY;
+        console.log(arguments);
+    },false);
+</script>
+</body>
+</html>
