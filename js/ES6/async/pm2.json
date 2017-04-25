@@ -1,0 +1,16 @@
+{
+  "apps":
+  [{
+    "name": "test",
+    "cwd": "./",
+    "script": "test1.js",
+    "exec_interpreter": "babel-node",
+    "min_uptime": "60s",
+    "max_restarts": 10,
+    "exec_mode" : "fork",
+    "error_file" : "./log/test-err.log",
+    "out_file": "./log/test-out.log",
+    "pid_file": "./log/test.pid",
+    "watch": false
+  }]
+}
