@@ -1,5 +1,4 @@
 var Router = function() {
-    arguments
     this.funcs = [];
 };
 Router.prototype.use  = function () {
