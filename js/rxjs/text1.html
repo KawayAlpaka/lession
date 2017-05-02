@@ -12,7 +12,7 @@
 //            console.log(hehe);
             observer.next("hehe1");
             observer.next("hehe2");
-        })
+        });
 //                .skip(1)
 //                .startWith("startWith");
         //订阅才会触发流，每订阅一次，流触发一次
@@ -20,10 +20,12 @@
             console.log("hehe.subscribe 1");
             console.log(response);
         });
-        hehe.subscribe(function(response) {
-            console.log("hehe.subscribe 2");
-            console.log(response);
-        });
+        setTimeout(function () {
+            hehe.subscribe(function(response) {
+                console.log("hehe.subscribe 2");
+                console.log(response);
+            });
+        },3000);
 
 
 //        var numbers = Rx.Observable.of(10, 20, 30);
