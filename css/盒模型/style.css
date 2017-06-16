@@ -1,0 +1,28 @@
+.container{
+
+    background-color: aquamarine;
+}
+.margin{
+    margin: 20px;
+}
+.padding{
+    padding: 20px;
+}
+.border{
+    border: solid 50px black;
+}
+.wh{
+    /*width: 200px;*/
+    height: 100px;
+    background-color: yellow;
+}
+
+.sanjiaoxing{
+    width: 0px;
+    height: 0px;
+    background-color: yellow;
+    border-left-color: red;
+    border-right-color: green;
+    border-top-color: blue;
+    border-bottom-color: black;
+}
