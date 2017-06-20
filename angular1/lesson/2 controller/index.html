@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>controller</title>
+    <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller("controller1",function ($scope) {
+            console.log("controller1");
+            $scope.click = function () {
+                $scope.showController2 = !$scope.showController2;
+            };
+            $scope.showController2 = true;
+        });
+        app.controller("controller2",function ($scope) {
+            console.log("controller2");
+            $scope.click = function () {
+            };
+            $scope.aaa = "aaa";
+        });
+    </script>
+</head>
+<body>
+<div>
+    <input type="text" ng-model="aaa">
+    <span>{{aaa}}</span>
+</div>
+<div ng-controller="controller1">
+    <input type="text" ng-model="aaa">
+    <span>{{aaa}}</span>
+    <button ng-click="click()" id="btncontroller11">按钮1</button>
+    <button id="btncontroller12">按钮2</button>
+    <div ng-if="showController2"  ng-controller="controller2">
+        <input type="text" ng-model="aaa">
+        <span>{{aaa}}</span>
+        <button ng-click="click('haha')" id="btncontroller21">按钮1</button>
+        <button ng-click="click('haha')" id="btncontroller22">按钮2</button>
+    </div>
+</div>
+<script>
+//    $(function () {
+//        $(btncontroller12).on("click",function () {
+//            $(btncontroller21).after("<span>哈哈</span>");
+//        });
+//        $(btncontroller22).on("click",function () {
+//            console.log("btncontroller22被点击");
+//        });
+//    });
+</script>
+</body>
+</html>
