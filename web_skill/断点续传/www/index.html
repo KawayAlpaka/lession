@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>断点续传</title>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.directive("uploader",function () {
+            return {
+                restrict: 'E',
+                templateUrl: '/views/directive/uploader.html',
+                link: function (s, element, attrs) {
+                    s.files = [];
+                    var fileInput = $(element).find(".fileInput");
+                    var resetBtn = $(element).find("button[type='reset']");
+                    fileInput.on("change",function () {
+                        for(var i=0;i<this.files.length;i++){
+                            s.files.push(this.files.item(i));
+                            console.log(this.files.item(i));
+                        }
+                        s.$apply();
+                    });
+                    fileInput.on("click",function () {
+                        resetBtn[0].click();
+                    });
+                    s.upload = function (file) {
+
+                    };
+                    s.remove = function (index) {
+                        s.files.splice(index,1);
+                    };
+                }
+            };
+        });
+    </script>
+</head>
+<body>
+<uploader></uploader>
+</body>
+</html>
