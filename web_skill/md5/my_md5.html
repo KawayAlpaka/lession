@@ -5,6 +5,25 @@
     <title>my_md5</title>
     <script src="http://cdn.bootcss.com/spark-md5/3.0.0/spark-md5.js"></script>
     <script>
+        var getBlobMd5 = function (blob) {
+            return new Promise(function (resolve, reject) {
+                var spark =  new SparkMD5();
+                var fileReader = new FileReader();
+                fileReader.onload = function (ee) {
+                    spark.append(ee.target.result);
+                    resolve(spark.end());
+                };
+                fileReader.readAsBinaryString(blob);
+            });
+        };
+        (function () {
+            var file1 = new File([123],"file1");
+            getBlobMd5(file1)
+                    .then(function (md5) {
+                        console.log(md5);
+                    });
+        })();
+        
         (function () {
             var file1 = new File([123],"file1");
             var file2 = new File([123],"file2");
@@ -22,9 +41,8 @@
             var blob2 = file2.slice(0,file2.size);
             fileReader1.readAsBinaryString(file1);
             fileReader2.readAsBinaryString(blob2);
-//        fileReader.readAsBinaryString(blob1);
-//        fileReader.readAsArrayBuffer(blob1);
         })();
+
     </script>
 </head>
 <body>
