@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ui-router</title>
+    <script src="http://cdn.bootcss.com/angular.js/1.5.4/angular.js"></script>
+    <!--<script src="http://cdn.bootcss.com/angular-ui-router/1.0.3/angular-ui-router.js"></script>-->
+    <script src="http://cdn.bootcss.com/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-router.statehelper/1.3.1/statehelper.js"></script>
+    <script>
+        var app = angular.module('myApp', ['ui.router','ui.router.stateHelper']);
+
+        app.config(['stateHelperProvider','$stateProvider', '$urlRouterProvider',
+            function (stateHelperProvider,$stateProvider, $urlRouterProvider) {
+                $urlRouterProvider.otherwise("/m1");
+                stateHelperProvider
+                        .state({
+                            name: 'm1',
+                            url: '/m1',
+                            views: {
+                                'index': {
+                                    templateUrl: 'view/m1.html',
+                                    controller: 'm1_controller'
+                                }
+                            },
+                            children: [
+                                {
+                                    name: 'login',
+                                    url: '/login1',
+                                    views: {
+                                        'm1': {
+                                            templateUrl: 'view/m1/login.html'
+                                            , controller: 'm1_login_controller'
+                                        }
+                                    }
+                                },
+                                {
+                                    name: 're',
+                                    url: '/re',
+                                    views: {
+                                        'm1': {
+                                            templateUrl: 'view/m1/re.html'
+                                            , controller: 'm1_re_controller'
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+            }
+        ]);
+
+        app.controller("m1_controller",function ($scope) {
+            console.log("m1_controller");
+            $scope.title = "m1 title";
+        });
+        app.controller("m1_login_controller",function ($scope) {
+            console.log("m1_login_controller");
+        });
+        app.controller("m1_re_controller",function ($scope) {
+            console.log("m1_re_controller");
+        });
+    </script>
+</head>
+<body>
+<!--<div>{{title}}</div>-->
+<div ui-view="index"></div>
+</body>
+</html>
