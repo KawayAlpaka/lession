@@ -2,9 +2,12 @@ var express = require('express');
 var app = express();
 var multiparty = require('multiparty');
 var util = require('util');
-var fs = require('fs');
+var fs = require('fs-extra');
 var multer = require('multer');
 
+fs.ensureDir("./upload/temp");
+fs.ensureDir("./upload/blob");
+fs.ensureDir("./upload/file");
 
 app.use(express.static('www'));
 
@@ -14,10 +17,11 @@ app.post('/file/webuploader', upload.fields([
     {name: 'file'}
 ]), function(req, res, next){
     console.log(req.body);
+    var blob = req.body;
     for(var i in req.files){
         console.log(req.files[i]);
         req.files[i].forEach(function (file) {
-            var dstPath = './public/files/' + file.originalname;
+            var dstPath = './upload/blob/' + blob.blobMd5;
             fs.rename(file.path, dstPath, function(err) {
                 if(err){
                     console.log('rename error: ' + err);
