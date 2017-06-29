@@ -43,7 +43,7 @@ var getBlobMd5 = function (blob) {
 };
 
 var app = angular.module('myApp', []);
-app.directive("uploader",function () {
+app.directive("uploader",function ($http) {
     return {
         restrict: 'E',
         templateUrl: 'views/directive/uploader.html',
@@ -157,6 +157,16 @@ app.directive("uploader",function () {
                         });
                 };
                 burst(file,currentChunk,chunkSize);
+            };
+            s.combine = function (file) {
+                $http({
+                    url : '/file/combine',
+                    method:'GET',
+                    params:{
+                        fileMd5:file.md5
+                    },
+                    type : 'json'
+                })
             };
             s.remove = function (index) {
                 s.files.splice(index,1);
