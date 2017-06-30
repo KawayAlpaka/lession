@@ -10,6 +10,7 @@ fs.ensureDir("./upload/blob");
 fs.ensureDir("./upload/file");
 
 app.use(express.static('www'));
+app.use("/upload",express.static('upload'));
 
 var upload = multer({dest: './upload/temp'});
 
@@ -61,7 +62,11 @@ app.post('/file/webuploader', upload.fields([
 
 app.get('/file/hasBlob', function (req, res, next) {
     console.log(req.query);
-    if(files[req.query.fileMd5] && files[req.query.fileMd5].blobs[req.query.blobMd5]){
+    var fileMd5 = req.query.fileMd5;
+    // var blobMd5 = req.query.blobMd5;
+    var chunk = req.query.chunk;
+    var file = files.get(fileMd5);
+    if(file && file.blobs.get(chunk)){
         res.json({
             result:"1"
         });

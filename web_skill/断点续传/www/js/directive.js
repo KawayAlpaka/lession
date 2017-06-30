@@ -58,6 +58,8 @@ app.directive("uploader",function ($http) {
                         var file = self.files.item(i);
                         var fileObj = {
                             file:file,
+                            uploadState:"未上传",
+                            path:"",
                             blobs:[]
                         };
                         s.files.push(fileObj);
@@ -70,6 +72,7 @@ app.directive("uploader",function ($http) {
                             fileObj.md5 = (progress*100).toFixed(2) + "%";
                             s.$apply();
                         };
+                        s.burst(fileObj);
                     })();
                 }
                 s.$apply();
@@ -81,30 +84,45 @@ app.directive("uploader",function ($http) {
                 console.log(file);
                 var uploadBlob = function (blob) {
                     return new Promise(function (resolve, reject) {
-                        var fd = new FormData();
-                        var ajax = new XMLHttpRequest();
-                        fd.append("fileName", file.file.name);
-                        fd.append("fileMd5", file.md5);
-                        fd.append("chunks", file.blobs.length);
-                        fd.append("chunk", blob.chunk);
-                        fd.append("blobMd5", blob.md5);
-                        fd.append("file", blob.blob);
-                        ajax.open("post", "/file/webuploader", true);
-                        ajax.onload = function () {
-                            console.log("onload");
-                            resolve(JSON.parse(ajax.responseText));
-                        };
-                        var upload = ajax.upload;
-                        upload.addEventListener("progress", function (event) {
-                            console.log("progress");
-                            var baifenbi = (event.loaded / event.total);
-                            blob.uploadState = (baifenbi*100).toFixed(4) + "%";
-                            s.$apply();
-                        }, false);
-                        upload.addEventListener("loadend", function () {
-                            console.log("loadend");
-                        }, false);
-                        ajax.send(fd);
+                        $http({
+                            url : '/file/hasBlob',
+                            method:'GET',
+                            params:{
+                                fileMd5:file.md5,
+                                // blobMd5:blob.md5,
+                                chunk:blob.chunk
+                            },
+                            type : 'json'
+                        }).then(function (data) {
+                            if(data.data.result == "1"){
+                                resolve();
+                            }else{
+                                var fd = new FormData();
+                                var ajax = new XMLHttpRequest();
+                                fd.append("fileName", file.file.name);
+                                fd.append("fileMd5", file.md5);
+                                fd.append("chunks", file.blobs.length);
+                                fd.append("chunk", blob.chunk);
+                                fd.append("blobMd5", blob.md5);
+                                fd.append("file", blob.blob);
+                                ajax.open("post", "/file/webuploader", true);
+                                ajax.onload = function () {
+                                    console.log("onload");
+                                    resolve(JSON.parse(ajax.responseText));
+                                };
+                                var upload = ajax.upload;
+                                upload.addEventListener("progress", function (event) {
+                                    console.log("progress");
+                                    var baifenbi = (event.loaded / event.total);
+                                    blob.uploadState = (baifenbi*100).toFixed(4) + "%";
+                                    s.$apply();
+                                }, false);
+                                upload.addEventListener("loadend", function () {
+                                    console.log("loadend");
+                                }, false);
+                                ajax.send(fd);
+                            }
+                        });
                     });
                 };
                 var currentChunk = 0;
@@ -116,6 +134,14 @@ app.directive("uploader",function ($http) {
                             currentChunk++;
                             if(currentChunk<file.blobs.length){
                                 uploadBlobs();
+                            }else{
+                                s.combine(file)
+                                    .then(function (data) {
+                                        if(data.data.result == "0"){
+                                            file.uploadState = "已上传";
+                                            file.path = data.data.path;
+                                        }
+                                    });
                             }
                             s.$apply();
                         });
@@ -159,7 +185,7 @@ app.directive("uploader",function ($http) {
                 burst(file,currentChunk,chunkSize);
             };
             s.combine = function (file) {
-                $http({
+                return $http({
                     url : '/file/combine',
                     method:'GET',
                     params:{

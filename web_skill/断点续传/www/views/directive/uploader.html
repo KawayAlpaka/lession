@@ -8,6 +8,8 @@
         <table class="table table-bordered">
             <tr>
                 <th>文件名</th>
+                <th>上传状态</th>
+                <th>下载路径</th>
                 <th>md5</th>
                 <th>文件大小</th>
                 <th>分片</th>
@@ -16,6 +18,10 @@
             </tr>
             <tr ng-repeat="file in files">
                 <td ng-bind="file.file.name"></td>
+                <td ng-bind="file.uploadState"></td>
+                <td>
+                    <a href="{{file.path}}" target="_blank" ng-bind="file.path"></a>
+                </td>
                 <td ng-bind="file.md5"></td>
                 <td ng-bind="file.file.size + 'b'"></td>
                 <td>
@@ -27,9 +33,9 @@
                 </td>
                 <td>0%</td>
                 <td>
-                    <button ng-click="burst(file)">分片</button>
+                    <!--<button ng-click="burst(file)">分片</button>-->
                     <button ng-click="upload(file)">上传</button>
-                    <button ng-click="combine(file)">合并</button>
+                    <!--<button ng-click="combine(file)">合并</button>-->
                     <button ng-click="remove($index)">移除</button>
                 </td>
             </tr>
