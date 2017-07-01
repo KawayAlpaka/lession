@@ -1,0 +1,32 @@
+html,body{
+    overflow: hidden;
+}
+
+.wall{
+    position: relative;
+
+    width: 1000px;
+    height: 600px;
+    border: 5px solid black;
+
+}
+
+.snaker-body,
+.snaker-head{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: red;
+    transition: all 50ms linear;
+}
+
+.bean{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: green;
+}
