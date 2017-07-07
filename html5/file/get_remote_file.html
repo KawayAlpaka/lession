@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get_remote_file</title>
+</head>
+<body>
+<div>
+    <input style="width: 40%" type="text" id="urlInput" value="temp/file" >
+    <button onclick="getRemoteFile()">test</button>
+</div>
+<script>
+    function getRemoteFile() {
+        //ajax获取远程文件还是要处理跨域
+        var xhr = new XMLHttpRequest();
+        xhr.open("get",urlInput.value);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function () {
+            console.log(xhr.response);
+            var file  = new File([xhr.response],"bb.doc");
+            console.log(file);
+        };
+        xhr.send();
+    }
+</script>
+</body>
+</html>
