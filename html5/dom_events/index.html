@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<button id="testClick" onclick="fn.click()">click</button>
+<!--原生没有tap事件-->
+<!--<button id="testTap" ontap="fn.tap()">tap</button>-->
+<details id="testToggle" ontoggle="fn.toggle()">
+    <summary>toggle</summary>
+    <p>哈哈</p>
+</details>
+</body>
+<script>
+    var fn = {};
+    fn.click = function () {
+        console.log("onclick1");
+    };
+    testClick.addEventListener("click",function () {
+       console.log("click");
+    });
+    testClick.onclick = function () {
+        console.log("onclick2");
+    };
+//    fn.tap = function () {
+//        console.log("ontap");
+//    };
+    fn.toggle = function () {
+        console.log("ontoggle");
+    };
+
+</script>
+</html>
