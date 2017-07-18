@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iScroll</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="https://cdn.bootcss.com/iScroll/5.2.0/iscroll.js"></script>
+    <script>
+        function isPassive() {
+            var supportsPassiveOption = false;
+            try {
+                addEventListener("test", null, Object.defineProperty({}, 'passive', {
+                    get: function () {
+                        supportsPassiveOption = true;
+                    }
+                }));
+            } catch(e) {}
+            return supportsPassiveOption;
+        }
+    </script>
+</head>
+<body>
+<div id="wrapper">
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <!--<div>...</div>-->
+    <ul>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+    </ul>
+</div>
+<style>
+    #wrapper{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+
+        /* Prevent native touch events on Windows */
+        -ms-touch-action: none;
+
+        /* Prevent the callout on tap-hold and text selection */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        /* Prevent text resize on orientation change, useful for web-apps */
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+        -o-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+    ul{
+        position: absolute;
+
+        /* Prevent elements to be highlighted on tap */
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+        /* Put the scroller into the HW Compositing layer right from the start */
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+</style>
+<script>
+    var myScroll = new IScroll(wrapper, {
+        mouseWheel: true,
+        scrollbars: true
+    });
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, isPassive() ? {
+        capture: false,
+        passive: false
+    } : false);
+    console.log(myScroll.options);
+</script>
+</body>
+</html>
