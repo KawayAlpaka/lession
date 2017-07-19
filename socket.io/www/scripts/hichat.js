@@ -7,7 +7,7 @@ var socket=io.connect(),//与服务器进行连接
     messageBoxText=document.getElementById('message-box-text'),
     text=document.getElementById('text');
 button.onclick=function(){
-    socket.emit('foo',text.value);//发送一个名为foo的事件，并且传递一个字符串数据‘hello’
+    socket.emit('foo',{text:text.value,who:who.value});//发送一个名为foo的事件，并且传递一个字符串数据‘hello’
 };
 function showMessageBox(who,text) {
     messageBoxWho.innerText = who;

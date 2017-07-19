@@ -47,8 +47,8 @@ io.on('connection', function(socket) {
         //将消息输出到控制台
         console.log(data);
         sendToAll({
-            who:socket.id,
-            text:data
+            who:data.who,
+            text:data.text
         });
     });
     socket.on('disconnect', function() {
