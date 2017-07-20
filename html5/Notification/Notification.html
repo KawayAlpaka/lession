@@ -16,7 +16,7 @@
         var doNotification = function () {
             var n = new Notification('Hello Notification', {body: "I hope that all the browser will support this\                   function!"});
         };
-        setTimeout(doNotification,5000);
+        setTimeout(doNotification,1000);
         if (window.Notification) {
             if (Notification.Permission === 'granted') {
                 console.log('granted');

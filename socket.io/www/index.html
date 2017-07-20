@@ -31,7 +31,7 @@
     <span id="user-count"></span>
 </div>
 <div>
-    <span>我的名字：</span><input type="text" id="who">
+    <span>我的名字：</span><input type="text" id="who" value="老司机">
 </div>
 <div class="panel" id="panel">
     <!--<div class="message">-->
@@ -39,10 +39,10 @@
         <!--<div class="text">222</div>-->
     <!--</div>-->
 </div>
-<div>
-    <input type="text" style="width: 80%" id="text">
-    <button id="sendBtn">发送</button>
-</div>
+<form id="form">
+    <input type="text" required style="width: 80%;line-height: 40px;font-size: 20px" id="text">
+    <button id="sendBtn" type="submit">发送</button>
+</form>
 <div class="message-box" id="message-box">
     <div id="message-box-who"></div>
     <div id="message-box-text"></div>
