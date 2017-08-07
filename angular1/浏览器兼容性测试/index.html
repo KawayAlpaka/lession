@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>测试</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script>
+        if (!window.console) {
+            var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml", "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"];
+            window.console = {};
+            for (var i = 0; i < names.length; ++i)
+                window.console[names[i]] = function () { };
+        }
+    </script>
+
+    <script src="http://cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller("controller1", function ($scope) {
+            console.log("controller1");
+            $scope.click = function () {
+                console.log($scope.showController2);
+                $scope.showController2 = !$scope.showController2;
+            };
+            $scope.showController2 = true;
+        });
+    </script>
+</head>
+<body ng-app="myApp">
+    <div>
+        <input type="text" ng-model="aaa">
+        <span>{{aaa}}</span>
+    </div>
+    <div ng-controller="controller1">
+        <input type="text" ng-model="aaa">
+        <span>{{aaa}}</span>
+        <button ng-click="click()" id="btncontroller11">按钮1</button>
+        <button id="btncontroller12">按钮2</button>
+    </div>
+</body>
+
+</html>
