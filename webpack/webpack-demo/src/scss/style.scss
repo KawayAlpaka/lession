@@ -1,7 +1,14 @@
+$color:#ddd;
+
+b{
+    $color:#bbb;
+    @import "commom";
+}
+
 a{
     display: flex;
     color: black;
     .b{
-        color: blue;
+        color: $color;
     }
 }

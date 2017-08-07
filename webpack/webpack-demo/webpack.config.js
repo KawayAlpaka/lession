@@ -15,7 +15,7 @@ module.exports = {
       template:'index.html'
     })
     ,
-    new ExtractTextPlugin("../css/styles.css"),
+    new ExtractTextPlugin("styles.css"),
     // new ExtractTextPlugin("css/styles.[hash].css"),
     // new ExtractTextPlugin("F:\\styles.css")
   ],
