@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>hello angularjs</title>
+    
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script> 
+    <script src="js/angular/l/l.js"></script>
+    <link href="css/l.css" rel="stylesheet" />
+    <script>
+        var myApp = angular.module('myApp',["lModule"]);
+        myApp.controller("root",["$scope",function(s){
+            s.rangeValue = 0.3;
+            this.hero = {
+                name:'Sunday'
+            };
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="root as ctrl">
+        <div>
+            <hero-detail hero='ctrl.hero'></hero-detail>
+        </div>
+        <div>
+            <em ng-bind="rangeValue"></em>
+            <div range-input="" style="width:400px;" data-min="0" data-max="0.7" data-fixed="2" ng-model="rangeValue"></div>
+        </div>
+    </div>
+</body>
+</html>
