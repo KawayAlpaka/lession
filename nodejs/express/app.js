@@ -71,8 +71,16 @@ app.post('/file/webuploader', upload.fields([
                 }
             });
         });
-
     }
+    //ie8的特殊处理，为此，其他浏览器的前端上传代码，也要做修改，这种情况下，浏览器获得到的数据，不会自动转换为obj，而是json字符串
+    //(如果不设置这个返回头，则IE8会弹出一个文件下载界面，并把返回的内容当成文件下载)
+    // res.header('Content-Type', 'text/html; charset=utf-8');
+
+    // console.log(req.header("aaa")); //ie不会发送
+    // console.log(req.header("Accept"));
+    // console.log(req.header("User-Agent"));
+    // console.log(req.header("X-Requested-With"));//ie不会发送
+    
     res.json({state:0});
 });
 

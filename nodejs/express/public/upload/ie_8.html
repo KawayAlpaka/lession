@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IE8上传文件</title>
+    <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery.form/3.09/jquery.form.js"></script>
+</head>
+<body>
+<form id="form" method="POST" enctype="multipart/form-data">
+    <div id="gggg" style="width: 300px; height: 300px"></div>
+<p><input type="file" name="file" id="upfile" value="C:\\Users\\dell\\Desktop\\home-product_02.png"></p>
+<p><input type="button" id="upJS" value="用原生JS上传"></p> 
+<p><input type="button" id="upJQuery" value="用jQuery上传"></p>
+</form>
+
+<script>
+    // /*原生JS版  有待研究*/
+    // document.getElementById("upJS").onclick = function () {
+
+    // };
+
+    /* jQuery 版 */
+    //预览
+    $("#upfile").on("change",function(){
+        var imgDiv = document.getElementById("gggg");
+        imgDiv.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod = scale)";
+        imgDiv.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = $("#upfile").val();
+    });
+    //上传
+    $('#upJQuery').on('click', function () {
+        // $("#upfile").val("C:\\Users\\dell\\Desktop\\home-product_02.png");
+        // console.log($("#upfile").val());
+        var ajax_option = {
+            url: "/file/webuploader",
+            // headers:{
+            //     aaa:"bbb"
+            // },
+            // dataType:"html",
+            success: function (data) {
+                console.log(data);
+            }
+        }
+        $('#form').ajaxSubmit(ajax_option);
+    });
+
+</script>
+</body>
+</html>
