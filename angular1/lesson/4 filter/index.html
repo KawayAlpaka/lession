@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>filter</title>
+    <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller("controller",function ($scope,$filter) {
+            //js中使用$filter
+            $scope.firstName="zhangsan";  
+            $scope.uFirstName=$filter('uppercase')($scope.firstName);  
+            console.log($scope.uFirstName);
+            $scope.price="121212";  
+            $scope.cPrice=$filter('currency')($scope.price,'RMB ￥');  
+            console.log($scope.cPrice);
+        });
+        //自定义过滤器
+        app.filter('replaceHello',function(){  
+            return function(input,n1,n2){  
+                console.log(input);  
+                console.log(n1);  
+                console.log(n2);  
+                return input.replace(/Hello/,'您好');  
+            }
+        });
+    </script>
+</head>
+<body>
+<div>
+    <h3>自带filter(参考资料:http://blog.csdn.net/bboyjoe/article/details/50455906)</h3>
+    <div>
+        <label>uppercase：</label>
+        <span ng-bind=" 'Abc' | uppercase"></span>
+    </div>
+    <div>
+        <label>lowercase：</label>
+        <span ng-bind=" 'Abc' | lowercase"></span>
+    </div>
+    <div>
+        <p>货币过滤：</p>
+        <div>
+            数量：<input type="number" ng-model="quantity"> 价格：
+            <input type="number" ng-model="price">
+            <p>总价 = {{ (quantity * price) | currency }}</p>
+            {{250 |currency:"RMB ￥"}}
+        </div>
+    </div>
+    <div>
+        <p>货币过滤：</p>
+        <div>
+            数量：<input type="number" ng-model="quantity"> 价格：
+            <input type="number" ng-model="price">
+            <p>总价 = {{ (quantity * price) | currency }}</p>
+            {{250 |currency:"RMB ￥"}}
+        </div>
+    </div>
+    <h3>自定义filter</h3>
+    <div>
+             {{'Hello AngularJs' | replaceHello}}<br/> {{'Hello AngularJs' | replaceHello:3:5}}<br/>
+    </div>
+
+</div>
+<div ng-controller="controller">
+
+</div>
+</body>
+</html>
