@@ -38,6 +38,26 @@
         <span ng-bind=" 'Abc' | lowercase"></span>
     </div>
     <div>
+        <label>number:1：</label>
+        <span ng-bind=" 1.2345678 |number:1"></span>
+    </div>
+    <div>
+        <label>number:2：</label>
+        <span ng-bind=" 1.2345678 |number:2"></span>
+    </div>
+    <div>
+        <label>number：</label>
+        <span ng-bind=" 1.2345678 |number"></span>
+    </div>
+    <div>
+        <label>number：(数字字符串)</label>
+        <span ng-bind=" '1.2345678' |number"></span>
+    </div>
+    <div>
+        <label>number：(非数字字符串)</label>
+        <span ng-bind=" 'a1.2345678' |number"></span>
+    </div>
+    <div>
         <p>货币过滤：</p>
         <div>
             数量：<input type="number" ng-model="quantity"> 价格：
