@@ -75,6 +75,10 @@
             {{250 |currency:"RMB ￥"}}
         </div>
     </div>
+                {{ [{"age": 20,"id": 10,"name": "iphone"},  
+            {"age": 12,"id": 11,"name": "sunm xing"},  
+            {"age": 44,"id": 12,"name": "test abc"}  
+            ] | orderBy:'id' }}  
     <h3>自定义filter</h3>
     <div>
              {{'Hello AngularJs' | replaceHello}}<br/> {{'Hello AngularJs' | replaceHello:3:5}}<br/>
