@@ -63,18 +63,11 @@
             数量：<input type="number" ng-model="quantity"> 价格：
             <input type="number" ng-model="price">
             <p>总价 = {{ (quantity * price) | currency }}</p>
-            {{250 |currency:"RMB ￥"}}
+            <div>{{25000 |currency:"RMB ￥"}}</div>
+            <div>{{25000 |currency:""}}</div>
         </div>
     </div>
-    <div>
-        <p>货币过滤：</p>
-        <div>
-            数量：<input type="number" ng-model="quantity"> 价格：
-            <input type="number" ng-model="price">
-            <p>总价 = {{ (quantity * price) | currency }}</p>
-            {{250 |currency:"RMB ￥"}}
-        </div>
-    </div>
+
                 {{ [{"age": 20,"id": 10,"name": "iphone"},  
             {"age": 12,"id": 11,"name": "sunm xing"},  
             {"age": 44,"id": 12,"name": "test abc"}  
