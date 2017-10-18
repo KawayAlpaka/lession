@@ -10,7 +10,7 @@
 <form id="form" method="POST" enctype="multipart/form-data">
     <div id="gggg" style="width: 300px; height: 300px"></div>
 <p><input type="file" name="file" id="upfile" value="C:\\Users\\dell\\Desktop\\home-product_02.png"></p>
-<p><input type="button" id="upJS" value="用原生JS上传"></p> 
+<!-- <p><input type="button" id="upJS" value="用原生JS上传"></p>  -->
 <p><input type="button" id="upJQuery" value="用jQuery上传"></p>
 </form>
 
@@ -22,23 +22,30 @@
 
     /* jQuery 版 */
     //预览
+    $("#gggg").on("click",function(){
+        $("#upfile").click();
+    });
     $("#upfile").on("change",function(){
         var imgDiv = document.getElementById("gggg");
-        imgDiv.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod = scale)";
-        imgDiv.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = $("#upfile").val();
+        // 这个预览方案在ie8默认的安全设置下，不起作用
+        // imgDiv.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod = scale)";
+        // imgDiv.filters("DXImageTransform.Microsoft.AlphaImageLoader").src = $("#upfile").val();
     });
     //上传
     $('#upJQuery').on('click', function () {
         // $("#upfile").val("C:\\Users\\dell\\Desktop\\home-product_02.png");
         // console.log($("#upfile").val());
         var ajax_option = {
-            url: "/file/webuploader",
+            url: "/file/webuploader_ie8",
             // headers:{
             //     aaa:"bbb"
             // },
             // dataType:"html",
             success: function (data) {
                 console.log(data);
+                var path = JSON.parse(data).webPath;
+                var imgDiv = document.getElementById("gggg");
+                imgDiv.style.background = "url('"+path+"')";
             }
         }
         $('#form').ajaxSubmit(ajax_option);
