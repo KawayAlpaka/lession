@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>lazy_load</title>
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".lazy-load").each(function (index, imgEle) {
+                imgEle.src = "https://placeholdit.imgix.net/~text?txtsize=75&txt=loading&w=800&h=300";
+                var image = new Image();
+                var onscroll = function(){
+                    // console.log("onscroll");
+                    if( (imgEle.getBoundingClientRect().top - window.screen.availHeight)<0  ){
+                        // image.src = imgEle.dataset.src;
+                        image.src = $(imgEle).attr("data-src");
+                        if (window.removeEventListener) {
+                            window.removeEventListener("scroll", onscroll);
+                        } else if (window.detachEvent) {
+                            window.detachEvent("onscroll", onscroll);
+                        }
+                    } 
+                }
+                onscroll();
+                if (window.addEventListener) {
+                    window.addEventListener("scroll", onscroll);
+                } else if (window.attachEvent) {
+                    window.attachEvent("onscroll", onscroll);
+                }
+
+                image.onload = function () {
+                    imgEle.src = image.src;
+                };
+            });
+        });
+    </script>
+    <style>
+        .lazy-load{
+            min-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97300&w=800&h=300" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97301&w=800&h=301" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97302&w=800&h=302" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97303&w=800&h=303" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97304&w=800&h=304" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97305&w=800&h=305" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97306&w=800&h=306" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97307&w=800&h=307" alt="">
+    </div>
+    <div>
+        <img class="lazy-load" data-src="https://placeholdit.imgix.net/~text?txtsize=75&txt=800%C3%97308&w=800&h=308" alt="">
+    </div>
+</body>
+
+</html>
