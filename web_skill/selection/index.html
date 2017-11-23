@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>selection</title>
-    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
 </head>
 <body>
 <div class="text">haha</div>
@@ -11,11 +11,17 @@
 <button type="button" onclick="showSelection()">showSelection</button>
 <script>
     function showSelection() {
-        var selection = window.getSelection();
-        console.log(selection);
+		if(window.getSelection){
+			// 非ie
+			var selection = window.getSelection();
+			console.log(selection);
+		}else{
+			// ie
+			var bo = document.selection.createRange();
+			bo.execCommand("Bold");
+		}
 
-        var bo = document.selection.createRange();
-        bo.execCommand("Bold");
+
     }
     $(function () {
         $(".text").on("select",function () {
