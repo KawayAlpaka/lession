@@ -5,6 +5,10 @@
     <title>rxjs</title>
     <!--<script src="https://unpkg.com/rxjs@5.3.0/bundles/Rx.min.js"></script>-->
     <script src="http://cdn.bootcss.com/rxjs/5.3.0/Rx.min.js"></script>
+</head>
+<body>
+    <div><input type="text" class="text1"></div>
+    <div><input type="text" class="text1"></div>
     <script>
         var  haha = Rx.Observable.of("haha");
         var hehe = Rx.Observable.create(function (observer) {
@@ -15,7 +19,7 @@
         });
 //                .skip(1)
 //                .startWith("startWith");
-        //订阅才会触发流，每订阅一次，流触发一次
+        //订阅才会触发流，每订阅一次，流触发一次(这是'冷'流的特性)
         hehe.subscribe(function(response) {
             console.log("hehe.subscribe 1");
             console.log(response);
@@ -49,19 +53,23 @@
 //        var bmi = weight.combineLatest(height, (w, h) => {console.log(w,h); return w / (h * h);});
 //        bmi.subscribe(x => console.log('BMI is ' + x));
 
-//        //3秒内没有新的，才发射  ?貌似不是
+// //        //3秒内没有新的，才发射  ?貌似不是(应该用debounceTime)
 //        var clicks = Rx.Observable.fromEvent(document, 'click');
-//        var result = clicks.auditTime(3000);
+//     //    var result = clicks.auditTime(3000);//错的
+//        var result = clicks.debounceTime(3000);
 //        result.subscribe(x => console.log(x));
 
 //        //3秒内的过滤掉
-//        var clicks = Rx.Observable.fromEvent(document, 'click');
-//        var result = clicks.throttleTime(3000);
-//        result.subscribe(x => console.log(x));
+    //    var clicks = Rx.Observable.fromEvent(document, 'click');
+    //    var result = clicks.throttleTime(3000);
+    //    result.subscribe(x => console.log(x));
+
+        // //测试能否同时给多个元素绑定流(结论是可以)
+        // var text1s = document.getElementsByClassName("text1"); 
+        // var input = Rx.Observable.fromEvent(text1s, 'input');
+        // input.subscribe(x => console.log(x));
+
 
     </script>
-</head>
-<body>
-
 </body>
 </html>
