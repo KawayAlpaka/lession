@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ng-template</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.7/angular.js"></script>
+    <script src="js/controller.js"></script>
+</head>
+<body>
+    <div ng-controller="home">
+        <div class="btn btn-success" ng-click="add()">+</div>
+        <div>
+            <button ng-repeat="tag in tags" class="btn" ng-class="{'btn-primary':tag.active,'btn-default':!tag.active}" ng-click="clickTag(tag)">{{tag.title}}</button>
+        </div>
+        <div ng-repeat="tag in tags" ng-show="tag.active">
+            <div ng-include="tag.src"></div>
+        </div>
+    </div>
+</body>
+</html>
