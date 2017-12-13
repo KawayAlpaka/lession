@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function test1(){
+            console.log(frames["baidu1"]);
+            console.log(frames["baidu2"]);
+        }
+        function test2(){
+            console.log(frames["baidu-name"]);
+        }
+        function test3(){
+            console.log(frames["baidu-id"]);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button onclick="test1()">测试1</button>
+        <button onclick="test2()">测试2</button>
+        <button onclick="test3()">测试3</button>
+    </div>
+    
+    <iframe src="https://www.baidu.com" id="baidu1" name="baidu2" frameborder="0"></iframe>
+    <iframe src="https://www.baidu.com" name="baidu-name" frameborder="0"></iframe>
+    <iframe src="https://www.baidu.com" id="baidu-id" frameborder="0"></iframe>
+</body>
+</html>
