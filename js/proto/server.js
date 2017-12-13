@@ -37,5 +37,7 @@ console.log(foo.__lookupGetter__("name").toString());
 foo.name = "name";
 console.log(foo.name);
 
-foo.__proto__.__defineGetter__("*",function(){return "*";});
+//没有找到通配符方案
+foo.__proto__.__defineGetter__("*",function(){return "**";});
 console.log(foo["zz"]);
+console.log(foo["*"]);
