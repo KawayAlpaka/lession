@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>filter</title>
-    <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script>
+    <!-- <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script> -->
+    <script src="http://cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>
     <script>
         var app = angular.module('myApp', []);
         app.controller("controller",function ($scope,$filter) {
@@ -64,7 +65,7 @@
             <input type="number" ng-model="price">
             <p>总价 = {{ (quantity * price) | currency }}</p>
             <div>{{25000 |currency:"RMB ￥"}}</div>
-            <div>{{25000 |currency:""}}</div>
+            <div>{{25000 |currency:"":3}}</div>
         </div>
     </div>
 
