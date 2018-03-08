@@ -49,7 +49,6 @@ module.exports = {
   ],
   module: {
     rules: [
-      //如果这里有对 .html 处理，就不能再模板中 用 "<%= require('html-loader!./pages/shared/_head.html')  %>" 导入其他html，有待研究
       {
         test: /\.tpl$/,
         loader: 'html-loader'
@@ -61,10 +60,10 @@ module.exports = {
     ]
   },
   output: {
-    path: buildDir, // var buildDir = path.resolve(__dirname, './build');
+    path: buildDir,
     // publicPath: '../../../../build/',
     // publicPath: '',
-    filename: '[name]/[name].[hash].entry.js',    // [name]表示entry每一项中的key，用以批量指定生成后文件的名称
+    filename: '[name]/[name].[hash].entry.js',
     chunkFilename: '[id].bundle.js',
   },
 };
