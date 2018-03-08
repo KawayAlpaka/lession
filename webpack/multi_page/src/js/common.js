@@ -1,12 +1,6 @@
 
 console.log("main.js:")
 
-class Foo {
-    getString (){
-        return "foo";
-    }
-}
-
 var obj = {
     name:"main"
 }
