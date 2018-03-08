@@ -21,6 +21,7 @@ console.log(configEntry)
 var buildDir = path.resolve(__dirname, './dist');
 
 module.exports = {
+  devtool: "source-map",
   entry: configEntry,
   plugins: [
     new CleanWebpackPlugin(
@@ -56,6 +57,14 @@ module.exports = {
       {
         test: /\.ejs$/,
         loader: 'ejs-loader'
+      },
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: "babel-loader" ,
+        options: {
+          sourceMap: true
+        }
       }
     ]
   },

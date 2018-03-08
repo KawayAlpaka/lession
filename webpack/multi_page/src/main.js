@@ -1,5 +1,12 @@
 
 console.log("main.js:")
+
+class Foo {
+    getString (){
+        return "foo";
+    }
+}
+
 var obj = {
     name:"main"
 }
@@ -8,4 +15,7 @@ export {
 };
 export function getIndex(params) {
     return "index";
+};
+export {
+    Foo
 };
