@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var pagesDir = "src/pages";
 
 var pageArr = [
-  'index/login',
+  // 'index/login',
   // 'index/index',
   // 'alert/index',
 ];
@@ -14,7 +14,7 @@ var configEntry = {};
 pageArr.forEach((page) => {
   configEntry[page] = path.resolve(pagesDir, page + '/page');
 });
-configEntry.main = "./src/main.js";
+configEntry.main = "./src/js/main.js";
 console.log(configEntry)
 
 
@@ -34,7 +34,8 @@ module.exports = {
     ),
     new HtmlWebpackPlugin({
       filename: `index.html`,
-      template: "./src/index.html"
+      template: "./src/index.html",
+      inject:false
     }),    
     new HtmlWebpackPlugin({
       filename: `index/index/index.html`,
@@ -72,7 +73,7 @@ module.exports = {
     path: buildDir,
     // publicPath: '../../../../build/',
     // publicPath: '',
-    filename: '[name]/[name].[hash].entry.js',
+    filename: 'js/[name].[hash].js',
     chunkFilename: '[id].bundle.js',
   },
 };
