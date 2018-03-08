@@ -32,6 +32,10 @@ module.exports = {
       }
     ),
     new HtmlWebpackPlugin({
+      filename: `index.html`,
+      template: "./src/index.html"
+    }),    
+    new HtmlWebpackPlugin({
       filename: `index/index/index.html`,
       template: path.resolve(pagesDir, `./index/index/index.js`), // 指定为一个js文件而非普通的模板文件
       // chunks: ['alert/index', 'commons'], // 自动加载上index/login的入口文件以及公共chunk
