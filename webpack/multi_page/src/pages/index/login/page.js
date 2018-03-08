@@ -29,3 +29,13 @@ let asyncFunc = async function a(){
     }
 };
 asyncFunc();
+function testable(target) {
+    target.isTestable = true;
+  }
+//装饰器
+@testable
+class MyTestableClass {
+  // ...
+}
+
+console.log(MyTestableClass.isTestable) // true
