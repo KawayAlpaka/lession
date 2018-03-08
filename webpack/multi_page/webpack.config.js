@@ -18,11 +18,19 @@ configEntry.main = "./src/main.js";
 console.log(configEntry)
 
 
-var buildDir = path.resolve(__dirname, './build');
+var buildDir = path.resolve(__dirname, './dist');
 
 module.exports = {
   entry: configEntry,
   plugins: [
+    new CleanWebpackPlugin(
+      ['dist'],
+      {
+        root: __dirname,  //根目录
+        verbose:  true,  //开启在控制台输出信息
+        dry: false    //启用删除文件
+      }
+    ),
     new HtmlWebpackPlugin({
       filename: `index/index/index.html`,
       template: path.resolve(pagesDir, `./index/index/index.js`), // 指定为一个js文件而非普通的模板文件
@@ -52,7 +60,7 @@ module.exports = {
     path: buildDir, // var buildDir = path.resolve(__dirname, './build');
     // publicPath: '../../../../build/',
     // publicPath: '',
-    filename: '[name]/[name].entry.js',    // [name]表示entry每一项中的key，用以批量指定生成后文件的名称
+    filename: '[name]/[name].[hash].entry.js',    // [name]表示entry每一项中的key，用以批量指定生成后文件的名称
     chunkFilename: '[id].bundle.js',
   },
 };
