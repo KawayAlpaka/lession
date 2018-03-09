@@ -101,14 +101,42 @@ module.exports = {
           ]
         })
       },   
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: `[hash].[ext]`,
+              outputPath:"css/img/",
+              publicPath:"img/"
+            }  
+            // options: {
+            //   name: function(fullpath){
+            //     var path =  "../assets" + fullpath.split("assets")[1].replace(/\\/g,"/");
+            //     return path;
+            //     // // return '[path][name].[ext]';
+            //   },
+            //   outputPath:function(filepath){
+            //     return buildFolder + filepath.replace("..","");
+
+            //   },
+            //   publicPath:function(filepath){
+            //     console.log(arguments);
+            //     return filepath;
+            //   }
+            // }  
+          }
+        ]
+      },
       // {
       //   test: /\.(png|jpg|gif)$/,
       //   use: [
       //     {
-      //       loader: 'file-loader',
+      //       loader: 'url-loader',
       //       options: {
-      //         // name: '[path][name].[ext]'
-      //       }  
+      //         limit: 100
+      //       }
       //     }
       //   ]
       // },
