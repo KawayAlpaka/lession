@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+
 let createPlugins = function (buildFolder,pagesSrcDir,pagesOutDir){
     let plugins = [
         new CleanWebpackPlugin(

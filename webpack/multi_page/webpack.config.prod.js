@@ -1,3 +1,3 @@
 module.exports = require("./webpack_conf/webpack.config")({
-  name:""
+  name:"prod"
 });
