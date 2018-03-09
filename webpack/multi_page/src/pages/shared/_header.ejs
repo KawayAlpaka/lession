@@ -1,4 +1,13 @@
 <header>
-    <a href="#">home</a>
-    <a href="#">index</a>
+    <a href="pages/home/home.html" onclick="goHome(this,event);">home</a>
+    <a href="pages/index/index/index.html">index</a>
+    <img src="assets/images/1.png"/>
 </header>
+<script>
+    var goHome = function(self,e){
+        console.log(e);
+        e.preventDefault();
+        location.href = $(self).attr("href");
+        return false;
+    };
+</script>
