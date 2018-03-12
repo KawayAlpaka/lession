@@ -24,7 +24,7 @@ let createPlugins = function (buildFolder, pagesSrcDir, pagesOutDir) {
     new CleanWebpackPlugin(
       [buildFolder],
       {
-        root: __dirname,  //根目录
+        root: path.resolve(__dirname, '../'),  //根目录
         verbose: true,  //开启在控制台输出信息
         dry: false    //启用删除文件
       }
