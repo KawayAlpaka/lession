@@ -1,3 +1,4 @@
+var fs = require("fs");
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -5,12 +6,45 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
+
 let pages = [
   {filename:`./index/index/index.html`,template: `./index/index/index.js`},
   {filename:`./home/home.html`,template: `./home/home.js`},
 ];
+let pages2 = [];
 
 let createPlugins = function (buildFolder, pagesSrcDir, pagesOutDir) {
+
+  //根据真实pages目录结构，生成需要输出的文件列表
+  readDirSync(pagesSrcDir,function(file){
+    if(file.ext == ".js"){
+      pages2.push({
+        template:file.path.replace(pagesSrcDir,"."),
+        filename:file.path.replace(pagesSrcDir,".").replace(".js",".html")
+      });
+    }
+  });
+  function readDirSync(path,fileCb){
+      var pa = fs.readdirSync(path);
+      pa.forEach(function(ele,index){  
+          var info = fs.statSync(path+"/"+ele);
+          if(info.isDirectory()){  
+              readDirSync(path+"/"+ele,fileCb);
+          }else{  
+              let doIndex = ele.lastIndexOf(".");
+              let ext = "";
+              if(doIndex >= 0){
+                ext = ele.slice(doIndex);
+              }
+              fileCb && fileCb({
+                name:ele,
+                path:path+"/"+ele,
+                ext: ext
+              });
+          }     
+      });
+  }
+  
   let plugins = [
     // new HtmlWebpackPlugin({
     //   filename: path.resolve(pagesOutDir, `./index/index/index.html`),
@@ -37,7 +71,7 @@ let createPlugins = function (buildFolder, pagesSrcDir, pagesOutDir) {
       inject: false
     })
   );
-  pages.forEach(function (page) {
+  pages2.forEach(function (page) {
     plugins.push(
       new HtmlWebpackPlugin({
         filename: path.resolve(pagesOutDir, page.filename),
