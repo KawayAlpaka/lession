@@ -8,7 +8,16 @@ module.exports = {
       },
       {
         test: /\.ejs$/,
-        loader: 'ejs-loader'
+        loader: [{
+          loader: 'ejs-loader',
+          options: {}
+        },
+        {
+          loader: 'clean-comment-loader',
+          options: {
+            type:"html"
+          }
+        }],
       },
       {
         test: /\.js$/, 
