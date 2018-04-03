@@ -1,5 +1,6 @@
 var maze = require("./maze");
 var maze1 = require("./maze1");
+var Maze = require("./maze_class");
 
 var walk =  function(maze,start,end){
     // console.log(maze);
