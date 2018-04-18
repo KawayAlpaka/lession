@@ -37,11 +37,12 @@ var cases = []Case{
 		},
 	}}
 
-func TestIntersect(t *testing.T) {
+func TestRotate(t *testing.T) {
 	for i, c := range cases {
 		rotate(c.input)
 		if !mcommon.Is2Equal(c.input, c.expect) {
-			t.Errorf("Error intersect :index=%d,result=%v,expect=%v", i, c.input, c.expect)
+			t.Errorf("Error Rotate :index=%d,result=%v,expect=%v", i, c.input, c.expect)
 		}
 	}
 }
+

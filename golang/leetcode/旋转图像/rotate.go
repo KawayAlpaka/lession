@@ -1,5 +1,7 @@
 package rotate
 
+import "fmt"
+
 func rotate(matrix [][]int) {
 	l1 := len(matrix)
 	// var _matrix [][]int
@@ -43,4 +45,19 @@ func rotate(matrix [][]int) {
 
 	}
 	// fmt.Printf("%v \n", matrix)
+}
+
+func productExceptSelf(nums []int) []int {
+	l1 := len(nums)
+	output := make([]int, l1)
+	for i := 0; i < l1; i++ {
+		s := 1
+		for j := 0; j < l1; j++ {
+			if i != j {
+				s = s * nums[j]
+			}
+		}
+		output[i] = s
+	}
+	return output
 }
