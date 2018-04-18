@@ -22,6 +22,7 @@ func plusOne(digits []int) []int {
 	return r
 }
 
+// 这个方案有问题，处理不了很长的数据
 func plusOne2(digits []int) []int {
 	var r []int
 	l1 := len(digits)
