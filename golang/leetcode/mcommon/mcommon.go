@@ -1,5 +1,6 @@
 package mcommon
 
+// IsEqual 对比两个整形数组是否相同
 func IsEqual(nums1 []int, nums2 []int) bool {
 	l1 := len(nums1)
 	l2 := len(nums2)
