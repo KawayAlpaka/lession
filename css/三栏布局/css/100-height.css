@@ -1,0 +1,108 @@
+/* 基本样式 */
+body{
+    margin: 0;
+    padding: 0;
+}
+.clear{
+    clear: both;
+}
+.layout{
+    margin-bottom: 60px;
+}
+.left-center-right-panel{
+    white-space: nowrap;
+}
+.layout .left-center-right-panel .left,
+.layout .left-center-right-panel .right,
+.layout .left-center-right-panel .center{
+    white-space: normal;
+    height: 100px;
+}
+
+.left{
+    background: red;
+    width: 200px;
+}
+.right{
+    background: blue;
+    width: 300px;
+}
+.center{
+    background: yellow;
+}
+
+
+/* 浮动方案 */
+.layout.float .left{
+    float: left;
+}
+.layout.float .right{
+    float: right;
+}
+.layout.float .center{
+    /* 解决center中的p的margin击穿的问题 */
+    overflow: hidden;
+}
+
+/* 绝对定位方案 */
+.layout.absolute{
+    margin-bottom: 240px;
+}
+.layout.absolute .left-center-right-panel{
+    position: relative;
+    height: 100px;
+}
+.layout.absolute .left{
+    position: absolute;
+    left: 0;
+}
+.layout.absolute .right{
+    position: absolute;
+    right: 0;
+}
+.layout.absolute .center{
+    position: absolute;
+    left: 200px;
+    right: 300px;
+}
+
+/* 弹性盒方案 */
+.layout.flex .left-center-right-panel{
+    display: flex;
+}
+.layout.flex .center{
+    flex: 1;
+}
+
+
+/* table方案 此方案默认是自适应方案 */
+.layout.table .left-center-right-panel{
+    display: table;
+    width: 100%;
+}
+.layout.table .left-center-right-panel>div{
+    display: table-cell;
+}
+.layout.table .left-center-right-panel .center>div{
+    overflow: hidden;
+}
+
+
+/* grid方案 */
+.layout.grid .left-center-right-panel{
+    display: grid;
+    grid-template-columns: 200px auto 300px;
+}
+
+/* calc方案 */
+.layout.calc .left-center-right-panel{
+    font-size: 0;
+}
+.layout.calc .left-center-right-panel>div{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+}
+.layout.calc .center{
+    width: calc(100% - 500px);
+}

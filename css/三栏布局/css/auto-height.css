@@ -1,0 +1,14 @@
+
+.layout .left-center-right-panel .left,
+.layout .left-center-right-panel .right,
+.layout .left-center-right-panel .center{
+    white-space: normal;
+    height: auto;
+}
+
+
+/* 绝对定位方案 */
+.layout.absolute .left-center-right-panel{
+    position: relative;
+    height: auto;
+}
