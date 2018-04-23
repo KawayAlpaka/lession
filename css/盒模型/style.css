@@ -9,12 +9,18 @@
     padding: 20px;
 }
 .border{
-    border: solid 50px black;
+    border: solid 20px black;
 }
 .wh{
     /*width: 200px;*/
     height: 100px;
     background-color: yellow;
+}
+.border-box{
+    box-sizing: border-box;
+}
+.content-box{
+    box-sizing: content-box;
 }
 
 .sanjiaoxing{
@@ -25,4 +31,5 @@
     border-right-color: green;
     border-top-color: blue;
     border-bottom-color: black;
+    border-width: 50px;
 }

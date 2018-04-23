@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>盒模型</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        button{
-            /*display: block;*/
-        }
-    </style>
 </head>
 <body>
 
@@ -17,6 +12,14 @@
 </div>
 <div class="container border padding margin">
     <div class="wh border padding margin">wh border padding margin</div>
+</div>
+
+<div class="container border padding margin wh border-box">
+    border-box（宽高=content的宽高+border+padding）
+</div>
+
+<div class="container border padding margin wh content-box">
+    content-box（宽高=content的宽高）
 </div>
 
 <div class="sanjiaoxing border"></div>
