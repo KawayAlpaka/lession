@@ -40,7 +40,9 @@ body{
     float: right;
 }
 .layout.float .center{
+    /* BFC 块级格式上下文 */
     /* 解决center中的p的margin击穿的问题 */
+    /* 解决center宽度实际是100%的问题 */
     overflow: hidden;
 }
 
