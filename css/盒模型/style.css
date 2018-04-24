@@ -12,15 +12,26 @@
     border: solid 20px black;
 }
 .wh{
-    /*width: 200px;*/
+    width: 200px;
     height: 100px;
     background-color: yellow;
+}
+.h{
+    height: 100px;
+    background-color: yellowgreen;
 }
 .border-box{
     box-sizing: border-box;
 }
 .content-box{
     box-sizing: content-box;
+}
+
+.bfc{
+    overflow: hidden;
+}
+.float-left{
+    float: left;
 }
 
 .sanjiaoxing{
