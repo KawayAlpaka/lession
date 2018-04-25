@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dom事件</title>
+    <style>
+        .wai{
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+        .nei{
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div>传统事件流</div>
+    <div id="wai" class="wai">
+        <div id="nei" class="nei">
+        </div>
+    </div>
+    <div>Event</div>
+    <div id="click3Element" >
+        <div class="wai">
+            <div class="nei">click3Event</div>
+        </div>
+    </div>
+    <div>CustomEvent</div>
+    <div id="click3CustomElement" >
+        <div class="wai">
+            <div class="nei">click3CustomEvent</div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="js/event.js"></script>
