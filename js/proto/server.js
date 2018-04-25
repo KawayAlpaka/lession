@@ -12,6 +12,7 @@ console.log(object);
 var foo = new Foo();
 console.log(foo);
 console.log(foo.prototype);
+console.log("foo.__proto__ === Foo.prototype:" + String(foo.__proto__ === Foo.prototype) );
 foo.prototype = {};
 console.log(foo.prototype);
 foo.prototype.ccc = "ccc";
@@ -23,13 +24,14 @@ console.log(foo.__proto__.__proto__.__proto__);
 console.log("foo.__proto__.__proto__.__lookupGetter__");
 console.log(foo.__proto__.__proto__.__lookupGetter__);
 console.log(Object);
+Object.prototype.eee = "eee";
 console.log(foo.ccc);
 console.log(foo.ddd);
+console.log(foo.eee);
 
 // foo.__lookupGetter__ = function () {
 //    console.log("__lookupGetter__");
 // };
-console.log(foo.eee);
 
 foo.__proto__.__defineGetter__("name",function(){return this.name1 + "get";});
 foo.__proto__.__defineSetter__("name",function(name){this.name1 = name +"set";});
