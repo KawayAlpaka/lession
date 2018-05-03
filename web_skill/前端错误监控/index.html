@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>前端错误监控</title>
+    <script>
+        (function(){
+            // try...catch 方案不好用,就不写了
+            // window错误捕获 可以捕获js错误和资源加载错误
+            window.addEventListener("error",function(event){
+                if(event.type == "error"){
+                    //上报错误
+                    if(event.error){//js错误
+                        new Image().src = "/getError?message="+event.error.message + "&stack="+event.error.stack;
+                    }else if(event.target.src){ //资源加载错误
+                        new Image().src = "/getError?src="+event.target.src;
+                    }
+                }
+            },true);
+        })(); 
+
+    </script>
+</head>
+<body>
+    <script>
+        (function(){
+            // Uncaught ReferenceError: a is not defined
+            console.log(a);
+        })();
+        
+    </script>
+    <img src="http://www.baidu.com/none-aa.jpg" />
+    <img src="https://www.baidu.com/img/bd_logo1.png?where=super" />
+    <script>
+        (function(){
+            //performance方案 不好用
+            console.log(performance.getEntries());
+            console.log(document.querySelectorAll("img"));
+        })(); 
+
+    </script>
+</body>
+</html>
