@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>px,em,rem,vh,vw,vmin,vmax</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div>
+        <div class="child">font-size: 14px;</div>
+    </div>
+    <div class="em-p" style="font-size: 14px;">
+        <div class="em-c child">font-size: 1em;height: 2em;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 1rem;height: 2rem;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 4vh;height: 8vh;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 4vw;height: 8vw;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 4vmin;height: 8vmin;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 4vmax;height: 8vmax;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 0.2in;height: 0.4in;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 0.4cm;height: 0.8cm;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 4mm;height: 8mm;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 10pt;height: 20pt;</div>
+    </div>
+    <div>
+        <div class="child">font-size: 2pc;height: 4pc;</div>
+    </div>
+
+    <div>
+        <div style="font-size: 16px;">修改html的font-size</div>
+        <div class="change-html-font-size">
+            <input type="range" min="0" max="100" value="16">
+            <span></span>
+        </div>
+    </div>
+    <script defer>
+        (()=>{
+            let c = document.querySelector(".change-html-font-size");
+            let input = c.querySelector("input");
+            let html = document.querySelector("html");
+            input.addEventListener("input",()=>{
+                html.style.fontSize = input.value + "px";
+            });
+        })();
+    </script>
+    <script defer>
+        (()=>{
+            document.querySelectorAll(".child").forEach((c)=>{
+                c.style = c.innerText;
+            });
+        })();
+    </script>
+</body>
+</html>

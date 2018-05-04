@@ -1,0 +1,10 @@
+body>div:nth-of-type(2n)>.child{
+    background: pink;
+}
+body>div:nth-of-type(2n+1)>.child{
+    background:yellowgreen;
+}
+
+.child{
+    white-space: nowrap;
+}
