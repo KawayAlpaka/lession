@@ -2,12 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>px,em,rem,vh,vw,vmin,vmax</title>
+    <title>px,em,rem,vh,vw,vmin,vmax等</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div>
+        <div style="font-size: 16px;">修改html的font-size</div>
+        <div class="change-html-font-size" style="font-size: 14px;">
+            <input type="range" min="0" max="100" value="16">
+            <span></span>
+        </div>
+    </div>
+    <script defer>
+        (()=>{
+            let c = document.querySelector(".change-html-font-size");
+            let input = c.querySelector("input");
+            let span = c.querySelector("span");
+            let html = document.querySelector("html");
+            input.addEventListener("input",()=>{
+                let l = input.value + "px";
+                html.style.fontSize = l;
+                span.innerHTML = l;
+            });
+        })();
+    </script>
+
     <div>
         <div class="child">font-size: 14px;</div>
     </div>
@@ -45,23 +67,7 @@
         <div class="child">font-size: 2pc;height: 4pc;</div>
     </div>
 
-    <div>
-        <div style="font-size: 16px;">修改html的font-size</div>
-        <div class="change-html-font-size">
-            <input type="range" min="0" max="100" value="16">
-            <span></span>
-        </div>
-    </div>
-    <script defer>
-        (()=>{
-            let c = document.querySelector(".change-html-font-size");
-            let input = c.querySelector("input");
-            let html = document.querySelector("html");
-            input.addEventListener("input",()=>{
-                html.style.fontSize = input.value + "px";
-            });
-        })();
-    </script>
+
     <script defer>
         (()=>{
             document.querySelectorAll(".child").forEach((c)=>{
