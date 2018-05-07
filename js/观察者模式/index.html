@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>观察者模式</title>
+    <script src="js/observer.js"></script>
+</head>
+<body>
+    <button id="btn1">点我</button>
+    <button id="btn2">移除第1个订阅者</button>
+    <button id="btn3">外部发射事件</button>
+    <script>
+        (() => {
+            let o = new Observer((e) => {
+                document.querySelector("#btn1").addEventListener("click", (event) => {
+                    e.emit(event);
+                });
+            });
+            let subscriber1 = (e) => {
+                console.log("第1个订阅者");
+                console.log(e);
+            };
+            let subscriber2 = (e) => {
+                console.log("第2个订阅者");
+                console.log(e);
+            };
+            o.subscribe(subscriber1);
+            o.subscribe(subscriber2);
+
+            //移除第一个订阅者
+            document.querySelector("#btn2").addEventListener("click", (event) => {
+                o.unsubscribe(subscriber1);
+            });
+
+            //外部发射事件
+            document.querySelector("#btn3").addEventListener("click", (event) => {
+                o.emit("手动触发的事件");
+            });
+        })();
+
+    </script>
+</body>
+</html>
