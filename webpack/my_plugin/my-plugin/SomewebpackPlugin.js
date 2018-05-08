@@ -23,11 +23,29 @@ SomewebpackPlugin.prototype.apply = function (compiler) {
     compiler.hooks.entryOption.tap(pluginName, params => {
         console.log('compiler.hooks.entryOption.tap');
         // console.log(params);
-      })
+    })
     compiler.hooks.compile.tap(pluginName, params => {
         console.log('compiler.hooks.compile.tap');
         // console.log(arguments);
-      })
+    })
+    var i = 0;
+    compiler.hooks.done.tap(pluginName, params => {
+        console.log('done');
+        console.log(++i);
+    })
+    // compilation（'编译器'对'编译ing'这个事件的监听）
+    compiler.hooks.compilation.tap(pluginName, function (compilation) {
+        console.log("The compiler is starting a new compilation...");
+        // 在compilation事件监听中，我们可以访问compilation引用，它是一个代表编译过程的对象引用
+        // 我们一定要区分compiler和compilation，一个代表编译器实体，另一个代表编译过程
+        // optimize('编译过程'对'优化文件'这个事件的监听)
+        // compilation.plugin("optimize", function () {
+        //     console.log("The compilation is starting to optimize files...");
+        // });
+        compilation.hooks.finishModules.tap(pluginName,(modules)=>{
+            console.log("finishModules");
+        });
+    });
 };
 // 暴露 js 函数
 module.exports = SomewebpackPlugin;
