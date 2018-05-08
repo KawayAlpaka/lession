@@ -148,7 +148,7 @@
     // ES6 class 方案 测试一下看看
     var Parent7 = class{
         constructor(){
-            this.name = "parent6";
+            this.name = "parent7";
             this.arr = [1,2,3];
         }
         getName(){
