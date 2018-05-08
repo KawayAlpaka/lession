@@ -17,10 +17,10 @@ let asyncFunc = async function a () {
 };
 asyncFunc();
 // 装饰器
-// function testable(target) {
-//     target.isTestable = true;
-// }
-// @testable
+function testable (target) {
+    target.isTestable = true;
+}
+@testable
 class MyTestableClass {
     // ...
 }

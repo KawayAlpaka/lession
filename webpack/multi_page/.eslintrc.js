@@ -1,5 +1,6 @@
 module.exports = {
     "extends": "standard",
+    "parser": "babel-eslint",
     rules:{
         indent:["off"],//缩进字符
         semi:["off"],//禁止使用分号
