@@ -22,10 +22,17 @@ module.exports = {
       {
         test: /\.js$/, 
         exclude: /node_modules/, 
-        loader: "babel-loader" ,
-        options: {
-          sourceMap: true
-        }
+        loader: [{
+          loader: 'babel-loader',
+          options: {
+            sourceMap: true
+          }
+        },{
+          loader: 'eslint-loader',
+          options: {
+
+          }
+        }]
       },
       {
         test: /\.scss$/,

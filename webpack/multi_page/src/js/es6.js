@@ -1,23 +1,21 @@
-
 class Person {
-    constructor(name) {
+    constructor (name) {
         this.name = name;
     }
-    static getString(){
+    static getString () {
         return "Person.getString";
     }
-    getString (){
+    getString () {
         return Person.name;
     }
 }
 
-
-class Boy extends Person{
-    constructor(name,long) {
+class Boy extends Person {
+    constructor (name, long) {
         super(name); // 调用父类的constructor()
         this.long = long;
     }
-    getString (){
+    getString () {
         return Boy.name;
     }
 }
