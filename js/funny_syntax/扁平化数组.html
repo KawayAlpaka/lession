@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>扁平化数组</title>
+</head>
+<body>
+    <script>
+        let arr = [1,[2,3,[4,5],6],7,[8,9],10];
+        //递归方案...单纯算法，不涉及技术点，不写了
+
+        //原型链+隐式转换方案
+        let byPrototype = (arr)=>{
+            let _toString = Array.prototype.toString;
+            Array.prototype.toString = function(){
+                return this.join(",");
+            };
+            let r = arr.toString();
+            Array.prototype.toString = _toString;
+            return r;
+        };
+        console.log(byPrototype(arr));
+
+        //直接join
+        console.log(arr.join(","));
+        //如果要保留数组格式
+        console.log(eval ("["+arr.join(",")+"]"));
+    </script>
+</body>
+</html>
