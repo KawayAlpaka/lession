@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: aqua;
+            border: 10px solid blueviolet;
+        }
+        .circle:hover {
+            background-color: yellowgreen;
+        }
+        .svg-circle:hover {
+            fill:blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>div的圆：</div>
+    <div class="circle"></div>
+    <script>
+        document.querySelector(".circle").addEventListener("click", function () {
+            console.log("click div circle");
+        });
+    </script>
+    <div>svg的圆：</div>
+    <svg width="120" height="120">
+        <circle class="svg-circle" cx="60" cy="60" r="55" stroke="black" stroke-width="10" fill="red" />
+    </svg>
+    <script>
+        document.querySelector(".svg-circle").addEventListener("click", function () {
+            console.log("click svg circle");
+        });
+    </script>
+    <div>svg的动画（animate）：</div>
+    <svg>
+        <rect x="10" y="10" width="200" height="20" stroke="black" fill="none">
+            <animate
+            attributeName="width"
+            attributeType="XML"
+            from="200" to="20"
+            dur="5s"
+            fill="freeze"
+            repeatCount="indefinite" />
+        </rect>
+    </svg>
+    <div>引入svg:</div>
+    <img src="img/1.svg" alt="">
+</body>
+
+</html>
