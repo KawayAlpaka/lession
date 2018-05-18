@@ -1,0 +1,81 @@
+
+
+.wrapper {
+    background-color: aquamarine;
+    overflow: hidden;
+}
+
+.cell {
+    background-color: blueviolet;
+    height: 200px;
+}
+
+.content{
+    background-color: yellowgreen;
+}
+
+.table.wrapper .cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.absolute.wrapper{
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.absolute.wrapper .content{
+    position: absolute;
+    top: 50%;
+    height: 40px;
+    margin-top: -20px;
+}
+
+/* 什么鬼 */
+.wrapper .float {
+    float: left;
+    height: 50%;
+    margin-bottom: -120px;
+}
+
+.wrapper .float .content {
+    clear: both;
+    height: 240px;
+    position: relative;
+}
+
+
+.absolute2.wrapper{
+    position: relative;
+    width: 600px;
+    height: 300px;
+}
+
+.absolute2.wrapper .content{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 240px;
+    width: 70%;
+}
+
+.wrapper.line-height .content{
+    line-height: 200px;
+}
+
+.wrapper.transform {
+    position: relative;
+    width: 600px;
+    height: 300px;
+}
+
+.wrapper.transform .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
