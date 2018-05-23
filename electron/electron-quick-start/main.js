@@ -42,12 +42,22 @@ function createWindow () {
   require("./main-process/msg-a");
   //在windows没有发现tray的表现
   require("./main-process/tray");
+
+  app.on('ready', ()=>{
+    //之后不会在触发
+    console.log("ready2");
+  });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+app.on('ready', ()=>{
+  console.log("ready3");
+});
+require("./main-process/shortcut");
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
