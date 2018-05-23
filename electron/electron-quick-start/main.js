@@ -31,7 +31,10 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
+  });
+
+  // 打开开发者工具
+  mainWindow.webContents.openDevTools();
 
   require("./main-process/menu");
   require("./main-process/msg-a");
