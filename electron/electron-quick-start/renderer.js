@@ -6,3 +6,4 @@ require("./renderer-process/menu");
 require("./renderer-process/msg-a");
 require("./renderer-process/notification");
 require("./renderer-process/link");
+require("./renderer-process/clipboard");
