@@ -38,6 +38,8 @@ function createWindow () {
 
   require("./main-process/menu");
   require("./main-process/msg-a");
+  //在windows没有发现tray的表现
+  require("./main-process/tray");
 }
 
 // This method will be called when Electron has finished
