@@ -32,6 +32,10 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   });
+  mainWindow.webContents.on("did-finish-load",()=>{
+    console.log("did-finish-load");
+    require("./main-process/pdf").printToPDF(mainWindow);
+  });
 
   // 打开开发者工具
   mainWindow.webContents.openDevTools();
@@ -47,6 +51,7 @@ function createWindow () {
     //之后不会在触发
     console.log("ready2");
   });
+
 }
 
 // This method will be called when Electron has finished
