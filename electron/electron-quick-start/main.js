@@ -35,6 +35,8 @@ function createWindow () {
 
   // 打开开发者工具
   mainWindow.webContents.openDevTools();
+  // 最大化窗口
+  mainWindow.maximize();
 
   require("./main-process/menu");
   require("./main-process/msg-a");
