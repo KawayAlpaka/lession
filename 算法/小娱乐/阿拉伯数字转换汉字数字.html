@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>阿拉伯数字转换汉字数字</title>
+    <script>
+        let toChinese = function(num){
+            let str = ""+ num;
+            let arr = str.split(".");
+            let xiaoshu = "";
+            if(arr.length == 2){
+                xiaoshu = "点";
+                for (let i=0;i<arr[1].length;i++){
+                    xiaoshu += a2h(arr[1][i])
+                }
+            }
+
+            let zhengshu = "";
+            let zhengshuLen = arr[0].length;
+            let pNum = "零";
+            for(let i=zhengshuLen-1,j=0;i>=0;i--,j++){
+                let s = arr[0][i];
+                let u1 = "";
+                let u2 = "";
+                let y = j%4;
+                let b = j/4;
+                switch(y){
+                    case 1:u1 = "十";break;
+                    case 2:u1 = "百";break;
+                    case 3:u1 = "千";break;
+                }
+                switch(b){
+                    case 1:u2 = "万";break;
+                    case 2:u2 = "亿";break;
+                    case 3:u2 = "兆";break;
+                }
+                if(u2 != ""){
+                    let first = zhengshu[0];
+                    if(first == "万" ||
+                    first == "亿" ||
+                    first == "兆" 
+                    ){
+                        zhengshu = zhengshu.replace(first,"");
+                    }
+                    zhengshu = u2 + zhengshu;
+                }
+                
+                let h = a2h(s);
+                if(h == "零"){
+                    if(pNum == h){
+
+                    }else{
+                        zhengshu = h + zhengshu;
+                    }
+                    
+                }else{
+                    zhengshu = h+ u1 + zhengshu;
+                }
+                pNum = h;
+            }
+            if(zhengshu == ""){
+                zhengshu = "零";
+            }
+            str = zhengshu + xiaoshu;
+            return str;
+        };
+        let a2h = function(c){
+            switch(c){
+                case "0":return "零";
+                case "1":return "一";
+                case "2":return "二";
+                case "3":return "三";
+                case "4":return "四";
+                case "5":return "五";
+                case "6":return "六";
+                case "7":return "七";
+                case "8":return "八";
+                case "9":return "九";
+            }
+        }
+
+        let test = function(num){
+            console.log(num + " 读作 " + toChinese(num));
+        }
+        test("30");
+        test("3000000000000");
+        test("0.1000");
+        test("3100.98");
+        test("30100.98");
+        test("300100.98");
+        test("3000100.98");
+        test("30000100.98");
+        test("300000100.98");
+        test("3000000100.98");
+        test("30000000100.98");
+        test("300000000100.98");
+        test("3000000000100.98");
+        test("30000000000100.98");
+        test("300000000000100.98");
+        test("3000000000000100.98");
+        test("3000000000000100.987654321");
+        test("3000000100000100.987654321");
+        test("123456789.0987654321");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
