@@ -34,6 +34,7 @@ function createWindow () {
   })
 
   require("./main-process/menu");
+  require("./main-process/msg-a");
 }
 
 // This method will be called when Electron has finished

@@ -3,3 +3,4 @@
 // All of the Node.js APIs are available in this process.
 require("./renderer-process/open");
 require("./renderer-process/menu");
+require("./renderer-process/msg-a");

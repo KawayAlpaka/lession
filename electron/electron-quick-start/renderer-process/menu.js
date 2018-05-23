@@ -9,4 +9,4 @@ var showMenu = function(){
 
 menu.addEventListener("click",showMenu);
 
-document.addEventListener("contextmenu",showMenu)
+document.addEventListener("contextmenu",showMenu);
