@@ -10,10 +10,11 @@
             let str = ""+ num;
             let sym = "";
             if(str[0] == "-"){
-                sym = "负"
+                sym = "负";
                 str = str.replace("-","");
             }
             if(str[0] == "+"){
+                sym = "正";
                 str = str.replace("+","");
             }
             let arr = str.split(".");
@@ -104,7 +105,7 @@
         "-30","-3000000100000100.987654321","-123456789.0987654321",,"+123456789.0987654321"
         ]
         let test = function(num){
-            console.log(num + " 读作 " + toChinese(num));
+            console.log(num + " 读作:" + toChinese(num));
         }
         testCases.forEach(function(c){
             test(c);
