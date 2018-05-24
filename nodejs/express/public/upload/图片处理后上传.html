@@ -7,6 +7,123 @@
     <title>图片处理后上传（加工、压缩）</title>
 </head>
 <body>
-    
+    <p>
+        <input type="file" id="upfile" accept="image/jpeg,image/png,image/gif">
+    </p>
+    <p>
+        <canvas id="canvas"></canvas>
+    </p>
+    <p>
+        <input type="button" id="upJS" value="上传">
+    </p>
+    <script>
+        /*
+        三个参数
+        file：一个是文件(类型是图片格式)，
+        w：一个是文件压缩的后宽度，宽度越小，字节越小
+        objDiv：一个是容器或者回调函数
+        photoCompress()
+         */
+        function photoCompress(file, w, objDiv) {
+            var ready = new FileReader();
+            /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
+            ready.readAsDataURL(file);
+            ready.onload = function () {
+                var re = this.result;
+                canvasDataURL(re, w, objDiv)
+            }
+        }
+        function canvasDataURL(path, obj, callback) {
+            var img = new Image();
+            img.src = path;
+            img.onload = function () {
+                var that = this;
+                // 默认按比例压缩
+                var w = that.width,
+                    h = that.height,
+                    scale = w / h;
+                w = obj.width || w;
+                h = obj.height || (w / scale);
+                var quality = 0.7;  // 默认图片质量为0.7
+                //生成canvas
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                // 创建属性节点
+                var anw = document.createAttribute("width");
+                anw.nodeValue = w;
+                var anh = document.createAttribute("height");
+                anh.nodeValue = h;
+                canvas.setAttributeNode(anw);
+                canvas.setAttributeNode(anh);
+                ctx.drawImage(that, 0, 0, w, h);
+                // 图像质量
+                if (obj.quality && obj.quality <= 1 && obj.quality > 0) {
+                    quality = obj.quality;
+                }
+                // quality值越小，所绘制出的图像越模糊
+                var base64 = canvas.toDataURL('image/jpeg', quality);
+                // 回调函数返回base64的值
+                callback(base64);
+            }
+        }
+        /**
+         * 将以base64的图片url数据转换为Blob
+         * @param urlData
+         *            用url方式表示的base64图片数据
+         */
+        function convertBase64UrlToBlob(urlData) {
+            var arr = urlData.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+
+
+        let upfileInput = document.querySelector("#upfile");
+        let canvas = document.querySelector('#canvas');
+
+        upfileInput.addEventListener("change", function () {
+            var file = this.files[0];
+            console.log("file:", file);
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function () {
+                var dataURL = fileReader.result;
+                var img = new Image();
+                img.src = dataURL;
+                img.onload = function () {
+                    canvas.width = 200;
+                    canvas.height = 200;
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                };
+            };
+        });
+
+        /*原生JS版*/
+        document.getElementById("upJS").onclick = function () {
+            /* FormData 是表单数据类 */
+            var fd = new FormData();
+            var ajax = new XMLHttpRequest();
+            fd.append("upload", 1);
+
+            var file = upfileInput.files[0];
+
+
+            //图片质量
+            var quality = 1;
+            var base64 = canvas.toDataURL(file.type, quality);
+            var blob = convertBase64UrlToBlob(base64);
+            fd.append("file", blob, file.name);
+
+            ajax.open("post", "/file/webuploader", true);
+            ajax.onload = function () {
+                console.log(ajax.responseText);
+            };
+            ajax.send(fd);
+        };
+    </script>
 </body>
 </html>
