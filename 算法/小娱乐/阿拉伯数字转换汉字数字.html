@@ -8,6 +8,14 @@
     <script>
         let toChinese = function(num){
             let str = ""+ num;
+            let sym = "";
+            if(str[0] == "-"){
+                sym = "负"
+                str = str.replace("-","");
+            }
+            if(str[0] == "+"){
+                str = str.replace("+","");
+            }
             let arr = str.split(".");
             let xiaoshu = "";
             if(arr.length == 2){
@@ -16,6 +24,8 @@
                     xiaoshu += a2h(arr[1][i])
                 }
             }
+
+            let fenWeis = ["万","亿","兆","万兆","亿兆","兆兆"];
 
             let zhengshu = "";
             let zhengshuLen = arr[0].length;
@@ -31,19 +41,15 @@
                     case 2:u1 = "百";break;
                     case 3:u1 = "千";break;
                 }
-                switch(b){
-                    case 1:u2 = "万";break;
-                    case 2:u2 = "亿";break;
-                    case 3:u2 = "兆";break;
-                }
+
+                u2 = fenWeis[b-1] || "";
                 if(u2 != ""){
-                    let first = zhengshu[0];
-                    if(first == "万" ||
-                    first == "亿" ||
-                    first == "兆" 
-                    ){
-                        zhengshu = zhengshu.replace(first,"");
-                    }
+                    fenWeis.forEach(function(fenWei){
+                        let first = zhengshu.substr(0,fenWei.length);
+                        if(fenWeis.indexOf(first) >=0){
+                            zhengshu = zhengshu.replace(first,"");
+                        }
+                    });
                     zhengshu = u2 + zhengshu;
                 }
                 
@@ -63,7 +69,7 @@
             if(zhengshu == ""){
                 zhengshu = "零";
             }
-            str = zhengshu + xiaoshu;
+            str = sym + zhengshu + xiaoshu;
             return str;
         };
         let a2h = function(c){
@@ -81,28 +87,28 @@
             }
         }
 
+        let testCases = [
+            "30","3000000000000","0.1000","3100.98","30100.98","300100.98","3000100.98","30000100.98","300000100.98",
+        "3000000100.98","30000000100.98","300000000100.98","3000000000100.98","30000000000100.98","300000000000100.98",
+        "3000000000000100.98","3000000000000100.987654321",
+        "3000000100000100.987654321",
+        "30000000100000100.987654321",
+        "300000000100000100.987654321",
+        "3000000000100000100.987654321",
+        "300000000000100000100.987654321",
+        "30000000000000100000100.987654321",
+        "3000000000000000100000100.987654321",
+        "300000000000000000100000100.987654321",
+        "123456789.0987654321",
+        "123456789098765432101234567.0987654321",
+        "-30","-3000000100000100.987654321","-123456789.0987654321",,"+123456789.0987654321"
+        ]
         let test = function(num){
             console.log(num + " 读作 " + toChinese(num));
         }
-        test("30");
-        test("3000000000000");
-        test("0.1000");
-        test("3100.98");
-        test("30100.98");
-        test("300100.98");
-        test("3000100.98");
-        test("30000100.98");
-        test("300000100.98");
-        test("3000000100.98");
-        test("30000000100.98");
-        test("300000000100.98");
-        test("3000000000100.98");
-        test("30000000000100.98");
-        test("300000000000100.98");
-        test("3000000000000100.98");
-        test("3000000000000100.987654321");
-        test("3000000100000100.987654321");
-        test("123456789.0987654321");
+        testCases.forEach(function(c){
+            test(c);
+        });
     </script>
 </head>
 <body>
