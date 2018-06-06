@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3D三角形</title>
+
+    <style>
+        .triangle{
+            position: absolute;
+            height: 0;
+            width: 0;
+            border-left: 173.205px solid red;
+            border-right: 173.205px solid transparent;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+        }
+        .triangle.triangle-red{
+            border-left: 173.205px solid red;
+        }
+        .triangle.triangle-green{
+            border-left: 173.205px solid green;
+        }
+        .triangle.triangle-blue{
+            border-left: 173.205px solid blue;
+        }
+        .triangle.triangle-yellow{
+            border-left: 173.205px solid yellow;
+        }
+        .triangle-3d{
+            position: relative;
+        }
+        .triangle-3d .triangle-right{
+            transform: rotateX(30deg) rotateY(60deg) rotateZ(-90deg) translateY(-115.47px);
+        }
+        .triangle-3d .triangle-left{
+            transform: rotateX(30deg) rotateY(-60deg) rotateZ(-90deg) translateY(-115.47px);
+        }
+        .triangle-3d .triangle-bottom{
+            transform: rotateX(90deg) rotateY(90deg) rotateZ(0deg) translateY(57.735px) translateZ(115.47px);
+        }
+    </style>
+</head>
+<body>
+    <div class="triangle-3d">
+        <div class="triangle triangle-red"></div>
+        <div class="triangle triangle-green triangle-right"></div>
+        <div class="triangle triangle-blue triangle-left"></div>
+        <div class="triangle triangle-yellow triangle-bottom"></div>
+    </div>
+    
+</body>
+</html>

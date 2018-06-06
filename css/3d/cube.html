@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3D正方体</title>
+
+    <style>        
+        @keyframes circle{
+            0% { transform:rotateX(0deg) rotateZ(0deg) rotateY(0deg);}
+            100% {transform:rotateX(0deg) rotateZ(0deg) rotateY(360deg);}
+        }
+        .cube{
+            position: relative;
+            transform-style:preserve-3d;
+            transform-origin:50px 50px 0px;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            animation:circle 5s linear infinite;
+        }
+        .square{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(0px);
+            text-align: center;
+            font-size: 50px;
+            padding-top: 20px;
+            color: white;
+        }
+        .square-f{
+            background-color: red;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
+        }
+        .square-back{
+            background-color: orange;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(-50px);
+        }
+        .square-l{
+            background-color: blue;
+            transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(-50px);
+        }
+        .square-r{
+            background-color: green;
+            transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
+        }
+        .square-bottom{
+            background-color: black;
+            transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(-50px);
+        }
+        .square-t{
+            background-color: yellow;
+            transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
+        }
+
+    </style>
+</head>
+<body>
+    <div style="position: fixed;left: 400px;top:400px;">
+        <div class="cube">
+            <div class="square square-f">4</div>
+            <div class="square square-back">4</div>
+            <div class="square square-l">0</div>
+            <div class="square square-r">!</div>
+            <div class="square square-bottom"></div>
+            <div class="square square-t"></div>
+        </div>
+    </div>
+</body>
+</html>
