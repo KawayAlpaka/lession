@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>controller</title>
+    <!-- <script src="http://cdn.bootcss.com/angular.js/1.2.32/angular.js"></script> -->
     <script src="http://cdn.bootcss.com/angular.js/1.6.4/angular.js"></script>
     <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
     <script>
@@ -20,6 +21,15 @@
             $scope.click = function () {
             };
             $scope.aaa = "aaa";
+        });
+        //测试证明，就算在高版本的浏览器下，低版本的angularjs也不能处理箭头符号定义的方法的注入。
+        app.controller("controller3",($scope)=>{
+            console.log("controller3");
+            console.log($scope);
+        });
+        app.controller("controller4",$scope=>{
+            console.log("controller4");
+            console.log($scope);
         });
     </script>
 </head>
@@ -40,6 +50,8 @@
         <button ng-click="click('haha')" id="btncontroller22">按钮2</button>
     </div>
 </div>
+<div ng-controller="controller3"></div>
+<div ng-controller="controller4"></div>
 <script>
 //    $(function () {
 //        $(btncontroller12).on("click",function () {
