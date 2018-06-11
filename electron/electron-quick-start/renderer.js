@@ -7,3 +7,13 @@ require("./renderer-process/msg-a");
 require("./renderer-process/notification");
 require("./renderer-process/link");
 require("./renderer-process/clipboard");
+
+
+var BrowserWindow = require("electron").remote.BrowserWindow;
+
+var pdf = require("./main-process/pdf");
+var btnPrintPdf = document.querySelector("#print-pdf");
+btnPrintPdf.addEventListener("click",function(){
+    var focusedWin = BrowserWindow.getFocusedWindow();
+    pdf.printToPDF(focusedWin);
+});

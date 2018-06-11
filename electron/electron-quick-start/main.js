@@ -34,7 +34,7 @@ function createWindow () {
   });
   mainWindow.webContents.on("did-finish-load",()=>{
     console.log("did-finish-load");
-    require("./main-process/pdf").printToPDF(mainWindow);
+    // require("./main-process/pdf").printToPDF(mainWindow);
   });
 
   // 打开开发者工具
