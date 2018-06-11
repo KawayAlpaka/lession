@@ -23,4 +23,5 @@ Ctrl+Shift+B
 ### 直接运行ts代码
 <pre><code>
 npm install -g ts-node
+ts-node ./src/main.ts
 </code></pre>
