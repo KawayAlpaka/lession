@@ -1,4 +1,4 @@
-# vscode开发环境部署
+# vscode开发环境部署(参考:https://blog.csdn.net/u011127019/article/details/73380654)
 
 ### 安装typescript
 <pre><code>
