@@ -1,0 +1,26 @@
+# vscode开发环境部署
+
+### 安装typescript
+<pre><code>
+npm install -g typescript
+</code></pre>
+
+### 验证是否安装成功
+<pre><code>
+tsc -v  
+</code></pre>
+
+### 生成任务 
+<pre><code>
+任务->配置生成默认任务->tsc
+</code></pre>
+
+### 启动任务
+<pre><code>
+Ctrl+Shift+B
+</code></pre>
+
+### 直接运行ts代码
+<pre><code>
+npm install -g ts-node
+</code></pre>

@@ -1,0 +1,17 @@
+{  
+    "compilerOptions": {  
+        "target": "es5",  
+        "noImplicitAny": true,  
+        "module": "commonjs",  
+        "removeComments": true,  
+        "sourceMap": false,  
+        "watch": true,  
+        "outDir": "out/"
+    },  
+    "include":[    
+        "src/*"    
+    ],    
+    "exclude": [    
+        "js"    
+    ]    
+}  
