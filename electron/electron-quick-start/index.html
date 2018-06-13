@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
@@ -12,10 +12,11 @@
       delete window.module;
     </script>
     <script src="./node_modules/jquery/dist/jquery.js"></script>
-
+    <script src="./node_modules/angular/angular.js"></script>
     <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script> -->
     <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+    <script src="./js/angular/controller/controller.js"></script>
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -34,6 +35,11 @@
       <a href="https://www.baidu.com">https://www.baidu.com</a>
       <button id="print-pdf" >打印pdf</button>
     </div>
+    <div ng-controller="index">
+        <input type="text" ng-model="name">
+        <span ng-bind="name"></span>
+    </div>
+
     <script>
       // You can also require other files to run in this process
       nodeRequire('./renderer.js')

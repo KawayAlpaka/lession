@@ -20,6 +20,7 @@
     "electron": "^2.0.0"
   },
   "dependencies": {
+    "angular": "^1.7.2",
     "jquery": "^3.3.1"
   }
 }

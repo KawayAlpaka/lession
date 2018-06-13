@@ -1,5 +1,38 @@
-<h1>hello modal</h1>
+<!DOCTYPE html>
+<html ng-app="myApp">
 
-<script>
-    require("../renderer-process/modal.js")
-</script>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/theme/default/layer.css" rel="stylesheet">
+    <script>
+        console.log(__dirname);
+    </script>
+    <script>
+        window.nodeRequire = require;
+        delete window.require;
+        delete window.exports;
+        delete window.module;
+    </script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script> -->
+    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+    <script src="../js/angular/controller/controller.js"></script>
+</head>
+
+<body>
+
+    <h1>hello modal</h1>
+    <div ng-controller="modal">
+        <input type="text" ng-model="name">
+        <span ng-bind="name"></span>
+    </div>
+    <script>
+        nodeRequire("../renderer-process/modal.js")
+    </script>
+</body>
+
+</html>
