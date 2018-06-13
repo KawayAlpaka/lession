@@ -5,7 +5,7 @@ var {ipcRenderer} = require("electron")
 var opens = document.querySelectorAll(".open");
 var openBrowserWindow = function(url){
     var win = new BrowserWindow({
-        frame:false
+        frame:true
     });
     win.on("error",(...args)=>{
         console.log("win error");
