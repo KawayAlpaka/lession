@@ -4,8 +4,17 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+    <link href="https://cdn.bootcss.com/layer/3.1.0/theme/default/layer.css" rel="stylesheet">
+    <script>
+      window.nodeRequire = require;
+      delete window.require;
+      delete window.exports;
+      delete window.module;
+    </script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script> -->
     <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
   </head>
   <body>
@@ -27,7 +36,7 @@
     </div>
     <script>
       // You can also require other files to run in this process
-      require('./renderer.js')
+      nodeRequire('./renderer.js')
     </script>
   </body>
 </html>
