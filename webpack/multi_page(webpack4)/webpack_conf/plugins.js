@@ -2,9 +2,8 @@ var fs = require("fs");
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 let pages = [
@@ -79,7 +78,12 @@ let createPlugins = function (buildFolder, pagesSrcDir, pagesOutDir) {
       })
     );
   });
-  plugins.push(new ExtractTextPlugin("css/style.[hash].css"));
+  plugins.push(new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: "css/style.[hash].css",
+    // chunkFilename: "[id].css"
+  }));
   plugins.push(new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]));
   return plugins;
 };
