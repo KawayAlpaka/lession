@@ -3,6 +3,7 @@ $containerWidth: 1210px;
 $theme-color:#f2741f;
 .hello{
     color: rebeccapurple;
+    display: flex;
 }
 
 @import "./_test.scss";
