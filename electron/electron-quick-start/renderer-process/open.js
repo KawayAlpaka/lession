@@ -34,7 +34,7 @@ opens.forEach((ele)=>{
 
 openModal.addEventListener("click",function(){
     var winId = BrowserWindow.getFocusedWindow().id;
-    var url = path.join("file:",__dirname,"../pages/modal.html")
+    var url = path.join("file:",__dirname,"../pages/modal.html");
     var win = openBrowserWindow(url);
     win.webContents.on("did-finish-load",(event)=>{
         console.log("did-finish-load");
