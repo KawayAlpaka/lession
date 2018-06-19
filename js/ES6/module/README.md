@@ -3,9 +3,9 @@
 The ESM module loader is experimental（node9以后有了这个功能，但是到node10为止，还是实验性的）
 
 所有的js文件扩展名为 mjs
-
+```
 node --experimental-modules ./main.mjs
-
+```
 
 ### 浏览器环境
 
