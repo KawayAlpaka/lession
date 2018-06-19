@@ -1,5 +1,7 @@
 import * as express from "express";
 import { AddressInfo } from "net";
+import { Hello } from "./module";
+Hello("express");
 let app = express();
 
 app.get("/",(req,res)=>{
