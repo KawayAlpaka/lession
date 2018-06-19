@@ -4,8 +4,11 @@ import { Hello } from "./module";
 Hello("express");
 let app = express();
 
-app.get("/",(req,res)=>{
-    res.send("hello world!")
+app.use('/', express.static('www'));
+app.use('/js', express.static('out/web'));
+
+app.get("/welcome",(req,res)=>{
+    res.send("welcome");
 });
 
 var server = app.listen(3000,function(){
@@ -14,3 +17,4 @@ var server = app.listen(3000,function(){
     let port = addressInfo.port;
     console.log('Example app listening at http://%s:%s', host, port);
 });
+
