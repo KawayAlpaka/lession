@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>尾递归计算n的阶层</title>
+  <script>
+    var calc = (n)=>{
+      if(n == 0){
+        return 0;
+      }
+      var r = 1;
+      var calc2 = (n2)=>{
+        r = r * n2;
+        if(n2 == n){
+          return r;
+        }
+        return calc2(n2+1);
+      };
+      return calc2(1);
+    };
+
+    var testCases = [
+      {input:0,except:0},
+      {input:1,except:1},
+      {input:2,except:2},
+      {input:3,except:6},
+      {input:4,except:24},
+    ];
+    testCases.forEach((c)=>{
+      var r = calc(c.input);
+      if(r == c.except){
+        console.log(`pass:input=${c.input},result=${r},except=${c.except}`);
+      }else{
+        console.warn(`pass:input=${c.input},result=${r},except=${c.except}`);
+      }
+    });
+  </script>
+</head>
+<body>
+  <p>如果一个函数中所有递归形式的调用都出现在函数的末尾，我们称这个递归函数是尾递归的。当递归调用是整个函数体中最后执行的语句且它的返回值不属于表达式的一部分时，这个递归调用就是尾递归。尾递归函数的特点是在回归过程中不用做任何操作，这个特性很重要，因为大多数现代的编译器会利用这种特点自动生成优化的代码。</p>
+  <p>当编译器检测到一个函数调用是尾递归的时候，它就覆盖当前的活动记录而不是在栈中去创建一个新的。编译器可以做到这点，因为递归调用是当前活跃期内最后一条待执行的语句，于是当这个调用返回时栈帧中并没有其他事情可做，因此也就没有保存栈帧的必要了。通过覆盖当前的栈帧而不是在其之上重新添加一个，这样所使用的栈空间就大大缩减了，这使得实际的运行效率会变得更高。</p>
+</body>
+</html>
