@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script>
+        function foreach(numbers,fn){
+            var s = "";
+            for(let i of numbers){
+                if(i != ","){
+                    s = s + i;
+                }else{
+                    fn(parseFloat(s));
+                    s = "";
+                }
+            }
+            fn(parseFloat(s));
+        }
+        function range(start ,end){
+            var r = "";
+            r = r + start
+            for(let i = start+1;i<=end;i++){
+                r = r +  "," + i;
+            }
+            return r;
+        }
+        function map(numbers,fn){
+            var r = "";
+            foreach(numbers,function(num){
+                if(r == ""){
+                    r = fn(num);
+                }else{
+                    r = r + "," + fn(num);
+                }
+            });
+            return r;
+        }
+        function reverse(numbers){
+            var r = "";
+            foreach(numbers,function(num){
+                if(r == ""){
+                    r = num;
+                }else{
+                    r = num + "," + r;
+                }
+            });
+            return r;
+        }
+        //测试1
+        var numbers = range(1,10);
+        numbers = map(numbers, function (n) { return n * n });
+        numbers = reverse(numbers);
+        foreach(numbers,console.log);
+        //测试2
+        var numbers = range(1, 10);
+        numbers = map(numbers, function (n) { return n + n });
+        numbers = reverse(numbers);
+        foreach(numbers, console.log);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
