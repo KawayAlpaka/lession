@@ -8,8 +8,8 @@
 
     <style>        
         @keyframes circle{
-            0% { transform:rotateX(0deg) rotateZ(0deg) rotateY(0deg);}
-            100% {transform:rotateX(0deg) rotateZ(0deg) rotateY(360deg);}
+            0% { transform:rotateX(0deg) rotateZ(0deg) rotateY(360deg);}
+            100% {transform:rotateX(0deg) rotateZ(0deg) rotateY(0deg);}
         }
         .cube{
             position: relative;
@@ -31,20 +31,20 @@
             color: white;
         }
         .square-f{
-            background-color: red;
+            background-color: #f90f0f;
             transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
         }
         .square-back{
-            background-color: orange;
+            background-color: #ff7300;
             transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
             /* 背面文字要正着显示 */
         }
         .square-l{
-            background-color: blue;
+            background-color: #1747ff;
             transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(-50px);
         }
         .square-r{
-            background-color: green;
+            background-color: #0a872a;
             transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(50px);
         }
         .square-bottom{
@@ -62,8 +62,8 @@
     <div style="position: fixed;left: 400px;top:400px;">
         <div class="cube">
             <div class="square square-f">4</div>
-            <div class="square square-back">4</div>
             <div class="square square-l">0</div>
+            <div class="square square-back">4</div>
             <div class="square square-r">!</div>
             <div class="square square-bottom"></div>
             <div class="square square-t"></div>
