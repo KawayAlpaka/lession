@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>摇一摇事件</title>
+
+  <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+  <script>
+      // init vConsole
+      var vConsole = new VConsole();
+      console.log('Hello world');
+    </script>
+  <script>
+    if(window.DeviceMotionEvent){
+        window.addEventListener('devicemotion',function(e){
+          if( (Math.abs(e.acceleration.x) + Math.abs(e.acceleration.y) + Math.abs(e.acceleration.z) ) > 100){
+            document.querySelector("#acceleration").innerHTML = JSON.stringify(e.acceleration); 
+            document.querySelector("#accelerationIncludingGravity").innerHTML = JSON.stringify(e.accelerationIncludingGravity); 
+          }
+        });
+    }else{
+        alert('你的浏览器不支持摇一摇功能.');
+    }
+  </script>
+</head>
+<body>
+  <div id="acceleration"></div>
+  <div id="accelerationIncludingGravity"></div>
+</body>
+</html>
