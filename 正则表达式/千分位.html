@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>千分位</title>
+  <script>
+    var str = "1243567890.12";
+    console.log(str.replace(/(\d)(?=(?:\d{3})+\.)/g ,'$1,') );
+  </script>
+</head>
+<body>
+  <code>
+    <pre>
+        var str = "1243567890.12";
+        console.log(str.replace(/(\d)(?=(?:\d{3})+\.)/g ,'$1,') );
+    </pre>
+  </code>
+  <div>
+    <h3>知识点:</h3>
+    <div>
+      <div>(?=exp)</div>
+      <div>匹配满足条件的前面的内容</div>
+          
+    </div>
+  </div>
+</body>
+</html>
