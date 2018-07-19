@@ -16,7 +16,7 @@ server.on('listening',()=>{
     server.setMulticastTTL(128);
     setInterval(()=>{
         sendMsg();
-    },1500);
+    },5000);
 });
 
 server.on('message',(msg,rinfo)=>{
