@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件</title>
+</head>
+<body>
+  <div class="input-warp">
+    <label for="search" class="input-label">Search field</label>
+    <div class="input-box">
+      <input type="search" name="" id="search" value="">
+    </div>
+  </div>
+  <style>
+    .input-warp{
+      border-bottom: solid 1px black;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .input-warp.focus .input-box{
+      height: 30px;
+    }
+    .input-warp.focus label{
+      font-size: 12px;
+    }
+    label{
+      font-size: 14px;
+      transition: all 1s;
+    }
+    .input-box{
+      height: 0;
+      overflow: hidden;
+      transition: all 1s;
+    }
+    input{
+      border: 0;
+      margin: 0;
+      padding: 6px 0 7px;
+      display: block;
+      box-sizing: content-box;
+      background: none;
+      width: 100%;
+      outline: none;
+    }
+  </style>
+  <script>
+    var input = document.querySelector("input");
+    input.addEventListener("blur",function(){
+      if(input.value && input.value.length > 0){
+      }else{
+        input.parentElement.parentElement.classList.remove("focus");
+      }
+      
+    });
+    input.addEventListener("focus",function(){
+      input.parentElement.parentElement.classList.add("focus");
+    });
+  </script>
+</body>
+</html>
