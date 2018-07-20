@@ -2,7 +2,7 @@
     "compilerOptions": {  
         "target": "es5",  
         "noImplicitAny": true,  
-        "module": "es6",  
+        "module": "commonjs",  
         "removeComments": true,  
         "sourceMap": false,  
         "watch": true,  

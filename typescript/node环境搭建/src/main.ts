@@ -4,8 +4,8 @@ import { Hello } from "./module";
 Hello("express");
 let app = express();
 
-app.use('/', express.static('www'));
-app.use('/js', express.static('out/web'));
+app.use('/', express.static('dist'));
+// app.use('/js', express.static('out/web'));
 
 app.get("/welcome",(req,res)=>{
     res.send("welcome");

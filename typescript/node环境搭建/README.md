@@ -25,3 +25,13 @@ Ctrl+Shift+B
 npm install -g ts-node
 ts-node ./src/main.ts
 </code></pre>
+
+### 运行js目标代码
+```
+node ./out/main.js
+```
+
+### 启动webpack打包
+```
+npm run watch
+```
