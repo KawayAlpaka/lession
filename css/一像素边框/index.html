@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一像素边框</title>
+  <link rel="stylesheet" href="css/border.css">
+  <style>
+    .box{
+      width: 100px;
+      height: 50px;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .box::before,
+    .box::after{
+      border-color: black;
+      border-radius: 50px;
+    }
+    .normal-border{
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      border-radius: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box normal-border">normal-border</div>
+  <div class="box border">border</div>
+  <div class="box border-top">border-top</div>
+  <div class="box border-right">border-right</div>
+  <div class="box border-bottom">border-bottom</div>
+  <div class="box border-left">border-left</div>
+  <div class="box border-topbottom">border-topbottom</div>
+  <div class="box border-topleft">border-topleft</div>
+  <div class="box border-topright">border-topright</div>
+</body>
+</html>
