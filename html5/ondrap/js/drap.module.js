@@ -2,49 +2,47 @@
   var myDrap = angular.module("myDrap",[],function(){
     console.log("myDrap");
   });
-  myDrap.directive('ngDrap', [function () {
+  myDrap.directive('ngDrap', ["$parse",function ($parse) {
     return {
         restrict: 'A',
-        scope: {
-          ngDrap:'&',
-        },
-        link: function (s, element, attrs) {
-          element[0].addEventListener("dragstart",function(event){
-  
-            s.ngDrap();
-          });
+        compile: function($element, attr) {
+          var fn = $parse(attr["ngDrap"]);
+          return function ngEventHandler(scope, element) {
+            var ele = element[0];
+            element.on('dragstart', function(event) {
+              if(event.target == ele && !isParent(event.relatedTarget,ele) ){
+                var callback = function() {
+                  fn(scope, {
+                    $event: event
+                  });
+                };
+                scope.$apply(callback);
+              }
+            });
+          };
         }
     };
   }]);
   // ng已经自带ngDragend指令
-  // maApp.directive('ngDragend', [function () {
-  //     return {
-  //         restrict: 'A',
-  //         scope: {
-  //           ngDrop:'&'
-  //         },
-  //         link: function (s, element, attrs) {
-  //           element[0].addEventListener("dragend", function(event) {
-  //             s.ngDragend();
-  //           });
-  //         }
-  //     };
-  // }]);
-  myDrap.directive('ngDrop', [function () {
+  myDrap.directive('ngDrop', ["$parse",function ($parse) {
     return {
         restrict: 'A',
-        scope: {
-          ngDrop:'&'
-        },
-        link: function (s, element, attrs) {
-          element[0].addEventListener("drop", function(event) {
-            s.ngDrop();
-            event.preventDefault();
-            s.$apply();
-          });
-          element[0].addEventListener("dragover", function(event) {
-            event.preventDefault();
-          });
+        compile: function($element, attr) {
+          var fn = $parse(attr["ngDrop"]);
+          return function ngEventHandler(scope, element) {
+            var ele = element[0];
+            element.on('drop', function(event) {
+              var callback = function() {
+                fn(scope, {
+                  $event: event
+                });
+              };
+              scope.$apply(callback);
+            });
+            element.on('dragover', function(event) {
+              event.preventDefault();
+            });
+          };
         }
     };
   }]);
