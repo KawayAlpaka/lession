@@ -9,16 +9,22 @@
         (function(){
             // try...catch 方案不好用,就不写了
             // window错误捕获 可以捕获js错误和资源加载错误
-            window.addEventListener("error",function(event){
+            var errorHandle = function(event){
                 if(event.type == "error"){
                     //上报错误
+                    event.preventDefault();
+                    event.stopPropagation();
                     if(event.error){//js错误
-                        new Image().src = "/getError?message="+event.error.message + "&stack="+event.error.stack;
+                        console.log(event.error.message);
+                        // new Image().src = "/getError?message="+event.error.message + "&stack="+event.error.stack;
                     }else if(event.target.src){ //资源加载错误
-                        new Image().src = "/getError?src="+event.target.src;
+                        console.log(event.target.src,"加载失败");
+                        // new Image().src = "/getError?src="+event.target.src;
                     }
                 }
-            },true);
+            };
+            // window.addEventListener("error",errorHandle,false);
+            window.addEventListener("error",errorHandle,true);
         })(); 
 
     </script>
@@ -28,8 +34,15 @@
         (function(){
             // Uncaught ReferenceError: a is not defined
             console.log(a);
+        })(); 
+    </script>
+    <script>
+        (function(){
+            // Uncaught ReferenceError: b is not defined
+			setTimeout(function(){
+				console.log(b);
+			},100);
         })();
-        
     </script>
     <img src="http://www.baidu.com/none-aa.jpg" />
     <img src="https://www.baidu.com/img/bd_logo1.png?where=super" />
