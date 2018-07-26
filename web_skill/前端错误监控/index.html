@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>前端错误监控</title>
+    <!-- <script>
+        // 系统错误的抛出不是用console.error，所以不能这样捕获。
+        (function(){
+            var error = console.error;
+            console.error = function(){
+                console.log(arguments);
+            };
+        })();
+    </script> -->
     <script>
         (function(){
             // try...catch 方案不好用,就不写了
@@ -26,7 +35,6 @@
             // window.addEventListener("error",errorHandle,false);
             window.addEventListener("error",errorHandle,true);
         })(); 
-
     </script>
 </head>
 <body>
@@ -46,6 +54,8 @@
     </script>
     <img src="http://www.baidu.com/none-aa.jpg" />
     <img src="https://www.baidu.com/img/bd_logo1.png?where=super" />
+    <!-- background-image的资源加载错误还没找到办法捕获 -->
+    <div style="background-image: url('http://www.hahahehe.com/none-bb.jpg')"></div>
     <script>
         (function(){
             //performance方案 不好用
