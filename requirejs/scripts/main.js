@@ -1,7 +1,8 @@
 require.config({
     baseUrl: "scripts",
     paths: {
-        'jquery': 'lib/jquery.min'
+        'jquery': 'lib/jquery.min',
+        "underscore": "https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min"
     },
     map: {
         // '*' means all modules will get 'jquery-private'
@@ -30,6 +31,9 @@ require.config({
 
     require(['jquery'], function( ) {
         console.log( $ ); // UNDEFINED!
+    });
+    require(['hello','underscore'], function( ) {
+        console.log(_);
     });
 })();
 
