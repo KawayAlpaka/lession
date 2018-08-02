@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>clipboard.js</title>
+  <script src="https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.js"></script>
+</head>
+<body>
+  <div>
+    <!-- Target -->
+    <input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
+    <!-- Trigger -->
+    <button class="btn" data-clipboard-target="#foo">
+        <img alt="Copy to clipboard">
+    </button>
+  </div>
+  <div>
+    <!-- Target -->
+    <textarea id="bar">Mussum ipsum cacilds...</textarea>
+    <!-- Trigger -->
+    <button class="btn" data-clipboard-action="cut" data-clipboard-target="#bar">
+        Cut to clipboard
+    </button>
+  </div>
+  <div>
+    <!-- Trigger -->
+    <button class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+        Copy to clipboard
+    </button>
+  </div>
+  <div>
+    
+  </div>
+  <script>
+    var clipboard = new ClipboardJS('.btn',{
+        // container: document.getElementById('modal'),
+        // target: function(trigger) {
+        //   // return trigger.nextElementSibling;
+        //   return trigger;
+        // },
+        text: function(trigger) {
+          // // 可以重写复制的值
+          // return trigger.getAttribute('aria-label');
+          // return "text";
+        }
+    });
+
+    clipboard.on('success', function(e) {
+      console.info('e:', e);
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+
+      e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
+  </script>
+</body>
+</html>
