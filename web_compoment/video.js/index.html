@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>video.js</title>
+  <script src="http://cdn.bootcss.com/es5-shim/4.5.10/es5-shim.js"></script>
+  <script src="http://cdn.bootcss.com/es5-shim/4.5.10/es5-sham.js"></script>
+  
+  <link rel="stylesheet" href="./node_modules/video.js/dist/video-js.min.css">
+  <script src="./node_modules/video.js/dist/video.js"></script>
+  <!-- <script src="//cdn.bootcss.com/video.js/5.20.5/video.min.js"></script> -->
+
+
+  <!-- 以下不能兼容ie8 -->
+  <!-- <link href="https://cdn.bootcss.com/video.js/7.0.3/video-js.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/video.js/7.0.3/video.js"></script> -->
+  <!-- <script src="./node_modules/videojs-ie8/dist/videojs-ie8.js"></script> -->
+  <!-- <script src="//cdn.bootcss.com/video.js/6.6.1/video.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/video.js/6.0.0/video.min.js"></script> -->
+
+  <!-- <script>
+    // videojs.options.flash.swf = './video-js.swf';
+  </script> -->
+</head>
+<body>
+    <video
+      id="my-player"
+      class="video-js"
+      controls
+      preload="auto"
+      poster="http://vjs.zencdn.net/v/oceans.png"
+      data-setup='{"techOrder": ["flash", "html5"]}'>
+    <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
+    <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
+    <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">
+        supports HTML5 video
+      </a>
+    </p>
+  </video>
+  <!-- <script>
+    var player = videojs('my-player');
+  </script> -->
+</body>
+</html>

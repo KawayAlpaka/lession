@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>剪切板</title>
+  <style>
+    textarea{
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="textarea1"></textarea>
+  <div>
+    <p>beforecopy：在发生复制操作前触发;</p>
+    <p>copy：在发生复制操作的时候触发;</p>
+    <p>beforecut：在发生剪切操作前触发;</p>
+    <p>cut：在发生剪切操作的时候触发;</p>
+    <p>beforepaste：在发生粘贴操作前触发;</p>
+    <p>paste：在发生粘贴操作的时候触发。</p>
+  </div>
+  <div>除了beforepaste事件，其他事件都可以触发，但没能从事件中取到值和设置值</div>
+  <div class="img-container">
+
+  </div>
+  <script>
+    var t = document.getElementById("textarea1");
+
+    t.addEventListener("beforecopy",function(event){
+      console.log("beforecopy");
+      window.teE = event;
+      console.log(event);
+      console.log(event.clipboardData.getData("text"));
+      });
+    t.addEventListener("copy",function(event){
+      console.log("copy");
+      console.log(event);
+      console.log(event.clipboardData.getData("text"));
+      });
+    t.addEventListener("beforecut",function(event){
+      console.log("beforecut");
+      console.log(event);
+      });
+    t.addEventListener("cut",function(event){
+      console.log("cut");
+      console.log(event);
+      });
+    t.addEventListener("beforepaste",function(event){
+      console.log("beforepaste");
+      console.log(event);
+      });
+    t.addEventListener("paste",function(event){
+      console.log("paste");
+      console.log(event.clipboardData.files);
+      var files = event.clipboardData.files;
+      // files 不是数组，不能用forEach
+      for(var i=0;i<files.length;i++){
+        var url = getObjectURL(files[i]);
+        var img = new Image();
+        img.src = url;
+        img.onload = function(){
+          document.querySelector(".img-container").appendChild(img);
+        };
+      }
+
+
+    });
+    
+    function getObjectURL(file) {
+      var url = null ;
+      if (window.createObjectURL!=undefined) { // basic
+          url = window.createObjectURL(file) ;
+      } else if (window.URL!=undefined) { // mozilla(firefox)
+          url = window.URL.createObjectURL(file) ;
+      } else if (window.webkitURL!=undefined) { // webkit or chrome
+          url = window.webkitURL.createObjectURL(file) ;
+      }
+      return url ;
+    }
+  </script>
+</body>
+</html>
