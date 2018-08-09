@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>contenteditable</title>
+  <style>
+    html,body{
+      font-size: 0;
+      margin: 0;
+    }
+    .actions{
+      font-size: 16px;
+    }
+    .contenteditable{
+      display: inline-block;
+      border:#f2f2f2 solid 1px;
+      width: 200px;
+      height: 30px;
+      font-size: 14px;
+      outline: none
+    }
+    .contenteditable.focus{
+      border: yellowgreen solid 1px;
+    }
+    .contenteditable.bold{
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="actions">
+    <button type="button" class="btn-bold">加粗</button>
+  </div>
+  <script>
+    document.querySelector(".btn-bold").addEventListener("click",function(){
+      var focusEle = document.querySelector(".contenteditable.focus");
+      if(focusEle.classList.contains("bold")){
+        focusEle.classList.remove("bold");
+      }else{
+        focusEle.classList.add("bold");
+      }
+     });
+  </script>
+  <div class="contenteditable" contenteditable="true"></div>
+  <div class="contenteditable" contenteditable="true"></div>
+  <script>
+    var contenteditables = document.querySelectorAll(".contenteditable");
+    contenteditables.forEach((contenteditable)=>{
+      contenteditable.addEventListener("click",function(e){
+        console.log("click");
+        contenteditables.forEach(ele=>{
+          ele.classList.remove("focus");
+        });
+        e.target.classList.add("focus");
+      });
+      contenteditable.addEventListener("dblclick",function(){
+        console.log("dblclick");
+      });
+      contenteditable.addEventListener("input",function(e){
+        console.log("input");
+        console.log(e.data);
+      });
+      // 没有change事件
+      contenteditable.addEventListener("change",function(e){
+        console.log("change");
+      });
+      contenteditable.addEventListener("blur",function(e){
+        console.log("blur");
+        console.log(e.target.innerHTML);
+      });
+    });
+  </script>
+</body>
+</html>
