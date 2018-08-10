@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100" height="100" version="1.1"
+xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 4
+    C50 2 70 8 95 6
+    C97 30 84 60 89 90
+    C77 86 44 96 12 90
+    C7 88 2 44 0 4"
+    style="fill:black;stroke:red;stroke-width:0"/>
+    <path d="M3 6
+    C50 6 70 12 91 9
+    C92 30 84 60 81 85
+    C72 86 41 96 18 85
+    C9 88 5 44 3 6"
+    style="fill:yellowgreen;stroke:red;stroke-width:0"/>
+</svg>
