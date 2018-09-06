@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vibrate</title>
+</head>
+<body>
+  <div>
+      <button onclick="runVibrate()" style="font-size:40px">vibrate</button>
+  </div>
+  <div>
+    只有部分android浏览器支持
+  </div>
+  <script>
+    var vibrate = navigator.vibrate
+    || navigator.webkitVibrate
+    || navigator.mozVibrate
+    || navigator.msVibrate;
+  
+    var runVibrate = function(){
+      if (vibrate) {
+        vibrate(1000);
+      }else{
+        console.log("no vibrate");
+      }
+    };
+  </script>
+  <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+  <script>
+    // init vConsole
+    var vConsole = new VConsole();
+    console.log('Hello world');
+  </script>
+</body>
+</html>
