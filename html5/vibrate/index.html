@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>vibrate</title>
+  <title>vibrate、devicelight、DeviceOrientationEvent</title>
 </head>
 <body>
   <div>
       <button onclick="runVibrate()" style="font-size:40px">vibrate</button>
   </div>
   <div>
-    只有部分android浏览器支持
+      <p>### 只有少部分android浏览器支持 vibrate 和 devicelight</p>
   </div>
+  <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+  <script>
+    // init vConsole
+    var vConsole = new VConsole();
+    console.log('Hello world');
+  </script>
   <script>
     var vibrate = navigator.vibrate
     || navigator.webkitVibrate
@@ -26,12 +32,37 @@
         console.log("no vibrate");
       }
     };
+    
+
+    window.addEventListener('devicelight', function(event) {
+      console.log(event.value + 'lux');
+    });
+
+
+    if (window.DeviceOrientationEvent) {
+      // 支持
+      var f = true;
+      setInterval(function(){
+        f = true;
+      },3000);
+      function callback(event){
+        if(f){
+          //通俗理解
+          //alpha水平角度
+          //beta直屏倾斜角
+          //gamma横屏倾斜角
+          var s1 = "absolute=${event.absolute},";
+          var s2 = `alpha=${event.alpha.toFixed(3)},beta=${event.beta.toFixed(3)},gamma=${event.gamma.toFixed(3)}`;
+          console.log(s2);
+          f = false;
+        }
+      }
+      window.addEventListener("deviceorientation", callback);
+    } else {
+      console.log("不支持 DeviceOrientationEvent");
+    }
+
   </script>
-  <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
-  <script>
-    // init vConsole
-    var vConsole = new VConsole();
-    console.log('Hello world');
-  </script>
+
 </body>
 </html>

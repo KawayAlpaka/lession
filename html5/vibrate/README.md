@@ -1,0 +1,1 @@
+### 只有少部分android浏览器支持 vibrate 和 devicelight
