@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>self</title>
+</head>
+<body>
+  <iframe src="frame.html" frameborder="0"></iframe>
+  <script src="js/main.js"></script>
+  <script>
+    navigator.serviceWorker.register('js/sw-test.js');
+  </script>
+</body>
+</html>
