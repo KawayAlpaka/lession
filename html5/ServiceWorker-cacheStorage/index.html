@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Service Worker和cacheStorage</title>
+</head>
+<body>
+  <div>参考资料：https://www.zhangxinxu.com/wordpress/2017/07/service-worker-cachestorage-offline-develop/</div>
+  <h3>一些提示信息5555</h3>
+  <ul>
+      <li>浏览器是否支持：<span id="isSupport"></span></li>
+      <li>service worker是否注册成功：<span id="isSuccess"></span></li>
+      <li>当前注册状态：<span id="state"></span></li>
+      <li>当前service worker状态：<span id="swState"></span></li>
+  </ul>
+  <script src="./static/jquery.min.js"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+      $('#isSupport').text('支持');
+
+      // 开始注册service workers
+      navigator.serviceWorker.register('./sw-demo-cache.js?v=1', {
+          scope: './'
+      }).then(function (registration) {
+          $('#isSuccess').text('注册成功');
+
+          var serviceWorker;
+          if (registration.installing) {
+              serviceWorker = registration.installing;
+              $('#state').text('installing');
+          } else if (registration.waiting) {
+              serviceWorker = registration.waiting;
+              $('#state').text('waiting');
+          } else if (registration.active) {
+              serviceWorker = registration.active;
+              $('#state').text('active');
+          }
+          if (serviceWorker) {
+              $('#swState').text(serviceWorker.state);
+              serviceWorker.addEventListener('statechange', function (e) {
+                  $('#swState').append('&emsp;状态变化为' + e.target.state);
+              });
+          }
+      }).catch (function (error) {
+          $('#isSuccess').text('注册没有成功');
+      });
+  } else {
+      $('#isSupport').text('不支持');
+  }
+  </script>
+</body>
+</html>
