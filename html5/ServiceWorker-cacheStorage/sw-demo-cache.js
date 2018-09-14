@@ -31,24 +31,36 @@ self.addEventListener('activate', function(event) {
 
 // 捕获请求并返回缓存数据
 self.addEventListener('fetch', function(event) {
-  var p1 = caches.match(event.request);
-  event.respondWith(p1.catch(function() {
-    return fetch(event.request);
-  }).then(function(response) {
-    caches.open(VERSION).then(function(cache) {
-      cache.put(event.request, response);
-    });
-    return response.clone();
-  }).catch(function() {
-    return caches.match('./static/mm1.jpg');
-  }));
-  // 就算从caches获取成功，也要更新caches
-  p1.then(function(){
-    caches.open(VERSION).then(function(cache) {
-      fetch(event.request)
-        .then(function(response){
-          cache.put(event.request, response);
-        },function(){});
-    });
-  });
+  // var p1 = caches.match(event.request);
+  // event.respondWith(p1.catch(function() {
+  //   return fetch(event.request);
+  // }).then(function(response) {
+  //   caches.open(VERSION).then(function(cache) {
+  //     cache.put(event.request, response);
+  //   });
+  //   return response.clone();
+  // }).catch(function() {
+  //   return caches.match('./static/mm1.jpg');
+  // }));
+  // // 就算从caches获取成功，也要更新caches
+  // p1.then(function(){
+  //   caches.open(VERSION).then(function(cache) {
+  //     fetch(event.request)
+  //       .then(function(response){
+  //         cache.put(event.request, response);
+  //       },function(){});
+  //   });
+  // });
+  event.respondWith(fetch(event.request)
+    .then(function(response){
+      caches.open(VERSION).then(function(cache) {
+        cache.put(event.request, response);
+      });
+      return response.clone();
+    },function(){
+      return caches.open(VERSION).then(function(cache) {
+        return cache.match(event.request);
+      });
+    })
+  );
 });
