@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AssemblyScript</title>
+</head>
+<body>
+  <script>
+    fetch('f.wasm') // 网络加载 f.wasm 文件
+      .then(res => res.arrayBuffer()) // 转成 ArrayBuffer
+      .then( (bytes) => {
+        return WebAssembly.instantiate(bytes,{
+          window:{
+            alert:window.alert,
+            prompt:window.prompt
+          },
+          console:{
+            log:console.log
+          }
+        });
+      }) // 编译为当前 CPU 架构的机器码 + 实例化
+      .then(mod => { // 调用模块实例上的 f 函数计算
+        console.log(mod);
+        console.log(mod.instance.exports.f(6));
+      });
+  </script>
+</body>
+</html>
