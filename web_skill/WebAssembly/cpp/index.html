@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Emscripten</title>
+  <script src="index.js"></script>
+
+</head>
+<body>
+  <button class="dice1">dice1</button>
+  <button class="dice2">dice2</button>
+  <script>
+    // 当HTML dice元素被点击时，其值将会被改变
+    var dice1 = document.querySelector('.dice1');
+    var dice2 = document.querySelector('.dice2');
+    dice1.addEventListener('click', function(){
+      // 调用C代码中的roll_dice函数
+      var result = _roll_dice();
+      console.log(result);
+    });
+    dice2.addEventListener('click', function(){
+      // 除函数名以外的所有参数都是可选的
+      var result = Module._roll_dice();
+      console.log(result);
+    });
+ </script>
+</body>
+</html>
