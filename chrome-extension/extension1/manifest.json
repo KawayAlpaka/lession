@@ -26,5 +26,6 @@
 		"default_icon": "img/chrome.png",
 		"default_title": "这是一个示例Chrome插件",
 		"default_popup": "html/popup.html"
-	}
+  },
+  "homepage_url": "https://www.baidu.com"
 }
