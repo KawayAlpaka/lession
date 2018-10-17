@@ -16,5 +16,15 @@
 			"css": ["css/custom.css"],
 			"run_at": "document_start"
 		}
-	]
+  ],
+  "background":
+	{
+		"page": "html/background.html"
+  },
+  "browser_action": 
+	{
+		"default_icon": "img/chrome.png",
+		"default_title": "这是一个示例Chrome插件",
+		"default_popup": "html/popup.html"
+	}
 }
