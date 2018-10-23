@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>table</title>
+</head>
+<body>
+  <div>
+    <h4>table-layout</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="tableLayout" checked value="automatic"><span>automatic</span></label>
+      <label class="radio-group"><input type="radio" name="tableLayout" value="fixed"><span>fixed</span></label>
+      <label class="radio-group"><input type="radio" name="tableLayout" value="inherit"><span>inherit</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>border-collapse</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="borderCollapse" checked value="separate"><span>separate</span></label>
+      <label class="radio-group"><input type="radio" name="borderCollapse" value="collapse"><span>collapse</span></label>
+      <label class="radio-group"><input type="radio" name="borderCollapse" value="inherit"><span>inherit</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>border-spacing</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="borderSpacing" checked value="inherit"><span>inherit</span></label>
+      <label class="radio-group"><input type="radio" name="borderSpacing" value="10px 20px"><span>10px 20px</span></label>
+      <label class="radio-group"><input type="radio" name="borderSpacing" value="0 5px"><span>0 5px</span></label>
+      <label class="radio-group"><input type="radio" name="borderSpacing" value="5px"><span>5px</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>caption-side</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="captionSide" checked value="top"><span>top</span></label>
+      <label class="radio-group"><input type="radio" name="captionSide" value="bottom"><span>bottom</span></label>
+      <label class="radio-group"><input type="radio" name="captionSide" value="inherit"><span>inherit</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>empty-cells</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="emptyCells" checked value="show"><span>show</span></label>
+      <label class="radio-group"><input type="radio" name="emptyCells" value="hide"><span>hide</span></label>
+      <label class="radio-group"><input type="radio" name="emptyCells" value="inherit"><span>inherit</span></label>
+    </div>
+  </div>
+  <hr>
+  <table id="table">
+    <caption>This is a caption</caption>
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>小明</td>
+        <td>男</td>
+        <td>一年级</td>
+      </tr>
+      <tr>
+        <td>小红</td>
+        <td>女</td>
+        <td>二年级</td>
+      </tr>
+      <tr>
+        <td>李雷</td>
+        <td>男</td>
+        <td>初中一年级</td>
+      </tr>
+      <tr>
+        <td>韩梅梅</td>
+        <td>女</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <style>
+    table{
+      width: 100%;
+    }
+    table td,th{
+      border: 1px solid black;
+    }
+  </style>
+  <script>
+    window.addEventListener("load",function(){
+      console.log("load");
+      var table = document.querySelector("#table");
+      var inputs = document.querySelectorAll(".radio-group input");
+      inputs.forEach(function(input){
+        input.addEventListener("click",function(){
+          table.style[this.name] = this.value;
+        },false);
+      });
+    });
+  </script>
+</body>
+</html>
