@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flex</title>
+  <style>
+    .box{
+      display: flex;
+      padding: 20px;
+      background-color: yellowgreen;
+    }
+    .item{
+      min-width: 100px;
+      min-height: 100px;
+      background-color: brown;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>容器样式</h2>
+  <div>
+    <h4>flex-direction</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="flexDirection" checked value="row"><span>row</span></label>
+      <label class="radio-group"><input type="radio" name="flexDirection" value="row-reverse"><span>row-reverse</span></label>
+      <label class="radio-group"><input type="radio" name="flexDirection" value="column"><span>column</span></label>
+      <label class="radio-group"><input type="radio" name="flexDirection" value="column-reverse"><span>column-reverse</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>flex-wrap</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="flexWrap" checked value="nowrap"><span>nowrap</span></label>
+      <label class="radio-group"><input type="radio" name="flexWrap" value="wrap"><span>wrap</span></label>
+      <label class="radio-group"><input type="radio" name="flexWrap" value="wrap-reverse"><span>wrap-reverse</span></label>
+    </div>
+  </div>
+  <!-- <div>
+    <h4>flex-flow(flex-direction和flex-wrap的简写)</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="flexFlow" checked value="row nowrap"><span>row nowrap</span></label>
+      <label class="radio-group"><input type="radio" name="flexFlow" value="column wrap"><span>column wrap</span></label>
+    </div>
+  </div> -->
+  <div>
+    <h4>justify-content</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="justifyContent" checked value="flex-start"><span>flex-start</span></label>
+      <label class="radio-group"><input type="radio" name="justifyContent" value="flex-end"><span>flex-end</span></label>
+      <label class="radio-group"><input type="radio" name="justifyContent" value="center"><span>center</span></label>
+      <label class="radio-group"><input type="radio" name="justifyContent" value="space-between"><span>space-between</span></label>
+      <label class="radio-group"><input type="radio" name="justifyContent" value="space-around"><span>space-around</span></label>
+    </div>
+  </div>
+  <hr>
+  <div id="box" class="box">
+    <div class="item">0</div>
+  </div>
+  <script>
+    window.addEventListener("load",function(){
+      console.log("load");
+      var box = document.querySelector("#box");
+      var template = document.querySelector(".item");
+      for(let index = 1;index<10;index++){
+        var node = template.cloneNode("div");
+        node.innerHTML = index;
+        box.appendChild(node);
+      }
+      var inputs = document.querySelectorAll(".radio-group input");
+      inputs.forEach(function(input){
+        input.addEventListener("click",function(){
+          box.style[this.name] = this.value;
+        },false);
+      });
+    });
+  </script>
+</body>
+</html>
