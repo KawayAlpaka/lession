@@ -61,7 +61,9 @@
     } else {
       console.log("不支持 DeviceOrientationEvent");
     }
-
+    window.addEventListener('orientationchange',function () {
+      console.log(window.orientation); //横屏=90；竖屏=0
+    },false);
   </script>
 
 </body>
