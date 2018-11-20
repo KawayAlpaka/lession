@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS,可注入的情况</title>
+</head>
+<body>
+  <div><a href="javascript:alert('a href');">a标签链接</a></div>
+  <div><div onclick="alert('onclick');">onclick</div></div>
+  <!-- <div><img src="x" onerror="alert('img onerror');" alt=""></div> -->
+  <!-- background-image 不会触发onerror -->
+  <!-- <div><div style="background-image:url('y')" onerror="alert('background-image onerror');" alt="">background-image onerror</div></div> -->
+  <script>
+    console.log('script');
+  </script>
+</body>
+</html>
