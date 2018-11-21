@@ -1,1 +1,2 @@
-import './generics';
+// import './generics';
+import './decorators';
