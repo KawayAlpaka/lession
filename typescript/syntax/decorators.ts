@@ -44,10 +44,19 @@ function after(after: Function) {
     }
   }
 }
+
+function property(options?:any) {
+  return function (Class:any, key:any) {
+    console.log('property');
+    // console.log(arguments);
+  }
+};
+
 @before(function() {
   console.log('before');
 })
 class Person {
+  @property()
   public _name: string = 'xiaoming';
   public static myType () {
     let type = 'Person';
