@@ -1,3 +1,6 @@
 body {
   background-color: #3ddc3952!important;
 }
+* {
+  user-select: text!important;
+}
