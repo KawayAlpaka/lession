@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>server-response</title>
+</head>
+<body>
+  <a href="/file/fromRes" target="_blank">下载</a>
+  <button type="button" onclick="download()">下载</button>
+  <script>
+    var download = function () {
+      var name = 'name';
+      window.open("/file/fromRes?name=",name);
+    }
+  </script>
+</body>
+</html>
