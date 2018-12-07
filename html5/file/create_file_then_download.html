@@ -8,13 +8,18 @@
 <div onclick="download()">download</div>
 <script>
     function download() {
-        var file  = new File([123124],"bb.doc");
+        var file  = new File([123124,',你好'],"bb.csv");
         var dataUrl = URL.createObjectURL(file);
         var a = document.createElement('a');
         a.href = dataUrl;
         a.download = file.name;
         a.click();
     }
+    // var data = "hello 你好";
+    // var utf = new TextEncoder();
+    // console.log(utf.encode(data));
+    // var gbk = new TextEncoder("gbk");
+    // console.log(gbk.encode(data));
 </script>
 </body>
 </html>
