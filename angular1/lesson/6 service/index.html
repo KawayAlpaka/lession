@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>service</title>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.32/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller("controller", function ($scope) {
+            $scope.a = 1;
+            $scope.b = 2;
+            $scope.myClick = function (n) {
+                console.log(n);
+                $scope.c = n;
+            }
+        });
+        // $parse 示例
+        app.directive('myClick', function ($parse) {
+            return {
+                restrict: 'A',
+                // // compile 写法
+                // compile: function ($element, attr) {
+                //     var fn = $parse(attr["myClick"]);
+                //     return function ngEventHandler(scope, element) {
+                //         element.on('click', function (event) {
+                //             var callback = function () {
+                //                 fn(scope, {
+                //                     $event: event
+                //                 });
+                //             };
+                //             scope.$apply(callback);
+                //         });
+                //     };
+                // }
+                // // link写法
+                link: function (s, element, attrs) {
+                    var fn = $parse(attrs.myClick);
+                    element[0].addEventListener("click",function(event){
+                        var callback = function () {
+                            fn(s, {
+                                $event: event
+                            });
+                        }
+                        s.$apply(callback);
+                    });
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div ng-controller="controller">
+        <div my-click="myClick(a+b)">myClick</div>
+        <div>
+            <div>a:{{a}}</div>
+            <div>b:{{b}}</div>
+            <div>c:{{c}}</div>
+        </div>
+    </div>
+</body>
+
+</html>
