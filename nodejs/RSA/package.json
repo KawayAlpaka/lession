@@ -1,0 +1,14 @@
+{
+  "name": "rsa",
+  "version": "1.0.0",
+  "description": "生成RSA私钥(无加密)\r <pre><code>\r openssl genrsa -out keys/rsa_private.key 2048\r </code></pre>\r 生成RSA公钥\r <pre><code>\r openssl rsa -in keys/rsa_private.key -pubout -out keys/rsa_public.key\r </code></pre>",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elliptic": "^6.4.1"
+  }
+}
