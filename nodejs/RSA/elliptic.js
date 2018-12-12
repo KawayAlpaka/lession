@@ -20,3 +20,5 @@ let pubKey = ec.keyFromPublic(res.pub,'hex');
 let signature = prvKey.sign(data);
 let derSign = signature.toDER();
 console.log(pubKey.verify(data, derSign));
+
+module.exports = res;

@@ -1,13 +1,17 @@
 const fs = require("fs");
 const crypto = require('crypto');
 const keys = require("./key");
+const res = require("./elliptic");
 
 var msg = "hello RSA";
 
 // var publicKey = keys.pubKey;
 // var privateKey = keys.privKey;
+// var publicKey = res.pub;
+// var privateKey = res.prv;
 var publicKey = fs.readFileSync("keys/rsa_public.key").toString();
 var privateKey = fs.readFileSync("keys/rsa_private.key").toString();
+
 
 
 console.log("公钥加密，私钥解密:");
