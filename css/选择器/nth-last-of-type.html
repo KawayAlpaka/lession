@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>nth-last-of-type</title>
+</head>
+
+<body>
+  <div>
+    要被:nth-last-of-type(n)选中，需要同时满足条件:
+    1、要被前面的 .test1选中;
+    2、要是同名元素中的倒数第n个
+  </div>
+  <div>
+    总结:  :nth-last-of-type(n) 选中的是 在同一个父元素中,具有相同元素名的倒数第n个元素
+  </div>
+  <style>
+    .test{
+      height: 30px;
+      background-color: red;
+    }
+    .test-1:nth-last-of-type(1) {
+      background-color: green;
+    }
+    .test-1:nth-last-of-type(2) {
+      background-color: green;
+    }
+    .test-1:nth-last-of-type(3) {
+      background-color: green;
+    }
+    .test-1:nth-last-of-type(4) {
+      background-color: green;
+    }
+    .test-g >:nth-last-of-type(2){
+      background-color: blue;
+    }
+  </style>
+  <div>
+    <div class="test-g">
+      <div>前面的div</div>
+      <p class="test test-1">0</p>
+      <p class="test test-1">1</p>
+      <p class="test test-1">2</p>
+      <p>3</p>
+      <p class="test test-1">4</p>
+      <div class="test test-1">5</div>
+      <div>后面的div</div>
+    </div>
+  </div>
+</body>
+
+</html>
