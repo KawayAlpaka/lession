@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ripple</title>
+  <style>
+    .warp{
+      position: relative;
+      top: 30px;
+      left: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      resize: both;
+    }
+  </style>
+  <link rel="stylesheet" href="css/ripple.css">
+  <link rel="stylesheet" href="css/my_ripple.css">
+  <script src="./js/my_ripple.js"></script>
+</head>
+<body>
+  <div class="warp">
+    <h4>ripple (来源网络)</h4>
+    <div class="container text-center">
+      <button class="btn btn-default ripple btn-lg">Button</button>
+      <button class="btn btn-default ripple btn-lg">Button with very long content</button>
+    </div>
+    <h4>myRipple</h4>
+    <div>
+      <button class="haha">Button</button>
+      <button class="haha">Button with very long content</button>
+    </div>
+  </div>
+
+  <script>
+    myRipple(document.querySelectorAll(".haha"));
+  </script>
+</body>
+</html>

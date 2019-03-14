@@ -1,0 +1,17 @@
+.ripple-element{
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background-color: #666;
+  transition: width 0.5s,height 0.5s, filter .5s;
+  filter: opacity(0);
+  transform: translate(-50%,-50%);
+}
+
+.my-ripple:active .ripple-element{
+  width: 0 !important;
+  height: 0 !important;
+  transform: translate(-50%,-50%);
+  filter: opacity(0.5);
+  transition: width 0s,height 0s,filter 0s;
+}
