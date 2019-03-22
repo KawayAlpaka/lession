@@ -59,3 +59,6 @@ class Vector:
   def normalize(self):
     """单位向量"""
     return Vector(self._values) / self.norm()
+
+  def underlying_list(self):
+    return self._values[:]
