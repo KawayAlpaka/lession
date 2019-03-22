@@ -6,7 +6,9 @@
 </head>
 <body>
 <div>
-    <input style="width: 40%" type="text" id="urlInput" value="temp/file" >
+    <!-- <input style="width: 40%" type="text" id="urlInput" value="temp/file" > -->
+    <!-- <input style="width: 40%" type="text" id="urlInput" value="http://192.168.0.39:6540/api/Enterprise/testexcel?ID=14&cname=&ctype=&crange=" > -->
+    <input style="width: 40%" type="text" id="urlInput" value="http://127.0.0.1:8080/api/Enterprise/testexcel?ID=14&cname=&ctype=&crange=" >
     <button onclick="getRemoteFile()">test</button>
 </div>
 <script>
@@ -14,11 +16,20 @@
         //ajax获取远程文件还是要处理跨域
         var xhr = new XMLHttpRequest();
         xhr.open("get",urlInput.value);
-        xhr.responseType = "arraybuffer";
+        // xhr.responseType = "arraybuffer";
+        xhr.responseType = "blob";
         xhr.onload = function () {
-            console.log(xhr.response);
-            var file  = new File([xhr.response],"bb.doc");
+            var file = new File([xhr.response],"file.txt");
             console.log(file);
+
+            // // 通过 Content-Disposition 获取文件名,服务端需要encodeURI
+            // var fileName = decodeURI( xhr.getResponseHeader("Content-Disposition").split(";")[1].split("filename=")[1] );
+            // var file = new File([xhr.response],fileName);
+            // var dataUrl = URL.createObjectURL(file);
+            // var a = document.createElement('a');
+            // a.href = dataUrl;
+            // a.download = file.name;
+            // a.click();
         };
         xhr.send();
     }
