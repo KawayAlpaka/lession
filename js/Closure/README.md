@@ -58,7 +58,7 @@ console.log(window);
 <img src="https://github.com/KawayAlpaka/lession/blob/master/js/Closure/img/example1-2.png?raw=true" >    
 
 发现 `Closure` 中的 `a` 没了， `f` 出现了。   
-### 闭包中只包含方法中会用到的环境变量    
+### 结论：闭包中只包含方法中会用到的环境变量    
 javascript在用`function`创建方法时(`Function`则不同，暂时不讨论)，并不是无脑的把环境变量一口闷入`Closure`中，而是预先进行解析，然后将方法中用到的环境变量，加入到 `Closure` 中。不错，节约内存空间。    
 PS:在特殊情况下，javascript无法预测方法内部使用了什么环境变量的情况下(如使用evel函数时)，`Closure`中就会包含所有环境变量，来保证闭包机制不受影响。
 
