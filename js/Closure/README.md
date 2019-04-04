@@ -3,13 +3,13 @@
 ```
 闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）    ---百度百科
 ```    
-通过百度的描述，可以得到结论：
+通过百度的描述，可以得到通俗的结论：
 ```
 1、闭包中不包含全局变量;                           // 以下称为 全局变量
 2、闭包中不包含本代码块中定义的变量;                // 以下称为 内部变量
 3、闭包包含的是本代码块所在的环境中定义的局部变量;   // 以下称为 环境变量
 ```
-#### javascript例子1:   
+### javascript例子1:   
 ```javascript
 var G = "G";              // G 全局变量
 var F = (function(){
@@ -33,7 +33,7 @@ console.log(window);
 图中的 Closure 就是闭包对象,它里面包含 a属性,值为 "a",这就是刚才代码中的外层局部变量 a.    
 验证了上面的结论1和2：闭包中不包含全局变量(G、F)和内部变量(b、c).奇怪的是环境变量 f 却没有在闭包对象中.
 
-#### javascript例子2:   
+### javascript例子2:   
 
 对例子1进行修改：注释 console.log("a:",a); 添加一行  f; 运行后检查 window.F 的内容.  
 
@@ -44,8 +44,8 @@ var F = (function(){
   var f = function(b){          // b 参数(内部变量), f 环境变量
     console.log("G:",G);
     var c = "c";                // c 内部变量
-    <del>console.log("a:",a);</del>     // ★ 删除
-    ~~console.log("b:",b);~~
+    //console.log("a:",a);      // ★ 删除
+    console.log("b:",b);
     console.log("c:",c);
     f;                          // ★ 新增
   }
@@ -57,7 +57,8 @@ console.log(window);
 <img src="https://github.com/KawayAlpaka/lession/blob/master/js/Closure/img/example1-2.png?raw=true" >    
 
 发现 Closure 中的 a 没了, f 出来了.   
-#### 闭包中只包含方法中会用到的环境变量    
+### 闭包中只包含方法中会用到的环境变量    
 javascript在用function创建方法时,并不是无脑的把环境变量一口闷入Closure中,预先进行了解析,然后将方法中用到的环境变量,加入到  Closure 中.不错,解约了内存空间.    
 PS:在特殊情况下,javascript无法预测方法内部使用了什么环境变量的情况下,如使用evel函数时,Closure中就会包含所有环境变量,来保证闭包机制不受影响.
 
+### 原文链接:[github](https://github.com/KawayAlpaka/lession/tree/master/js/Closure)
