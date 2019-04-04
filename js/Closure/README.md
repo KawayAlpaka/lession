@@ -28,7 +28,7 @@ console.log(window);
 以上例子中 G、F 为全局变量; 相对于定义f的代码块, a、f 为 环境变量; b、c 为 内部变量.   
 代码执行完成后, f 被返回赋值给了 全局变量 F，然后在控制台中打印了 全局对象 window, 在开发者工具中检查 window.F 的内容. 
 
-![example1-1][example1-1]   
+![example1-1][https://github.com/KawayAlpaka/lession/blob/master/js/Closure/img/example1-1.png?raw=true]   
 
 图中的 Closure 就是闭包对象,它里面包含 a属性,值为 "a",这就是刚才代码中的外层局部变量 a.    
 验证了上面的结论1和2：闭包中不包含全局变量(G、F)和内部变量(b、c).奇怪的是环境变量 f 却没有在闭包对象中.
@@ -45,7 +45,7 @@ var F = (function(){
     console.log("G:",G);
     var c = "c";                // c 内部变量
     <del>console.log("a:",a);</del>     // ★ 删除
-    console.log("b:",b);
+    ~~console.log("b:",b);~~
     console.log("c:",c);
     f;                          // ★ 新增
   }
@@ -54,7 +54,7 @@ var F = (function(){
 console.log(window);
 ```
 
-![example1-2][example1-2]   
+![example1-2][https://github.com/KawayAlpaka/lession/blob/master/js/Closure/img/example1-2.png?raw=true]   
 
 发现 Closure 中的 a 没了, f 出来了.   
 #### 闭包中只包含方法中会用到的环境变量    
