@@ -7,31 +7,30 @@
   <title>Closure</title>
 </head>
 <body>
-  <div>结论：闭包中只包含定义的function中使用到的局部变量（通过调试工具查看），但使用了evel函数，就会包含全部局部变量</div>
+  <div>结论：闭包中只包含定义的function中使用到的局部变量（通过调试工具查看），但使用了evel函数，就会包含全部外部局部变量</div>
   <script>
-    var G = {name:"G"};
-    var ff = (function(){
-      var a = {name:"a"};
-      // var data = {name:"data",data:(new Array(50000)).fill("data")};
-      var f = function(b){
-        console.log("G=",G);
-        var c = {name:"c"};
-        console.log("a=",a);
-        // eval("console.log('a')");
-        console.log("b=",b);
-        console.log("c=",c);
-        console.log("d=",d);
-        var d = {name:"d"};
-        console.log("d=",d);
-        // eval(`
-        //   var e = {name:"e"};
-        //   console.log(e);
-        // `);
-        // console.log(e);
-      }
-      f(a);
-      return f;
-    })();
+    var G = "G";              // G 全局变量
+    var F =  (function(){
+                var A = "A";
+                var f1 = (function(){
+                  var a = "a";            // a 外层局部变量
+                  var f = function(b){    // b 参数, f 外层局部变量
+                    console.log("G:",G);
+                    var c = "c";          // c 内层局部变量
+                    console.log("a:",a);
+                    console.log("b:",b);
+                    console.log("c:",c);
+                    f;
+                    d;
+                    // eval("");
+                  }
+                  // eval('');
+                  return f;
+                })();
+                // eval('');
+                return f1;
+              })();
+    console.log(window);
   </script>
 </body>
 </html>
