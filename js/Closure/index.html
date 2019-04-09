@@ -9,6 +9,7 @@
 <body>
   <div>结论：闭包中只包含定义的function中使用到的局部变量（通过调试工具查看），但使用了evel函数，就会包含全部外部局部变量</div>
   <script>
+    var ev = eval;
     var G = "G";              // G 全局变量
     var F =  (function(){
                 var A = "A";
@@ -20,10 +21,14 @@
                     console.log("a:",a);
                     console.log("b:",b);
                     console.log("c:",c);
-                    f;
+                    // f;
                     d;
-                    // eval("");
+                    eval("");
+                    // ev("console.log('ev')");
                   }
+                  // var f2 = function(b){
+                  //   f;
+                  // }
                   // eval('');
                   return f;
                 })();
