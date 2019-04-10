@@ -7,12 +7,12 @@
       eval('foo = 3');
       return foo;
   }
-  console.log(test()); // 3
-  console.log(foo); // 1
+  console.log(test());    // 3
+  console.log(foo);       // 1
 })();
-console.log("------------------------------------------");
+console.log("--------------分割线----------------------------");
 // 但是 eval 只在被直接调用并且调用函数就是 eval 本身时，才在当前作用域中执行。
-// 在如下情况下 执行的作用域为全局作用域，两个function中的 foo 都没有被修改，全局的 foo 被修改了
+// 间接调用eval时 执行的作用域为全局作用域，两个function中的 foo 都没有被修改，全局的 foo 被修改了
 var foo = 1;
 (function(){
   var foo = 1;
@@ -22,8 +22,8 @@ var foo = 1;
       bar('foo = 3');
       return foo;
   }
-  console.log(test()); // 2
-  console.log(foo); // 1
+  console.log(test());    // 2
+  console.log(foo);       // 1
 })();
-console.log(foo); // 3
+console.log(foo);         // 3
 

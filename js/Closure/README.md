@@ -64,4 +64,4 @@ javascript引擎在用`function`创建方法时(`Function`则不同，暂时不�
 PS:在特殊情况下，javascript无法预测方法内部使用了什么环境变量的情况下（如使用eval函数时），`Closure`中就会包含所有环境变量（甚至包括`arguments`），来保证闭包机制不受影响。    
 
 
-原文链接:<a href="https://github.com/KawayAlpaka/lession/tree/master/js/Closure" target="_blank">github</a>
+原文链接：<a href="https://github.com/KawayAlpaka/lession/tree/master/js/Closure" target="_blank">github</a>
