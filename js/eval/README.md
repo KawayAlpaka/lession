@@ -9,7 +9,7 @@ eval是js中一个强大的方法。都说`eval == evil`等于`true`，这篇文
 ## <span id="security">安全性</span>
 太明显了，暂不讨论
 ## <span id="speed">运行效率</span>
-都知道eval比较慢，到底慢多少，自己测测看，下面是代码（对比运行 1万次`eval("sum++")`和 500万次`sum++`所需要的时间）
+都知道 `eval` 比较慢，到底慢多少，自己测测看，下面是代码（对比运行 1万次 `eval("sum++")` 和 500万次 `sum++` 所需要的时间）
 ```javascript
 var getTime = function(){
   // return Date.now();
@@ -66,7 +66,7 @@ durCode =  14 ms
 Chrome 的 V8 果然是王者，Firefox 在运行`eval`的PK上输给了古董IE8，node环境中`eval`的表现最好（只慢100多倍）
 
 ## <span id="scope">作用域</span>
-在作用域方面，`eval`的表现让人费解。**直接调用时：当前作用域；间接调用时：全局作用域**。
+在作用域方面，`eval` 的表现让人费解。**直接调用时：当前作用域；间接调用时：全局作用域**。
 #### 直接调用
 `eval`被直接调用并且调用函数就是`eval`本身时，作用域为当前作用域，`function`中的`foo`被修改了，全局的`foo`没被修改。
 ```javascript
