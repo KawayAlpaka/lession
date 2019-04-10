@@ -4,7 +4,7 @@ eval是js中一个强大的方法。都说`eval == evil`等于`true`，这篇文
 * [安全性](#security)
 * [运行效率](#speed)
 * [作用域](#scope)
-* [内存](#momery) ▲ 
+* [内存▲](#momery) 
 * [总结和应对方案](#result)
 ## <span id="security">安全性</span>
 太明显了，暂不讨论
