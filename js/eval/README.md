@@ -1,14 +1,14 @@
 # 为什么要少用eval?
 eval是js中一个强大的方法。都说`eval == evil`等于`true`，这篇文章将研讨eval的几个缺点和使用注意事项。
 ## 目录
-* [安全性](#security)
-* [运行效率](#speed)
-* [作用域](#scope)
-* [内存▲](#momery) 
-* [总结和应对方案](#result)
-## <span id="security">安全性</span>
+* [一、安全性](#security)
+* [二、运行效率](#speed)
+* [三、作用域](#scope)
+* [四、内存▲](#momery) 
+* [五、总结和应对方案](#result)
+## <span id="security">一、安全性</span>
 太明显了，暂不讨论
-## <span id="speed">运行效率</span>
+## <span id="speed">二、运行效率</span>
 都知道 `eval` 比较慢，到底慢多少，自己测测看，下面是代码（对比运行 1万次 `eval("sum++")` 和 500万次 `sum++` 所需要的时间）
 ```javascript
 var getTime = function(){
@@ -65,9 +65,9 @@ durCode =  14 ms
 
 Chrome 的 V8 果然是王者，Firefox 在运行`eval`的PK上输给了古董IE8，node环境中`eval`的表现最好（只慢100多倍）
 
-## <span id="scope">作用域</span>
+## <span id="scope">三、作用域</span>
 在作用域方面，`eval` 的表现让人费解。**直接调用时：当前作用域；间接调用时：全局作用域**。
-#### 直接调用
+#### 3.1 直接调用
 `eval`被直接调用并且调用函数就是`eval`本身时，作用域为当前作用域，`function`中的`foo`被修改了，全局的`foo`没被修改。
 ```javascript
 var foo = 1;
@@ -79,7 +79,7 @@ function test() {
 console.log(test());    // 3
 console.log(foo);       // 1
 ```
-#### 间接调用
+#### 3.2 间接调用
 间接调用`eval`时 执行的作用域为全局作用域，两个`function`中的`foo`都没有被修改，全局的`foo`被修改了。     
 ```javascript
 var foo = 1;
@@ -97,14 +97,17 @@ var foo = 1;
 console.log(foo);         // 3
 ```
 
-## <span id="momery">内存 ▲ </span>
+## <span id="momery">四、内存 ▲ </span>
 使用`eval`会导致内存的浪费，这是本文要讨论的重点。
 下面用测试结果来对比，**使用eval** 和 **不使用eval** 的情况下，以下代码内存的消耗情况。    
-### 不用eval的情况
+### 4.1 不用eval的情况
 ```javascript
 var f1 = function(){          // 创建一个f1方法
-  var data = {name:"data",data: (new Array(50000)).fill("data 111 data")}; // 创建一个不会被使用到的变量
-  var f = function(){                      // 创建f方法然后返回
+  var data = {
+    name:"data",
+    data: (new Array(50000)).fill("data 111 data")
+    };                        // 创建一个不会被使用到的变量
+  var f = function(){         // 创建f方法然后返回
     console.log("code:hello world");
   };
   return f;
@@ -129,7 +132,7 @@ var F1 = f1();
 
 这似乎说明不了什么。没有对比就没有伤害，下面我们来伤害一下`eval`。    
 
-### 使用eval的情况
+### 4.2 使用eval的情况
 修改上面的代码，把 `console.log` 修改为 `eval` 运行：
 ```diff
 - console.log("code:hello world");
@@ -143,7 +146,7 @@ var F1 = f1();
 
 `window`占用了`251048`，`4%`的内存，其中`F1`占用了`200140`，相当于总量的`3%`的内存，`F1.context.data`，占用了`200044`，约等于`F1`的占用量，可见这些额外的内存开销都是来自于`F1.context.data`。
 
-#### 分析     
+### 4.3 分析     
 
 使用eval时：`F1`占用了`200140`，`3%`的内存；      
 不用eval时：`F1`占用了`32`，`0%`的内存；    
@@ -158,7 +161,7 @@ F1 = "Hello"  //重设F1,这样就没什么引用到data了
 
 说到这里，再回头看`eval`奇怪的作用域。**直接调用时：当前作用域；间接调用时：全局作用域**，也就可以理解了。当间接调用时，javascript引擎不知道它是`eval`，优化时就会移除不需要的变量，如果`eval`中用到了那些变量，就会发生意想不到的事情。这违背了闭包的原则，变得难以理解。索性把间接调用的作用域设置为了全局。
 
-## <span id="result">总结和应对方案</span>
+## <span id="result">五、总结和应对方案</span>
 
 #### 安全性
 分析：`eval`是否安全主要由数据源决定，如果数据源不安全，`eval`只是提供了一种攻击方法而已。    

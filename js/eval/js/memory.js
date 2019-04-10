@@ -1,5 +1,8 @@
-var f1 = function(){
-  var data = {name:"data",data: (new Array(50000)).fill("data 111 data")};
+var f1 = function(){  // 创建一个f1方法
+  var data = {        
+    name:"data",
+    data: (new Array(50000)).fill("data 111 data")
+  };                  // 创建一个不会被使用到的变量
   var f = function(){
     // console.log("code:hello world");
     eval('console.log("eval:hello world");');
