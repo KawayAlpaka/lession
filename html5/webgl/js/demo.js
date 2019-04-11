@@ -6,8 +6,9 @@ var VSHADER_SOURCE,FSHADER_SOURCE;
 
 VSHADER_SOURCE = `
   attribute vec4 b_Position;
+  uniform mat4 u_ModelMatrix;
   void main () {
-    gl_Position = b_Position;
+    gl_Position = u_ModelMatrix * b_Position;
   }
 `;
 FSHADER_SOURCE = `
@@ -60,8 +61,30 @@ function initVertexBuffers (gl) {
 var n = initVertexBuffers(gl);
 
 gl.clearColor(0,0,0,1);
+
+var u_ModelMatrix = gl.getUniformLocation(gl.program,"u_ModelMatrix");
+var modelMatrix = new Matrix4();
+
+var currentAngle = 0;
+var lastTime = Date.now();
+
+function tick(){
+  animation();
+  draw();
+  requestAnimationFrame(tick);
+}
+
+function animation(){
+  var thisTime = Date.now();
+  var dur = lastTime - thisTime;
+  lastTime = thisTime;
+  currentAngle = currentAngle + dur * 0.18;
+}
+
 function draw () {
+  modelMatrix.setRotate(currentAngle,0,1,0);
+  gl.uniformMatrix4fv(u_ModelMatrix,false,modelMatrix.elements);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES,0,n);
 }
-draw();
+tick();
