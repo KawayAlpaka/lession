@@ -63,7 +63,8 @@ durCode =  14 ms
 直接运行 sum++ 的速度约是 运行 eval("sum++") 的 179 倍
 ```
 
-Chrome 的 V8 果然是王者，Firefox 在运行`eval`的PK上输给了古董IE8，node环境中`eval`的表现最好（只慢100多倍）
+Chrome 的 V8 果然是王者，Firefox 在运行`eval`的PK上输给了古董IE8，node环境中`eval`的表现最好（只慢100多倍）     
+PS:笔者测试环境有限，大家有个感性认识就好。   
 
 ## <span id="scope">三、作用域</span>
 在作用域方面，`eval` 的表现让人费解。**直接调用时：当前作用域；间接调用时：全局作用域**。
