@@ -1,5 +1,7 @@
 (function () {
 
+
+
     var bindDom0Dom2Dom3 = function (o) {
         // 相同事件，先注册的先触发
         // dom2
@@ -24,27 +26,38 @@
     };
     // bindDom0Dom2Dom3(window);
 
+    var blockAll = function(e){
+        e.stopImmediatePropagation();
+    };
+    // window.addEventListener("copy",blockAll,true);
+    document.querySelector("#block-all").addEventListener("click",function(){
+        window.addEventListener("click",blockAll,true);
+        setTimeout(() => {
+            window.removeEventListener("click",blockAll,true);
+        }, 5000);
+    },true);
+
 
     // 事件流 
     wai.addEventListener("click", function (e) {
         console.log("wai click 冒泡");
-        console.log(e);
+        // console.log(e);
     }, false);
     wai.addEventListener("click", function (e) {
         console.log("wai click 捕获");
-        console.log(e);
+        // console.log(e);
     }, true);
     nei.addEventListener("click", function (e) {
         console.log("nei click 捕获");
-        console.log(e);
+        // console.log(e);
         // //阻止冒泡后，wai的冒泡事件就不会触发
-        e.stopPropagation();
+        // e.stopPropagation();
         //立即阻止后，nei的其他事件就不会触发，也不会继续冒泡
-        e.stopImmediatePropagation();
+        // e.stopImmediatePropagation();
     }, true);
     nei.addEventListener("click", function (e) {
         console.log("nei click 冒泡");
-        console.log(e);
+        // console.log(e);
     }, false);
 
 
