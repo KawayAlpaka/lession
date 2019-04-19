@@ -4,3 +4,10 @@ body {
 * {
   user-select: text!important;
 }
+
+.free-copy-select {
+  outline: #4d335a solid 3px;
+  filter: saturate(200%);
+}
+
+
