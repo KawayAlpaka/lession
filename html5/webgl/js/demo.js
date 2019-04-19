@@ -7,8 +7,10 @@ var VSHADER_SOURCE,FSHADER_SOURCE;
 VSHADER_SOURCE = `
   attribute vec4 b_Position;
   uniform mat4 u_ModelMatrix;
+  uniform mat4 u_ViewMatrix;
+  uniform mat4 u_ProjectionMatrix;
   void main () {
-    gl_Position = u_ModelMatrix * b_Position;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * b_Position;
   }
 `;
 FSHADER_SOURCE = `
@@ -65,6 +67,16 @@ gl.clearColor(0,0,0,1);
 var u_ModelMatrix = gl.getUniformLocation(gl.program,"u_ModelMatrix");
 var modelMatrix = new Matrix4();
 
+var u_ViewMatrix = gl.getUniformLocation(gl.program,"u_ViewMatrix");
+var viewMatrix = new Matrix4();
+viewMatrix.lookAt(0, 0, 1, 0, 0, -1, 0, 1, 0);
+// viewMatrix.lookAt(100, 100, 100, 0, 0, 0, 0, 1, 0);
+// viewMatrix.lookAt(0.3, 0.3, 0.3, 0, 0, 0, 0, 1, 0);
+
+var u_ProjectionMatrix = gl.getUniformLocation(gl.program,"u_ProjectionMatrix");
+var projectionMatrix = new Matrix4();
+projectionMatrix.perspective(120, 1, 0.1, 1000);
+
 var currentAngle = 0;
 var lastTime = Date.now();
 
@@ -82,9 +94,11 @@ function animation(){
 }
 
 function draw () {
-  modelMatrix.setRotate(currentAngle,0,1,0);
-  gl.uniformMatrix4fv(u_ModelMatrix,false,modelMatrix.elements);
+  modelMatrix.setRotate(currentAngle, 0, 1, 0);
+  gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+  gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
+  gl.uniformMatrix4fv(u_ProjectionMatrix, false, projectionMatrix.elements);
   gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES,0,n);
+  gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 tick();
