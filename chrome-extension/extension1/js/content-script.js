@@ -36,25 +36,22 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
       // alert(request.value);
       window.postMessage({"type": 'catchImg'}, '*');
     }
+    if(request.cmd == 'catchAllImg') {
+      // alert(request.value);
+      window.postMessage({"type": 'catchAllImg'}, '*');
+    }
     sendResponse('我收到了你的消息！');
 });
 
 window.addEventListener("message", function(e)
 {
   if(e.data.type == "showImg"){
-    // var url = chrome.extension.getURL('html/show-img.html');
-    // console.log(url);
-    // var showImgPage = window.open(url);
-    // showImgPage.location.href = url;
-    // // var baidu = window.open("https://www.baidu.com");
-    // console.log(showImgPage);
     showImg(e.data.results);
   }
 }, false);
-console.log(chrome.tabs);
 
 var showImg = function(results){
   chrome.runtime.sendMessage({type: 'showImg',results}, function(response) {
-    console.log('收到来自后台的回复：' + response);
+    // console.log('收到来自后台的回复：' + response);
   });
 }

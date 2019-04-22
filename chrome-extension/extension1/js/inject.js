@@ -3,8 +3,11 @@
   window.addEventListener("message", function(e)
   {
     if(e.data.type == "catchImg"){
-      console.log(e.data);
       startFind();
+    }
+    if(e.data.type == "catchAllImg"){
+      // console.log("catchAllImg");
+      catchImg(document.body);
     }
   }, false);
   var selectRange = function(e){
@@ -20,8 +23,12 @@
   var regUrl = /^url\(['"]([\S]+)['"]\)$/;
   var findImg = function(e){
     endFind();
+    catchImg(e.target.parentNode);
+  };
+  var catchImg = function(node){
     var rs = [];
-    var nodes = e.target.querySelectorAll("*");
+    var target = node;
+    var nodes = target.querySelectorAll("*");
     var insert = function(node,url){
       // console.log(node);
       // console.log(url);
@@ -48,14 +55,14 @@
       }
     }
     nodes.forEach(deal);
-    deal(e.target);
-    console.log(rs);
+    deal(target);
     if(rs.length > 0){
       showResult(rs);
     }else{
       alert("没有找到图片");
     }
-  };
+  }
+
   var startFind = function(){
     document.addEventListener("mouseover",selectRange,false);
     document.addEventListener("mouseout",unSelectRange,false);

@@ -6,7 +6,8 @@ body {
 }
 
 .free-copy-select {
-  outline: #4d335a solid 3px;
+  /* outline: #4d335a solid 3px; */
+  box-shadow: #4d335a 0px 0px 0px 6px inset;
   filter: saturate(200%);
 }
 
