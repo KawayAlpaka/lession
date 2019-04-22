@@ -1,16 +1,23 @@
 var showImg = function(){
   console.log("show-img-load");
-  console.log(results);
-  var template = document.querySelector(".template");
-  var panel = document.querySelector(".imgs-panel"); 
-  results.forEach(function(result) {
-    var link = template.cloneNode(true);
-    console.log(link);
-    link.href = result.url;
-    var img = link.querySelector(".img");
-    img.src = result.url;
-    link.classList.remove("template");
-    panel.appendChild(link);
-  });
+  if(typeof results != "undefined" && Array.isArray(results)){
+    var template = document.querySelector(".template");
+    var panel = document.querySelector(".imgs-panel"); 
+    results.forEach(function(result) {
+      var link = template.cloneNode(true);
+      link.href = result.url;
+      var img = link.querySelector(".img");
+      link.classList.remove("template");
+      // 处理svg
+      if(result.tag == "svg"){
+        var file  = new File([result.url],"free-copy.svg",{type:"image/svg+xml;charset=utf-8"});
+        var dataUrl = URL.createObjectURL(file);
+        img.src = dataUrl;
+      }else{
+        img.src = result.url;
+      }
+      panel.appendChild(link);
+    });
+  }
 };
 document.addEventListener("DOMContentLoaded",showImg,false);

@@ -1,4 +1,11 @@
 (function(){
+  // 禁止篡改复制内容
+  var blockAll = function(e){
+    e.stopImmediatePropagation();
+  };
+  window.addEventListener("copy",blockAll,true);
+
+
   const selectName = "free-copy-select";
   window.addEventListener("message", function(e)
   {
@@ -11,13 +18,13 @@
     }
   }, false);
   var selectRange = function(e){
-    // console.log("mouseover");
+    // console.log("mouseover",e.target);
     // console.log(e.target.style.outline= "#00FF00 solid 2px;");
     // e.target.style.outline = "#00FF00 solid 2px";
     e.target.classList.add(selectName);
   };
   var unSelectRange = function(e){
-    // console.log("mouseout");
+    // console.log("mouseout:",e.target);
     e.target.classList.remove(selectName);
   };
   var regUrl = /^url\(['"]([\S]+)['"]\)$/;
@@ -26,6 +33,10 @@
     catchImg(e.target.parentNode);
   };
   var catchImg = function(node){
+    // 兼容性检查 
+    if (!node.computedStyleMap) {
+      // alert("浏览器版本比较低，可能会遗漏部分图片，建议升级浏览器");
+    }
     var rs = [];
     var target = node;
     var nodes = target.querySelectorAll("*");
@@ -45,12 +56,19 @@
         insert(node,node.src);
       }
       // * background-image
-      var backgroundImage = node.computedStyleMap().get("background-image").toString();
-      if(regUrl.test(backgroundImage)){
-        insert(node,backgroundImage.replace(regUrl,"$1"));
+      if(node.computedStyleMap){
+        try{
+          var backgroundImage = node.computedStyleMap().get("background-image").toString();
+          if(regUrl.test(backgroundImage)){
+            insert(node,backgroundImage.replace(regUrl,"$1"));
+          }
+        }catch(e){
+          // 解决一个360浏览器的报错
+          console.log(e);
+        }
       }
       // svg
-      if (node.tagName == "SVG"){
+      if (node.tagName.toLowerCase() == "svg"){
         insert(node,node.outerHTML);
       }
     }
