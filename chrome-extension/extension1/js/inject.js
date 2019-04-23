@@ -1,4 +1,5 @@
 (function(){
+  // console.log("inject.js");
   // 禁止篡改复制内容
   var blockAll = function(e){
     e.stopImmediatePropagation();
@@ -55,24 +56,26 @@
       if(node.src && node.tagName === "IMG"){
         insert(node,node.src);
       }
-      // * background-image
+      // background-image
       if(node.computedStyleMap){
-        try{
-          var backgroundImage = node.computedStyleMap().get("background-image").toString();
-          if(regUrl.test(backgroundImage)){
-            insert(node,backgroundImage.replace(regUrl,"$1"));
-          }
-        }catch(e){
-          // 解决一个360浏览器的报错
-          console.log(e);
+        var backgroundImage = node.computedStyleMap().get("background-image").toString();
+        if(regUrl.test(backgroundImage)){
+          insert(node,backgroundImage.replace(regUrl,"$1"));
         }
       }
       // svg
       if (node.tagName.toLowerCase() == "svg"){
         insert(node,node.outerHTML);
+        // svg 以后就不在向下检索
+        return;
+      }
+      if(node.children && node.children.length > 0){
+        for(var i=0;i < node.children.length;i++){
+          deal(node.children[i]);
+        }
       }
     }
-    nodes.forEach(deal);
+    // nodes.forEach(deal);
     deal(target);
     if(rs.length > 0){
       showResult(rs);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>MainPage</title>
     <script>
         function test1(){
             console.log(frames["baidu1"]);
@@ -16,6 +16,9 @@
         function test3(){
             console.log(frames["baidu-id"]);
         }
+        function test4(){
+            console.log(frames);
+        }
     </script>
 </head>
 <body>
@@ -23,10 +26,12 @@
         <button onclick="test1()">测试1</button>
         <button onclick="test2()">测试2</button>
         <button onclick="test3()">测试3</button>
+        <button onclick="test4()">测试4</button>
     </div>
     
     <iframe src="https://www.baidu.com" id="baidu1" name="baidu2" frameborder="0"></iframe>
     <iframe src="https://www.baidu.com" name="baidu-name" frameborder="0"></iframe>
     <iframe src="https://www.baidu.com" id="baidu-id" frameborder="0"></iframe>
+    <iframe src="./iframe.html"></iframe>
 </body>
 </html>
