@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>arrow-function</title>
+  <script>
+    const f1 = function(){
+      return this;
+    };
+    const f2 = () => {
+      return this;
+    };
+
+    class Foo {
+      name = "foo";
+      f0 () {
+        return this;
+      }
+      f1 = f1
+      f2 = f2
+      f11 = function () {
+        return this;
+      }
+      f21 = () => {
+        return this;
+      }
+    }
+    const foo = new Foo();
+    console.log("foo.f0:",foo.f0.toString());
+    console.log("f1:",f1.toString());
+    console.log("f2:",f2.toString());
+    console.log("直接运行：");
+    console.log("f1()",f1());
+    console.log("f2()",f2());
+
+    console.log("foo.f() 运行：");
+
+    console.log("foo.f0()",foo.f0());
+    console.log("foo.f1()",foo.f1());
+    console.log("foo.f11()",foo.f11());
+    console.log("foo.f2()",foo.f2());
+    console.log("foo.f21()",foo.f21());
+
+    const obj = { name : "obj" };
+    obj.f1 = f1;
+    obj.f2 = f2;
+    obj.f0 = foo.f0;
+    obj.f11 = foo.f11;
+    obj.f21 = foo.f21;
+    console.log("obj.f() 运行：");
+    console.log("obj.f0()",obj.f0());
+    console.log("obj.f1()",obj.f1());
+    console.log("obj.f11()",obj.f11());
+    console.log("obj.f2()",obj.f2());
+    console.log("obj.f21()",obj.f21());
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
