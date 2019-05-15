@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bizarre": "0.0.1",
     "hello-real-li": "0.0.1"
   }
 }
