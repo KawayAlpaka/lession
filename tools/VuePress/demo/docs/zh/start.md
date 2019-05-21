@@ -8,3 +8,7 @@ start
 xxx
 ## node
 xxx
+## ES6
+```
+improt * as ba from "ba";
+```

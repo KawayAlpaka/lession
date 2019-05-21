@@ -5,28 +5,23 @@ module.exports = {
   ],
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' },
+      { text: '首页', link: '/' },
       {
-        text: 'Languages',
-        items: [
-          {
-            text: '亚洲', items: [
-              { text: 'Chinese', link: '/language/chinese' },
-              { text: 'Japanese', link: '/language/japanese' }
-            ]
-          },
+        text: '指南',
+        items:[
+          { text: '指南', link: '/zh/guide' },
+          { text: '快速安装', link: '/zh/start' },
+          { text: 'api', link: '/zh/api' }
         ]
-      }
+      },
     ],
     // navbar: true,
-    sidebar: [
-      '/',
-      '/',
-      ['/zh/guide/start', 'Explicit link text']
-    ],
-    displayAllHeaders: true,
+    // sidebar: [
+    //   '/',
+    //   '/',
+    //   ['/zh/start', 'Explicit link text']
+    // ],
+    // displayAllHeaders: true,
   },
 
 }
