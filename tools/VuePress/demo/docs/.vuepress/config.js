@@ -1,6 +1,8 @@
+const path = require('path');
 module.exports = {
   title: 'Hello VuePress',
   description: 'Just playing around',
+  dest: path.resolve(__dirname,'../../dist'),
   head: [
   ],
   themeConfig: {
@@ -23,5 +25,4 @@ module.exports = {
     // ],
     // displayAllHeaders: true,
   },
-
 }
