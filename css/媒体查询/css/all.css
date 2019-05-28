@@ -11,7 +11,7 @@
 }
 
 /* 屏幕小于等于400px时 */
-@media screen and (max-width:400px){
+@media screen and (max-width:800px){
     .inner{
         width: 50%;
     }
