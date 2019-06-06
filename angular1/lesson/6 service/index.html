@@ -12,8 +12,9 @@
         app.controller("controller", function ($scope) {
             $scope.a = 1;
             $scope.b = 2;
-            $scope.myClick = function (n) {
+            $scope.myClick = function (n,haha) {
                 console.log(n);
+                console.log(haha);
                 $scope.c = n;
             }
         });
@@ -41,7 +42,8 @@
                     element[0].addEventListener("click",function(event){
                         var callback = function () {
                             fn(s, {
-                                $event: event
+                                $event: event,
+                                $haha:"haha"
                             });
                         }
                         s.$apply(callback);
@@ -54,7 +56,7 @@
 
 <body>
     <div ng-controller="controller">
-        <div my-click="myClick(a+b)">myClick</div>
+        <div my-click="myClick(a+b,$haha)">myClick</div>
         <div>
             <div>a:{{a}}</div>
             <div>b:{{b}}</div>
