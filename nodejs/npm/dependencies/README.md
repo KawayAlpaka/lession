@@ -1,14 +1,21 @@
-一直纠结，`dependencies` 和 `devDependencies` 有什么区别？我使用的包应该放到什么地方？网上找了一些资料，大神群里咨询了一下。得到的答案是：      
+一直纠结，`dependencies` 和 `devDependencies` 有什么区别？我使用的包应该放到什么地方？上网找资料，大神群咨询。得到的答案是：      
 * 生产环境用到的放在 `dependencies`中;      
 * 开发环境用到的放在 `devDependencies`中;       
 * 这是规范，遵守就能一起玩，不遵守就自己玩;      
 
-Emmm...大神就是喜欢说一些菜逼听不懂的话。     
-问出这个问题的朋友想必都发现：无论放到`dependencies`中，还是`devDependencies`，`npm install`时都会安装，没有差别，团队合作也OK，照玩不误啊。什么叫只能自己玩？把`koa`放到`devDependencies`中有没有问题？把`webpack`放到`dependencies`又会怎么样？       
-直到自己发布了 `package` 才明白了大神的意思。     
+Emmm...大神就是喜欢说一些菜逼听不懂的话。但我就是想知道：如果我不遵守，会怎么样？    
 
-## 区别
-来看看 [debug](https://github.com/visionmedia/debug) 这个`package`。它的 `package.json` 内容如下：
+提出这个问题的朋友应该都发现：无论放到`dependencies`中，还是`devDependencies`，`npm install`时都会安装，没有差别，团队合作也OK，照玩不误啊。什么叫只能自己玩？把`koa`放到`devDependencies`中有没有问题？把`webpack`放到`dependencies`又会怎么样？      
+
+直到自己在`npm`上发布了 `package` 才明白了大神的意思。     
+
+## 生产环境 or 开发环境？   
+**我**使用`vue`开发`web`项目的环境，是什么环境？    
+当然是开发环境，同时也是生产环境。    
+**开发环境**是相对于**我的项目**来说的，相对**vue**时，这个环境就是**生产环境**。   
+
+## 从实践中理解两者的区别
+先看 [debug](https://github.com/visionmedia/debug) 这个`package`。它的 `package.json` 内容如下：
 ```json
 {
   "dependencies": {
@@ -29,12 +36,13 @@ Emmm...大神就是喜欢说一些菜逼听不懂的话。
   }
 }
 ```
-### npm install debug
-依赖`debug`的项目需要这样用，手动创建一个项目
+### 使用debug (npm install debug)   
+依赖`debug`的项目需要这样用。（也是大部分用户的使用方式）     
+手动创建一个项目      
 ```shell
 npm init
 ```
-手动在`package.json`中添加内容
+手动在`package.json`中添加`debug`依赖
 ```json
 {
   "dependencies": {
@@ -52,10 +60,11 @@ npm install
   -- debug
   -- ms
 ``` 
-这时安装了：`debug`和`ms(debug的dependencies包含的package)`
+发现 `npm` 只安装了 `debug` 和 `ms(debug的dependencies包含的package)`。     
+因为现在的环境相对于`debug`来说，是生产环境，所以`npm`只安装了`debug`的生产依赖。   
 
-### git clone debug
-`debug`的开发者，或二次开发者，需要这样用。
+### 开发debug (git clone debug)
+`debug`项目的**开发者**或**二次开发者**，才会这样用。
 ```shell
 git clone https://github.com/visionmedia/debug.git
 cd debug
@@ -67,36 +76,33 @@ npm install
   -- debug
   -- ms
   -- brfs
-  -- brfs  
-  -- browserify
-  -- coveralls
-  -- istanbul
-  -- karma
-  -- karma-browserify
-  -- karma-chrome-launcher
-  -- karma-mocha
-  -- mocha
-  -- mocha-lcov-reporter
   -- xo
   -- connect
   -- date-format
-  -- ...一共653个package
+  -- ......一共653个package
 ```
-这时安装了：`debug`项目的 `dependencies`、`devDependencies`以及`它们的dependencies`。   
+发现 `npm` 安装了 `dependencies`、`devDependencies`以及`它们的dependencies`。
+因为现在的环境相对于`debug`来说，是开发环境，所以`npm`安装了`debug`的所有依赖，以及它们的生产依赖。   
 
 ## 结论（挑战规范，知其所以然）     
-1. 如果所有依赖包都是**只是**开放环境要用到的包，并且项目不需要发布到`npm`让别人使用。如`webpack`打包完成后发布`dist`的前端项目，因为生产环境不再需要依赖这些包(甚至都不需要`node`)，这时你把**依赖**放到哪里，完全**随你开心**。但为了避免有人说闲话，应该放到`devDependencies`中。    
-2. 如果所有依赖包都是生产环境要用到的包，并且项目不需要发布到`npm`让别人使用。如**web**项目常用的`express`和`koa`，是生产环境运行必须的包，你也可以随便放 **（惊不惊喜意不意外）**，在生产环境中，部署生产环境时使用`npm install`，一样会把所有包安装下来，不影响生产环境的运行。为了避免有人说闲话，还是要放到`dependencies`中。
-3. 如果既有开发依赖又有生产依赖，并且项目不需要发布到`npm`让别人使用。你还是可以随便放。`npm install` 会安装所有包。但就会产生问题（生产环境安装了开发环境的包），会死人吗？不太清楚，但项目是可以运行的。要避免这些额外的消耗，就要按照规范来，区分两种包的位置。在生产环境中使用`npm install --production`，则只会安装`dependencies`中的依赖。外翻篇：如果你开心，也可以把**开发依赖**包放到`devDependencies`，**生产依赖**包放到`dependencies`，生产环境就用`npm install --only=dev`，这样只会安装`devDependencies`中的依赖。
+
+根据以上的实践分析，总结出一些**玩**法：    
+
+1. 如果所有依赖包**都是开放环境**要用到的包，并且不会发布到`npm`让别人使用（如`webpack`打包完成后发布`dist`的前端项目），因为生产环境不再需要依赖这些包(甚至都不需要`nodejs`)，这时你把**依赖**放到哪里，完全**随你开心**。但为了避免有人说闲话，应该放到`devDependencies`中。    
+2. 如果所有依赖包**都是生产环境**要用到的包，并且不会发布到`npm`让别人使用。如**web**项目常用的`express`和`koa`，是生产环境运行必须的包，你也可以随便放 **（惊不惊喜意不意外）**，在生产环境中，部署生产环境时使用`npm install`，一样会把所有包安装下来，不影响生产环境的运行。为了避免有人说闲话，还是要放到`dependencies`中。   
+3. 如果既有开发依赖又有生产依赖，并且不会发布到`npm`让别人使用。你还是可以随便放。`npm install` 会安装所有包。但就会产生问题，**生产环境安装了开发环境的包**，这个问题会死人吗？不太清楚，但项目是可以运行的。要避免这些额外的消耗，就要区分两种包的位置。在生产环境中使用`npm install --production`，则只会安装`dependencies`中的依赖。外翻篇：如果你开心，也可以把**开发依赖**包放到`devDependencies`，**生产依赖**包放到`dependencies`，生产环境就用`npm install --only=dev`，这样只会安装`devDependencies`中的~~生产~~依赖。
 4. 如果是一个要发布到`npm`的项目，生产依赖就**一定**要放在`dependencies`中(缺失会导致运行出错)，开发依赖应该放在`devDependencies`中，这样可以不浪费用户资源，自己的开发团队也能一键部署开发环境。
 
 
-| dependencies | devDependencies | 发布到npm | 自己项目用 |
-|--------------|-----------------|----------|------------|
-| 生产依赖      |  开发依赖        | -        | -          |
-| 生产依赖、开发依赖 | - | 浪费大量用户资源 | 浪费生产环境资源 |
-| - | 生产依赖、开发依赖 | 用户无法正常运行 | 浪费生产环境资源、需要用奇怪的方式部署 |
-| 开发依赖 | 生产依赖 | 浪费大量用户资源、用户无法正常运行 | 需要用奇怪的方式部署 |
+简单总结一下，当**生产依赖**和**开发依赖**分别放到不同位置时，会导致的问题：
+
+|  玩法                         | dependencies     | devDependencies  | 作为 npm package 发布  | 自用项目 |
+| ------                        |------------------|------------------|-----------------------|--------- |
+| 规范                          | 生产依赖          |  开发依赖         | -                     | -       |
+| 开发依赖放在dependencies中     | 生产依赖、开发依赖 | -                | 浪费大量用户资源       | 浪费生产环境资源 |
+| 生产依赖放在devDependencies中  | -                | 生产依赖、开发依赖 | 用户无法正常运行       | 浪费生产环境资源、需要用奇怪的方式部署 |
+| 反着放                        | 开发依赖          | 生产依赖          | 浪费大量用户资源、用户无法正常运行 | 需要用奇怪的方式部署 |
+
 
 ## 参考资料
 http://blog.sina.com.cn/s/blog_986896ff0102xe7q.html      
