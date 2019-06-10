@@ -86,7 +86,7 @@ npm install
 
 3. 如果既有开发依赖又有生产依赖，并且不会发布到`npm`让别人使用。你还是可以随便放。`npm install` 会安装所有包。但就会产生问题，**生产环境安装了开发环境的包**，这个问题会死人吗？不太清楚，但项目是可以运行的。要避免这些额外的消耗，就要区分两种包的位置。在生产环境中使用`npm install --production`，则只会安装`dependencies`中的依赖。外翻篇：如果你开心，也可以把**开发依赖**包放到`devDependencies`，**生产依赖**包放到`dependencies`，生产环境就用`npm install --only=dev`，这样只会安装`devDependencies`中的~~生产~~依赖。
 
-4. 如果是一个要发布到`npm`的项目，生产依赖就**一定**要放在`dependencies`中（缺失会导致运行出错）；开发依赖**应该**放在`devDependencies`中，这样可以不浪费用户资源，如果放到`dependencies`中，用户端就会安装很多多余的依赖，浪费大量资源。   
+4. 如果是一个要发布到`npm`的项目，生产依赖就**一定**要放在`dependencies`中（缺失会导致运行出错）；开发依赖**应该**放在`devDependencies`中，这样可以不浪费用户资源，如果放到`dependencies`中，用户端就会安装很多多余的依赖，浪费大量资源，增加版本冲突概率。   
 
 ## 总结    
 
