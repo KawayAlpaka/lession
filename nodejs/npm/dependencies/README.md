@@ -5,7 +5,7 @@
 
 Emmm...大神就是喜欢说一些菜逼听不懂的话。但我就是想知道：如果我不遵守，会怎么样？    
 
-提出这个问题的朋友应该都发现：无论放到`dependencies`中，还是`devDependencies`，`npm install`时都会安装，没有差别，团队合作也OK，照玩不误啊。什么叫只能自己玩？把`koa`放到`devDependencies`中有没有问题？把`webpack`放到`dependencies`又会怎么样？      
+提出这个问题的朋友应该都发现：无论放到`dependencies`中，还是`devDependencies`，运行 `npm install` 时都会安装，没有差别，团队合作也OK，照玩不误啊。什么叫只能自己玩？把`koa`放到`devDependencies`中有没有问题？把`webpack`放到`dependencies`又会怎么样？      
 
 直到自己在`npm`上发布了 `package` 才明白了大神的意思。     
 
@@ -76,7 +76,7 @@ npm install
 发现 `npm` 安装了 `dependencies`、`devDependencies`以及`它们的dependencies`。   
 因为现在的环境相对于`debug`来说，是开发环境，所以`npm`安装了`debug`的所有依赖，以及它们的生产依赖。   
 
-对比以上结果，可以看出，一般情况下开发环境所需要安装的 `package` 要远多于生产环境。   
+对比以上结果，可以看出，一般情况下开发环境所需要安装的依赖**远多于**生产环境。   
 
 ## 非常规玩法（挑战规范，知其所以然） 
 
