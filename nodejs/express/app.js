@@ -110,9 +110,10 @@ app.post('/file/webuploader_ie8', upload.fields([
 });
 
 app.get('/file/fromRes', function (req, res) {
+    var fileName = encodeURIComponent("文件名.ext");
     res.writeHead(200, {
         'Content-Type': 'application/octet-stream', //告诉浏览器这是一个二进制文件  
-        'Content-Disposition': 'attachment; filename=filename.ext' //告诉浏览器这是一个需要下载的文件  
+        'Content-Disposition': 'attachment; filename=' + fileName //告诉浏览器这是一个需要下载的文件  
     });
     var filePath = path.join(__dirname,'app.js');
     fs.createReadStream(filePath).pipe(res);
