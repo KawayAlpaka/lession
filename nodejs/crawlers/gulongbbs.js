@@ -6,8 +6,8 @@ var fs = require("fs");
 var path = require("path");
 
 var baseUrl = "https://www.gulongbbs.com";
-var listUrl = "https://www.gulongbbs.com/book/tymyd/";
-var outputFile = "天涯.明月.刀.txt";
+var listUrl = "https://www.gulongbbs.com/book/fdyj/";
+var outputFile = "飞刀又见飞刀.txt";
 var outputDir = "dist"
 var outputPath = path.resolve(__dirname,outputDir,outputFile);
 
@@ -21,14 +21,21 @@ axios.get(listUrl, {})
     var getArticles = async function (list) {
       console.log("getArticles");
       for (let i = 0; i < list.length; i++) {
+        // console.log(list[i]);
         let r = await axios.get(list[i], {
           responseType: 'arraybuffer',
           transformResponse: [function (data) {
             return iconv.decode(data, "gb2312");
           }]
         });
+        // console.log(r.data);
         let $ = cheerio.load(r.data);
         let title = $(".main_ArticleTitle").text();
+
+        if(!title || title.length == 0){
+          continue;
+        }
+        console.log(title);
         let content = $("#new>span").html();
         
         // 标签转换
@@ -42,12 +49,12 @@ axios.get(listUrl, {})
         content = unescape(content.replace(/&#x/g, '%u').replace(/;/g, ''));
 
         // 去除一些没有正常转换的符号
-        content = content.replace(/%uD7/g, "");
+        content = content.replace(/%u[A-Za-z0-9]{2}/g, "");
 
         if (!fs.existsSync("dist")) {
           fs.mkdirSync("dist");
         }
-        console.log(title);
+
         fs.appendFileSync(outputPath, title + "\r\n", "utf-8");
         fs.appendFileSync(outputPath, content + "\r\n", "utf-8");
       }
