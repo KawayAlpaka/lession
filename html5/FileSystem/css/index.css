@@ -1,0 +1,49 @@
+.template{
+  display: none!important;
+}
+
+.show-panel{
+  display: inline-block;
+  width: 40%;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: bisque;
+  padding: 10px;
+  vertical-align: top;
+  min-height: 500px;
+}
+.edit-panel{
+  display: inline-block;
+  width: 40%;
+  vertical-align: top;
+}
+
+.centent-editor{
+  width: 100%;
+  height: 500px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  outline: none;
+}
+
+.entry-group{
+  display: inline-block;
+  width: 70px;
+  height: 90px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px transparent dotted;
+  word-break: break-all;
+  cursor: pointer;
+  user-select: none;
+}
+.entry-group:hover{
+  background-color: rgba(200, 200, 200, 0.6);
+}
+.entry-group.active{
+  border: 1px #666 dotted;
+  background-color: rgba(200, 200, 200, 0.6);
+}
