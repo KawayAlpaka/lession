@@ -1,6 +1,21 @@
 .template{
   display: none!important;
 }
+.control-panel {
+  padding: 20px;
+}
+.control-panel input{
+  margin-left: 10px;
+}
+
+.sys-btn{
+  display: inline-block;
+  font-size: 24px;
+  margin: 10px;
+  vertical-align: middle;
+}
+
+
 
 .show-panel{
   display: inline-block;
@@ -16,12 +31,12 @@
   display: inline-block;
   width: 40%;
   vertical-align: top;
+  padding: 10px;
 }
 
 .centent-editor{
   width: 100%;
   height: 500px;
-  margin: 10px;
   border-radius: 10px;
   background-color: #333;
   color: white;
@@ -36,6 +51,7 @@
   padding: 6px;
   border-radius: 6px;
   border: 1px transparent dotted;
+  text-align: center;
   word-break: break-all;
   cursor: pointer;
   user-select: none;
@@ -46,4 +62,8 @@
 .entry-group.active{
   border: 1px #666 dotted;
   background-color: rgba(200, 200, 200, 0.6);
+}
+
+.entry-group .glyphicon{
+  font-size: 24px;
 }

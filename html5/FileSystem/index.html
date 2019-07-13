@@ -5,41 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FileSystem</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-	<div>FileSystem</div>
-	<div>
-		<button onclick="refresh()">刷新</button>
-		<button onclick="toUpDir()">向上</button>
-		<button onclick="del()">删除</button>
 
-	</div>
-	<div>
-		<span>文件名:</span>
-		<input type="text" name="file-name" id="file-name">
-		<button onclick="createFile()">新建文件</button>
-	</div>
-	<div>
-		<span>目录名:</span>
-		<input type="text" name="dir-name" id="dir-name">
-		<button onclick="createDir()">新建目录</button>
+	<div class="form-inline control-panel">
+		<div> <h3>FileSystem</h3> </div>
+		<div>
+			<span class="sys-btn glyphicon glyphicon-refresh" aria-hidden="true" onclick="refresh()"></span>
+			<span class="sys-btn glyphicon glyphicon-upload" aria-hidden="true" onclick="toUpDir()"></span>
+			<span class="sys-btn glyphicon glyphicon-trash" aria-hidden="true" onclick="del()"></span>
+			<input type="text" class="form-control" name="file-name" id="file-name" placeholder="文件名">
+			<button class="btn btn-default" onclick="createFile()">新建文件</button>
+			<input type="text" class="form-control" name="dir-name" id="dir-name" placeholder="目录名">
+			<button class="btn btn-default" onclick="createDir()">新建目录</button>
+		</div>
 	</div>
 	<div>
 			<div class="show-panel" id="show-panel"></div>
 			<div class="edit-panel" id="edit-panel">
 				<textarea class="centent-editor" id="centent-editor" contenteditable="true"></textarea>
-				<button onclick="saveFile()">保存</button>
+				<button class="btn btn-success" onclick="saveFile()">保存</button>
 			</div>
 	</div>
 	<div class="template entry-group file-group" data-type="file">
 		<div>
-			<span class="entry-name"></span><span>(文件)</span>
+			<div><span class="glyphicon glyphicon-file" aria-hidden="true"></span></div>
+			<span class="entry-name"></span>
 		</div>
 	</div>
 	<div class="template entry-group dir-group" data-type="dir">
 		<div>
-			<span class="entry-name"></span><span>(目录)</span>
+			<div><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></div>
+			<span class="entry-name"></span>
 		</div>
 	</div>
 	<script src="js/bizarre-web.js"></script>

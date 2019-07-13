@@ -21,6 +21,7 @@ function onInitFs(fs) {
   }).catch(function(e){
     console.log(e);
     currentDir = fs.root;
+    bizarre.Web.Hash.setHash({path:currentDir.fullPath});
     refresh();
   });
 }
@@ -174,20 +175,20 @@ var getEntry = function(path,type){
     };
     switch(type){
       case "file": 
-        fs.root.getFile(path,{ create: true, exclusive: false },function(entry){
+        fs.root.getFile(path,{ create: false, exclusive: false },function(entry){
           resolve(entry);
         }, Catch);
         break;
       case "dir":
-        fs.root.getDirectory(path, {create: true}, function(dirEntry) {
+        fs.root.getDirectory(path, {create: false}, function(dirEntry) {
           resolve(dirEntry);
         }, Catch);
         break;
       default:
-        fs.root.getFile(path,{ create: true, exclusive: false },function(entry){
+        fs.root.getFile(path,{ create: false, exclusive: false },function(entry){
           resolve(entry);
         }, function(){
-          fs.root.getDirectory(path, {create: true}, function(dirEntry) {
+          fs.root.getDirectory(path, {create: false}, function(dirEntry) {
             resolve(dirEntry);
           }, Catch);
         });
@@ -213,6 +214,7 @@ showPanel.addEventListener("click",function(e){
           showEditor();
         });
     }else{
+      bizarre.Web.Hash.setHash({path:currentDir.fullPath});
       cententEditor.value = "";
       hideEditor();
     }
