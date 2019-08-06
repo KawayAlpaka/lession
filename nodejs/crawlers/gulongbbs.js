@@ -15,7 +15,11 @@ var run = function (options) {
   var _options = {
     listSelector: ".main_tdbg_575 a",
     titleSelector: ".main_ArticleTitle",
-    contentSelector: "#new>span"
+    contentSelector: "#new>span",
+    charset: "gb2312",
+    url:function(url){
+      return baseUrl + url;
+    }
   };
   if(options){
     options = {..._options,...options};
@@ -29,19 +33,19 @@ var run = function (options) {
       var articleUrls = [];
       $(options.listSelector).each(function (index, ele) {
         // console.log($(ele).attr("href"));
-        articleUrls.push(baseUrl + $(ele).attr("href"));
+        articleUrls.push(options.url($(ele).attr("href")));
       });
       var getArticles = async function (list) {
         console.log("start:");
         for (let i = 0; i < list.length; i++) {
+          // console.log(list[i]);
           let r = await axios.get(list[i], {
             responseType: 'arraybuffer',
             transformResponse: [function (data) {
-              return iconv.decode(data, "gb2312");
+              return iconv.decode(data, options.charset);
             }]
           }).catch((e)=>{
-            console.log(e);
-            break;
+            console.log(e.toString());
           });
           // console.log(r.data);
           let $ = cheerio.load(r.data);
@@ -58,6 +62,7 @@ var run = function (options) {
           content = content.replace(/<p[\s\S]*?>([\s\S]*?)<\/p>/gi, "$1");
           content = content.replace(/<strong[\s\S]*?>([\s\S]*?)<\/strong>/gi, "$1");
           content = content.replace(/<span[\s\S]*?>([\s\S]*?)<\/span>/gi, "$1");
+          // content = content.replace(/<div[\s\S]*?>([\s\S]*?)<\/div>/gi, "$1");
           content = content.replace(/<font[\s\S]*?>([\s\S]*?)<\/font>/gi, "$1");
 
           // utf-8 字符串转中文字符串
@@ -81,5 +86,9 @@ var run = function (options) {
 run({
   listSelector: ".list a",
   titleSelector: "title",
-  contentSelector: "#Article content"
+  contentSelector: "#Article .content",
+  charset:"utf-8",
+  url: function(url){
+    return url;
+  }
 });
