@@ -1,5 +1,5 @@
 from collections import Counter
-from playStats.descriptive_stats import frequency,mode,median,mean
+from playStats.descriptive_stats import frequency,mode,median,mean,rng,quartile,variance,std
 
 if __name__ == "__main__":
   # # 测试频数
@@ -22,7 +22,23 @@ if __name__ == "__main__":
   # print(median([1,4,2,3,5]))
   # print(median([1,4,2,3,5,99]))
 
-  # 测试均值
-  print(mean([1,4,2,3]))
-  print(mean([1,4,2,3,5]))
-  print(mean([1,4,2,3,5,99]))
+  # # 测试均值
+  # print(mean([1,4,2,3]))
+  # print(mean([1,4,2,3,5]))
+  # print(mean([1,4,2,3,5,99]))
+
+  # # 测试极差
+  # print(rng([1,4,2,3,5]))
+  # print(rng([1,4,2,3,5,99]))
+
+  # # 测试四分位数
+  # print(quartile([1,4,2,3,5]))
+  # print(quartile([1,2,3,4,5,8]))
+
+  # 测试方差
+  print(variance([1,4,2,3,5]))
+  print(variance([1,2,3,4,5,8]))
+
+  # 测试标准差
+  print(std([1,4,2,3,5]))
+  print(std([1,2,3,4,5,8]))
