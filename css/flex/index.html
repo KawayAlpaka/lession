@@ -12,10 +12,14 @@
       background-color: yellowgreen;
     }
     .item{
-      min-width: 100px;
-      min-height: 100px;
+      width: 150px;
+      /* height: 100px; */
       background-color: brown;
-      margin: 20px;
+      margin: 10px;
+      padding: 5px;
+    }
+    .item input{
+      width: 90%;
     }
   </style>
 </head>
@@ -38,13 +42,6 @@
       <label class="radio-group"><input type="radio" name="flexWrap" value="wrap-reverse"><span>wrap-reverse</span></label>
     </div>
   </div>
-  <!-- <div>
-    <h4>flex-flow(flex-direction和flex-wrap的简写)</h4>
-    <div>
-      <label class="radio-group"><input type="radio" name="flexFlow" checked value="row nowrap"><span>row nowrap</span></label>
-      <label class="radio-group"><input type="radio" name="flexFlow" value="column wrap"><span>column wrap</span></label>
-    </div>
-  </div> -->
   <div>
     <h4>justify-content</h4>
     <div>
@@ -55,9 +52,49 @@
       <label class="radio-group"><input type="radio" name="justifyContent" value="space-around"><span>space-around</span></label>
     </div>
   </div>
+  <div>
+    <h4>align-items</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="alignItems" value="flex-start"><span>flex-start</span></label>
+      <label class="radio-group"><input type="radio" name="alignItems" value="flex-end"><span>flex-end</span></label>
+      <label class="radio-group"><input type="radio" name="alignItems" value="center"><span>center</span></label>
+      <label class="radio-group"><input type="radio" name="alignItems" value="baseline"><span>baseline</span></label>
+      <label class="radio-group"><input type="radio" name="alignItems" checked value="stretch"><span>stretch</span></label>
+    </div>
+  </div>
+  <div>
+    <h4>align-content</h4>
+    <div>
+      <label class="radio-group"><input type="radio" name="alignContent" value="flex-start"><span>flex-start</span></label>
+      <label class="radio-group"><input type="radio" name="alignContent" value="flex-end"><span>flex-end</span></label>
+      <label class="radio-group"><input type="radio" name="alignContent" value="center"><span>center</span></label>
+      <label class="radio-group"><input type="radio" name="alignContent" value="space-between"><span>space-between</span></label>
+      <label class="radio-group"><input type="radio" name="alignContent" value="space-around"><span>space-around</span></label>
+      <label class="radio-group"><input type="radio" name="alignContent" checked value="stretch"><span>stretch</span></label>
+    </div>
+  </div>
   <hr>
   <div id="box" class="box">
-    <div class="item">0</div>
+    <div class="item">
+      <div class="index">0</div>
+      <!-- <div><input type="number" class="order" name="order" placeholder="order"></div>
+      <div><input type="number" class="flex-grow" name="flexGrow" placeholder="flex-grow"></div>
+      <div><input type="number" class="flex-shrink" name="flexShrink" placeholder="flex-shrink"></div>
+      <div><input type="number" class="flex-basis" name="flexBasis" placeholder="flex-basis"></div> -->
+    </div>
+  </div>
+  <hr>
+  <h2>Item 样式</h2>
+  <div>
+    <h4>align-self</h4>
+    <div>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" checked value="auto"><span>auto</span></label>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" value="flex-start"><span>flex-start</span></label>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" value="flex-end"><span>flex-end</span></label>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" value="center"><span>center</span></label>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" value="baseline"><span>baseline</span></label>
+      <label class="radio-group"><input type="radio" selector=".item" name="alignSelf" value="stretch"><span>stretch</span></label>
+    </div>
   </div>
   <script>
     window.addEventListener("load",function(){
@@ -66,15 +103,30 @@
       var template = document.querySelector(".item");
       for(let index = 1;index<10;index++){
         var node = template.cloneNode("div");
-        node.innerHTML = index;
+        node.querySelector(".index").innerHTML = index;
+        node.style.minHeight = (100 + index * 5) + "px"; 
         box.appendChild(node);
       }
       var inputs = document.querySelectorAll(".radio-group input");
       inputs.forEach(function(input){
         input.addEventListener("click",function(){
-          box.style[this.name] = this.value;
+          if(input.hasAttribute("selector")){
+            var selector = this.attributes.getNamedItem("selector").value;
+            var eles = document.querySelectorAll(selector);
+            eles.forEach((ele) => {
+              ele.style[this.name] = this.value;
+            })
+          }else{
+            box.style[this.name] = this.value;
+          }
         },false);
       });
+      box.addEventListener("change",function(e){
+        var target = e.target;
+        if(target.value){
+          target.parentNode.parentNode.style[target.name] = target.value;
+        }
+      },false);
     });
   </script>
 </body>
