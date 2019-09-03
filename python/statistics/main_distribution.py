@@ -3,10 +3,12 @@ import random,math
 import matplotlib.pyplot as plt
 
 # 返回数据(频段数组,频数数组,频率数组)
-def get_rate(data,rwidth=1):
+def get_rate(data,rwidth=1,min_data=None,max_data=None):
   len_data = len(data)
-  min_data = math.floor(min(data))
-  max_data = math.ceil(max(data)) 
+  if min_data == None:
+    min_data = math.floor(min(data))
+  if max_data == None:
+    max_data = math.ceil(max(data)) 
 
   x = []  #频段
   y = []  #频数
@@ -41,7 +43,7 @@ def chi_square(data):
       s = sample(data,n)
       x = sum([ num**2 for num in s ])
       g1.append(x)
-    f = get_rate(g1,0.5)
+    f = get_rate(g1,rwidth=0.1)
     xx = [f0[2] for f0 in f[0]]
     yy = [f2 for f2 in f[2]]
     plt.plot(xx,yy,color)
@@ -53,16 +55,18 @@ def t_distribution(data):
   # mo = [(1,"red")]
   for n,color in mo:
     g1 = []
-    for _ in range(1,500):
+    for _ in range(1,5000):
       s = sample(data,n)
-      x = sum([ num**2 for num in s ])
-      y = (sum(s) / n) / math.sqrt(x/n)
-      g1.append(y)
-    f = get_rate(g1,0.05)
+      X = sum(s) / n
+      Y = sum([ (num - X)**2 for num in s ]) / n
+      t = X / math.sqrt(Y/n)
+      g1.append(t)
+    f = get_rate(g1,0.1,min_data=-10,max_data=10)
     xx = [f0[2] for f0 in f[0]]
     yy = [f2 for f2 in f[2]]
     plt.plot(xx,yy,color)
   plt.show()
+
 def f_distribution(data):
   mo1 = [(20,40,"black"),(10,40,"red"),(5,40,"green")]
   mo2 = [(20,40,"darksalmon"),(20,30,"yellow"),(20,20,"blue"),(20,10,"black")]
@@ -88,5 +92,5 @@ if __name__ == "__main__":
   np.random.seed(0)
   s = np.random.normal(mu, sigma, sampleNo)
   # chi_square(s)
-  # t_distribution(s)
-  f_distribution(s)
+  t_distribution(s)
+  # f_distribution(s)
