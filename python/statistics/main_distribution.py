@@ -49,25 +49,44 @@ def chi_square(data):
   plt.show()
 
 def t_distribution(data):
-  # mo = [(1,"red"),(3,"green"),(6,"brown"),(10,"darksalmon"),(20,"gold")]
-  # for n,color in mo:
-  #   g1 = []
-  #   for _ in range(1,10000):
-  #     s = sample(data,n)
-  #     x = sum([ num**2 for num in s ])
-  #     y = (sum([ num for num in s ]) /n) / math.sqrt(x/n)
-  #     g1.append(y)
-  #   f = get_rate(g1)
-  #   xx = [f0[2] for f0 in f[0]]
-  #   yy = [f2 for f2 in f[2]]
-  #   plt.plot(xx,yy,color)
-  # plt.show()
-  pass
+  mo = [(2,"green"),(4,"brown"),(8,"gold"),(16,"darksalmon"),(32,"yellow"),(64,"blue"),(128,"black"),(256,"red")]
+  # mo = [(1,"red")]
+  for n,color in mo:
+    g1 = []
+    for _ in range(1,500):
+      s = sample(data,n)
+      x = sum([ num**2 for num in s ])
+      y = (sum(s) / n) / math.sqrt(x/n)
+      g1.append(y)
+    f = get_rate(g1,0.05)
+    xx = [f0[2] for f0 in f[0]]
+    yy = [f2 for f2 in f[2]]
+    plt.plot(xx,yy,color)
+  plt.show()
+def f_distribution(data):
+  mo1 = [(20,40,"black"),(10,40,"red"),(5,40,"green")]
+  mo2 = [(20,40,"darksalmon"),(20,30,"yellow"),(20,20,"blue"),(20,10,"black")]
+  for n1,n2,color in mo2:
+    g1 = []
+    for _ in range(1,1000):
+      sU = sample(data,n1)
+      sV = sample(data,n2)
+      U = sum([ num**2 for num in sU ]) / n1
+      V = sum([ num**2 for num in sV ]) / n2
+      g1.append(U / V)
+    f = get_rate(g1,0.2)
+    xx = [f0[2] for f0 in f[0]]
+    yy = [f2 for f2 in f[2]]
+    plt.plot(xx,yy,color)
+  plt.title('(20,40,"black"),(10,40,"red"),(5,40,"green")')
+  plt.show()
+
 
 if __name__ == "__main__":
   mu ,sigma = 0, 1
   sampleNo = 100000
   np.random.seed(0)
   s = np.random.normal(mu, sigma, sampleNo)
-  chi_square(s)
+  # chi_square(s)
   # t_distribution(s)
+  f_distribution(s)
