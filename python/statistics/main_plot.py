@@ -1,3 +1,4 @@
+# 基本绘图
 import matplotlib.pyplot as plt 
 import random
 from  collections import Counter

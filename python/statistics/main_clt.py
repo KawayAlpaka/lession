@@ -1,3 +1,4 @@
+# 中心极限定理
 import random
 import matplotlib.pyplot as plt
 from playStats.descriptive_stats import mean

@@ -1,0 +1,45 @@
+#bili{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-top: 1px gray solid;
+  border-bottom: 1px gray solid;
+  /* height: 30px; */
+}
+
+#bili .text{
+  padding: 6px 12px;
+}
+#bili::before{
+  position: relative;
+  right: 2px;
+  content: "";
+  width: 10px;
+  /* background-color: red; */
+  border-right: 2px solid gray;
+  border-top-right-radius: 10px 50%;
+  border-bottom-right-radius: 10px 50%;
+}
+#bili::after{
+  position: relative;
+  left: 8px;
+  content: "";
+  width: 10px;
+  /* background-color: blue; */
+  border-right: 2px solid gray;
+  border-top-right-radius: 10px 50%;
+  border-bottom-right-radius: 10px 50%;
+}
+
+#bili:hover{
+  border-top: 1px pink solid;
+  border-bottom: 1px pink solid;
+}
+
+#bili:hover::before{
+  border-right: 2px solid pink;
+}
+
+#bili:hover::after{
+  border-right: 2px solid pink;
+}

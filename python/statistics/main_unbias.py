@@ -1,3 +1,4 @@
+# 有偏估计和无偏估计
 from playStats.descriptive_stats import mean,variance
 import random
 import matplotlib.pyplot as plt

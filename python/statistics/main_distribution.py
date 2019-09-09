@@ -1,3 +1,4 @@
+# 用模拟采样的方式 画 卡方、t、f 分布图
 import numpy as np
 import random,math
 import matplotlib.pyplot as plt

@@ -1,3 +1,4 @@
+# 点估计和区间估计
 from playStats.descriptive_stats import mean,variance,std
 from playStats.interval_est import mean_ci_est,var_ci_est
 
