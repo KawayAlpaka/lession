@@ -1,4 +1,4 @@
-from playStats.hypothesis_testing import z_test,t_test,t_test_paired
+from playStats.hypothesis_testing import z_test,t_test,t_test_paired,chi2_test,f_test
 from playStats.interval_est import mean_ci_est,mean_diff_ci_z_est
 
 if __name__ == "__main__":
@@ -18,13 +18,16 @@ if __name__ == "__main__":
   # print(mean_diff_ci_z_est(data1,data2,0.05,5,15))
 
 
-  ## t检验 适用于总体方差未知的情况
-  # 单个样本 t检验
-  print(t_test(data1,tail="both",mu=35))
-  # 两个样本 t检验
-  print(t_test(data1,data2,tail="both",mu=0,equal=True))
-  print(t_test(data1,data2,tail="both",mu=0,equal=False))
-  # 配对 t检验
-  print(t_test_paired(data1,data2,tail="both",mu=0))
+  # ## t检验 适用于总体方差未知的情况
+  # # 单个样本 t检验
+  # print(t_test(data1,tail="both",mu=35))
+  # # 两个样本 t检验
+  # print(t_test(data1,data2,tail="both",mu=0,equal=True))
+  # print(t_test(data1,data2,tail="both",mu=0,equal=False))
+  # # 配对 t检验
+  # print(t_test_paired(data1,data2,tail="both",mu=0))
 
-  
+  # 卡方检验(检验方差值)
+  print(chi2_test(data1,tail="both",sigma2=5))
+  # f检验(检验方差比)
+  print(f_test(data1,data2,tail="both",ratio=1))
