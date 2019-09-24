@@ -32,3 +32,17 @@ class A:
   def funcname(parameter_list):
     pass
     
+arr = [11,22,33]
+print(id(arr)) 
+arr.append(44)
+print(id(arr)) 
+id = id(arr)
+print(id)
+
+def multipliers1():
+  return [lambda x: i * x for i in range(4)]
+print([m(2) for m in multipliers1()])
+def multipliers2():
+  return [(lambda x: i * x)(2) for i in range(4)]
+print(multipliers2())
+print([ i for i in range(4)])

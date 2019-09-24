@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>avatar</title>
+  <link href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label class="btn btn-warning" for="file-input">
+      <span>选择头像</span>
+      <input style="display: none" type="file" class="" accept="image/jpeg, image/png, image/gif" id="file-input" >
+    </label>
+    <div class="btn btn-success" id="save-img" onclick="exportCanvasAsPNG()">保存图片</div>
+  </div>
+  <hr>
+  <div class="result-panel">
+    <canvas width="300" height="300" class="canvas" id="canvas"></canvas>
+    <hr>
+    <div class="add-position">
+      <div class="btn btn-default btn-sm" id="position1">左上角</div>
+      <div class="btn btn-default btn-sm" id="position2">右上角</div>
+      <div class="btn btn-default btn-sm" id="position3">左下角</div>
+      <div class="btn btn-default btn-sm" id="position4">左下角</div>
+    </div>
+    <br>
+    <div>
+      <input id="scale-input" type="range" max="1" min="0" step="0.01" value="0.25">
+    </div>
+  </div>
+
+
+  <script>
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var tagImg = new Image();     // 标签图片
+    var avatarImg = new Image();  // 头像图片
+    var zanbi = 0.25;
+    tagImg.src = "/img/艾丝蒂尔.png"; 
+    tagImg.onload = function(){
+      refresh();
+    };
+    tagImg.onerror = function(){
+      window.alert('标签加载失败，请重试');
+    };
+    avatarImg.onload = function(){
+      refresh();
+    }
+    avatarImg.onerror = function(){
+      window.alert('头像加载失败，请重试');
+    };
+
+    // 载入头像图片
+    var fileInput = document.getElementById("file-input");
+    fileInput.addEventListener("change",function(){
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e){
+        avatarImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      resultPanel.style.display = "block";
+      saveImg.style.display = "inline-block";
+    },false);
+
+
+    // 绘图
+    var refresh = function(){
+      context.clearRect(0,0,canvas.width,canvas.height);  
+      context.drawImage(avatarImg, 0, 0,300,300);
+      var activeBtn = addPositionPanel.querySelector(".btn-success");
+      // 计算缩放比例
+      var width = tagImg.width;
+      var height = tagImg.height;
+      var maxLen = Math.max(width,height)
+      var scale =  canvas.width * zanbi / maxLen ;
+      width = width * scale;
+      height = height * scale;
+
+      if(activeBtn){
+        switch(activeBtn.id){
+          case "position1": context.drawImage(tagImg, 0, 0,width,height); break;
+          case "position2": context.drawImage(tagImg, canvas.width - width, 0,width,height); break;
+          case "position3": context.drawImage(tagImg, 0, canvas.height - height,width,height); break;
+          case "position4": context.drawImage(tagImg, canvas.width - width, canvas.height - height,width,height); break;
+          default: context.drawImage(tagImg, 0, 0,width,height); break;
+        }
+      }else{
+        context.drawImage(tagImg, 0, 0,width,height);
+      }
+    }
+
+    // 设置标签位置
+    var addPositionPanel = document.querySelector(".add-position");
+    addPositionPanel.addEventListener("click",function(e){
+      if(e.target.classList.contains("btn")){
+        var activeBtn = addPositionPanel.querySelector(".btn-success");
+        if(activeBtn){
+          activeBtn.classList.replace("btn-success","btn-default");
+        }
+        e.target.classList.replace("btn-default","btn-success");
+        refresh();
+      }
+    },false);
+
+
+    // 设置缩放比例
+    var scaleInput = document.querySelector("#scale-input");
+    scaleInput.addEventListener("input",function(){
+      zanbi = scaleInput.value;
+      refresh();
+    },false);
+
+    // 初始时隐藏部分组件
+    var resultPanel = document.querySelector(".result-panel");
+    resultPanel.style.display = "none";
+    var saveImg = document.querySelector("#save-img");
+    saveImg.style.display = "none";
+
+    // 下载图片
+    function exportCanvasAsPNG() {
+      var MIME_TYPE = "image/png";
+      var imgURL = canvas.toDataURL(MIME_TYPE);
+      var dlLink = document.createElement('a');
+      dlLink.download = Date.now() + ".png";
+      dlLink.href = imgURL;
+      dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      document.body.removeChild(dlLink);
+    }
+  </script>
+</body>
+</html>

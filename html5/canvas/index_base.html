@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        .canvas{
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="600" class="canvas" id="canvas"></canvas>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    //使用context进行绘制
+    function drawLine() {
+        context.moveTo(0,0);
+        context.lineTo(50,50);
+        context.lineTo(0,50);
+        context.closePath();
+        context.lineWidth = 2;
+        context.strokeStyle = "#058";
+        context.stroke();
+
+        context.beginPath();
+        context.strokeStyle="red";
+        context.moveTo(100,0);
+        context.lineTo(150,50);
+        context.moveTo(100,0);
+        context.lineTo(100,50);
+        context.stroke();
+    }
+    function drawRectangle() {
+        context.beginPath();
+        context.fillStyle = "blue";
+//        context.rect( 0 , 100 , 100 , 100 );
+        context.fillRect( 0 , 100 , 100 , 100 );
+        context.strokeRect( 0 , 100 , 100 , 100 );
+    }
+    drawLine();
+    drawRectangle();
+
+
+</script>
+</body>
+</html>
