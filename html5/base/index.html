@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <base href="/base/" target="_blank">
+  <title>base demo</title>
+</head>
+<body>
+  <script>
+    var ajax = function(url){
+      fetch(url).then((res)=>{console.log(res)});
+      var xhr = new XMLHttpRequest();
+      xhr.open("get",url);
+      xhr.send();
+    };
+  </script>
+  <div>
+    <h4>绝对路径</h4>
+    <a href="/a-absolute">/abc</a>
+    <img src="/img-absolute.jpg" alt="">
+    <div style="background-image: url('/style-back-absolute.jpg');"></div>
+    <div class="back-absolute"></div>
+    <script src="/script-absolute.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+      ajax("/ajax-absolute");
+    </script>
+  </div>
+  <div>
+    <h4>相对路径</h4>
+    <a href="a-relative">abc</a>
+    <img src="img-relative.jpg" alt="">
+    <div style="background-image: url('style-back-relative.jpg');"></div>
+    <div class="back-relative"></div>
+    <script src="script-relative.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+      ajax("ajax-relative");
+    </script>
+  </div>
+  <div>
+    <h4>结论:</h4>
+    <div>1、base影响到几乎所有<strong>相对地址</strong>的请求。如：XMLHttpRequest、fetch、a的href、img的src、script的src、link的href、元素背景样式。</div>
+    <div>2、<strong>绝对地址</strong>不受影响。</div>
+    <div>3、引入的css中引用到的资源，都是相对于css文件的，无视html中的base。</div>
+  </div>
+</body>
+</html>

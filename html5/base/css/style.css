@@ -1,0 +1,7 @@
+.back-absolute{
+  background-image: url('/css-back-absolute.jpg');
+}
+
+.back-relative{
+  background-image: url('css-back-relative.jpg');
+}
