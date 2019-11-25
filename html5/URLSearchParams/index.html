@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>URLSearchParams</title>
+</head>
+<body>
+  <h2>URLSearchParams</h2>
+  <div id="result"></div>
+  <script>
+    (function(){
+      if(location.search.length < 1){
+        location.href = "?aa=a1&aa=a2";
+        return;
+      }
+      var urlSearchParams = new URLSearchParams(location.search);
+      var has_aa = urlSearchParams.has("aa");
+      var get_aa = urlSearchParams.get("aa");
+      var getAll_aa = urlSearchParams.getAll("aa");
+      document.querySelector("#result").innerHTML = `has_aa = ${has_aa};get_aa = ${get_aa};getAll_aa = ${getAll_aa};`;
+    })();  
+    </script>
+</body>
+</html>
