@@ -1,7 +1,7 @@
 if (typeof module != "undefined") {
     // var Promise = require("./Promise_m");
 }
-
+var Promise = require("./Promise_m");
 // 测试then
 console.log("A:");
 var p1 = new Promise(function (resolve, reject) {
@@ -119,6 +119,20 @@ Promise.race([new Promise(function (resolve, reject) {
     console.log(err.message)
 });
 
+// 测试运行顺序  结论：正常运行的比较快
+(function(){
+    let resolved = Promise.resolve();
+    let rejected = Promise.reject();
+    setTimeout(function(){
+        resolved.then(function(){
+            console.log("已经resolve的promise运行then");
+        });
+        rejected.catch(function(){
+            console.log("已经reject的promise运行catch");
+        });
+        console.log("正常log");
+    },100);
+})();
 
 
 // _temp code

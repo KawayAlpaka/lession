@@ -120,6 +120,12 @@
         }
     };
 
+    Promise.reject = function(obj){
+        return new Promise(function (resolve,reject) {
+            reject(obj);
+        });
+    };
+
     Promise.all = function (arr) {
         var promise = new Promise(function (resolve, reject) {
             var results = [];
