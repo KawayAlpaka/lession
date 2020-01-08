@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+  </head>
+  <body>
+    <!-- <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+      <%=chunk %>
+    <% } %> -->
+    <% var bundleStr = ""; var _source = compilation.assets['bundle.js']._source; %>
+    <% for (var i=0;i < _source.children.length;i++) { %>
+      <% if( typeof _source.children[i] == 'string' ) bundleStr = bundleStr + _source.children[i]; %><% if(_source.children[i]._source) bundleStr = bundleStr + _source.children[i]._source._value; %><% if(_source.children[i]._value) bundleStr = bundleStr + _source.children[i]._value; %>
+    <% } %>
+    <script>
+      <%=bundleStr %>
+    </script>
+</html>
