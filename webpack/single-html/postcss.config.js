@@ -4,7 +4,7 @@ module.exports = {
     // 'postcss-import': {},
     // 'postcss-cssnext': {},
     'autoprefixer': {
-      browsers:[
+      overrideBrowserslist:[
         'last 10 version',
         "Explorer >= 8",
         "iOS >= 8",

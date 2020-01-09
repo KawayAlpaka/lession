@@ -2,17 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My App</title>
+    <title>单文件页面打包DEMO</title>
+    <style>
+      <%= compilation.assets['css/style.css'].source()%>
+    </style>
   </head>
   <body>
-    <!-- <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-      <%=chunk %>
-    <% } %> -->
-    <% var bundleStr = ""; var _source = compilation.assets['bundle.js']._source; %>
-    <% for (var i=0;i < _source.children.length;i++) { %>
-      <% if( typeof _source.children[i] == 'string' ) bundleStr = bundleStr + _source.children[i]; %><% if(_source.children[i]._source) bundleStr = bundleStr + _source.children[i]._source._value; %><% if(_source.children[i]._value) bundleStr = bundleStr + _source.children[i]._value; %>
-    <% } %>
+    <h3>单文件页面打包DEMO</h3>
+    <img src="<%= require('./img/blue.jpg') %>" />
+    <div class="back">class-back</div>
+    <div style="background-image:url('<%= require("./img/blue.jpg") %>')">style-back</div>
     <script>
-      <%=bundleStr %>
+      <%= compilation.assets['bundle.js'].source() %>
     </script>
+  </body>
 </html>

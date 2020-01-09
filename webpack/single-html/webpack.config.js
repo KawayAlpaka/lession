@@ -2,6 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   mode: "development",
@@ -14,29 +15,41 @@ module.exports = {
     rules: [
       {
         test: /\.ejs$/,
-        loader: [{
-          loader: 'ejs-loader',
-          options: {}
-        },
-      ],
+        loader: [
+          {
+            loader: 'ejs-loader',
+            options: {}
+          }
+        ],
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,
         use: [
-          // //  ▲ 要输出到 html文件中，这里不能使用 MiniCssExtractPlugin，二球要用 style-loader。
-          // {
-          //   loader: MiniCssExtractPlugin.loader
-          // },
-          // {
-          //   loader: "css-loader",
-          //   options: {
-          //     sourceMap: true
-          //   }
-          // },
           {
-            loader: "style-loader",
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
             options: {
-              // sourceMap: true
+              sourceMap: true
             }
           },
           { 
@@ -52,19 +65,43 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 20000000,
+              fallback:{
+                loader: 'file-loader',
+                options: {
+                  outputPath: "img/",
+                  useRelativePath : true
+                  // publicPath: "../img/"
+                }
+              }
+            }
+          },
+        ]
       }
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'My App',
       filename: path.resolve(__dirname, 'dist/index.html'),
       template: path.resolve(__dirname, 'src/index.ejs'),
       inject: false
     }),
-    // // 要输出到 html中，则不需要 MiniCssExtractPlugin
-    // new MiniCssExtractPlugin({
-    //   filename: "css/style.[hash].css",
-    // })
+    new HtmlWebpackPlugin({
+      title: 'My App',
+      filename: path.resolve(__dirname, 'dist/html_test.html'),
+      template: path.resolve(__dirname, 'src/index.html'),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "css/style.css",
+    })
   ]
 };
