@@ -3,17 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <title>单文件页面打包DEMO</title>
-    <style>
-      <%= compilation.assets['css/style.css'].source()%>
-    </style>
+    <% for (var css of htmlWebpackPlugin.files.css) { %>
+      <style>
+        <%= compilation.assets[css].source()%>
+      </style>
+    <% } %>
+
   </head>
   <body>
     <h3>单文件页面打包DEMO</h3>
     <img src="<%= require('./img/blue.jpg') %>" />
     <div class="back">class-back</div>
     <div style="background-image:url('<%= require("./img/blue.jpg") %>')">style-back</div>
-    <script>
-      <%= compilation.assets['bundle.js'].source() %>
-    </script>
+    <% for (var js of htmlWebpackPlugin.files.js) { %>
+      <script>
+        <%= compilation.assets[js].source() %>
+      </script>
+    <% } %>
   </body>
 </html>
