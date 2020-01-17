@@ -1,0 +1,12 @@
+.title{
+  text-align: center;
+}
+
+.panel{
+  width: 39.2%;
+  margin: 20px auto;
+}
+
+.panel-footer{
+  text-align: right;
+}
