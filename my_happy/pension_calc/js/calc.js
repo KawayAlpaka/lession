@@ -38,7 +38,6 @@
 
   var calc = function(){
     var factors = getFactors();
-    console.log(factors);
     var perZhishu = [];
     var nianshu = 0;
     var personalPaymentProportion = factors.socialFactors.personalPaymentProportion / 100;
@@ -49,6 +48,12 @@
     var payBaseIncreaseRatio = factors.personalFactors.payBaseIncreaseRatio / 100;
     var personalAccountAmount = 0;
     var companyAccountAmount = 0;
+
+    // 验证
+    if(factors.socialFactors.retirementAge < factors.personalFactors.endPayAge){
+      alert("法定退休年龄不得小于终止缴费年龄");
+    }
+
     for(let age = factors.personalFactors.startPayAge;age<factors.socialFactors.retirementAge;age++){
       if(age < factors.personalFactors.endPayAge){
         perZhishu.push(payBase / averageSalary);
