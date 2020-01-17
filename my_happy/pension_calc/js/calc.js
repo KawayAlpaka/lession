@@ -10,17 +10,53 @@
   var socialFactorsEle = document.querySelector("#social-factors");
   var personalFactorsEle = document.querySelector("#pasonal-factors");
   var investmentFactorsEle = document.querySelector("#investment-factors");
+
+  var setting = {};
+  setting.key = "pension-calc-factors";
+  setting.save = function(factors){
+    if(!factors){
+      factors = getFactors();
+    }
+    localStorage.setItem(setting.key,JSON.stringify(factors));
+  };
+  setting.set = function(){
+    var factors = JSON.parse(localStorage.getItem(setting.key));
+    if(factors){
+      Object.keys(factors.socialFactors).forEach((key)=>{
+        let input = socialFactorsEle.querySelector(`input[name=${key}]`);
+        if(input){
+          input.value = factors.socialFactors[key];
+        }
+      });
+      Object.keys(factors.personalFactors).forEach((key)=>{
+        let input = personalFactorsEle.querySelector(`input[name=${key}]`);
+        if(input){
+          input.value = factors.personalFactors[key];
+        }
+      });
+      Object.keys(factors.investmentFactors).forEach((key)=>{
+        let input = investmentFactorsEle.querySelector(`input[name=${key}]`);
+        if(input){
+          input.value = factors.investmentFactors[key];
+        }
+      });
+    }
+  };
+
   var getFactors = function(){
+    // 社会因素
     var socialFactors = {};
     var inputs = socialFactorsEle.querySelectorAll("input[name]");
     inputs.forEach((input)=>{
       socialFactors[input.name] = parseFloat(input.value);
     });
+    // 个人因素
     var personalFactors = {};
     inputs = personalFactorsEle.querySelectorAll("input[name]");
     inputs.forEach((input)=>{
       personalFactors[input.name] = parseFloat(input.value);
     });
+    // 投资环境因素
     var investmentFactors = {};
     inputs = investmentFactorsEle.querySelectorAll("input[name]");
     inputs.forEach((input)=>{
@@ -45,6 +81,9 @@
 
   var calc = function(){
     var factors = getFactors();
+
+    setting.save(factors);
+
     var perZhishu = [];
     var nianshu = 0;
     var personalPaymentProportion = factors.socialFactors.personalPaymentProportion / 100;
@@ -102,10 +141,14 @@
     result.pensionBase = result.averageSalary * ( 1 + result.zhishu) / 2 * nianshu * 0.01;
     result.pensionPersonal = personalAccountAmount / factors.socialFactors.monthlyCount;
     result.pensionTotal = result.pensionBase + result.pensionPersonal;
+    result.pensionTotalYear = result.pensionTotal * 12;
 
     console.log(result);
     showResult(result);
   };
+
+  setting.set();
+
   calc();
   document.getElementById("form").onsubmit = function(){
     calc();
