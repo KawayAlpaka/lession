@@ -9,6 +9,7 @@
 
   var socialFactorsEle = document.querySelector("#social-factors");
   var personalFactorsEle = document.querySelector("#pasonal-factors");
+  var investmentFactorsEle = document.querySelector("#investment-factors");
   var getFactors = function(){
     var socialFactors = {};
     var inputs = socialFactorsEle.querySelectorAll("input[name]");
@@ -20,9 +21,15 @@
     inputs.forEach((input)=>{
       personalFactors[input.name] = parseFloat(input.value);
     });
+    var investmentFactors = {};
+    inputs = investmentFactorsEle.querySelectorAll("input[name]");
+    inputs.forEach((input)=>{
+      investmentFactors[input.name] = parseFloat(input.value);
+    });
     return {
       socialFactors,
-      personalFactors
+      personalFactors,
+      investmentFactors
     };
   };
 
@@ -49,6 +56,11 @@
     var personalAccountAmount = 0;
     var companyAccountAmount = 0;
 
+    var investmentProfitPersonal = 0;
+    var investmentProfitCompany = 0;
+    var investmentProfitRate = factors.investmentFactors.investmentProfitRate / 100;
+
+
     // 验证
     if(factors.socialFactors.retirementAge < factors.personalFactors.endPayAge){
       alert("法定退休年龄不得小于终止缴费年龄");
@@ -58,8 +70,18 @@
       if(age < factors.personalFactors.endPayAge){
         perZhishu.push(payBase / averageSalary);
         nianshu++;
+
         personalAccountAmount += payBase * personalPaymentProportion * 12;
         companyAccountAmount += payBase * companyPaymentProportion * 12;
+
+        // 计算投资收入
+        investmentProfitPersonal += investmentProfitPersonal * investmentProfitRate + payBase * personalPaymentProportion * 12;
+        investmentProfitCompany += investmentProfitCompany * investmentProfitRate + payBase * companyPaymentProportion * 12;
+
+      }else{
+        // 如果停缴了，不继续注资，但还是要利滚利
+        investmentProfitPersonal += investmentProfitPersonal * investmentProfitRate;
+        investmentProfitCompany += investmentProfitCompany * investmentProfitRate;
       }
       averageSalary = averageSalary * ( 1 + averageSalaryIncreaseRatio);
       payBase = payBase * ( 1 + payBaseIncreaseRatio);
@@ -68,15 +90,19 @@
     // 如果不是新开一年的情况
     averageSalary = averageSalary / ( 1 + averageSalaryIncreaseRatio );
 
-    var result = {};
-    result.nianshu = nianshu;
+    var result = {
+      nianshu,
+      averageSalary,
+      personalAccountAmount,
+      companyAccountAmount,
+      investmentProfitPersonal,
+      investmentProfitCompany
+    };
     result.zhishu = sum(...perZhishu) / nianshu;
-    result.averageSalary = averageSalary;
     result.pensionBase = result.averageSalary * ( 1 + result.zhishu) / 2 * nianshu * 0.01;
-    result.personalAccountAmount = personalAccountAmount;
-    result.companyAccountAmount = companyAccountAmount;
     result.pensionPersonal = personalAccountAmount / factors.socialFactors.monthlyCount;
     result.pensionTotal = result.pensionBase + result.pensionPersonal;
+
     console.log(result);
     showResult(result);
   };

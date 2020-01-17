@@ -102,71 +102,105 @@
         <button type="submit" class="btn btn-warning">计算</button>
       </div>
     </div>
-    
+    <div id="investment-factors" class="panel panel-success">
+      <div class="panel-heading">投资分析（养老金用于投资）</div>
+      <div class="panel-body">
+        <div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">年收益率</div>
+              <input name="investmentProfitRate" type="number" class="form-control" value="5" required>
+              <div class="input-group-addon">%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-warning">计算</button>
+      </div>
+    </div>
   </form>
-  <div id="result-panel" class="panel panel-warning">
-    <div class="panel-heading">计算结果</div>
-    <div class="panel-body">
-      <div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">缴费年限</div>
-            <input name="nianshu" type="number" class="form-control" placeholder="共缴费年数">
-            <div class="input-group-addon">年</div>
+  <div id="result-panel" >
+    <div class="panel panel-warning">
+      <div class="panel-heading">计算结果</div>
+      <div class="panel-body">
+        <div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">缴费年限</div>
+              <input name="nianshu" type="number" class="form-control" placeholder="共缴费年数">
+              <div class="input-group-addon">年</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">指数</div>
-            <input name="zhishu" type="number" class="form-control" placeholder="a1/Al+a2/AZ+ ....+an/An)/N">
-            <!-- <div class="input-group-addon"></div> -->
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">指数</div>
+              <input name="zhishu" type="number" class="form-control" placeholder="a1/Al+a2/AZ+ ....+an/An)/N">
+              <!-- <div class="input-group-addon"></div> -->
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">上年度在岗职工月平均工资</div>
-            <input name="averageSalary" type="number" class="form-control">
-            <div class="input-group-addon">元/月</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">上年度在岗职工月平均工资</div>
+              <input name="averageSalary" type="number" class="form-control">
+              <div class="input-group-addon">元/月</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">个人账户余额</div>
-            <input name="personalAccountAmount" type="number" class="form-control" placeholder="账户中个人所交的总额">
-            <div class="input-group-addon">元</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">个人账户余额</div>
+              <input name="personalAccountAmount" type="number" class="form-control" placeholder="账户中个人所交的总额">
+              <div class="input-group-addon">元</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">统筹账户余额</div>
-            <input name="companyAccountAmount" type="number" class="form-control" placeholder="账户中企业所交的总额（不参与计算养老金，仅了解）">
-            <div class="input-group-addon">元</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">统筹账户余额</div>
+              <input name="companyAccountAmount" type="number" class="form-control" placeholder="账户中企业所交的总额（不参与计算养老金，仅了解）">
+              <div class="input-group-addon">元</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">基础养老金</div>
-            <input name="pensionBase" type="number" class="form-control" placeholder="社会平均工资 * (1 + 指数) ÷ 2 × 缴费年限 × 1%">
-            <div class="input-group-addon">元/月</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">基础养老金</div>
+              <input name="pensionBase" type="number" class="form-control" placeholder="社会平均工资 * (1 + 指数) ÷ 2 × 缴费年限 × 1%">
+              <div class="input-group-addon">元/月</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">个人账户养老金</div>
-            <input name="pensionPersonal" type="number" class="form-control" placeholder="个人账户余额 ÷ 计发月数">
-            <div class="input-group-addon">元/月</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">个人账户养老金</div>
+              <input name="pensionPersonal" type="number" class="form-control" placeholder="个人账户余额 ÷ 计发月数">
+              <div class="input-group-addon">元/月</div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">总养老金</div>
-            <input name="pensionTotal" type="number" class="form-control" placeholder="基础养老金 + 个人账户养老金">
-            <div class="input-group-addon">元/月</div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">总养老金</div>
+              <input name="pensionTotal" type="number" class="form-control" placeholder="基础养老金 + 个人账户养老金">
+              <div class="input-group-addon">元/月</div>
+            </div>
+          </div>
+          <h3>如果用于投资：</h3>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">个人部分最终余额</div>
+              <input name="investmentProfitPersonal" type="number" class="form-control" placeholder="个人部分利滚利后的余额">
+              <div class="input-group-addon">元</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">企业部分最终余额</div>
+              <input name="investmentProfitCompany" type="number" class="form-control" placeholder="企业部分利滚利后的余额">
+              <div class="input-group-addon">元</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <script src="./js/calc.js"></script>
 </body>
 </html>
