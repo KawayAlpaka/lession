@@ -92,6 +92,7 @@
     var averageSalaryIncreaseRatio = factors.socialFactors.averageSalaryIncreaseRatio / 100;
     var payBase = factors.personalFactors.payBase;
     var payBaseIncreaseRatio = factors.personalFactors.payBaseIncreaseRatio / 100;
+    var accountingInterestRate = factors.socialFactors.accountingInterestRate / 100;
     var personalAccountAmount = 0;
     var companyAccountAmount = 0;
 
@@ -110,15 +111,18 @@
         perZhishu.push(payBase / averageSalary);
         nianshu++;
 
-        personalAccountAmount += payBase * personalPaymentProportion * 12;
+        personalAccountAmount += personalAccountAmount * accountingInterestRate + payBase * personalPaymentProportion * 12;
         companyAccountAmount += payBase * companyPaymentProportion * 12;
 
         // 计算投资收入
         investmentProfitPersonal += investmentProfitPersonal * investmentProfitRate + payBase * personalPaymentProportion * 12;
         investmentProfitCompany += investmentProfitCompany * investmentProfitRate + payBase * companyPaymentProportion * 12;
 
-      }else{
+      }else{ 
+        // 停止缴费，但还没退休的情况
         // 如果停缴了，不继续注资，但还是要利滚利
+        personalAccountAmount += personalAccountAmount * accountingInterestRate;
+
         investmentProfitPersonal += investmentProfitPersonal * investmentProfitRate;
         investmentProfitCompany += investmentProfitCompany * investmentProfitRate;
       }
