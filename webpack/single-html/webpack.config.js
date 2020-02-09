@@ -70,7 +70,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif|jpeg)$/,
+        test: /\.(png|jpg|gif|jpeg|ani)$/,
         use: [
           {
             loader: 'url-loader',
@@ -86,6 +86,19 @@ module.exports = {
               }
             }
           },
+        ]
+      },
+      {
+        test: /\.(cur)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: "img/",
+              useRelativePath : true
+              // publicPath: "../img/"
+            }
+          }
         ]
       }
     ]

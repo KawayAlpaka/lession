@@ -6,4 +6,8 @@ h3{
   width: 100px;
   height: 100px;
   background-image: url("../img/blue.jpg");
+  /* ani 图片 url-loader 可以解析但不生效 */
+  /* cursor: url("../img/dragselect.ani"),pointer; */
+  /* cur 图片 url-loader 不可以解析，会出错 */
+  /* cursor: url("http://localhost:8080/img/2706e9b39057a4fa2f18a051824de07e.cur"),pointer; */
 }
