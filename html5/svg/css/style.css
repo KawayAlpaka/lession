@@ -1,0 +1,29 @@
+.test-panel{
+  display: inline-block;
+  padding: 10px;
+  border: #ddd solid 1px;
+  margin: 10px;
+  vertical-align: top;
+}
+
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: aqua;
+  border: 10px solid blueviolet;
+}
+.circle:hover {
+  background-color: yellowgreen;
+}
+.svg-circle:hover {
+  fill:blue;
+}
+
+.bubble{
+  display: inline-block;
+  padding: 12px;
+  background-image: url('/img/bubble.svg');
+  background-size: 100% 100%;
+}
