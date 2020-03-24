@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas跨域相关</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext("2d");
+    var src = "https://test-1251095557.cos.ap-chengdu.myqcloud.com/main/首页banner.jpg";
+    // var src = "https://baize-1257801634.cos.ap-chengdu.myqcloud.com/taskStudent/img/5059cd25-a68c-4444-81ea-ad8ad726d697.jpg";
+    (function(){
+      // var img = document.createElement('img');
+      // img.src = src;
+
+      // context.drawImage(src, 0, 0, 400, 400);
+      // img.onload = function () {
+      //   context.drawImage(src, 0, 0, 400, 400);
+      // };
+      // setTimeout(()=>{
+      //   console.log("re");
+      //   context.drawImage(src, 0, 0, 400, 400);
+      // },5000);
+    })();
+    fetch(src)
+      .then((res)=>{
+        res.blob()
+          .then((blob)=>{
+            console.log(blob);
+            let a = new FileReader();
+            a.onload =  (e) => {
+              console.log(e.target.result);
+            }
+            a.readAsDataURL(blob);
+          });
+      });
+  </script>
+</body>
+
+</html>
