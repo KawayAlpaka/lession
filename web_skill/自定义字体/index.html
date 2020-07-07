@@ -15,6 +15,12 @@
     <label>
         <input type="radio" name="font-family" value="hksv" onclick="radioClick(event)" ><span>华康少女</span>
     </label>
+    <label>
+      <input type="radio" name="font-family" value="pingfan-bold" onclick="radioClick(event)" ><span>平方bold</span>
+    </label>
+    <label>
+      <input type="radio" name="font-family" value="pingfan-extra-light" onclick="radioClick(event)" ><span>平方extra-light</span>
+    </label>
   </div>
   <h2 id="test" style="font-family:'Microsoft Yahei'">爱我中华</h2>
   <script>
@@ -22,7 +28,6 @@
     var radioClick = function(e){
       test.style.fontFamily = e.target.value;
     };
-    
   </script>
 </body>
 </html>

@@ -4,3 +4,17 @@
   font-weight: bold;
   font-style: italic;
 }
+
+@font-face {
+  font-family: 'pingfan-bold';
+  src: url('../字体文件/PingFangBold.ttf') format('truetype');
+  /* font-weight: bold;
+  font-style: italic; */
+}
+
+@font-face {
+  font-family: 'pingfan-extra-light';
+  src: url('../字体文件/PingFangExtraLight.ttf') format('truetype');
+  /* font-weight: bold;
+  font-style: italic; */
+}
