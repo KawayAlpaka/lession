@@ -1,0 +1,14 @@
+.border-image{
+  border:30px solid transparent;
+  width:300px;
+  padding:10px 20px;
+  overflow: hidden;
+
+  /* border-image:url(../img/border.png) 30 30 round; */
+  border-image-source: url(../img/border.png);
+  /* border-image-slice决定了图片中的那些部分是边框，那些部分是角 */
+  border-image-slice: 30 30;
+  border-image-width: 15px 15px;
+  border-image-outset: 0px 0px;
+  border-image-repeat: round;
+}
