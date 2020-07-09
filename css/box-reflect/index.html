@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>box-reflect</title>
+  <style>
+    html,body{
+      margin:50px 0;
+    }
+    .reflect-below{
+      display: inline-block;
+      margin:0 auto;
+      -webkit-box-reflect:below 0 -webkit-linear-gradient(transparent,transparent 50%,rgba(255,255,255,.3));
+      font:bold 60px/1.231 georgia,sans-serif;
+      text-transform:uppercase;
+    }
+    .reflect-above{
+      display: inline-block;
+      margin:0 auto;
+      -webkit-box-reflect: above 0 -webkit-linear-gradient(transparent,transparent 50%,rgba(255,255,255,.3));
+      font:bold 60px/1.231 georgia,sans-serif;
+      text-transform:uppercase;
+    }
+    .reflect-right{
+      display: inline-block;
+      margin:0 auto;
+      -webkit-box-reflect: right 0 linear-gradient(to right,transparent,transparent 50%,rgba(255,255,255,.3));
+      font:bold 60px/1.231 georgia,sans-serif;
+      text-transform:uppercase;
+    }
+    </style>
+</head>
+<body>
+  <div>
+    <div class="reflect-below">你看到倒影了么？haha</div>
+  </div>
+  <div style="height: 150px;"></div>
+  <div>
+    <div class="reflect-above">你看到倒影了么？haha</div>
+  </div>
+  <div style="height: 150px;"></div>
+  <div>
+    <div class="reflect-right">你看到倒影了么？haha</div>
+  </div>
+</body>
+</html>
