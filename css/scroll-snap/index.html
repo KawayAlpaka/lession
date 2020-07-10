@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scroll-snap</title>
+  <style>
+    html,body,.container{
+      height: 100%;
+      margin: 0;
+    }
+
+    .container {
+      overflow-y: scroll;
+
+      /* scroll-snap-type: mandatory; */
+      scroll-snap-points-y: repeat(300px);
+      scroll-snap-type: y mandatory;
+    }
+
+    .child {
+      scroll-snap-align: start;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class='container'>
+    <section class='child' style="background-color: aqua;"></section>
+    <section class='child' style="background-color: cadetblue;"></section>
+    <section class='child' style="background-color: coral;"></section>
+</div>
+</body>
+</html>
