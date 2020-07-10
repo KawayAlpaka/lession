@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>supports</title>
+  <style>
+    .box{
+      height: 100px;
+    }
+    @supports (background-color: green) {
+      .green {
+        background-color: green;
+      }
+    }
+    @supports not (background-color: yellow_green) {
+      .yellow-green {
+        background-color: yellowgreen;
+      }
+    }
+    @supports (background-color: blue_violet) {
+      .blue-violet {
+        background-color: blue_violet;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box green">green</div>
+  <div class="box yellow-green">yellow-green</div>
+  <div class="box blue-violet">blue-violet</div>
+</body>
+</html>
