@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid</title>
+  <style>
+    body{
+      margin: 0;
+    }
+    .grid{
+      background-color: brown;
+      min-height: 100px;
+    }
+    .column{
+      background-color:coral;
+    }
+    .grid-fr {
+      display: grid;
+      /* grid-template-columns: repeat(4, calc((100% - 10px * 3)/ 4)); */
+      grid-template-columns: 250px repeat(12, 1fr);
+      grid-column-gap: 10px;
+    }
+    .column-span{
+      grid-column: 2;
+    }
+  </style>
+</head>
+<body>
+  <h3>fr单位在grid中的功能，类似 flex:1</h3>
+  <div class="grid grid-fr">
+    <div class="column">1</div>
+    <div class="column">2</div>
+    <div class="column">3</div>
+    <div class="column">4</div>
+    <div class="column">5</div>
+    <div class="column">6</div>
+    <div class="column">7</div>
+    <div class="column">8</div>
+    <div class="column">9</div>
+    <div class="column">10</div>
+    <div class="column">11</div>
+    <div class="column">12</div>
+    <div class="column">13</div>
+  </div>
+  <h3></h3>
+</body>
+</html>

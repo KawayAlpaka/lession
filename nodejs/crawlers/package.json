@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.3",
+    "exceljs": "^4.1.1",
     "iconv-lite": "^0.4.24",
     "json2csv": "^4.5.4",
     "request": "^2.88.0"

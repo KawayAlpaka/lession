@@ -7,7 +7,7 @@ const path = require('path')
 
 
 try {
-  let dataJson = fs.readFileSync(path.resolve(__dirname,"dist","5idem.json")).toString();
+  let dataJson = fs.readFileSync(path.resolve(__dirname,"dist","gaokeji3.json")).toString();
   let data = JSON.parse(dataJson);
 
   if(data[0]){
@@ -20,7 +20,7 @@ try {
   let opts = { fields };
   let csv = json2csv(data, opts);
 
-  fs.writeFile(path.resolve(__dirname,"dist","data.csv"),csv ,function(err){
+  fs.writeFile(path.resolve(__dirname,"dist","data2.csv"),csv ,function(err){
     if(err) console.log('写文件操作失败');
     else console.log('写文件操作成功');
   });
