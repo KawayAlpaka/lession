@@ -1,0 +1,21 @@
+.fall-warp{
+  /* column-count: 4;
+  column-gap: 0;
+  columns: 2; */
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: masonry;
+
+  background-color: brown;
+  overflow: hidden;
+  padding: 30px;
+}
+
+.fall-item{
+  /* float: left; */
+  width: 45%;
+  margin: 10px;
+  background-image: linear-gradient(yellow,black);
+  overflow: hidden;
+}
