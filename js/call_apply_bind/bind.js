@@ -26,11 +26,12 @@ if (typeof module != "null" && typeof module != "undefined") {
 
 if (typeof window == "object"){
   console.log(1);
-  myBind();
+  // myBind();
   console.log(2);
   var objA = {};
   objA.name = "A";
   objA.funcA = function (str1,str2) {
+    this.message = str1 + str2;
     console.log(this.name + str1 + str2);
   };
   var objB = {};
@@ -40,4 +41,7 @@ if (typeof window == "object"){
   funcA("你好","吗？");
   var funcB = objA.funcA.bind(objB,"他好");
   funcB("吧？");
+
+  var instant = new funcB("吗?");
+  console.log(instant);
 }
