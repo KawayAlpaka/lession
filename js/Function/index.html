@@ -25,6 +25,10 @@
 			};
 			obj.fn = new Function("with(this){ return name; }");
 			console.log(obj.fn());
+
+            var fn3 = new Function("{ aa , bb}","console.log(aa,bb)");
+            fn3({aa:"aa"});
+
 		})();
 	</script>
 </head>
