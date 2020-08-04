@@ -50,6 +50,7 @@ function getArraybuffer (uri){
 function downloadM3u8(uri,saveFullPath){
   var m3u8Uri = URI(uri);
   const origin = m3u8Uri.origin();
+  
   return axios({
     method:'get',
     url:uri
@@ -65,7 +66,11 @@ function downloadM3u8(uri,saveFullPath){
     for(let i=0;i<segments.length;i++){
     // for(let i=0;i<5;i++){
       let ii = i.toFixed(0).padStart(4,"0");
-      let url = origin + segments[i].uri;
+      let uri = URI(segments[i].uri);
+      if(!uri.origin()){
+        uri.origin(origin);
+      }
+      let url = uri.toString();
       // await downloadFile(url,saveFullPath + `/${ii}.ts`);
       let arraybuffer = await getArraybuffer(url);
       // console.log(arraybuffer);

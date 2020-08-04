@@ -1,5 +1,15 @@
 (function () {
-
+    document.addEventListener("readystatechange",function(e){
+            console.log("readystatechange:",e);
+            switch(document.readyState){
+                case "interactive":
+                    // 
+                    break;
+                case "complete":
+                    // 
+                    break;
+            }
+        });
 
 
     var bindDom0Dom2Dom3 = function (o) {
