@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模板字符串替换</title>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+</head>
+<body>
+  <h3>需求</h3>
+  <div>change("我的名字叫：{name}，我现在{age:5}岁" , { name: "小明" }  )    </div>
+  <div>// 输出:  "我的名字叫：小明，我现在5岁"</div>
+  <script>
+    console.log("======lodash.template 方案======");
+    // lodash.template 方案
+    var compiled1 = _.template("我的名字叫：<%=name%>");
+    console.log(compiled1({name: '小明'}));
+
+    //修改模版规则
+    _.templateSettings = {
+      interpolate: /\{(.+?)\}/g
+    };
+
+    var template3 = _.template("Hello { name }!");
+    console.log(template3({name: "Mustache"}));
+
+
+    // //  对于不存在的值，lodash会报错
+    // var compiled2 = _.template("我的名字叫：<%-name%>，我现在<%-age?1:2%>岁");
+    // console.log(compiled2({name: '小明'}));
+
+
+    console.log("======自定义方案======");
+    let template = "我的名字叫：{ name}，我现在{age : 5}岁，我在{ city: 武汉 }搬砖";
+    let change = function(template,values){
+      let reg = /\{(.+?)\}/g;
+      let keywords = template.match(reg);
+      let rObjs = keywords.map((keyword)=>{
+        let _t = keyword.replace(/\{(.+?)\}/,"$1");
+        let [key,defaultVal] = _t.split(":");
+        if(key) key = key.trim();
+        if(defaultVal) defaultVal = defaultVal.trim(); else defaultVal = "";
+        return {
+          keyword,
+          key,
+          defaultVal
+        }
+      });
+      let result = template;
+      rObjs.forEach((obj)=>{
+        result = result.replace(obj.keyword, values[obj.key] || obj.defaultVal)
+      });
+      return result;
+    };
+    console.log(change(template, { name: "小明" , city:"深圳"}));
+
+
+
+  </script>
+</body>
+</html>
