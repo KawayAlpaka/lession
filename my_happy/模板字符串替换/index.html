@@ -32,7 +32,7 @@
 
     console.log("======自定义方案======");
     let template = "我的名字叫：{ name}，我现在{age : 5}岁，我在{ city: 武汉 }搬砖";
-    let change = function(template,values){
+    let change = function(template,values = {}){
       let reg = /\{(.+?)\}/g;
       let keywords = template.match(reg);
       let rObjs = keywords.map((keyword)=>{
@@ -53,6 +53,7 @@
       return result;
     };
     console.log(change(template, { name: "小明" , city:"深圳"}));
+    console.log(change(template));
 
 
 
