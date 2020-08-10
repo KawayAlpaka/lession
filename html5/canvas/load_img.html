@@ -19,17 +19,46 @@
   img.src = "/img/avatar.png"; 
   img.onload = function(){
     context.drawImage(img, 0, 0,300,300);
-    console.log(img.width);
-    console.log(img.height);
+    console.log("img.width",img.width);
+    console.log("img.height",img.height);
     canvas.toBlob(function(b){
       blob = b;
       objectURL = URL.createObjectURL(blob);
+      console.log("objectURL:",objectURL);
     });
     dataUrl = canvas.toDataURL();
+    console.log("dataUrl:",dataUrl);
   };
   img.onerror = function(){
     window.alert('图片加载失败，请重试');
   };
+
+
+  // // 下载网络图片。（受到同源策略限制，不能获得跨域图片 toDataURL 会报跨域错误）
+  // var getImgBase64 = function(url){
+  //   var p = new Promise((resolve,reject)=>{
+  //     var img = new Image();
+  //     // img.crossOrigin = "Anonymous";
+  //     img.setAttribute('crossOrigin', 'anonymous');
+  //     img.src = url; 
+  //     img.onload = function(){
+  //       try{
+  //         var canvas = document.createElement("canvas");
+  //         canvas.width = img.width;
+  //         canvas.height = img.height;
+  //         var ctx = canvas.getContext("2d");
+  //         ctx.drawImage(img, 0, 0, img.width, img.height);
+  //         var dataURL = canvas.toDataURL("image/png");
+  //         console.log("dataURL:",dataURL);
+  //         resolve(dataURL);
+  //       }catch(e){
+  //         reject(e);
+  //       }
+  //     };
+  //   });
+  //   return p;
+  // };
+  // getImgBase64("/img/avatar.png");
 </script>
 </body>
 </html>
