@@ -10,7 +10,10 @@
                     break;
             }
         });
-
+    window.addEventListener("hashchange",function(event){
+        console.log(event);
+        console.log(document.URL);
+    });
 
     var bindDom0Dom2Dom3 = function (o) {
         // 相同事件，先注册的先触发
