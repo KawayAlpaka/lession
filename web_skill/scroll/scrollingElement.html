@@ -16,6 +16,7 @@
   <div>要注意的是，PC端的scrollingElement是 html元素，而移动端的却是 body 元素。</div>
   <div>html.clientHeight = 窗口可显示的高度，body.clientHeight = body元素的高度。 </div>
   <div>所以在判断是否滚动到底部时，不能用 scrollingElement.clientHeight 来计算，应该用 html.clientHeight 来计算</div>
+  <!-- <a id="aaa" href="https://www.baidu.com">www.baidu.com</a> -->
   <script src="https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js"></script>
   <script>
     // var vConsole = new VConsole();
@@ -55,6 +56,8 @@
     //// 测试结果，scroll 只触发了1次（应该是在打开浏览器检查结果的时候才触发的）。正常情况下，次数应该与scrollTo次数相同
     setTimeout(()=>{
       operate.scrollToRealBottom();
+      // click 还是可以生效
+      // document.querySelector("#aaa").click();
     },5000);
   </script>
 </body>
