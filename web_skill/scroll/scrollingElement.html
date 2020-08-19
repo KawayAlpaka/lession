@@ -18,7 +18,7 @@
   <div>所以在判断是否滚动到底部时，不能用 scrollingElement.clientHeight 来计算，应该用 html.clientHeight 来计算</div>
   <script src="https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js"></script>
   <script>
-    var vConsole = new VConsole();
+    // var vConsole = new VConsole();
   </script>
   <script>
     const operate = {};
@@ -41,14 +41,21 @@
     operate.scrollToBottom = function(){
       let e = document.scrollingElement || document.documentElement;
       return new Promise((resolve,reject)=>{
-        console.log(scrollTo);
-        scrollTo(0,e.scrollHeight);
+        scrollTo(0,e.scrollTop + e.clientHeight);
         setTimeout(()=>{
           resolve();
         },500);
       });
     };
-    operate.scrollToRealBottom();
+    window.addEventListener("scroll",()=>{
+      console.log("on scroll");
+    });
+
+    //// 测试当页面隐藏（浏览器最小化时），scroll 事件的处罚情况。
+    //// 测试结果，scroll 只触发了1次（应该是在打开浏览器检查结果的时候才触发的）。正常情况下，次数应该与scrollTo次数相同
+    setTimeout(()=>{
+      operate.scrollToRealBottom();
+    },5000);
   </script>
 </body>
 </html>
