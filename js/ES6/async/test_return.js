@@ -5,10 +5,14 @@ const fn1 = async function(){
   // console.log(r);
   return "hehe";
 };
+const fn2 = async function(){
+  return new Promise((resolve)=>{ setTimeout(()=>{ resolve("data haha")  },1000) });
+};
 console.log("start");
-let r = fn1()
+let r = fn2()
 console.log(r);
 r.then(function(data){
   console.log(data);
 });
 console.log("end");
+
