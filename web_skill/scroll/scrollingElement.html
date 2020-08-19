@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scrollingElement</title>
+  <style>
+    .zanwei{
+      height: 5000px;
+      background-image: linear-gradient(to bottom, white,black);
+    }
+  </style>
+</head>
+<body>
+  <div class="zanwei">scrollingElement</div>
+  <div>要注意的是，PC端的scrollingElement是 html元素，而移动端的却是 body 元素。</div>
+  <div>html.clientHeight = 窗口可显示的高度，body.clientHeight = body元素的高度。 </div>
+  <div>所以在判断是否滚动到底部时，不能用 scrollingElement.clientHeight 来计算，应该用 html.clientHeight 来计算</div>
+  <script src="https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js"></script>
+  <script>
+    var vConsole = new VConsole();
+  </script>
+  <script>
+    const operate = {};
+    operate.scrollToRealBottom = async function(){
+      let e = document.scrollingElement;
+      document.documentElement.clientHeight
+      console.log("operate.scrollToRealBottom");
+      console.log("e:",e);
+      console.log("e.tagName:",e.tagName);
+      console.log("e.scrollTop:",e.scrollTop);
+      console.log("e.clientHeight:",e.clientHeight);
+      console.log("e.offsetHeight:",e.offsetHeight);
+      console.log("e.scrollHeight:",e.scrollHeight);
+      console.log("document.documentElement.clientHeight:",document.documentElement.clientHeight);
+      for(let i = 0;e.scrollTop + document.documentElement.clientHeight < e.scrollHeight && i<100;i++){
+        console.log("scrollToBottom time:",i);
+        await operate.scrollToBottom();
+      }
+    };
+    operate.scrollToBottom = function(){
+      let e = document.scrollingElement || document.documentElement;
+      return new Promise((resolve,reject)=>{
+        console.log(scrollTo);
+        scrollTo(0,e.scrollHeight);
+        setTimeout(()=>{
+          resolve();
+        },500);
+      });
+    };
+    operate.scrollToRealBottom();
+  </script>
+</body>
+</html>
