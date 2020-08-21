@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>scrollingElement</title>
   <style>
+    .warp{
+      height: 400px;
+      overflow: scroll;
+    }
     .zanwei{
       height: 5000px;
       background-image: linear-gradient(to bottom, white,black);
@@ -13,6 +17,9 @@
 </head>
 <body>
   <div class="zanwei">scrollingElement</div>
+  <div class="warp">
+    <div class="zanwei">scrollingElement</div>
+  </div>
   <div>要注意的是，PC端的scrollingElement是 html元素，而移动端的却是 body 元素。</div>
   <div>html.clientHeight = 窗口可显示的高度，body.clientHeight = body元素的高度。 </div>
   <div>所以在判断是否滚动到底部时，不能用 scrollingElement.clientHeight 来计算，应该用 html.clientHeight 来计算</div>
@@ -22,10 +29,14 @@
     // var vConsole = new VConsole();
   </script>
   <script>
+    var warp = document.querySelector(".warp");
     const operate = {};
-    operate.scrollToRealBottom = async function(){
+    operate.scrollToRealBottom = async function(ele){
+
       let e = document.scrollingElement;
-      document.documentElement.clientHeight
+      if(ele){
+        e = ele;
+      }
       console.log("operate.scrollToRealBottom");
       console.log("e:",e);
       console.log("e.tagName:",e.tagName);
@@ -34,22 +45,25 @@
       console.log("e.offsetHeight:",e.offsetHeight);
       console.log("e.scrollHeight:",e.scrollHeight);
       console.log("document.documentElement.clientHeight:",document.documentElement.clientHeight);
-      for(let i = 0;e.scrollTop + document.documentElement.clientHeight < e.scrollHeight && i<100;i++){
+      for(let i = 0;e.scrollTop + e.clientHeight < e.scrollHeight && i<100;i++){
+      // for(let i = 0;warp.scrollTop + warp.clientHeight < warp.scrollHeight && i<100;i++){
         console.log("scrollToBottom time:",i);
-        await operate.scrollToBottom();
+        await operate.scrollToBottom(e);
       }
     };
-
     var evt = window.document.createEvent('UIEvents'); 
     evt.initUIEvent('scroll', true, false, window, 0); 
 
-    operate.scrollToBottom = function(){
-      let e = document.scrollingElement || document.documentElement;
+    operate.scrollToBottom = function(e){
+      if(!e){
+        e = document.scrollingElement || document.documentElement;
+      }
       return new Promise((resolve,reject)=>{
-        scrollTo(0,e.scrollTop + e.clientHeight);
+        e.scrollTo(0,e.scrollTop + e.clientHeight);
 
         // 手动触发 onscroll 事件
-        window.dispatchEvent(evt);
+        // window.dispatchEvent(evt);
+        e.dispatchEvent(evt);
         
         setTimeout(()=>{
           resolve();
@@ -57,14 +71,19 @@
       });
     };
     window.addEventListener("scroll",()=>{
-      console.log("on scroll");
+      console.log("window on scroll");
     });
+    warp.addEventListener("scroll",()=>{
+      console.log("warp on scroll");
+    });
+
 
     //// 测试当页面隐藏（浏览器最小化时），scroll 事件的处罚情况。
     //// 测试结果，scroll 只触发了1次（应该是在打开浏览器检查结果的时候才触发的）。正常情况下，次数应该与scrollTo次数相同
 
     setTimeout(()=>{
       operate.scrollToRealBottom();
+      operate.scrollToRealBottom(warp);
       // click 还是可以生效
       // document.querySelector("#aaa").click();
     },5000);
