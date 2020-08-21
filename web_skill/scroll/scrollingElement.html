@@ -23,6 +23,7 @@
   <div>要注意的是，PC端的scrollingElement是 html元素，而移动端的却是 body 元素。</div>
   <div>html.clientHeight = 窗口可显示的高度，body.clientHeight = body元素的高度。 </div>
   <div>所以在判断是否滚动到底部时，不能用 scrollingElement.clientHeight 来计算，应该用 html.clientHeight 来计算</div>
+  <div>手动触发 warp 的 onscroll 事件会冒泡到window</div>
   <!-- <a id="aaa" href="https://www.baidu.com">www.baidu.com</a> -->
   <script src="https://cdn.jsdelivr.net/npm/vconsole@3.3.4/dist/vconsole.min.js"></script>
   <script>
