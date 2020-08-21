@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lazy-load</title>
+  <style>
+    .lazy-load{
+      height: 100px;
+      width: 100%;
+    }
+    .lazy-load:nth-of-type(2n + 1){
+      background-color: #ddd;
+    }
+    .lazy-load:nth-of-type(2n){
+      background-color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="warp">
+    <div class="lazy-load"></div>
+  </div>
+  
+  <script>
+    let warp = document.querySelector(".warp");
+    let lazyLoad = document.querySelector(".lazy-load");
+
+    let options = {
+      // root: document.querySelector('#scrollArea'), 
+      rootMargin: '0px', 
+      threshold: 1.0
+    }
+    let observer = new IntersectionObserver((entries, observer)=>{
+      console.log(entries);
+      // console.log(observer);
+    }, options);
+
+    for(let i=0;i<30;i++){
+      let _l = lazyLoad.cloneNode(true);
+      _l.innerHTML = i;
+      warp.append(_l);
+      observer.observe(_l);
+    }
+
+
+  </script>
+</body>
+</html>
