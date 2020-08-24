@@ -1,0 +1,29 @@
+.input-group{
+  display: flex;
+  border: solid 1px #eee;
+  padding: 10px;
+  transition: all 0.5s;
+}
+
+.input-group:focus-within{
+  outline: brown 1px solid;
+  transform: translate(0,-10px);
+  box-shadow: 10px 10px 10px #ddd ;
+}
+
+.input-group input{
+  flex: 1;
+  border:none;
+  outline: none;
+}
+
+.input-group .button{
+  border: solid 1px #666;
+  padding: 2px 4px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.input-group input:placeholder-shown + .button{
+  opacity: 0;
+}
