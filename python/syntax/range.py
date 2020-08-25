@@ -1,3 +1,22 @@
+print(type(123))
+print(type(123.123))
+print(type("123"))
+
+if type("123") is str:
+  print("123 is str")
+else:
+  print("123 is not str")
+
+di = {
+  "str":"str",
+  "int":123
+}
+
+di["int"] = "123"
+
+print(di)
+
+
 print(range(2,5))
 print(range(5,0))
 for i in range(2,0,-1):
