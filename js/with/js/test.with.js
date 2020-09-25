@@ -17,6 +17,7 @@ var fn =  new Function("g", `
                   console.log(a);
                   console.log(b);
                   console.log(window);
+                  // alert("alert"); // 还是会弹出
                   return a;
                 }
               `).bind({});
