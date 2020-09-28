@@ -20,8 +20,29 @@ const codeShower = document.querySelector("#code-shower");
 
 codeShower.innerHTML = highlightedCode;
 
+var str = "";
+var b = true;
+var c = 123;
+
 document.querySelector("#code-editor").addEventListener("input",function(){
   highlighted = hljs.highlight('javascript', this.value);
   console.log(highlighted);
   codeShower.innerHTML = highlighted.value.replace(/\n/g,"<br>").replace(/\t/g,"&nbsp;&nbsp;");
+
+	var bianli = function(node,parentKind){
+		
+		if(typeof node == "string"){
+      console.log(node);
+			//
+		}else{
+			for(let child of node.children){
+				bianli(child,node.kind)
+			}
+		}
+	}
+	bianli(highlighted.emitter.rootNode);
+
+  // highlighted.emitter.rootNode.children.forEach((e)=>{
+  //   console.log(e);
+  // })
 },false);
