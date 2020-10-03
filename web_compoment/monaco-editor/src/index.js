@@ -27,7 +27,7 @@ window.MonacoEnvironment = {
 };
 
 window.require(["vs/editor/editor.main"], function () {
-  monaco.editor.create(document.getElementById('container'), {
+  window.ie = monaco.editor.create(document.getElementById('container'), {
     value: [
       'function x() {',
       '\tconsole.log("Hello world!");',
@@ -35,4 +35,17 @@ window.require(["vs/editor/editor.main"], function () {
     ].join('\n'),
     language: 'javascript'
   });
+  console.log(window.ie);
+  window.ie.onKeyUp((...args)=>{
+    console.log("onKeyUp");
+    // console.log(args);
+  });
+  window.ie.onDidChangeModelContent((...args)=>{
+    console.log("onDidChangeModelContent");
+    // console.log(args);
+  });
+  window.ie.onDidChangeModel((...args)=>{
+    console.log("onDidChangeModel");
+    // console.log(args);
+  })
 });
