@@ -147,6 +147,10 @@
 
     // ES6 class 方案 测试一下看看
     var Parent7 = class{
+        static _data = "parent data";
+        static getData(){
+            return this._data;
+        }
         constructor(){
             this.name = "parent7";
             this.arr = [1,2,3];
@@ -156,6 +160,7 @@
         }
     };
     var Child7 = class extends Parent7{
+        static _data = "child data";
         constructor(){
             //必须执行super();
             super();
@@ -165,7 +170,8 @@
             return this.type;
         }
     };
-
+    console.log(Parent7.getData());
+    console.log(Child7.getData());
 
     var cases = [
         {caseName:"构造函数继承法",Parent:Parent1,Child:Child1},
