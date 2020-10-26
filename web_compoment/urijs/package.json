@@ -1,0 +1,14 @@
+{
+  "name": "uri-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "urijs": "^1.19.2"
+  }
+}
