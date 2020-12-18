@@ -1,6 +1,6 @@
 const URI = require('urijs');
 
-var url = new URI("http://example.org/foo?bar=baz");
+var url = new URI("http://example.org/foo?bar=baz&key-key=value");
 url.addQuery("foo", "bar");
 console.log(url.query());
 console.log(url.query(true));
