@@ -43,3 +43,13 @@ console.log(foo.name);
 foo.__proto__.__defineGetter__("*",function(){return "**";});
 console.log(foo["zz"]);
 console.log(foo["*"]);
+
+
+
+Foo.prototype.aaa = "default aaa";
+foo = new Foo("aaa");
+console.log(foo.aaa);
+foo.aaa = undefined;
+console.log(foo.aaa);
+delete foo.aaa;
+console.log(foo.aaa);

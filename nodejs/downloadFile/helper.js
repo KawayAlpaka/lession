@@ -6,6 +6,16 @@ const path = require("path");
 const URI = require('urijs');
 
 
+async function downloadFileMuti(uris,saveDir){
+  
+  for(let uri of uris){
+    console.log(uri);
+    let saveBasename = path.basename(uri);
+    let saveFullPath = path.join(saveDir,saveBasename);
+    await downloadFile(uri,saveFullPath);
+  }
+}
+
 function downloadFile(uri,saveFullPath){
   return axios({
     method:'get',
@@ -114,5 +124,6 @@ function downloadM3u8(uri,saveFullPath,fenpian=0){
 
 module.exports = {
   downloadFile,
-  downloadM3u8
+  downloadM3u8,
+  downloadFileMuti
 };
