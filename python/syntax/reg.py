@@ -18,3 +18,5 @@ print(re.search('(^https:\/\/dg\.anjuke\.com\/community\/.*\/$)|(^https:\/\/dg\.
 
 
 
+print(re.findall(r"a(.+?)b","a123b"))
+print(re.findall(r"anjuke.com\/community\/view\/(\d+)$","https://dg.anjuke.com/community/view/822928"))
