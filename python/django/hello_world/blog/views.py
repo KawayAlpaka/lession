@@ -8,3 +8,10 @@ def HelloWorld(request):
 
 def Articles(request):
   return HttpResponse(",".join([a.title for a in Article.objects.all()]))
+
+def detail(request,id):
+  print(id)
+  return render(request,'detail.html',{
+    "name":"晓明",
+    "id":id
+  })
