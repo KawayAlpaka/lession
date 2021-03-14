@@ -20,3 +20,9 @@ print(re.search('(^https:\/\/dg\.anjuke\.com\/community\/.*\/$)|(^https:\/\/dg\.
 
 print(re.findall(r"a(.+?)b","a123b"))
 print(re.findall(r"anjuke.com\/community\/view\/(\d+)$","https://dg.anjuke.com/community/view/822928"))
+
+
+print(re.findall(r"二手房\((\d+)\)","二手房(301)"))
+print(re.findall(r"二手房\((\d+)\)","二手房(0)"))
+print(re.findall(r"二手房\((\d+)\)","二手房()"))
+print(re.findall(r"二手房\((\d+)\)","二手房()")[0])
