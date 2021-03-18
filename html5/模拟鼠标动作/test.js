@@ -35,14 +35,13 @@ var go = function(targetX=280){
   var initX = rect.x + 5;
   var initY = rect.y + 5;
   var realTargetX = initX + targetX;
+  var realTargetY = initY + Math.floor(Math.random() * 4 + 2);
   var _x = initX;
   var _y = initY;
-  
+  var guiji = genData({x:initX,y:initY},{x:realTargetX,y:realTargetY});
+  console.log(guiji);
   evDownObj.initMouseEvent("mousedown",true,true,window,0,_x, _y, _x, _y,false,false,false,false,0,null);
   handler.dispatchEvent(evDownObj);
-  
-  var guiji = genData({x:initX,y:initY},{x:realTargetX,y:initY});
-  console.log(guiji);
   let timeout = Math.random() * 500 + 1000;
   for(let i=0;i<guiji.length;i++){
     let g = guiji[i];
@@ -50,15 +49,15 @@ var go = function(targetX=280){
     timeout += g.time;
     setTimeout(() => {
       let evObj = document.createEvent('MouseEvents');
-      evObj.initMouseEvent("mousemove",true,true,window,0,g.x, initY, g.x, initY,false,false,false,false,0,null);
+      evObj.initMouseEvent("mousemove",true,true,window,0,g.x, g.y, g.x, g.y,false,false,false,false,0,null);
       // handler.dispatchEvent(evObj);
       document.dispatchEvent(evObj);
       if(_i == guiji.length - 1){
         setTimeout(() => {
           let mouseUp = document.createEvent('MouseEvents');
-          mouseUp.initMouseEvent("mouseup",true,true,window,0,g.x, initY, g.x, initY,false,false,false,false,0,null);
+          mouseUp.initMouseEvent("mouseup",true,true,window,0,g.x, g.y, g.x, g.y,false,false,false,false,0,null);
           document.dispatchEvent(mouseUp);
-        }, Math.random() * 100 +300);
+        }, Math.random() * 100 +500);
       }
     }, timeout);
   }
@@ -106,14 +105,44 @@ var genData = function(sourcePoint,targetPoint){
   var speed = 0;
   var fullSpeed = 100;
   var currX = sourcePoint.x;
+  var currY = sourcePoint.y;
   var guiji = [];
-  for(;currX<=targetPoint.x;currX += Math.floor(Math.random() * 4) ){
+  // 生成x
+  for(;currX<=targetPoint.x;currX += Math.floor(Math.random() * 2 + 1) ){
     if(currX > targetPoint.x){
       currX = targetPoint.x;
     }
     let distant = Math.min(Math.abs(targetPoint.x - currX),Math.abs(sourcePoint.x - currX));
-    let time = Math.floor( (Math.random() * 3 + 3) * 1000 / (distant + Math.random() * 3 + 100));
+    // let time = Math.floor( (Math.random() * 3 + 3) * 1000 / (distant + Math.random() * 10 + 200));
+    let time = Math.floor((Math.random() * 150 + 300))
+    if(distant >= 3){
+      time = Math.floor((Math.random() * 100 + 100))
+    }
+    if(distant >= 6){
+      time = Math.floor((Math.random() * 10 + 5))
+    }
     guiji.push({x: currX,time});
+  }
+  // 修正最后一个x
+  let last = guiji[guiji.length-1]
+  if(last.x != targetPoint.x){
+    last.x = targetPoint.x;
+  }
+
+
+  // 生成y
+  let add = 1;
+  let fenduan = Math.floor(guiji.length / (targetPoint.y - sourcePoint.y));
+  // // 如果y距离大于轨迹点数
+  // if(guiji.length <= targetPoint.y - sourcePoint.y){
+  //   add = Math.floor((targetPoint.y - sourcePoint.y) / guiji.length);
+  // }
+  for(let i=0;i<guiji.length;i++){
+    let g = guiji[i];
+    if(i % fenduan == 0 && currY != targetPoint.y){
+      currY += add;
+    }
+    g.y = currY;
   }
   return guiji;
 }
