@@ -2,20 +2,24 @@
   <div>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
-    <Basic></Basic>
+    <!-- <Basic></Basic> -->
+    <Header></Header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-import Basic from './components/basic.vue';
+import Header from './components/header.vue';
+// import HelloWorld from './components/HelloWorld.vue';
+// import Basic from './pages/basic.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld,
-    Basic
+    Header
+    // HelloWorld,
+    // Basic
   }
 });
 </script>
