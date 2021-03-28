@@ -1,9 +1,11 @@
 <template>
-  <div class="header">
-    <div>{{user.name}}:{{user.age}}</div>
-    <router-link to="/">首页</router-link>
-    <router-link to="/basic">basic</router-link>
-    <router-link to="/store">store</router-link>
+  <div class="store">
+    <div>
+      {{user.name}}:{{user.age}}
+    </div>
+    <div>
+      <button @click="agePP">age++</button>
+    </div>
   </div>
 </template>
 
@@ -11,13 +13,16 @@
 import { defineComponent} from 'vue'
 import { user } from '@/store'
 export default defineComponent({
-  name: 'Header',
-  methods: {
-
-  },
+  name: 'Store',
   setup() {
+    const agePP = () => {
+      user.age++;
+    }
+
+
     return {
-      user
+      user,
+      agePP
     }
   }
 });
