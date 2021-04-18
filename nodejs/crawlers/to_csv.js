@@ -7,7 +7,7 @@ const path = require('path')
 
 
 try {
-  let dataJson = fs.readFileSync(path.resolve(__dirname,"dist","gaokeji3.json")).toString();
+  let dataJson = fs.readFileSync(path.resolve(__dirname,"dist","city1.json")).toString();
   let data = JSON.parse(dataJson);
 
   if(data[0]){
