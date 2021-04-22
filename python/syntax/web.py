@@ -16,7 +16,7 @@ import webbrowser
 
 
 new_chrome = webbrowser.Chrome()
-new_chrome.name = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+new_chrome.name = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 new_chrome.remote_args = webbrowser.Chrome.remote_args + [
   "--disable-web-security",
   "--user-data-dir=D:\chrome"
