@@ -28,7 +28,10 @@ def genReports(type,stage):
     {'$match':
        {
          "price": {"$exists": True},
-         "on_sale_count":{"$gt":0}
+         # "on_sale_count":{"$gt":0},
+         "on_sale_count":{"$exists": True},
+         # "city":"绵阳",
+         # "area1":"盐亭县"
        }
     },
     # {'$match': {"city":"三亚","price": {"$exists": True}}},
@@ -43,7 +46,9 @@ def genReports(type,stage):
     #             # }
     #           }
     #  },
-    { "$project": {"xiaoqu": 1,"city":1,"area1":1,"area2":1,"price":1,"on_sale_count":1, "total": { "$multiply": ["$price", "$on_sale_count"]}}},
+    # { "$project": {"xiaoqu": 1,"city":1,"area1":1,"area2":1,"price":1,"on_sale_count":{ "$add": ["$on_sale_count", 1]}, "total": { "$multiply": ["$price", "$on_sale_count"]}}},
+    # 所有小区在售数量+1计算
+    { "$project": {"_id":1,"xiaoqu": 1,"city":1,"area1":1,"area2":1,"price":1,"on_sale_count":{ "$add": ["$on_sale_count", 1]}, "total": { "$multiply": ["$price", { "$add": ["$on_sale_count", 1]}]}}},
     # {"$sort": {"price": -1}},
     {
       '$group': {
@@ -54,8 +59,12 @@ def genReports(type,stage):
         'on_sale_count':{"$sum":"$on_sale_count"},
         'price__on_sale_count':{
           "$addToSet":{
-            'price':'$price',
-            'on_sale_count':'$on_sale_count',
+            # 如果不加id,这个set中会去重,重复的就没有了,缩短字段名，降低了单挑doc大小，勉强可用，tostring后的id，比原来的id更大
+            # "i": {"$toString": "$_id"},
+            "i": "$_id",
+            # "xiaoqu":"$xiaoqu",
+            'p':'$price',
+            'c':'$on_sale_count',
           }
         },
         # 'prices':{"$addToSet":"$price"},
@@ -66,15 +75,16 @@ def genReports(type,stage):
         # }
       }
     },
-    {"$project": {"area1": "$area1", "average":{ "$divide": [ "$sum", "$on_sale_count" ]},"on_sale_count":1,'count':1,
+    {"$project": {"average":{ "$divide": [ "$sum", "$on_sale_count" ]},"on_sale_count":1,'count':1,
                   # 'prices':'$prices','on_sale_counts':'$on_sale_counts',
-                  'price__on_sale_count':'$price__on_sale_count'
+                  'price__on_sale_count':1
                   }
      },
     {"$sort": {"average": -1}}
   ]
   res = []
-  for i in xiaoqu.aggregate(pipeline):
+  collection = db["xiaoqu-{}".format(stage)]
+  for i in collection.aggregate(pipeline,allowDiskUse=True):
     # print(i)
 
     price__on_sale_counts = i.get("price__on_sale_count")
@@ -82,16 +92,18 @@ def genReports(type,stage):
 
     total_on_sale_count = i.get("on_sale_count")
     mid = total_on_sale_count / 2
-    array = sorted(price__on_sale_counts,key=lambda x:x["price"],reverse=True)
+    array = sorted(price__on_sale_counts,key=lambda x:x["p"],reverse=True)
     sum = 0
     median = None
     average = i.get("average")
     fangcha_tatal = 0
     for x in array:
-      on_sale_count = x.get("on_sale_count")
-      price = x.get("price")
+      on_sale_count = x.get("c")
+      price = x.get("p")
       sum += on_sale_count
       fangcha_tatal += ((price - average)**2)*on_sale_count
+      # if (i.get("_id")[1] == '盐亭县'):
+      #   print("sum:{} mid:{} on_sale_count:{} price:{}".format(sum,mid,on_sale_count,price))
       if(sum >= mid and median == None):
         median = price
         # print("中位数:{}".format(x.get("price")))
@@ -105,6 +117,12 @@ def genReports(type,stage):
     # print("中位数:{}；标准差:{}".format(median,standard.real))
     # print(i["sum"] / i["on_sale_count"])
     d = dict(i)
+    # print(array)
+    # print(d)
+    # if(i.get("_id")[1] == '盐亭县'):
+    #   print(d)
+    #   print(len(array))
+    #   print(array)
     d["piancha"] = standard.real / median
     d["median"] = median
     _id = d.get("_id")
@@ -124,7 +142,7 @@ def genReports(type,stage):
 
 def saveJsonFile(data,path="dist/data.json"):
   js = json.dumps(data)
-  f = open(path, "w")
+  f = open(path, "w",encoding="utf-8")
   f.write(js)
   f.close()
 
@@ -135,30 +153,30 @@ def saveCsvFile(data,headers,path="dist/data.csv"):
     dict_writer.writerows(data)
 
 if __name__ == "__main__":
+  stage = 2
   # type = "Country"
   # type = "City"
   type = "Area1"
-  reports = genReports(type,1)
+  reports = genReports(type,stage)
   # saveJsonFile(reports,"dist/{}.json".format(type))
 
-  # print(reports[0].keys())
   headers = {"stage":1,"type":1,"city":"","area1":"","count":1,"on_sale_count":1,"average":1,"median":1,"piancha":1}
-  # print(headers.keys())
-  saveCsvFile(reports,headers.keys(),"dist/{}.csv".format(type))
+  saveCsvFile(reports,headers.keys(),"dist/{}.csv".format(str(stage) + "-" + type))
 
+  # places = []
+  #
   # for report in reports:
   #   print(report)
-  # print(get_anjuke_start_urls())
-  # anjuke_start_urls.insert_one({"start_url":"https://guangzhou.anjuke.com/community"})
-  # anjuke_start_urls.insert_one({"start_url":"https://dg.anjuke.com/community"})
+    # place = {
+    #   "city":report.get("city"),
+    #   "area":report.get("area1")
+    # }
+    # places.append(place)
+
+  # saveJsonFile(places, "dist/places-{}.json".format(type))
 
 
 
   # startTime = time.time()
-  #
-  # for i in range(100):
-  #   db = client["db-{}".format(str(i))]
-  #   xiaoqu = db["xiaoqu-{}".format(str(i))]
-  #
   # endTime = time.time()
   # print(endTime - startTime)

@@ -1,4 +1,4 @@
-import requests,json
+import requests,json,time
 
 # print(requests)
 #
@@ -54,8 +54,12 @@ headers = {
 url = "https://2021.ip138.com/"
 # url = "https://shanghai.anjuke.com/community/view/818145"
 
+
+start_at = time.time()
 response = requests.get(url,
                         headers=headers,
                         proxies=proxies
                         )
+end_at = time.time()
 print(response.text)
+print(end_at - start_at)
