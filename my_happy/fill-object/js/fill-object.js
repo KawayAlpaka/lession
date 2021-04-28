@@ -23,3 +23,6 @@ const fillObject = (source, pattern) => {
 	return source;
 }
 
+if(typeof module != "undefined"){
+	module.exports = fillObject;
+}
