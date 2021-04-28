@@ -1,11 +1,5 @@
-!function(){
-  if(typeof module != "undefined"){
-    var chai = require('chai');
-    var fillObject = require("../js/fill-object");
-  }else{
-    chai = window.chai;
-    fillObject = window.fillObject;
-  }
+!function(chai,fillObject){
+ 
   
   // var assert = require('assert');
   var expect = chai.expect;
@@ -283,5 +277,7 @@
   
   });
   
-}()
-
+}(
+  typeof module != "undefined" ? require('chai') : chai,
+  typeof module != "undefined" ? require("../js/fill-object") : fillObject
+)
