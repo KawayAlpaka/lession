@@ -1,0 +1,11 @@
+{
+  "name": "test_child_process",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_spawn.js",
+  "scripts": {
+    "test": "node test_spawn.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
