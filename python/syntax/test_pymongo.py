@@ -155,18 +155,18 @@ def saveCsvFile(data,headers,path="dist/data.csv"):
 if __name__ == "__main__":
   stage = 2
   # type = "Country"
-  # type = "City"
-  type = "Area1"
+  type = "City"
+  # type = "Area1"
   reports = genReports(type,stage)
   # saveJsonFile(reports,"dist/{}.json".format(type))
 
   headers = {"stage":1,"type":1,"city":"","area1":"","count":1,"on_sale_count":1,"average":1,"median":1,"piancha":1}
-  saveCsvFile(reports,headers.keys(),"dist/{}.csv".format(str(stage) + "-" + type))
+  # saveCsvFile(reports,headers.keys(),"dist/{}.csv".format(str(stage) + "-" + type))
 
   # places = []
   #
-  # for report in reports:
-  #   print(report)
+  for report in reports:
+    print(report)
     # place = {
     #   "city":report.get("city"),
     #   "area":report.get("area1")
@@ -180,3 +180,5 @@ if __name__ == "__main__":
   # startTime = time.time()
   # endTime = time.time()
   # print(endTime - startTime)
+
+
