@@ -1,3 +1,5 @@
+import time
+
 ips = ['106.35.186.124:47783', '']
 arr = [ip for ip in ips if len(ip) > 0]
 print(arr)
@@ -31,3 +33,9 @@ print("xiaoqu-" + str(1))
 print([int(n) for n in "123,4124".split(",")])
 
 print("其他" not in "其他")
+
+
+# # 测试报错
+# p = {}
+# p.a = "123"
+
