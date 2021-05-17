@@ -1,9 +1,10 @@
 <template>
   <div class="header">
     <div>{{user.name}}:{{user.age}}</div>
-    <router-link to="/">首页</router-link>
-    <router-link to="/basic">basic</router-link>
-    <router-link to="/store">store</router-link>
+    <router-link class="link" to="/">首页</router-link>
+    <router-link class="link" to="/basic">basic</router-link>
+    <router-link class="link" to="/store">store</router-link>
+    <router-link class="link" to="/computed">computed</router-link>
   </div>
 </template>
 
@@ -25,5 +26,7 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.link{
+  margin:10px;
+}
 </style>
