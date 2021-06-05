@@ -13,3 +13,4 @@ console.log((new URI()).host());
 const pramas = {"bookid":"plugin.php?id=jameson_manhua&c=index&a=bofang&kuid=7318","hahaha":"hehehe"}
 console.log((URI("www.baidu.com/?aaa=aaa")).query(pramas).toString());
 console.log((URI("www.baidu.com/?aaa=aaa")).addQuery(pramas).toString());
+console.log(URI.buildQuery({aa:"aa",bb:"bb"}));

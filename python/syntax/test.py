@@ -39,3 +39,14 @@ print("其他" not in "其他")
 # p = {}
 # p.a = "123"
 
+
+num = 3/2
+print(num % 1)
+print(isinstance(num,int))
+
+num = 4/2
+print(num % 1)
+print(isinstance(num,int))
+print(isinstance(num,float))
+
+print(0 == 0.0)
