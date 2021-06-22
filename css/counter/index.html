@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>counter</title>
+  <style>
+    .warp{
+      counter-reset: l1;
+    }
+    .ul li{
+      counter-increment: l1;
+    }
+    .ul li::marker{
+      content: counter(l1);
+    }
+    .ul2 li{
+      counter-increment: l2;
+    }
+    .ul2 li::marker{
+      content: counter(l1) "." counter(l2);
+    }
+  </style>
+</head>
+<body>
+  <div class="warp">
+    <ul class="ul">
+      <li>哈哈</li>
+      <li>呵呵</li>
+      <li>嘿嘿</li>
+      <li>    
+        <ul class="ul2">
+          <li>哈哈</li>
+          <li>呵呵</li>
+          <li>嘿嘿</li>
+          <li>aaa</li>
+          <li>bbb</li>
+          <li>ccc</li>
+        </ul>
+      </li>
+      <li>aaa</li>
+      <li>bbb</li>
+      <li>ccc</li>
+    </ul>
+  </div>
+  <div class="warp">
+
+  </div>
+</body>
+</html>
