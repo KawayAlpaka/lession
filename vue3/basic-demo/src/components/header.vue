@@ -5,6 +5,7 @@
     <router-link class="link" to="/basic">basic</router-link>
     <router-link class="link" to="/store">store</router-link>
     <router-link class="link" to="/computed">computed</router-link>
+    <router-link class="link" to="/directive">directive</router-link>
   </div>
 </template>
 
