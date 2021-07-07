@@ -12,6 +12,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import Directive from "@/components/Directive.vue"
+// const ws = require("vue")
 export default defineComponent({
   components:{
     Directive
