@@ -1,3 +1,5 @@
+import "./less/style.less";
+
 console.log("haha");
 
 class Test{

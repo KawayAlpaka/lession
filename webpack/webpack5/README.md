@@ -28,3 +28,7 @@ new HtmlWebpackPlugin({
 最简单的使用方法:
 - 安装```clean-webpack-plugin```
 - 加入到配置中
+
+### 使用less
+- 安装```less```、```less-loader``` 、```css-loader``` 、```style-loader``` 
+- 配置 webpack 的 loader
