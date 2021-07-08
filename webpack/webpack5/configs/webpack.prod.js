@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge')
 const commonConfig = require("./webpack.common")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 const Config = merge(commonConfig, {
   mode: "production",
@@ -23,7 +24,11 @@ const Config = merge(commonConfig, {
     })
   ],
   optimization: {
+    // minimize: true,
     minimizer: [
+      new TerserPlugin({
+        // test: /^((?!min\.js).)*$/, // 匹配不包含 min.js 的文件，这样不行，他还会去压缩css，傻逼吗
+      }),
       new CssMinimizerPlugin()
     ],
     splitChunks: {

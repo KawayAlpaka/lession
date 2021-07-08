@@ -74,3 +74,12 @@ optimization: {
 只要配置 optimization.splitChunks 即可，但要配置要点 在于 test和minChunks参数，注意看demo
 
 
+### 使用 TerserPlugin 压缩js
+只要配置下面的就行
+```js
+optimization: {
+  minimizer:[
+    new TerserPlugin({})
+  ] 
+}
+```
