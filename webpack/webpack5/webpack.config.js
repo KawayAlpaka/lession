@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 const srcPath = path.join(__dirname, "src");
 
@@ -26,6 +28,9 @@ module.exports = {
 		}]
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			IsHappy:true
+		}),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: path.join(srcPath, "template", "index.html"),

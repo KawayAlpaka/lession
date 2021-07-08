@@ -32,3 +32,12 @@ new HtmlWebpackPlugin({
 ### 使用less
 - 安装```less```、```less-loader``` 、```css-loader``` 、```style-loader``` 
 - 配置 webpack 的 loader
+
+
+### 使用DefinePlugin
+```js
+new webpack.DefinePlugin({
+  IsHappy:true
+})
+```
+好处是打包压缩可以根据分支化简代码

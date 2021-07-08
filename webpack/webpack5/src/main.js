@@ -7,3 +7,9 @@ class Test{
 }
 
 console.log(Test._data);
+
+if(IsHappy){
+	console.log("happy")
+}else{
+	console.log("unhappy")
+}
