@@ -6,8 +6,6 @@
 - 配置 ```.babelrc``` 的 ```presets```
 - 配置 webpack 的 loader
 
-
-
 ### 多html入口文件
 使用多个 ```HtmlWebpackPlugin```即可
 ```js
@@ -21,8 +19,12 @@ new HtmlWebpackPlugin({
 })
 ```
 
-
 ### 使用dev-server
 最简单的使用方法:
 - 安装```webpack-dev-server```
 - 配置脚本```"start": "webpack serve --open"```
+
+### 使用CleanWebpackPlugin
+最简单的使用方法:
+- 安装```clean-webpack-plugin```
+- 加入到配置中

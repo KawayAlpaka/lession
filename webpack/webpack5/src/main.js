@@ -5,4 +5,3 @@ class Test{
 }
 
 console.log(Test._data);
-
