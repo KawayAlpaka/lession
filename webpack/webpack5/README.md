@@ -51,3 +51,10 @@ const Config = merge(commonConfig,{
   mode:"production"
 });
 ```
+
+
+### 使用mini-css-extract-plugin 
+生产环境下，生成.css文件
+1. 安装 mini-css-extract-plugin
+2. 配置 rules部分,把style-loader替换成MiniCssExtractPlugin.loader
+3. plugins中添加```new MiniCssExtractPlugin({filename:"css/[name].[contenthash:4].css"})```
