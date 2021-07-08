@@ -70,3 +70,7 @@ optimization: {
 }
 ```
 
+### 使用分包功能
+只要配置 optimization.splitChunks 即可，但要配置要点 在于 test和minChunks参数，注意看demo
+
+
