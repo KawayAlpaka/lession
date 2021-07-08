@@ -58,3 +58,15 @@ const Config = merge(commonConfig,{
 1. 安装 mini-css-extract-plugin
 2. 配置 rules部分,把style-loader替换成MiniCssExtractPlugin.loader
 3. plugins中添加```new MiniCssExtractPlugin({filename:"css/[name].[contenthash:4].css"})```
+
+
+### 使用CssMinimizerPlugin压缩css
+注意他是要写到  optimization.minimizer 中
+```js
+optimization: {
+  minimizer:[
+    new CssMinimizerPlugin()
+  ] 
+}
+```
+
