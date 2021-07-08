@@ -7,7 +7,8 @@ const srcPath = path.join(__dirname,"src");
 module.exports = {
 	mode:"development",
   entry: {
-		main:"./src/main.js"
+		main: path.join(srcPath,"main.js"),
+		list: path.join(srcPath,"list.js")
 	},
 	module: {
 	    rules: [{
@@ -20,15 +21,17 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: path.join(srcPath,"template","index.html"),
-			filename:"index.html"
+			filename:"index.html",
+			chunks:["main"]
 		}),
 		new HtmlWebpackPlugin({
 			template: path.join(srcPath,"template","list.html"),
-			filename:"list.html"
+			filename:"list.html",
+			chunks:["list"]
 		})
 	],
   output: {
-    filename: 'main.[contenthash:8].js',
+    filename: '[name].[contenthash:8].js',
     path: path.resolve(__dirname, 'dist')
   },
 };
