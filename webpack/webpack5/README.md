@@ -12,3 +12,9 @@ new HtmlWebpackPlugin({
   filename:"list.html"
 })
 ```
+
+
+### 使用dev-server
+最简单的使用方法:
+- 安装```webpack-dev-server```
+- 配置脚本```"start": "webpack serve --open"```
