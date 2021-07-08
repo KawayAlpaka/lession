@@ -1,4 +1,5 @@
 import "./less/style.less";
+import { add } from "./common/common";
 
 console.log("haha");
 
@@ -7,7 +8,7 @@ class Test{
 }
 
 console.log(Test._data);
-
+console.log(list,add(1,3));
 if(IsHappy){
 	console.log("happy")
 }else{
