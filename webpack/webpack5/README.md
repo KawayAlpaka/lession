@@ -41,3 +41,13 @@ new webpack.DefinePlugin({
 })
 ```
 好处是打包压缩可以根据分支化简代码
+
+
+### webpack-merge合并配置
+```js
+const { merge } = require('webpack-merge')
+const commonConfig = require("./webpack.common")
+const Config = merge(commonConfig,{
+  mode:"production"
+});
+```
