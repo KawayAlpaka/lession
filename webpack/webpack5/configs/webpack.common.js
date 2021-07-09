@@ -11,6 +11,7 @@ module.exports = {
 		list: path.join(srcPath, "list.js")
 	},
 	module: {
+		noParse: /\.min\.js$/, // 也可以传数组和函数
 		rules: [{
 			test: /\.js$/,
 			use: 'babel-loader',

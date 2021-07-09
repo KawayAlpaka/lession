@@ -118,3 +118,12 @@ import "moment/locale/zh-cn"
 moment.locale("zh-cn");
 console.log(moment.months());
 ```
+
+
+### module.noParse 避免重复打包
+```js
+module: {
+  noParse: /\.min\.js$/
+}
+```
+
