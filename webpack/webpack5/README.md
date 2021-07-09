@@ -83,3 +83,13 @@ optimization: {
   ] 
 }
 ```
+
+
+### 懒加载模块
+vue和react的懒加载，用的也就是这个功能。
+```js
+import("./common/lazy").then((lazy)=>{
+  console.log(lazy);
+  console.log(lazy.sub(10,5)); 
+});
+```
