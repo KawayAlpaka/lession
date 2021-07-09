@@ -27,3 +27,16 @@ button.addEventListener("click",()=>{
 	// console.log(lazy);
 },false);
 document.body.appendChild(button);
+
+
+
+
+const insertImg = (imageFile)=>{
+	const img = new Image()
+	img.src = imageFile;
+	document.body.appendChild(img);
+}
+import lineImg from "./image/line.png";
+import lineLiteImg from "./image/line-lite.png";
+insertImg(lineImg);
+insertImg(lineLiteImg);

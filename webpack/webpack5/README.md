@@ -93,3 +93,9 @@ import("./common/lazy").then((lazy)=>{
   console.log(lazy.sub(10,5)); 
 });
 ```
+
+
+### 使用url-loader + file-loader 打包图片
+1. 安装 loader
+2. 配置 rules 
+3. 直接 ```import img from "path/to/image.png"```
