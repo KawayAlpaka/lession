@@ -43,6 +43,10 @@ module.exports = {
 			IsHappy:true
 		}),
 		new CleanWebpackPlugin(),
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^\.\/locale$/,
+			contextRegExp: /moment$/,
+		}),
 		new HtmlWebpackPlugin({
 			template: path.join(srcPath, "template", "index.html"),
 			filename: "index.html",

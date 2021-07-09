@@ -40,3 +40,11 @@ import lineImg from "./image/line.png";
 import lineLiteImg from "./image/line-lite.png";
 insertImg(lineImg);
 insertImg(lineLiteImg);
+
+
+
+import moment from "moment"
+import "moment/locale/zh-cn"
+moment.locale("zh-cn");
+console.log(moment.months());
+

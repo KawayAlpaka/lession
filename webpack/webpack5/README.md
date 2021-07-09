@@ -99,3 +99,22 @@ import("./common/lazy").then((lazy)=>{
 1. 安装 loader
 2. 配置 rules 
 3. 直接 ```import img from "path/to/image.png"```
+
+### 使用IgnorePlugin忽略指定文件的打包
+以moment举例，需要去研究moment的结果
+```js
+plugins: [
+  new webpack.IgnorePlugin({
+    resourceRegExp: /^\.\/locale$/,
+    contextRegExp: /moment$/,
+  }),
+],
+// which means "any require statement matching './locale' from any directories ending with 'moment' will be ignored
+```
+上面忽略以后，需要手动引入需要的语言包
+```js
+import moment from "moment"
+import "moment/locale/zh-cn"
+moment.locale("zh-cn");
+console.log(moment.months());
+```
