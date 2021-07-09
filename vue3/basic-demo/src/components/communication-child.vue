@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent,onBeforeUpdate } from 'vue'
 export default defineComponent({
   props:{
     onFinish:{
@@ -22,6 +22,9 @@ export default defineComponent({
     const onFinish2 = ()=>{
       props.onFinish(++counter);
     }
+    onBeforeUpdate(()=>{
+      console.log("onBeforeUpdate child")
+    });
     return {
       msg:"",
       onFinish2

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,ref } from 'vue'
+import { defineComponent,ref,onBeforeUpdate } from 'vue'
 import CommunicationChild from "../components/communication-child.vue"
 export default defineComponent({
   components:{
@@ -21,6 +21,9 @@ export default defineComponent({
     const setCounter = (val:number)=>{
       counter.value = val;
     }
+    onBeforeUpdate(()=>{
+      console.log("onBeforeUpdate parent")
+    });
     return {
       msg:"",
       counter,
