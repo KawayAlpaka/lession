@@ -9,5 +9,13 @@
 <body>
   <div><a href="./create_file_then_download.html">生成文件再下载</a></div>
   <div><a href="./get_remote_file.html">获取远程文件</a></div>
+  <div>
+    <input id="file" type="file" webkitdirectory name="file" >
+  </div>
+  <script>
+    document.getElementById("file").addEventListener("change",(e)=>{
+      console.log(e.target.files);
+    });
+  </script>
 </body>
 </html>
