@@ -9,8 +9,10 @@
 <body>
   <div><a href="./create_file_then_download.html">生成文件再下载</a></div>
   <div><a href="./get_remote_file.html">获取远程文件</a></div>
+  
   <div>
     <input id="file" type="file" webkitdirectory name="file" >
+    <div><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/webkitdirectory">选择文件夹相关api</a></div>
   </div>
   <script>
     document.getElementById("file").addEventListener("change",(e)=>{
