@@ -5,7 +5,7 @@
     <input v-model="value" />
     <br>
     <!-- <Directive v-model11312="value"/> -->
-    <!-- <input v-model11312="value" /> -->
+    <input v-model11312="value" />
   </div>
 </template>
 
