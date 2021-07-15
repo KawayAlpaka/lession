@@ -7,6 +7,7 @@ import Directive  from "@/pages/directive.vue"
 import Communication  from "@/pages/communication.vue"
 import Provide from "@/pages/provide.vue"
 import WatchPage from "@/pages/watch.vue"
+import TeleportPage from "@/pages/teleport.vue"
 const routes = [
   { path: '/basic', component: Basic },
   { path: '/', component: HelloWorld },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/communication', component: Communication },
   { path: '/provide', component: Provide },
   { path: '/watch', component: WatchPage },
+  { path: '/teleport', component: TeleportPage },
 ]
 
 const router = createRouter({

@@ -9,6 +9,7 @@
     <router-link class="link" to="/communication">Communication</router-link>
     <router-link class="link" to="/provide">Provide</router-link>
     <router-link class="link" to="/watch">watch</router-link>
+    <router-link class="link" to="/teleport">Teleport</router-link>
   </div>
 </template>
 
