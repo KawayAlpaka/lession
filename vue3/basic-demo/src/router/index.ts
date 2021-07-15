@@ -8,6 +8,7 @@ import Communication  from "@/pages/communication.vue"
 import Provide from "@/pages/provide.vue"
 import WatchPage from "@/pages/watch.vue"
 import TeleportPage from "@/pages/teleport.vue"
+import SuspensePage from "@/pages/suspense.vue"
 const routes = [
   { path: '/basic', component: Basic },
   { path: '/', component: HelloWorld },
@@ -18,6 +19,7 @@ const routes = [
   { path: '/provide', component: Provide },
   { path: '/watch', component: WatchPage },
   { path: '/teleport', component: TeleportPage },
+  { path: '/suspense', component: SuspensePage },
 ]
 
 const router = createRouter({
