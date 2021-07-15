@@ -7,6 +7,7 @@
     <router-link class="link" to="/computed">computed</router-link>
     <router-link class="link" to="/directive">directive</router-link>
     <router-link class="link" to="/communication">Communication</router-link>
+    <router-link class="link" to="/provide">Provide</router-link>
   </div>
 </template>
 
