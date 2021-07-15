@@ -8,6 +8,7 @@
     <router-link class="link" to="/directive">directive</router-link>
     <router-link class="link" to="/communication">Communication</router-link>
     <router-link class="link" to="/provide">Provide</router-link>
+    <router-link class="link" to="/watch">watch</router-link>
   </div>
 </template>
 

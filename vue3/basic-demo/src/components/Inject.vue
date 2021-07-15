@@ -31,7 +31,7 @@ export default defineComponent({
     const increment = (obj:any)=>{
       console.log(obj);
       obj.count++;
-      self?.update()
+      // self?.update()
     }
     const self = getCurrentInstance()
     return {
