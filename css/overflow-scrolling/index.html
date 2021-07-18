@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>overflow-scrolling</title>
+  <style>
+    html,body{
+      height: 100%;
+      overflow-y: scroll;
+      scroll-behavior:smooth;
+      background-color: aqua;
+    }
+    .main{
+      position: relative;
+      /* 没感觉有什么区别啊 */
+      /* -webkit-overflow-scrolling:touch; */
+      scroll-behavior:smooth;
+      height: 3000px;
+      background-image: linear-gradient(to bottom,red,blue);
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    .goto-bottom{
+      position: fixed;
+      left: 0;
+    }
+    .goto-top{
+      position: fixed;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    没感觉有什么差别
+    <button class="goto-bottom" onclick="gotoBottom()">go to bottom</button>
+    <button class="goto-top" onclick="gotoTop()">go to top</button>
+  </div>
+  <script>
+    var gotoBottom = function(){
+      // document.querySelector(".main")
+      // document.documentElement
+      document.body.scrollTop = 3000;
+    }
+    var gotoTop = function(){
+      // document.querySelector(".main")
+      // document.documentElement
+      document.body.scrollTop = 0;
+    }
+  </script>
+</body>
+</html>
