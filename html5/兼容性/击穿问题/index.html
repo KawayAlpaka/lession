@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>击穿问题</title>
+  <style>
+    body{
+      font-size: 40px;
+    }
+    .btn{
+      height: 100px;
+      height: 100px;
+      background-color: gold;
+    }
+    .div-btn{
+      height: 100px;
+      height: 100px;
+      background-color: gold;
+    }
+    #btn2{
+      position: absolute; 
+      top: 0;
+      z-index: -1;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <!-- <button class="btn" onclick="alert('haha')">alert</button> -->
+    <div id="btn1" class="div-btn">btn1</div>
+    <div id= btn2 class="div-btn">btn2</div>
+  </div>
+  <script>
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    // 只有这样写才能重现问题，谁会这样写???
+    // 之前说的击穿，应该是 zepto 为了实现双击功能引发的问题。
+    // 以后双击功能需要单独设计，不能混用，需要双击的地方，就会有延时
+    btn1.addEventListener("mousedown",()=>{
+      btn1.style.display = "none"
+    });
+    btn2.addEventListener("mousedown",()=>{
+      alert("123")
+    });
+    btn2.addEventListener("mouseup",()=>{
+      alert("456")
+    });
+  </script>
+</body>
+</html>
