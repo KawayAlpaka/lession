@@ -5,9 +5,40 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>img</title>
+  <style>
+    .zanwei{
+      height: 1000px;
+    }
+  </style>
 </head>
 <body>
+  <!-- <div class="zanwei"></div> -->
   <img src="./img/baseline-test.jpg" alt="" srcset="">
-  <img src="./img/progressive-test.jpg" alt="" srcset="">
+  <img id="progressive-img" loading="lazy" src="./img/progressive-test.jpg" alt="123" srcset="">
+  
+  <img alt="响应式，当iphone6显示第一个图，iphone6plus显示第二个图" sizes="100vw" srcset="./img/baseline-test.jpg 750w, https://avatars.githubusercontent.com/u/13232471?v=4 800w">
+  <!-- <img loading="lazy" src="./img/progressive-test.jpg" alt="123" srcset="">
+  <img loading="lazy" src="https://avatars.githubusercontent.com/u/13232471?v=4" alt="123" srcset="">
+  <img loading="lazy" src="https://avatars.githubusercontent.com/u/13232471?v=4" alt="123" srcset="">
+  <img loading="lazy" src="https://avatars.githubusercontent.com/u/13232471?v=4" alt="123" srcset="">
+  <img loading="lazy" src="https://avatars.githubusercontent.com/u/13232471?v=4" alt="123" srcset=""> -->
+
+
+  <script>
+    // const img = document.getElementById("progressive-img")
+    // const append = ()=>{
+    //   const newImg = img.cloneNode();
+    //   newImg.src = "https://avatars.githubusercontent.com/u/13232471?v=4";
+    //   newImg.removeAttribute("id");
+    //   document.body.appendChild(newImg);
+    //   // document.body.append(img);
+    // }
+      
+
+    // for(let i=0;i<100;i++){
+    //   append()
+    // }
+    
+  </script>
 </body>
 </html>
