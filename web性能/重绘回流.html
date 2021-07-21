@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重绘回流</title>
+  <style>
+    .box{
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-image: linear-gradient(to bottom,red ,green);
+      transition: all 0.3s;
+    }
+    .box:hover{
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <div class="box" id="box2"></div>
+  <!-- <img class="box" src="./img/sun.svg" /> -->
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <!-- <img class="box" src="./img/sun.svg" /> -->
+
+  <script>
+    const keyframes = [
+      {
+        transform: `translate(0px)`,
+      },
+      {
+        transform: `translate(100px,100px)`,
+      },
+      { transform: "translate(0)" },
+    ];
+    const options = {
+        duration: 3000,
+        easing: "cubic-bezier(0,0,0.32,1)",
+      };
+    const b2 = document.getElementById("box2");
+    b2.addEventListener("click",()=>{
+      // b2.animate(keyframes, options);
+      b2.style.height = 200 + "px"
+    });
+
+  </script>
+</body>
+</html>
