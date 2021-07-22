@@ -138,3 +138,15 @@ module: {
 - ```https://github.com/alexkuz/webpack-chart```
 
 
+### source-map-explorer分析
+效果似乎和stats类似，但他会显示百分比数据，界面没有 webpack-chart 漂亮，只能通过 source-map分析，那就不能分析 image 等模块;
+使用过程
+- 安装：```npm i source-map-explorer -D```
+- 需要打包出source-map: ```devtool:"source-map"```
+- 添加分析脚本：```"analyze": "source-map-explorer dist/*.js --no-border-checks"```
+- 打包一下
+- 运行分析脚本: ```npm run analyze```，就会弹出分析界面
+
+
+
+
