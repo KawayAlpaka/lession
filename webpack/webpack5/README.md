@@ -148,5 +148,20 @@ module: {
 - 运行分析脚本: ```npm run analyze```，就会弹出分析界面
 
 
+### SpeedMeasurePlugin分析plugin和loader运行时间
 
+使用流程
+
+- 安装```npm install --save-dev speed-measure-webpack-plugin```
+- 创建专门用来测试的配置
+  ```js
+  const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+  const prodConfig = require("./webpack.prod");
+  const smp = new SpeedMeasurePlugin();
+  const measureConfig = smp.wrap(prodConfig);
+  module.exports = measureConfig;
+  ```
+- 用这个配置来运行就可以看到结果
+
+ps. 目前版本有个bug，会报错 ```You forgot to add 'mini-css-extract-plugin' plugin```
 
