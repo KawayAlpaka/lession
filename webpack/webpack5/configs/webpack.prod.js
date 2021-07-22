@@ -4,6 +4,7 @@ const commonConfig = require("./webpack.common")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const Config = merge(commonConfig, {
   mode: "production",
@@ -21,6 +22,10 @@ const Config = merge(commonConfig, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:4].css"
+    }),
+    new GenerateSW ({
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
   optimization: {

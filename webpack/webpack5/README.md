@@ -127,6 +127,10 @@ module: {
 }
 ```
 
+### 使用PWA,打包支持离线的应用
+- 参考文章 https://www.jianshu.com/p/e2d38fd35a09
+
+
 ## 打包性能分析
 ### stats分析
 生成 stats.json
