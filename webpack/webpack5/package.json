@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node ./dist/main.js",
     "start": "webpack serve --open",
-    "build": "webpack --config ./configs/webpack.prod.js"
+    "build": "webpack --config ./configs/webpack.prod.js",
+    "profile": "webpack --profile --json > stats.json"
   },
   "author": "",
   "license": "ISC",

@@ -127,3 +127,14 @@ module: {
 }
 ```
 
+## 打包性能分析
+### stats分析
+生成 stats.json
+
+```webpack --profile --json > stats.json```
+
+去下面的地址查看
+- ```http://alexkuz.github.io/webpack-chart/```
+- ```https://github.com/alexkuz/webpack-chart```
+
+
