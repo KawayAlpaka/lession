@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history</title>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <button class="link-btn">/1</button>
+      <button class="link-btn">/2</button>
+      <button class="link-btn">/3</button>
+      <button class="link-btn">/4</button>
+    </div>
+    <div>
+      <button onclick="history.back()">back</button>
+      <button onclick="history.forward()">forward</button>
+    </div>
+
+  </div>
+  <div class="text">home</div>
+  <script>
+    document.querySelectorAll(".link-btn").forEach((btn)=>{
+      // btn.addEventListener("pointerenter",()=>{
+      btn.addEventListener("click",()=>{
+        console.log(btn);
+        goto(btn.innerHTML)
+      })
+    })
+    const goto = (path)=>{
+      history.pushState("","",path)
+      text.innerHTML = path
+    }
+    const text = document.querySelector(".text")
+    window.addEventListener("popstate",(e)=>{
+      // popstate 只能监听到 back forward 操作，但不能监听到 pushState 操作
+      text.innerHTML = location.pathname
+    })
+  </script>
+</body>
+</html>
