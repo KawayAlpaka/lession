@@ -1,7 +1,7 @@
 export const getName = ()=>{
-  return "alipay1"
+  return "alipay"
 }
 
-// export const add = (a: number, b: number) => {
-//   return a + b
-// }
+export const add = (a: number, b: number) => {
+  return a + b
+}
