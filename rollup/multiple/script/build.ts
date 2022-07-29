@@ -6,15 +6,19 @@ import fs from 'fs/promises'
 
 const rootPath = path.join(__dirname, '..')
 
-const genOption = ({ type, name }: { type: 'lib' | 'component', name: string }) => {
-  const inputFile = path.join(rootPath, `src/${type}/${name}/index.ts`)
+type TBuildType = 'lib' | 'component'
+
+const genOption = ({ type, name }: { type: TBuildType, name: string }) => {
+  const inputFile = path.join(rootPath, `src/${type}/${name}/index.${type === 'lib' ? 'ts' : 'tsx'}`)
   const inputOptionJs: RollupOptions = {
+    external: ['react'],
     input: inputFile,
     plugins: [
       babel({ babelHelpers: 'bundled', extensions: ['.ts', '.tsx'] }),
     ]
   }
   const inputOptionDts: RollupOptions = {
+    external: ['react'],
     input: inputFile,
     plugins: [
       dts()
@@ -34,19 +38,26 @@ const genOption = ({ type, name }: { type: 'lib' | 'component', name: string }) 
   }
 }
 
+
 build()
-async function build() {
-  try {
-    const libNames = await fs.readdir(path.join(rootPath, 'src/lib'))
-    for (const libName of libNames) {
-      const libOption = genOption({ type: 'lib', name: libName })
-      for (const inputOption of libOption.inputs) {
-        const bundle = await rollup(inputOption)
-        for (const outputOption of libOption.outputs) {
-          await bundle.write(outputOption)
-        }
+
+async function buildType(type: TBuildType) {
+  const names = await fs.readdir(path.join(rootPath, `src/${type}`))
+  for (const name of names) {
+    const option = genOption({ type, name: name })
+    for (const inputOption of option.inputs) {
+      const bundle = await rollup(inputOption)
+      for (const outputOption of option.outputs) {
+        await bundle.write(outputOption)
       }
     }
+  }
+}
+
+async function build() {
+  try {
+    await buildType('lib')
+    await buildType('component')
   } catch (error) {
     console.error(error)
   }
