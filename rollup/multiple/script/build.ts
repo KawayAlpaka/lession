@@ -6,6 +6,12 @@ import fs from 'fs/promises'
 
 const rootPath = path.join(__dirname, '..')
 
+const packageJson = require(`${rootPath}/package.json`)
+delete packageJson.devDependencies
+delete packageJson.scripts
+const packageName = packageJson.name
+packageJson.main = 'cjs/index.js'
+
 type TBuildType = 'lib' | 'component'
 
 const genOption = ({ type, name }: { type: TBuildType, name: string }) => {
@@ -25,19 +31,25 @@ const genOption = ({ type, name }: { type: TBuildType, name: string }) => {
     ]
   }
 
+  const outputDir = path.join(rootPath, `dist/${type}/${name}`)
   const outputs: OutputOptions[] = [{
     format: 'es',
-    dir: path.join(rootPath, `dist/${type}/${name}/es`)
+    dir: path.join(outputDir, `es`)
   }, {
     format: 'cjs',
-    dir: path.join(rootPath, `dist/${type}/${name}/cjs`)
+    dir: path.join(outputDir, `cjs`)
   }]
+
+  const writePackageJson = async () => {
+    packageJson.name = `@${packageName}-${type}/${name.toLowerCase()}`
+    fs.writeFile(outputDir + '/package.json', JSON.stringify(packageJson))
+  }
   return {
     inputs: [inputOptionJs, inputOptionDts],
-    outputs
+    outputs,
+    writePackageJson
   }
 }
-
 
 build()
 
@@ -50,9 +62,12 @@ async function buildType(type: TBuildType) {
       for (const outputOption of option.outputs) {
         await bundle.write(outputOption)
       }
+      await option.writePackageJson()
     }
   }
 }
+
+
 
 async function build() {
   try {
