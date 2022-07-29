@@ -1,9 +1,13 @@
 import babel from "@rollup/plugin-babel"
+// import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import path from "path"
 import { OutputOptions, RollupOptions } from "rollup"
 import { IPackage } from "./packages"
 import { rootPath } from "./root"
 import dts from "rollup-plugin-dts";
+
+const extensions = ['.ts', '.tsx', '.js', '.jsx']
 
 export const genOption = ({ type, name }: IPackage) => {
   const inputFile = path.join(rootPath, `src/${type}/${name}/index.${type === 'lib' ? 'ts' : 'tsx'}`)
@@ -11,13 +15,19 @@ export const genOption = ({ type, name }: IPackage) => {
     external: ['react'],
     input: inputFile,
     plugins: [
-      babel({ babelHelpers: 'bundled', extensions: ['.ts', '.tsx'] }),
+      // commonjs(),
+      nodeResolve({
+        extensions
+      }),
+      babel({ babelHelpers: 'bundled', extensions }),
     ]
   }
   const inputOptionDts: RollupOptions = {
     external: ['react'],
     input: inputFile,
     plugins: [
+      // commonjs(),
+      nodeResolve(),
       dts()
     ]
   }
@@ -32,7 +42,10 @@ export const genOption = ({ type, name }: IPackage) => {
   }]
 
   return {
-    inputs: [inputOptionJs, inputOptionDts],
+    inputs: [
+      inputOptionJs, 
+      inputOptionDts
+    ],
     outputs
   }
 }
