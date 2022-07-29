@@ -9,10 +9,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "rollup": "^2.77.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "rollup": "^2.77.0",
     "@babel/core": "^7.18.9",
     "@babel/preset-typescript": "^7.18.6",
     "@rollup/plugin-babel": "^5.3.1",
