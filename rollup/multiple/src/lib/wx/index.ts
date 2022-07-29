@@ -1,4 +1,8 @@
 export const getName = ()=>{
+  const a = {a:""}
+  if(a?.a){
+    console.log('a.a exist')
+  }
   return "alipay"
 }
 
