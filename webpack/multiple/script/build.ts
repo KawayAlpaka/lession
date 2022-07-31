@@ -1,7 +1,6 @@
-import webpack, { Configuration } from 'webpack';
-import { getTargetPackages, writePackageJson } from './packages';
+import webpack from 'webpack';
+import { getTargetPackages, writeDts, writePackageJson } from './packages';
 import { getOptions } from './option';
-
 
 build()
 
@@ -15,6 +14,7 @@ async function build() {
       if(!result.hasErrors()){
         for(const item of options){
           await writePackageJson(item.package)
+          writeDts(item.package)
         }
       }
 

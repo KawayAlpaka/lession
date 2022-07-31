@@ -1,6 +1,7 @@
 import path from "path";
 import { rootPath } from "./root";
 import fs from 'fs/promises'
+import { generateDtsBundle } from "dts-bundle-generator";
 
 export type TBuildType = 'lib' | 'component'
 
@@ -28,5 +29,12 @@ export const writePackageJson = async ({ type, name }: IPackage) => {
   const outputDir = path.join(rootPath, `dist/${type}/${name}`)
   packageJson.name = `@${packageName}-${type}/${name.toLowerCase()}`
   await fs.writeFile(outputDir + '/package.json', JSON.stringify(packageJson))
+}
+
+export const writeDts = async ({ type, name }: IPackage) => {
+  const outputDir = path.join(rootPath, `dist/${type}/${name}/cjs`)
+  const inputFile = path.join(rootPath, `src/${type}/${name}/index.${type === 'lib' ? 'ts' : 'tsx'}`)
+  const [dts] = generateDtsBundle([{filePath:inputFile}])
+  await fs.writeFile(outputDir + '/index.d.ts', dts)
 }
 

@@ -1,5 +1,7 @@
 import { add } from './module'
 
-const aa = "aa"
+export { add } from './module'
 
+
+const aa = "aa"
 console.log(add())

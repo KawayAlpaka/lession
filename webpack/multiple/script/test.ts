@@ -1,21 +1,23 @@
-import babel from '@rollup/plugin-babel';
-// import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import path from 'path';
-import { rollup } from 'rollup';
 
-rollup({
-  // input: path.join(__dirname, '../src/test/js/main.js'),
-  input: path.join(__dirname, '../src/test/ts/main.ts'),
-  plugins: [
-    nodeResolve({
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
-    }),
-    babel({ babelHelpers: 'bundled', extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
-  ]
-}).then(async (bundle) => {
-  bundle.write({
-    format: 'cjs',
-    dir: path.join(__dirname, `../dist`)
-  })
-})
+// import dts from 'dts-bundle'
+import path from 'path'
+// console.log(dts.default)
+// dts.bundle({
+//     name: 'cool-project',
+//     main: 'build/index.d.ts'
+// });
+
+
+// const dts = require('dts-bundle');
+// // console.log(dts.bundle)
+// dts.bundle({
+//     name: 'cool-project',
+//     main: path.join(__dirname,'../src/test/ts/main.ts')
+// });
+
+import { generateDtsBundle } from 'dts-bundle-generator'
+console.log(generateDtsBundle)
+const data = generateDtsBundle([{
+  filePath:path.join(__dirname,'../src/test/ts/main.ts'),
+}])
+console.log(data)
