@@ -1,8 +1,6 @@
-import { watch } from 'rollup';
+import webpack from 'webpack';
+import { getTargetPackages, TBuildType, writeDts, writePackageJson } from './packages';
 import { getOptions } from './option';
-import { getTargetPackages, writePackageJson } from './packages';
-
-
 
 dev()
 
@@ -10,28 +8,26 @@ async function dev() {
   try {
     const packages = await getTargetPackages()
     const options = getOptions(packages)
-    for (const option of options) {
-      for (const input of option.inputs) {
-        const watcher = watch({
-          ...input,
-          output: option.outputs
-        })
-        watcher.on('event', (e) => {
-          // console.log('aaaaaaaaaaaaaaaa:', Date.now())
-          // console.log(e)
-          if(e.code === 'BUNDLE_START'){
-            console.log('BUNDLE_START:',e.input)
-          }
-          if(e.code === 'BUNDLE_END'){
-            console.log('BUNDLE_END:',e.result.watchFiles)
-          }
-          if (e.code === 'END') {
-            writePackageJson(option.package)
-          }
-        })
-      }
-    }
+    const compiler = webpack(options.map(item => item.option))
+    compiler.watch({
+
+    }, async (err, result) => {
+      console.log('err:', err)
+      // console.log('result:', result)
+      result.stats.forEach(async (stat) => {
+        const optionName = stat.compilation.options.name as string
+        console.log('name:', optionName)
+        if (stat.hasErrors()) {
+          console.log('errors:', stat.compilation.errors)
+        } else {
+          const [type, name] = optionName.split('/') as [TBuildType, string]
+          await writePackageJson({ type, name })
+          writeDts({ type, name })
+        }
+      })
+    })
   } catch (error) {
     console.error(error)
   }
 }
+

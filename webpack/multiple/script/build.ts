@@ -22,7 +22,6 @@ async function build() {
         if(stat.hasErrors()){
           console.log('errors:', stat.compilation.errors)
         }
-        
       })
 
     })

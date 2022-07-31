@@ -11,13 +11,21 @@ export const genOption = ({ type, name }: IPackage): Configuration => {
 
 
   return {
+    name:`${type}/${name}`,
     mode: 'development',
     externals: ['react'],
     module: {
       rules: [
         {
           test: /\.tsx?$/,
-          use: 'babel-loader',
+          use: [
+            {
+              loader:'babel-loader'
+            },
+            // {
+            //   loader: path.join(rootPath,'script/dts-loader/dts-loader')
+            // }
+          ],
           exclude: /node_modules/
         },
         {

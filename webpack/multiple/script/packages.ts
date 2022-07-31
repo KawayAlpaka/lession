@@ -10,7 +10,8 @@ export interface IPackage {
   type: TBuildType
 }
 
-export const getTargetPackages = async () => {
+export const getTargetPackages = async (): Promise<IPackage[]> => {
+  // return [{type:'lib',name:'alipay'}]
   const packages: IPackage[] = []
   const libNames = await fs.readdir(path.join(rootPath, `src/lib`))
   packages.push(...libNames.map(name => ({ name, type: 'lib' as TBuildType })))
