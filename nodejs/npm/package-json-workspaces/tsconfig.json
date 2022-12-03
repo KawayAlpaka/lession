@@ -5,6 +5,9 @@
       "module-a": [
         "./packages/module-a"
       ],
+      "module-a/*": [
+        "./packages/module-a/*"
+      ],
       "module-b": [
         "./packages/module-b"
       ]
