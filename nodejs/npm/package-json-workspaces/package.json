@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ts-node main.ts"
+    "test": "ts-node main.ts",
+    "test:b": "ts-node ./packages/module-b/index.ts",
+    "test:c": "ts-node ./packages/module-c/index.ts"
   },
   "workspaces": [
     "packages/*",
