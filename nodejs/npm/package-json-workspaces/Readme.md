@@ -29,4 +29,8 @@ npm run test
 import { getAge } from "module-a/lib/age"
 ```
 
+- 子模块的 ```package.json``` 不能删除，删除后就不会生成软连接到 ```node_modules```中
+
+- 软连接的文件夹名，是根据子模块 ```package.json``` 的 ```name```生成的。
+
 
