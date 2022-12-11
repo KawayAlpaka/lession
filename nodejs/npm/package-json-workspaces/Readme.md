@@ -41,3 +41,4 @@ import { getAge } from "module-a/lib/age"
 
 - 子模块的代码，使用的是子模块的依赖
 
+- 不同子模块依赖的相同模块，分别放在```devDependencies```和```dependencies```中时，会分别处理，就是说会重复安装。
