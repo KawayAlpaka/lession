@@ -14,6 +14,7 @@ const links = [
   "/routes/users/2",
   "/routes/parallel",
   "/routes/parallel/hello",
+  "/render",
 ];
 
 export const MenuList = () => {
