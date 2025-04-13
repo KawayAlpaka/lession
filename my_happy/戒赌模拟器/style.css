@@ -1,0 +1,13 @@
+.table {
+  width: 100%;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.table td {
+  border: 1px solid #ddd;
+}

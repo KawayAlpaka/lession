@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>戒赌模拟器</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div>
+    <h1>《戒赌模拟器》是模拟倍投法下注的场景，目的是验证倍投法也无法赚钱，帮助大家戒赌</h1>
+  </div>
+  <div>
+    <h4>规则设定：</h4>
+    <p>每轮开奖前，参与者买入 0~9 这十个数字中的1个或多个。开奖时，会随机开出一个数字，参与中买中，则可以可以获得奖金</p>
+  </div>
+  <div>
+    <h4>自定义规则参数：</h4>
+    <p>每注1元，中奖后，奖金是<input id="prizeAmountEle" type="number" value="8" step="1" min="1" max="10" />元，
+      每轮开间间隔<input id="onceTimeEle" type="number" value="5" min="1" step="1" max="60">分钟</p>
+  </div>
+  <div>
+    <h4>倍投方案：</h4>
+    <div>
+
+      每次买<input id="planTypeNumEle" type="number" value="5" step="1" min="1" max="10" />个不同数字
+    </div>
+    <div>
+      每个数字买<input id="planBuyNumEle" type="number" value="10" step="1" min="1" />注
+    </div>
+    <div>
+      参与到<select id="planBreakEle">
+        <option value="没资金">没资金</option>
+        <option value="一定次数">一定次数</option>
+        <option value="一定胜利次数">一定胜利次数</option>
+      </select>
+      <input id="planBreakNumEle" type="number" value="10000" step="1" min="1">次
+    </div>
+  </div>
+
+  <div>
+    <h4>背景设定：</h4>
+    <div>
+      <label>模拟本金:</label>
+      <input id="initAmountEle" value="1000000">
+    </div>
+  </div>
+
+  <div>
+    <button id="start" type="button">开始模拟</button>
+  </div>
+  <div id="message"></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>之前的中奖次数</td>
+        <td>参与次数</td>
+        <td>购买数字</td>
+        <td>开奖数字</td>
+        <td>是否中奖</td>
+        <td>每个数字下注</td>
+        <td>倍投倍率</td>
+        <td>投注前余额</td>
+        <td>本次成本</td>
+        <td>中奖金额</td>
+        <td>投注后余额</td>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+  </table>
+
+  <script src="./main.js"></script>
+</body>
+
+</html>
