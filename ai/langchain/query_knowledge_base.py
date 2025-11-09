@@ -16,7 +16,7 @@ class DeepSeekRAGSystem:
         self.qa_chain = None
         
         # DeepSeek API配置
-        self.api_key = os.getenv("DEEPSEEK_API_KEY", "my DEEPSEEK_API_KEY")
+        self.api_key = os.getenv("DEEPSEEK_API_KEY", "your key")
         self.api_url = "https://api.deepseek.com/v1/chat/completions"
     
     def load_vector_store(self):
@@ -92,6 +92,8 @@ class DeepSeekRAGSystem:
         
         # 2. 合并检索到的文档内容
         context = "\n\n".join([doc.page_content for doc in relevant_docs])
+        print(f"context:")
+        print(context)
         
         print(f"检索到 {len(relevant_docs)} 个相关文档片段")
         

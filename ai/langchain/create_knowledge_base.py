@@ -45,8 +45,8 @@ class KnowledgeBaseCreator:
     def split_documents(self, documents):
         """文档分割处理"""
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=500,      # 每个文本块的大小
-            chunk_overlap=50,    # 块之间的重叠大小
+            chunk_size=100,      # 每个文本块的大小
+            chunk_overlap=30,    # 块之间的重叠大小
             length_function=len,
             separators=["\n\n", "\n", "。", "！", "？", "；", "，", " ", ""]
         )
@@ -78,12 +78,19 @@ class KnowledgeBaseCreator:
         if not documents:
             print("未找到可处理的文档")
             return None
+        print("documents:")
+        print(documents)
         
         # 2. 文档分割
         chunks = self.split_documents(documents)
+        print("chunks:")
+        print(chunks)
         
         # 3. 创建向量存储
         vector_store = self.create_vector_store(chunks)
+        print("vector_store:")
+        print(vector_store)
+
         
         print("知识库创建完成！")
         return vector_store
