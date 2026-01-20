@@ -3,6 +3,11 @@ var fs = require('fs');
 var path = require('path');
 
 var server = http.createServer(function (req, res) {
+    if (path.normalize(decodeURI(req.url)) !== decodeURI(req.url)) {
+        res.statusCode = 403;
+        res.end();
+        return;
+    }
     var returnByStream = function (fileName) {
         var stream = fs.createReadStream(fileName);
         stream.pipe(res); // 将 res 作为 stream 的 dest
